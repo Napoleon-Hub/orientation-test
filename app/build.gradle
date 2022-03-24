@@ -1,0 +1,120 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    compileSdkVersion globalConfig.compileSdkVersion
+    buildToolsVersion globalConfig.buildToolsVersion
+
+    defaultConfig {
+        applicationId appConfig.applicationId
+        minSdkVersion globalConfig.minSdkVersion
+        targetSdkVersion globalConfig.targetSdkVersion
+        versionCode appConfig.versionCode
+        versionName appConfig.versionName
+
+        archivesBaseName = "${rootProject.name.toLowerCase()}-${appConfig.versionName}"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+        useIR = true
+    }
+}
+
+dependencies {
+
+    // Common
+    implementation appDependencies.coreKtx
+    implementation appDependencies.appCompat
+    implementation appDependencies.material
+    implementation appDependencies.constraintLayout
+    implementation appDependencies.fragmentKtx
+
+    // Hilt
+    implementation appDependencies.hilt
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    kapt           appDependencies.hiltCompiler
+
+    // Navigation Components
+    implementation appDependencies.navigationFragmentKtx
+    implementation appDependencies.navigationUiKtx
+
+    // Room
+    implementation appDependencies.roomRuntime
+    implementation appDependencies.roomKtx
+    kapt           appDependencies.roomCompiler
+
+    // Jetpack
+    implementation appDependencies.lifecycleViewModel
+    implementation appDependencies.lifecycleLiveData
+
+    // Coroutines
+    implementation appDependencies.coroutinesCore
+    implementation appDependencies.coroutinesAndroid
+
+    // Firebase
+    implementation platform(appDependencies.firebaseBoom)
+    implementation appDependencies.firebaseAnalytics
+    implementation appDependencies.firebaseCrashlytics
+
+    // Ads
+    implementation appDependencies.playServices
+    constraints {implementation(appDependencies.workRuntime)}
+
+    // Gson
+    implementation appDependencies.gson
+
+    //Billing
+    implementation appDependencies.billing
+
+    // Play Core library
+    implementation appDependencies.playCore
+    implementation appDependencies.playCoreKtx
+
+    // User Messaging
+    implementation appDependencies.userMessaging
+
+}

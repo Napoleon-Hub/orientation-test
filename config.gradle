@@ -1,0 +1,46 @@
+/**
+ * This file defines configuration for all project
+ */
+
+ext {
+
+    /**
+     * Common configuration for all project
+     */
+
+    globalConfig = [
+            compileSdkVersion: 31,
+            minSdkVersion    : 24,
+            targetSdkVersion : 31,
+            buildToolsVersion: "30.0.3",
+    ]
+
+    /**
+     * Configuration for app module
+     */
+
+    def appVersionMajor = 1
+    def appVersionMinor = 1
+    def appVersionPatch = 6
+
+    appConfig = [
+
+            applicationId    : 'com.funnygaytest',
+
+            versionCode      : generateVersionCode(appVersionMajor, appVersionMinor, appVersionPatch),
+            versionName      : generateVersionName(appVersionMajor, appVersionMinor, appVersionPatch),
+    ]
+
+}
+
+/**
+ * Versions calculations
+ */
+
+static Integer generateVersionCode(versionMajor, versionMinor, versionPatch) {
+    return versionMajor * 100 + versionMinor * 10 + versionPatch
+}
+
+static String generateVersionName(versionMajor, versionMinor, versionPatch) {
+    return "${versionMajor}.${versionMinor}.${versionPatch}"
+}

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "374661098496",
+    "project_id": "funny-gay-test",
+    "storage_bucket": "funny-gay-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374661098496:android:39cbb91b9fda980ff77ce5",
+        "android_client_info": {
+          "package_name": "com.funnygaytest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374661098496-rknqorsnh35k7rmgtf9vtot5p23avdks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgHt_MgTLG0gceR0LH1smVvEt6CdeQOMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374661098496-rknqorsnh35k7rmgtf9vtot5p23avdks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

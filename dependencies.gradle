@@ -1,0 +1,85 @@
+/**
+ * This file defines all project dependencies
+ */
+
+def libraryVersions = [
+
+        androidGradlePluginVersion   : '7.0.3',
+        kotlinGradlePluginVersion    : '1.5.30',
+        googleServicesVersion        : '4.3.10',
+        firebaseCrashlyticsVersion   : '2.8.0',
+
+        coreKtxVersion               : '1.7.0',
+        appCompatVersion             : '1.4.1',
+        materialVersion              : '1.4.0',
+        constraintLayoutVersion      : '2.1.2',
+        ktxFragmentVersion           : '1.4.0',
+        hiltVersion                  : '2.40.5',
+        navigationVersion            : '2.4.0-beta02',
+        roomVersion                  : '2.3.0',
+        lifeCycleVersion             : '2.4.0',
+        coroutenesVersion            : '1.5.0',
+        firebaseBoomVersion          : '29.0.0',
+        playServicesVersion          : '20.5.0',
+        workRuntimeVersion           : '2.7.0',
+        gsonVersion                  : '2.8.9',
+        billingVersion               : '4.1.0',
+        playCoreVersion              : '1.10.2',
+        playCoreKtxVersion           : '1.8.1',
+        userMessagingVersion         : '2.0.0'
+
+]
+
+ext {
+
+    /**
+     * Common dependencies for all project
+     */
+
+    globalDependencies = [
+
+            androidGradlePlugin     : "com.android.tools.build:gradle:${libraryVersions.androidGradlePluginVersion}",
+            kotlinGradlePlugin      : "org.jetbrains.kotlin:kotlin-gradle-plugin:${libraryVersions.kotlinGradlePluginVersion}",
+            googleServicesPlugin    : "com.google.gms:google-services:${libraryVersions.googleServicesVersion}",
+            firebaseCrashlytics     : "com.google.firebase:firebase-crashlytics-gradle:${libraryVersions.firebaseCrashlyticsVersion}",
+            hiltGradlePlugin        : "com.google.dagger:hilt-android-gradle-plugin:${libraryVersions.hiltVersion}",
+            navigationSafeArgsPlugin: "androidx.navigation:navigation-safe-args-gradle-plugin:${libraryVersions.navigationVersion}"
+
+    ]
+
+    /**
+     * Dependencies for app module
+     */
+
+    appDependencies = [
+
+            coreKtx                 : "androidx.core:core-ktx:${libraryVersions.coreKtxVersion}",
+            appCompat               : "androidx.appcompat:appcompat:${libraryVersions.appCompatVersion}",
+            material                : "com.google.android.material:material:${libraryVersions.materialVersion}",
+            constraintLayout        : "androidx.constraintlayout:constraintlayout:${libraryVersions.constraintLayoutVersion}",
+            fragmentKtx             : "androidx.fragment:fragment-ktx:${libraryVersions.ktxFragmentVersion}",
+            hilt                    : "com.google.dagger:hilt-android:${libraryVersions.hiltVersion}",
+            hiltCompiler            : "com.google.dagger:hilt-android-compiler:${libraryVersions.hiltVersion}",
+            navigationFragmentKtx   : "androidx.navigation:navigation-fragment-ktx:${libraryVersions.navigationVersion}",
+            navigationUiKtx         : "androidx.navigation:navigation-ui-ktx:${libraryVersions.navigationVersion}",
+            roomRuntime             : "androidx.room:room-runtime:${libraryVersions.roomVersion}",
+            roomCompiler            : "androidx.room:room-compiler:${libraryVersions.roomVersion}",
+            roomKtx                 : "androidx.room:room-ktx:${libraryVersions.roomVersion}",
+            lifecycleViewModel      : "androidx.lifecycle:lifecycle-viewmodel-ktx:${libraryVersions.lifeCycleVersion}",
+            lifecycleLiveData       : "androidx.lifecycle:lifecycle-livedata-ktx:${libraryVersions.lifeCycleVersion}",
+            coroutinesCore          : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${libraryVersions.coroutenesVersion}",
+            coroutinesAndroid       : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${libraryVersions.coroutenesVersion}",
+            firebaseBoom            : "com.google.firebase:firebase-bom:${libraryVersions.firebaseBoomVersion}",
+            firebaseAnalytics       : "com.google.firebase:firebase-analytics-ktx",
+            firebaseCrashlytics     : "com.google.firebase:firebase-crashlytics",
+            playServices            : "com.google.android.gms:play-services-ads:${libraryVersions.playServicesVersion}",
+            workRuntime             : "androidx.work:work-runtime:${libraryVersions.workRuntimeVersion}",
+            gson                    : "com.google.code.gson:gson:${libraryVersions.gsonVersion}",
+            billing                 : "com.android.billingclient:billing-ktx:${libraryVersions.billingVersion}",
+            playCore                : "com.google.android.play:core:${libraryVersions.playCoreVersion}",
+            playCoreKtx             : "com.google.android.play:core-ktx:${libraryVersions.playCoreKtxVersion}",
+            userMessaging           : "com.google.android.ump:user-messaging-platform:${libraryVersions.userMessagingVersion}"
+
+    ]
+
+}
