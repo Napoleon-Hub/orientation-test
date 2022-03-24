@@ -74,8 +74,6 @@ dependencies {
 
     // Hilt
     implementation appDependencies.hilt
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
     kapt           appDependencies.hiltCompiler
 
     // Navigation Components

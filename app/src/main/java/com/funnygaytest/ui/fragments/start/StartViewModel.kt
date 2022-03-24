@@ -31,7 +31,4 @@ class StartViewModel @Inject constructor(
     val isConnected: Boolean
         get() = preferences.isConnected
 
-    val lastQuestion: Int
-        get() = preferences.lastQuestion
-
 }
