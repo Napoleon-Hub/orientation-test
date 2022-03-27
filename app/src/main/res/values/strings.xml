@@ -26,6 +26,8 @@
     <string name="result_text_result_definitely_gay">When we analyzed your responses, we were not a bit surprised, because the result is obvious. You are %d%% gay!
         You are so gay that you may already start painting your nails, as far as this is your destiny!</string>
     <string name="result_text_notice">Scientists can finally relax and return home to their families, because inventing questions was not so easy)\n
+        If you liked the app, rate it or share the result with your friends, this way you can find out whether your friends are those who they seem to be!\n</string>
+    <string name="result_text_full">Scientists can finally relax and return home to their families, because inventing questions was not so easy)\n
         If you liked the app, rate it or share the result with your friends, this way you can find out whether your friends are those who they seem to be!\n
         If you want more tests like this one, support the scientists and their families, this way you will help to speed up the scientific process (%s) :) Good luck!\n</string>
     <string name="result_button_restart">Take test again</string>

@@ -11,7 +11,6 @@ import javax.inject.Inject
 
 class SkuDetailsLoader @Inject constructor(private val billingClient: BillingClient) {
 
-    @Throws(Exception::class)
     suspend fun getProductDetails(): SkuDetails? {
         val params = SkuDetailsParams.newBuilder()
             .setSkusList(skuList)
