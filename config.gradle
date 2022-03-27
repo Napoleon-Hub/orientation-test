@@ -21,7 +21,7 @@ ext {
 
     def appVersionMajor = 1
     def appVersionMinor = 1
-    def appVersionPatch = 6
+    def appVersionPatch = 7
 
     appConfig = [
 
