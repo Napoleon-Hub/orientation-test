@@ -36,13 +36,10 @@
     <string name="result_test_share">Я прошел гейтест с таким вот результатом:\n%s\nКак думаешь, какой результат будет у тебя?)\n\nhttps://play.google.com/store/apps/details?id=com.funnygaytest</string>
 
     <!-- Errors -->
-    <string name="dialog_connection_error_title">Проблема подключения к интернету</string>
-    <string name="dialog_connection_error_description">Упс, чтобы использовать данное преложение необходимо подключение к интернету. Проверьте соединение и попробуйте снова</string>
+    <string name="dialog_connection_error_title">Упс</string>
+    <string name="dialog_connection_error_description">Для продолжения необходимо интернет-соединение. Проверьте подключение и попробуйте снова</string>
     <string name="dialog_connection_error_button">Закрыть</string>
     <string name="toast_choose_error">Пожалуйста, выберите ответ, прежде чем продолжить</string>
-
-
-
 
     <!-- Questions -->
     <string name="question_1">Как думаешь, окажись мы в средневековье, какая профессия у тебя была бы?</string>

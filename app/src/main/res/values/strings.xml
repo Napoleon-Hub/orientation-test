@@ -35,9 +35,9 @@
     <string name="result_test_share">I passed a gay test with this result:\n%s\nAny guesses about YOUR result?)\n\nhttps://play.google.com/store/apps/details?id=com.funnygaytest</string>
 
     <!-- Errors -->
-    <string name="dialog_connection_error_title">Internet connection error</string>
-    <string name="dialog_connection_error_description">Oops, you need an Internet connection to use this app. Check your connection and try again</string>
-    <string name="dialog_connection_error_button">Close</string>
+    <string name="dialog_connection_error_title">OOps</string>
+    <string name="dialog_connection_error_description">You need an Internet connection to use this app. Check your connection and try again</string>
+    <string name="dialog_connection_error_button">OK</string>
     <string name="toast_choose_error">Please select an answer before proceeding further</string>
 
     <!-- Questions -->

@@ -49,12 +49,17 @@ android {
     }
 
     buildFeatures {
+        compose true
         viewBinding true
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.1.1'
     }
 
     kotlinOptions {
@@ -65,15 +70,33 @@ android {
 
 dependencies {
 
-    // Common
+    // Android
     implementation appDependencies.coreKtx
     implementation appDependencies.appCompat
     implementation appDependencies.material
     implementation appDependencies.constraintLayout
+    implementation appDependencies.constraintLayoutCompose
     implementation appDependencies.fragmentKtx
+
+    // Jetpack Compose
+    implementation appDependencies.composeUi
+    implementation appDependencies.composeUiTooling
+    implementation appDependencies.composeFoundation
+    implementation appDependencies.composeMaterial
+    implementation appDependencies.composeRuntimeLiveData
+    implementation "com.airbnb.android:lottie-compose:4.2.0"
+
+    // Activity
+    implementation appDependencies.activityCompose
+
+    // Lifecycle
+    implementation appDependencies.lifecycleViewModel
+    implementation appDependencies.lifecycleViewModelCompose
+    implementation appDependencies.lifecycleLiveData
 
     // Hilt
     implementation appDependencies.hilt
+    implementation appDependencies.hiltNavigationCompose
     kapt           appDependencies.hiltCompiler
 
     // Navigation Components
@@ -84,10 +107,6 @@ dependencies {
     implementation appDependencies.roomRuntime
     implementation appDependencies.roomKtx
     kapt           appDependencies.roomCompiler
-
-    // Jetpack
-    implementation appDependencies.lifecycleViewModel
-    implementation appDependencies.lifecycleLiveData
 
     // Coroutines
     implementation appDependencies.coroutinesCore
