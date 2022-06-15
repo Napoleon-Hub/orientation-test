@@ -22,7 +22,7 @@ class StartViewModel @Inject constructor(preferences: PrefsEntity) :
             StartContract.Event.OnNextClick -> {
                 if (isConnected) {
                     gameBegun = true
-                    setEffect { StartContract.Effect.GoToGameScreen }
+                    setEffect { StartContract.Effect.NavigateToGameScreen }
                     viewModelScope.launch {
                         delay(500)
                         setState { StartContract.State.ViewStateGameStarted }

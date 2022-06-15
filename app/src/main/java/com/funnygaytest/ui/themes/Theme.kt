@@ -1,5 +1,7 @@
 package com.funnygaytest.ui.themes
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.LocalOverScrollConfiguration
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -12,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.funnygaytest.R
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainTheme(
     paddingSize: GayTestSize = GayTestSize.Medium,
@@ -74,6 +77,7 @@ fun MainTheme(
     )
 
     CompositionLocalProvider(
+        LocalOverScrollConfiguration provides null,
         LocalGayTestColors provides colors,
         LocalGayTestTypography provides typography,
         LocalGayTestShape provides shapes,

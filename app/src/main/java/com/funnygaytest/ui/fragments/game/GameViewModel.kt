@@ -37,8 +37,8 @@ class GameViewModel @Inject constructor(
     }
 
     var lastQuestion: Int
-        get() = preferences.lastQuestion
-        set(value) { preferences.lastQuestion = value }
+        get() = preferences.lastQuestionIndex
+        set(value) { preferences.lastQuestionIndex = value }
 
     var points: Int
         get() = preferences.points

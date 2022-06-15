@@ -29,8 +29,6 @@ private const val TEXT_DESCRIPTION_ID = "textDescription"
 private const val BUTTON_NEXT_ID = "buttonNext"
 private const val TEXT_VERSION_ID = "textVersion"
 
-private const val START_EFFECTS = "startEffects"
-
 @Composable
 fun StartScreen(
     screenOrientation: Int,
@@ -38,7 +36,7 @@ fun StartScreen(
     viewModel: StartViewModel
 ) {
 
-    val connectionErrorDialog = remember { mutableStateOf(false) }
+    val connectionErrorDialogShown = remember { mutableStateOf(false) }
     var descriptionText by remember { mutableStateOf("") }
     var nextButtonText by remember { mutableStateOf("") }
 
@@ -55,14 +53,14 @@ fun StartScreen(
         }
     }
 
-    LaunchedEffect(START_EFFECTS) {
-        viewModel.effect.collect {
-            when (it) {
-                StartContract.Effect.GoToGameScreen -> {
+    LaunchedEffect(Unit) {
+        viewModel.effect.collect { effect ->
+            when (effect) {
+                StartContract.Effect.NavigateToGameScreen -> {
                     navController.navigate(GAME_SCREEN_NAME)
                 }
                 StartContract.Effect.ShowConnectionErrorDialog -> {
-                    connectionErrorDialog.value = true
+                    connectionErrorDialogShown.value = true
                 }
             }
         }
@@ -107,11 +105,11 @@ fun StartScreen(
                 style = GayTestTheme.typography.subText,
             )
 
-            if (connectionErrorDialog.value) {
+            if (connectionErrorDialogShown.value) {
                 InfoDialog(
                     title = stringResource(id = R.string.dialog_connection_error_title),
                     desc = stringResource(id = R.string.dialog_connection_error_description),
-                    onDismiss = { connectionErrorDialog.value = false }
+                    onDismiss = { connectionErrorDialogShown.value = false }
                 )
             }
 

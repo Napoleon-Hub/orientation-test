@@ -1,22 +1,25 @@
-package com.funnygaytest.screens.start
+package com.funnygaytest.screens.result
 
 import com.funnygaytest.base.UiEffect
 import com.funnygaytest.base.UiEvent
 import com.funnygaytest.base.UiState
 
-class StartContract {
+
+class ResultContract {
 
     sealed class Event : UiEvent {
-        object OnNextClick : Event()
+        object OnShareResultsClick : Event()
+        object OnRestartGameClick : Event()
+        object OnRateGameClick : Event()
+        object OnPayClick : Event()
     }
 
     sealed class State : UiState {
-        object ViewStateGameNotStarted: State()
-        object ViewStateGameStarted: State()
+        object ViewStateGameResult: State()
     }
 
     sealed class Effect : UiEffect {
-        object NavigateToGameScreen : Effect()
         object ShowConnectionErrorDialog : Effect()
     }
+
 }

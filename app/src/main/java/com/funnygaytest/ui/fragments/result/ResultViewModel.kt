@@ -48,9 +48,9 @@ class ResultViewModel @Inject constructor(
         }
 
     private var lastQuestion: Int
-        get() = preferences.lastQuestion
+        get() = preferences.lastQuestionIndex
         set(value) {
-            preferences.lastQuestion = value
+            preferences.lastQuestionIndex = value
         }
 
 }

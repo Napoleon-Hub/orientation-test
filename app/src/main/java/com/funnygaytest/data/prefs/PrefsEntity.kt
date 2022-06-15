@@ -9,6 +9,6 @@ import javax.inject.Inject
 class PrefsEntity @Inject constructor(@ApplicationContext val ctx: Context) {
     var isConnected by activeBoolean(false)
     var gameBegun by activeBoolean(false)
-    var lastQuestion by activeInt(0)
+    var lastQuestionIndex by activeInt(0)
     var points by activeInt(0)
 }
