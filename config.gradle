@@ -19,9 +19,9 @@ ext {
      * Configuration for app module
      */
 
-    def appVersionMajor = 1
-    def appVersionMinor = 1
-    def appVersionPatch = 8
+    def appVersionMajor = 2
+    def appVersionMinor = 0
+    def appVersionPatch = 0
 
     appConfig = [
 

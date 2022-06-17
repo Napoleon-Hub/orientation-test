@@ -32,12 +32,6 @@ android {
         versionName appConfig.versionName
 
         archivesBaseName = "${rootProject.name.toLowerCase()}-${appConfig.versionName}"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
     }
 
     buildTypes {
@@ -50,7 +44,6 @@ android {
 
     buildFeatures {
         compose true
-        viewBinding true
     }
 
     compileOptions {
@@ -72,11 +65,6 @@ dependencies {
 
     // Android
     implementation appDependencies.coreKtx
-    implementation appDependencies.appCompat
-    implementation appDependencies.material
-    implementation appDependencies.constraintLayout
-    implementation appDependencies.constraintLayoutCompose
-    implementation appDependencies.fragmentKtx
 
     // Jetpack Compose
     implementation appDependencies.composeUi
@@ -84,7 +72,8 @@ dependencies {
     implementation appDependencies.composeFoundation
     implementation appDependencies.composeMaterial
     implementation appDependencies.composeRuntimeLiveData
-    implementation "com.airbnb.android:lottie-compose:4.2.0"
+    implementation appDependencies.lottieCompose
+    implementation appDependencies.constraintLayoutCompose
 
     // Activity
     implementation appDependencies.activityCompose
@@ -100,13 +89,7 @@ dependencies {
     kapt           appDependencies.hiltCompiler
 
     // Navigation Components
-    implementation appDependencies.navigationFragmentKtx
     implementation appDependencies.navigationUiKtx
-
-    // Room
-    implementation appDependencies.roomRuntime
-    implementation appDependencies.roomKtx
-    kapt           appDependencies.roomCompiler
 
     // Coroutines
     implementation appDependencies.coroutinesCore
@@ -120,9 +103,6 @@ dependencies {
     // Ads
     implementation appDependencies.playServices
     constraints {implementation(appDependencies.workRuntime)}
-
-    // Gson
-    implementation appDependencies.gson
 
     //Billing
     implementation appDependencies.billing

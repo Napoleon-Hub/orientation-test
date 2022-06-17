@@ -3,7 +3,7 @@ package com.funnygaytest.screens.game
 import com.funnygaytest.base.UiEffect
 import com.funnygaytest.base.UiEvent
 import com.funnygaytest.base.UiState
-import com.funnygaytest.domain.model.Answer
+import com.funnygaytest.domain.models.Answer
 
 class GameContract {
 

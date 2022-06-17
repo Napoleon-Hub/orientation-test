@@ -1,7 +1,8 @@
 package com.funnygaytest.domain.billing
 
 import androidx.lifecycle.MutableLiveData
-import com.android.billingclient.api.*
+import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.SkuDetails
 import com.funnygaytest.di.BillingModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel

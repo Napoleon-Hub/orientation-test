@@ -1,4 +1,4 @@
-package com.funnygaytest.domain.model
+package com.funnygaytest.domain.models
 
 import androidx.annotation.Keep
 

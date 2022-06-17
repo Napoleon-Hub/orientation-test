@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.funnygaytest.base.BaseViewModel
 import com.funnygaytest.data.prefs.PrefsEntity
-import com.funnygaytest.domain.model.Answer
-import com.funnygaytest.domain.model.Question
-import com.funnygaytest.domain.model.QuestionsGenerator
+import com.funnygaytest.domain.models.Answer
+import com.funnygaytest.domain.models.Question
+import com.funnygaytest.utils.helpers.QuestionsGenerator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -24,8 +24,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.R
-import com.funnygaytest.domain.model.Answer
-import com.funnygaytest.domain.model.Question
+import com.funnygaytest.domain.models.Answer
+import com.funnygaytest.domain.models.Question
 import com.funnygaytest.ui.themes.GayTestTheme
 
 @Composable

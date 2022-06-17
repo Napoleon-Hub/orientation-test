@@ -2,7 +2,6 @@ package com.funnygaytest.di
 
 import android.content.Context
 import android.content.res.Resources
-import com.funnygaytest.data.room.QuestionsRoomDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,12 +12,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-    @Provides
-    @Singleton
-    fun provideRoom(@ApplicationContext context: Context): QuestionsRoomDatabase {
-        return QuestionsRoomDatabase.getDatabase(context)
-    }
 
     @Provides
     @Singleton

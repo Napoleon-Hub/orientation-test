@@ -87,7 +87,7 @@ fun InfoHeader(modifier: Modifier) {
 
     LottieAnimation(
         composition = composition,
-        progress = progress,
+        progress = { progress },
         modifier = modifier
     )
 }
