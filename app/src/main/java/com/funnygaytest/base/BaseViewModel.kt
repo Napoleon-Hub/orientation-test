@@ -21,16 +21,16 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
             preferences.gameBegun = value
         }
 
-    protected var points: Int
-        get() = preferences.points
-        set(value) {
-            preferences.points = value
-        }
-
     protected var lastQuestionIndex: Int
         get() = preferences.lastQuestionIndex
         set(value) {
             preferences.lastQuestionIndex = value
+        }
+
+    var points: Int
+        get() = preferences.points
+        protected set(value) {
+            preferences.points = value
         }
 
     /**

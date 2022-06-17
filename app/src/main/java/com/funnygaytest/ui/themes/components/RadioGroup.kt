@@ -1,9 +1,6 @@
 package com.funnygaytest.ui.themes.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Card
@@ -38,7 +35,7 @@ fun RadioGroup(
     countOfQuestions: Int,
     previousSelectedAnswer: Answer,
     onAnswerClickRegister: (Answer) -> Unit
-): Answer {
+) {
 
     val (selectedAnswer, onAnswerSelected) = remember {
         mutableStateOf(previousSelectedAnswer)
@@ -113,8 +110,6 @@ fun RadioGroup(
             }
         }
     }
-
-    return selectedAnswer
 }
 
 object ClearRippleTheme : RippleTheme {

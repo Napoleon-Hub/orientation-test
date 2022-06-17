@@ -2,10 +2,7 @@ package com.funnygaytest.screens.game
 
 import android.content.res.Configuration
 import android.widget.Toast
-import androidx.compose.foundation.layout.BoxWithConstraints
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.*
@@ -55,11 +52,11 @@ fun GameScreen(
     when (viewState.value) {
         GameContract.State.ViewStatePlayGame -> {
             buttonText = R.string.game_button_next
-            onButtonClick = { viewModel.setEvent(GameContract.Event.OnNextClick) }
+            onButtonClick = { viewModel.setEvent(GameContract.Event.OnNextClick(false)) }
         }
         GameContract.State.ViewStateFinishGame -> {
             buttonText = R.string.game_button_finish
-            onButtonClick = { viewModel.setEvent(GameContract.Event.OnFinishClick) }
+            onButtonClick = { viewModel.setEvent(GameContract.Event.OnNextClick(true)) }
         }
     }
 
@@ -67,7 +64,9 @@ fun GameScreen(
         viewModel.effect.collect { effect ->
             when (effect) {
                 GameContract.Effect.NavigateToResultScreen -> {
-                    navController.navigate(RESULT_SCREEN_NAME)
+                    navController.navigate(RESULT_SCREEN_NAME) {
+                        popUpTo(0)
+                    }
                 }
                 GameContract.Effect.ShowConnectionErrorDialog -> {
                     connectionErrorDialogShown = true
@@ -136,7 +135,8 @@ fun GameScreen(
                 modifier = Modifier
                     .layoutId(BUTTON_NEXT_ID)
                     .padding(horizontal = 16.dp)
-                    .wrapContentWidth(),
+                    .wrapContentWidth()
+                    .height(66.dp),
                 onClick = { onButtonClick() },
                 text = stringResource(id = buttonText)
             )

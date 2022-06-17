@@ -18,13 +18,13 @@
     <!-- Result -->
     <string name="result_title">Test passed!</string>
     <string name="result_text_result_not_gay">Honestly, we are very surprised with the result, because you are only %d%% gay!
-        One of the scientists bet his car that you like boys! Now the poor man will be beaten at home by his wife, but you can be proud (if you are satisfied), you are definitely not a gay!</string>
+        One of the scientists bet his car that you like boys! Now the poor man will be beaten at home by his wife, but you can be proud (if you are satisfied), you are definitely not a gay!\n</string>
     <string name="result_text_result_little_gay">In fact, you were very close to be alleged a gay, because you are %d%% gay. A bit more and you could dress up and walk at the gay parade
-        or just start looking for a boyfriend, but no! We don\'t think you\'re a gay, bro!</string>
+        or just start looking for a boyfriend, but no! We don\'t think you\'re a gay, bro!\n</string>
     <string name="result_text_result_probably_gay">Scientists had been arguing for a long time, someone even started fighting, but the decision was made! You are %d%% gay!
-        If this result upsets you, don\'t worry, buy heels and pink clothes, do a makeup and be yourself!</string>
+        If this result upsets you, don\'t worry, buy heels and pink clothes, do a makeup and be yourself!\n</string>
     <string name="result_text_result_definitely_gay">When we analyzed your responses, we were not a bit surprised, because the result is obvious. You are %d%% gay!
-        You are so gay that you may already start painting your nails, as far as this is your destiny!</string>
+        You are so gay that you may already start painting your nails, as far as this is your destiny!\n</string>
     <string name="result_text_notice">Scientists can finally relax and return home to their families, because inventing questions was not so easy)\n
         If you liked the app, rate it or share the result with your friends, this way you can find out whether your friends are those who they seem to be!\n</string>
     <string name="result_text_full">Scientists can finally relax and return home to their families, because inventing questions was not so easy)\n

@@ -14,7 +14,10 @@ class StartViewModel @Inject constructor(preferences: PrefsEntity) :
 
     override fun createInitialState(): StartContract.State {
         return if (gameBegun) StartContract.State.ViewStateGameStarted
-        else StartContract.State.ViewStateGameNotStarted
+        else {
+            points = 0
+            StartContract.State.ViewStateGameNotStarted
+        }
     }
 
     override fun handleEvent(event: StartContract.Event) {

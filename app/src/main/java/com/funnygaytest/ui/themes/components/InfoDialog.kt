@@ -58,7 +58,9 @@ fun InfoDialog(
                         )
                         Spacer(modifier = Modifier.height(24.dp))
                         MainButton(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(66.dp),
                             onClick = onDismiss,
                             text = stringResource(R.string.dialog_connection_error_button)
                         )

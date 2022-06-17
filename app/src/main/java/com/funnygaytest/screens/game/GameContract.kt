@@ -9,8 +9,7 @@ class GameContract {
 
     sealed class Event : UiEvent {
         data class OnAnswerClick(val answer: Answer) : Event()
-        object OnNextClick : Event()
-        object OnFinishClick : Event()
+        data class OnNextClick(val isFinish: Boolean) : Event()
     }
 
     sealed class State : UiState {

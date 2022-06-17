@@ -32,21 +32,21 @@ class GameViewModel @Inject constructor(preferences: PrefsEntity) :
             is GameContract.Event.OnAnswerClick -> {
                 selectedAnswer = event.answer
             }
-            GameContract.Event.OnNextClick -> {
+            is GameContract.Event.OnNextClick -> {
                 if (selectedAnswer.answerPoints != -1) {
                     if (isConnected) {
-                        points += selectedAnswer.answerPoints
-                        changeQuestion()
-
+                        if (!event.isFinish) {
+                            points += selectedAnswer.answerPoints
+                            changeQuestion()
+                        } else {
+                            setEffect { GameContract.Effect.NavigateToResultScreen }
+                        }
                     } else {
                         setEffect { GameContract.Effect.ShowConnectionErrorDialog }
                     }
                 } else {
                     setEffect { GameContract.Effect.ShowChooseAnswerToast }
                 }
-            }
-            GameContract.Event.OnFinishClick -> {
-                setEffect { GameContract.Effect.NavigateToResultScreen }
             }
         }
     }
