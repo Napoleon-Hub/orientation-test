@@ -12,6 +12,7 @@ class ResultContract {
         object OnShareResultsClick : Event()
         object OnRestartGameClick : Event()
         object OnRateUsClick : Event()
+        object OnAnotherAppsClick : Event()
         data class OnPayClick(val activity: Activity) : Event()
     }
 
@@ -22,6 +23,7 @@ class ResultContract {
     sealed class Effect : UiEffect {
         object OpenShareActivity : Effect()
         object OpenRateUsActivity : Effect()
+        object OpenAnotherAppsActivity : Effect()
         object NavigateToStartScreen : Effect()
         object ShowConnectionErrorDialog : Effect()
     }

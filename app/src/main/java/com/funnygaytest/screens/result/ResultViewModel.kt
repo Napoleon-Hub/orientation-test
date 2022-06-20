@@ -43,6 +43,9 @@ class ResultViewModel @Inject constructor(
                     setEffect { ResultContract.Effect.ShowConnectionErrorDialog }
                 }
             }
+            ResultContract.Event.OnAnotherAppsClick -> {
+                setEffect { ResultContract.Effect.OpenAnotherAppsActivity }
+            }
         }
     }
 

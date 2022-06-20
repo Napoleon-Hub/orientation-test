@@ -7,7 +7,6 @@ import android.content.res.Configuration
 import android.net.Uri
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -30,7 +29,6 @@ import com.funnygaytest.ui.themes.components.IconButton
 import com.funnygaytest.ui.themes.components.InfoDialog
 import com.funnygaytest.ui.themes.components.MainButton
 import com.funnygaytest.utils.extentions.getActivity
-import kotlinx.coroutines.flow.collect
 
 private const val CONSTRAINT_RESULT_BUTTONS_ID = "constraintResultButtons"
 private const val CONSTRAINT_RESULT_TEXT_ID = "constraintResultText"
@@ -38,15 +36,18 @@ private const val TEXT_RESULT_TITLE_ID = "textResultTitle"
 private const val TEXT_RESULT_DESCRIPTION_ID = "textResultDescription"
 private const val TEXT_NOTICE_ID = "textNotice"
 private const val BUTTON_RESTART_ID = "buttonRestart"
+private const val BUTTON_ANOTHER_APPS_ID = "buttonAnotherApps"
 private const val BUTTON_SHARE_ID = "buttonShare"
 private const val BUTTON_PAY_ID = "buttonPay"
 private const val BUTTON_RATE_US_ID = "buttonRateUs"
 
-private const val MAX_POINTS: Double = 67.0
+private const val MAX_POINTS: Double = 111.0
 
 private const val SHARE_TEXT_TYPE = "text/plain"
 private const val MARKET_URI = "market://details?id=com.funnygaytest"
 private const val GOOGLE_PLAY_URI = "https://play.google.com/store/apps/details?id=com.funnygaytest"
+private const val ANOTHER_GAMES_MARKET_URI = "market://dev?id=6364243335711753284"
+private const val ANOTHER_GAMES_GOOGLE_PLAY_URI = "https://play.google.com/store/apps/dev?id=6364243335711753284"
 
 @Composable
 fun ResultScreen(
@@ -86,6 +87,9 @@ fun ResultScreen(
                 }
                 ResultContract.Effect.OpenRateUsActivity -> {
                     rateUs(context)
+                }
+                ResultContract.Effect.OpenAnotherAppsActivity -> {
+                    showAnotherApps(context)
                 }
                 ResultContract.Effect.NavigateToStartScreen -> {
                     navController.navigate(START_SCREEN_NAME) {
@@ -151,11 +155,15 @@ fun ResultScreen(
 
 
                 MainButton(
-                    modifier = Modifier
-                        .layoutId(BUTTON_RESTART_ID)
-                        .height(66.dp),
+                    modifier = Modifier.layoutId(BUTTON_RESTART_ID),
                     text = stringResource(id = R.string.result_button_restart),
                     onClick = { viewModel.setEvent(ResultContract.Event.OnRestartGameClick) }
+                )
+
+                MainButton(
+                    modifier = Modifier.layoutId(BUTTON_ANOTHER_APPS_ID),
+                    text = stringResource(id = R.string.result_button_another_apps),
+                    onClick = { viewModel.setEvent(ResultContract.Event.OnAnotherAppsClick) }
                 )
 
                 IconButton(
@@ -229,13 +237,21 @@ private fun portraitConstraintSetButtons(): ConstraintSet {
     return ConstraintSet {
         val leftGuideline = createGuidelineFromStart(0.25f)
         val rightGuideline = createGuidelineFromEnd(0.25f)
+        val centerGuideline = createGuidelineFromEnd(0.5f)
         val buttonRestart = createRefFor(BUTTON_RESTART_ID)
+        val buttonAnotherApps = createRefFor(BUTTON_ANOTHER_APPS_ID)
         val buttonShare = createRefFor(BUTTON_SHARE_ID)
         val buttonPay = createRefFor(BUTTON_PAY_ID)
         val buttonRateUs = createRefFor(BUTTON_RATE_US_ID)
 
         constrain(buttonRestart) {
-            linkTo(start = parent.start, end = parent.end, startMargin = 20.dp, endMargin = 20.dp)
+            linkTo(start = parent.start, end = centerGuideline, startMargin = 20.dp, endMargin = 4.dp)
+            bottom.linkTo(parent.bottom, 28.dp)
+            width = Dimension.fillToConstraints
+        }
+
+        constrain(buttonAnotherApps) {
+            linkTo(start = centerGuideline, end = parent.end, startMargin = 4.dp, endMargin = 20.dp)
             bottom.linkTo(parent.bottom, 28.dp)
             width = Dimension.fillToConstraints
         }
@@ -255,7 +271,7 @@ private fun portraitConstraintSetButtons(): ConstraintSet {
         }
 
         constrain(buttonRateUs) {
-            linkTo(start = rightGuideline, end = buttonRestart.end, startMargin = 8.dp)
+            linkTo(start = rightGuideline, end = buttonAnotherApps.end, startMargin = 8.dp)
             linkTo(top = buttonPay.top, bottom = buttonPay.bottom)
             height = Dimension.fillToConstraints
             width = Dimension.fillToConstraints
@@ -269,13 +285,21 @@ private fun landscapeConstraintSetButtons(): ConstraintSet {
         val endGuideline = createGuidelineFromEnd(0.2f)
         val centerStartGuideline = createGuidelineFromStart(0.35f)
         val centerEndGuideline = createGuidelineFromEnd(0.35f)
+        val centerGuideline = createGuidelineFromEnd(0.5f)
         val buttonRestart = createRefFor(BUTTON_RESTART_ID)
+        val buttonAnotherApps = createRefFor(BUTTON_ANOTHER_APPS_ID)
         val buttonShare = createRefFor(BUTTON_SHARE_ID)
         val buttonPay = createRefFor(BUTTON_PAY_ID)
         val buttonRateUs = createRefFor(BUTTON_RATE_US_ID)
 
         constrain(buttonRestart) {
-            linkTo(start = startGuideline, end = endGuideline)
+            linkTo(start = startGuideline, end = centerGuideline, endMargin = 4.dp)
+            bottom.linkTo(parent.bottom, 28.dp)
+            width = Dimension.fillToConstraints
+        }
+
+        constrain(buttonAnotherApps) {
+            linkTo(start = centerGuideline, end = endGuideline, startMargin = 4.dp)
             bottom.linkTo(parent.bottom, 28.dp)
             width = Dimension.fillToConstraints
         }
@@ -295,7 +319,7 @@ private fun landscapeConstraintSetButtons(): ConstraintSet {
         }
 
         constrain(buttonRateUs) {
-            linkTo(start = centerEndGuideline, end = buttonRestart.end, startMargin = 8.dp)
+            linkTo(start = centerEndGuideline, end = buttonAnotherApps.end, startMargin = 8.dp)
             linkTo(top = buttonPay.top, bottom = buttonPay.bottom)
             height = Dimension.fillToConstraints
             width = Dimension.fillToConstraints
@@ -359,5 +383,13 @@ private fun rateUs(context: Context) {
         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_URI)))
     } catch (e: ActivityNotFoundException) {
         context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_URI)))
+    }
+}
+
+private fun showAnotherApps(context: Context) {
+    try {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(ANOTHER_GAMES_MARKET_URI)))
+    } catch (e: ActivityNotFoundException) {
+        context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(ANOTHER_GAMES_GOOGLE_PLAY_URI)))
     }
 }

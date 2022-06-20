@@ -32,6 +32,7 @@
         Если тебе понравилось приложение, оцени его или поделись результатом со своими друзьями, ведь так ты сможешь узнать, возможно твои друзья не те, кем кажутся!)\n
         Если хочешь больше подобных тестов, поддержи ученых и их семьи, так ты поможешь ускорить научный процесс(%s) :) Хорошего настроения!\n</string>
     <string name="result_button_restart">Перепройти тест</string>
+    <string name="result_button_another_apps">Другие тесты</string>
     <string name="result_button_pay">Покормить ученых</string>
     <string name="result_test_share">Я прошел гейтест с таким вот результатом:\n%s\nКак думаешь, какой результат будет у тебя?)\n\nhttps://play.google.com/store/apps/details?id=com.funnygaytest</string>
 

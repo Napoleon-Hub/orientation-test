@@ -57,7 +57,6 @@ class MainActivity : ComponentActivity() {
                 interstitialAd = null
             }
         }
-        loadVideoAd()
 
         setContent {
             MainTheme {
@@ -74,6 +73,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable(GAME_SCREEN_NAME) {
+                        loadVideoAd()
                         val gameViewModel = hiltViewModel<GameViewModel>()
                         GameScreen(
                             screenOrientation = resources.configuration.orientation,
