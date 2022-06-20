@@ -31,7 +31,7 @@
         If you liked the app, rate it or share the result with your friends, this way you can find out whether your friends are those who they seem to be!\n
         If you want more tests like this one, support the scientists and their families, this way you will help to speed up the scientific process (%s) :) Good luck!\n</string>
     <string name="result_button_restart">Take test again</string>
-    <string name="result_button_another_apps">Another apps</string>
+    <string name="result_button_another_apps">Another tests</string>
     <string name="result_button_pay">Feed scientists</string>
     <string name="result_test_share">I passed a gay test with this result:\n%s\nAny guesses about YOUR result?)\n\nhttps://play.google.com/store/apps/details?id=com.funnygaytest</string>
 
