@@ -1,14 +1,7 @@
 package com.funnygaytest.domain.billing
 
-import androidx.lifecycle.MutableLiveData
 import com.android.billingclient.api.BillingClient
-import com.android.billingclient.api.SkuDetails
-import com.funnygaytest.di.BillingModule
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
@@ -16,11 +9,9 @@ class BillingInteractor @Inject constructor(
     private val billingClient: BillingClient,
     private val stateListener: MyBillingClientStateListener,
     private val purchasesUpdatedListener: MyPurchasesUpdatedListener,
-    @Named(BillingModule.BILLING_SCOPE)
-    private val billingScope: CoroutineScope,
-    private val skuDetailsLoader: SkuDetailsLoader
+    private val productDetailsLoader: ProductDetailsLoader
 ) {
-    var skuDetails = MutableLiveData<SkuDetails?>()
+    var productDetails = productDetailsLoader.productDetails
     val launchBillingFlow = billingClient::launchBillingFlow
 
     fun init() {
@@ -29,15 +20,7 @@ class BillingInteractor @Inject constructor(
         }
         billingClient.startConnection(stateListener)
         stateListener.loadDetailsCallback = {
-            billingScope.launch {
-                skuDetails.postValue(skuDetailsLoader.getProductDetails())
-            }
+            productDetailsLoader.getProductDetails()
         }
     }
-
-    fun disconnect() {
-        billingScope.cancel()
-        billingClient.endConnection()
-    }
-
 }

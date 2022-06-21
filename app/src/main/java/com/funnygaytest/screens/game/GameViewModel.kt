@@ -7,12 +7,18 @@ import com.funnygaytest.data.prefs.PrefsEntity
 import com.funnygaytest.domain.models.Answer
 import com.funnygaytest.domain.models.Question
 import com.funnygaytest.utils.helpers.QuestionsGenerator
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+private const val EVENT_QUESTION = "question_"
+
 @HiltViewModel
-class GameViewModel @Inject constructor(preferences: PrefsEntity) :
-    BaseViewModel<GameContract.Event, GameContract.State, GameContract.Effect>(preferences) {
+class GameViewModel @Inject constructor(
+    preferences: PrefsEntity,
+    private val firebaseAnalytics: FirebaseAnalytics
+) : BaseViewModel<GameContract.Event, GameContract.State, GameContract.Effect>(preferences) {
 
     val listOfQuestions = QuestionsGenerator().generateQuestions()
 
@@ -35,8 +41,12 @@ class GameViewModel @Inject constructor(preferences: PrefsEntity) :
             is GameContract.Event.OnNextClick -> {
                 if (selectedAnswer.answerPoints != -1) {
                     if (isConnected) {
+                        sendAnswerQuestionEvent(
+                            lastQuestionIndex + 1,
+                            event.context.getString(selectedAnswer.answerResId)
+                        )
+                        points += selectedAnswer.answerPoints
                         if (!event.isFinish) {
-                            points += selectedAnswer.answerPoints
                             changeQuestion()
                         } else {
                             setEffect { GameContract.Effect.NavigateToResultScreen }
@@ -57,6 +67,12 @@ class GameViewModel @Inject constructor(preferences: PrefsEntity) :
         _lastQuestion.value = listOfQuestions[lastQuestionIndex]
         if (listOfQuestions.last() == _lastQuestion.value) {
             setState { GameContract.State.ViewStateFinishGame }
+        }
+    }
+
+    private fun sendAnswerQuestionEvent(questionNumber: Int, answer: String) {
+        firebaseAnalytics.logEvent(EVENT_QUESTION + questionNumber) {
+            param(FirebaseAnalytics.Param.ITEM_NAME, answer)
         }
     }
 

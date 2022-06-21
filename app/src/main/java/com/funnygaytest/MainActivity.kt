@@ -15,7 +15,6 @@ import androidx.navigation.compose.rememberNavController
 import com.funnygaytest.screens.game.GameScreen
 import com.funnygaytest.screens.game.GameViewModel
 import com.funnygaytest.screens.result.ResultScreen
-import com.funnygaytest.screens.result.ResultViewModel
 import com.funnygaytest.screens.start.StartScreen
 import com.funnygaytest.screens.start.StartViewModel
 import com.funnygaytest.ui.themes.MainTheme
@@ -27,6 +26,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
+import com.wildlifesurvivaltest.screens.result.ResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

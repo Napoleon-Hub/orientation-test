@@ -1,5 +1,6 @@
 package com.funnygaytest.screens.game
 
+import android.content.Context
 import com.funnygaytest.base.UiEffect
 import com.funnygaytest.base.UiEvent
 import com.funnygaytest.base.UiState
@@ -9,7 +10,7 @@ class GameContract {
 
     sealed class Event : UiEvent {
         data class OnAnswerClick(val answer: Answer) : Event()
-        data class OnNextClick(val isFinish: Boolean) : Event()
+        data class OnNextClick(val isFinish: Boolean, val context: Context) : Event()
     }
 
     sealed class State : UiState {

@@ -51,11 +51,11 @@ fun GameScreen(
     when (viewState.value) {
         GameContract.State.ViewStatePlayGame -> {
             buttonText = R.string.game_button_next
-            onButtonClick = { viewModel.setEvent(GameContract.Event.OnNextClick(false)) }
+            onButtonClick = { viewModel.setEvent(GameContract.Event.OnNextClick(false, context)) }
         }
         GameContract.State.ViewStateFinishGame -> {
             buttonText = R.string.game_button_finish
-            onButtonClick = { viewModel.setEvent(GameContract.Event.OnNextClick(true)) }
+            onButtonClick = { viewModel.setEvent(GameContract.Event.OnNextClick(true, context)) }
         }
     }
 

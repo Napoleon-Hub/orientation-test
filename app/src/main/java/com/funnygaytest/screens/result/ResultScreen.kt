@@ -30,6 +30,7 @@ import com.funnygaytest.ui.components.IconButton
 import com.funnygaytest.ui.components.InfoDialog
 import com.funnygaytest.ui.components.MainButton
 import com.funnygaytest.utils.extentions.getActivity
+import com.wildlifesurvivaltest.screens.result.ResultViewModel
 
 private const val CONSTRAINT_RESULT_BUTTONS_ID = "constraintResultButtons"
 private const val CONSTRAINT_RESULT_TEXT_ID = "constraintResultText"
@@ -65,10 +66,10 @@ fun ResultScreen(
     var isPayButtonEnable by remember { mutableStateOf(false) }
     val resultText = generateResultText(viewModel.points, context)
 
-    viewModel.skuDetails.observeForever { scuDetails ->
-        if (scuDetails?.price != null) {
+    viewModel.productDetails.observeForever { productDetails ->
+        if (productDetails?.oneTimePurchaseOfferDetails != null) {
             noticeTextId = R.string.result_text_full
-            price = scuDetails.price
+            price = productDetails.oneTimePurchaseOfferDetails?.formattedPrice!!
             isPayButtonEnable = true
         } else {
             noticeTextId = R.string.result_text_notice

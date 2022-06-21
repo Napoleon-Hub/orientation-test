@@ -1,5 +1,6 @@
 package com.funnygaytest.ui.components
 
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.OutlinedButton
@@ -49,7 +50,7 @@ fun MainButton(
         text?.let {
             Text(
                 text = it,
-                modifier = modifier.drawWithContent {
+                modifier = modifier.wrapContentHeight().drawWithContent {
                     if (readyToDraw) {
                         drawContent()
                     }
