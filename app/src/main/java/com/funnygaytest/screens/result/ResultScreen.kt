@@ -25,7 +25,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import com.funnygaytest.R
 import com.funnygaytest.START_SCREEN_NAME
-import com.funnygaytest.ui.themes.GayTestTheme
+import com.funnygaytest.ui.themes.MainTestTheme
 import com.funnygaytest.ui.components.IconButton
 import com.funnygaytest.ui.components.InfoDialog
 import com.funnygaytest.ui.components.MainButton
@@ -121,7 +121,7 @@ fun ResultScreen(
                         .layoutId(TEXT_RESULT_TITLE_ID)
                         .padding(horizontal = 20.dp),
                     text = stringResource(id = R.string.result_title),
-                    style = GayTestTheme.typography.heading
+                    style = MainTestTheme.typography.heading
                 )
 
                 Text(
@@ -129,7 +129,7 @@ fun ResultScreen(
                         .layoutId(TEXT_RESULT_DESCRIPTION_ID)
                         .padding(horizontal = 20.dp),
                     text = resultText,
-                    style = GayTestTheme.typography.description.copy(fontSize = 18.sp)
+                    style = MainTestTheme.typography.description.copy(fontSize = 18.sp)
                 )
 
                 Text(
@@ -138,7 +138,7 @@ fun ResultScreen(
                         .padding(horizontal = 20.dp),
                     text = if (price.isEmpty()) stringResource(id = noticeTextId)
                     else stringResource(id = noticeTextId, price),
-                    style = GayTestTheme.typography.description.copy(fontSize = 14.sp)
+                    style = MainTestTheme.typography.description.copy(fontSize = 14.sp)
                 )
 
             }

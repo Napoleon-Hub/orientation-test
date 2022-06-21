@@ -12,12 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.funnygaytest.ui.themes.GayTestTheme
+import com.funnygaytest.ui.themes.MainTestTheme
 
 @Composable
 fun IconButton(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = GayTestTheme.colors.primaryElement,
+    backgroundColor: Color = MainTestTheme.colors.primaryElement,
     iconId: Int,
     onClick: () -> Unit,
     enabled: Boolean = true

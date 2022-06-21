@@ -10,14 +10,14 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.funnygaytest.ui.themes.GayTestTheme
+import com.funnygaytest.ui.themes.MainTestTheme
 
 @Composable
 fun MainButton(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = GayTestTheme.colors.primaryElement,
+    backgroundColor: Color = MainTestTheme.colors.primaryElement,
     text: String? = null,
-    textStyle: TextStyle = GayTestTheme.typography.buttonText,
+    textStyle: TextStyle = MainTestTheme.typography.buttonText,
     onClick: () -> Unit,
     enabled: Boolean = true
 ) {

@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.funnygaytest.R
 import com.funnygaytest.domain.models.Answer
 import com.funnygaytest.domain.models.Question
-import com.funnygaytest.ui.themes.GayTestTheme
+import com.funnygaytest.ui.themes.MainTestTheme
 
 @Composable
 fun RadioGroup(
@@ -41,7 +41,7 @@ fun RadioGroup(
 
     Card(
         modifier,
-        backgroundColor = GayTestTheme.colors.primaryElement,
+        backgroundColor = MainTestTheme.colors.primaryElement,
         elevation = 6.dp,
         shape = RoundedCornerShape(10.dp)
     ) {
@@ -59,13 +59,13 @@ fun RadioGroup(
                         question.questionNumber,
                         countOfQuestions
                     ),
-                    style = GayTestTheme.typography.subText
+                    style = MainTestTheme.typography.subText
                 )
 
                 Text(
                     modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp),
                     text = stringResource(id = question.questionResId),
-                    style = GayTestTheme.typography.subText
+                    style = MainTestTheme.typography.subText
                 )
 
             }
@@ -96,7 +96,7 @@ fun RadioGroup(
                         modifier = modifier
                             .fillMaxWidth()
                             .padding(horizontal = 6.dp),
-                        style = GayTestTheme.typography.subText.copy(textAlign = TextAlign.Start),
+                        style = MainTestTheme.typography.subText.copy(textAlign = TextAlign.Start),
                         onClick = {
                             onAnswerSelected(answer)
                             onAnswerClickRegister(answer)

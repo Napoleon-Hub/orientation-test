@@ -20,7 +20,7 @@ import androidx.navigation.NavController
 import com.funnygaytest.BuildConfig
 import com.funnygaytest.GAME_SCREEN_NAME
 import com.funnygaytest.R
-import com.funnygaytest.ui.themes.GayTestTheme
+import com.funnygaytest.ui.themes.MainTestTheme
 import com.funnygaytest.ui.components.InfoDialog
 import com.funnygaytest.ui.components.MainButton
 
@@ -81,7 +81,7 @@ fun StartScreen(
                     .layoutId(TEXT_TITLE_ID)
                     .padding(horizontal = 24.dp),
                 text = stringResource(R.string.app_name),
-                style = GayTestTheme.typography.heading
+                style = MainTestTheme.typography.heading
             )
 
             Text(
@@ -90,7 +90,7 @@ fun StartScreen(
                     .padding(horizontal = 24.dp)
                     .verticalScroll(rememberScrollState()),
                 text = descriptionText,
-                style = GayTestTheme.typography.description
+                style = MainTestTheme.typography.description
             )
 
             MainButton(
@@ -104,7 +104,7 @@ fun StartScreen(
             Text(
                 modifier = Modifier.layoutId(TEXT_VERSION_ID),
                 text = stringResource(R.string.app_version, BuildConfig.VERSION_NAME),
-                style = GayTestTheme.typography.subText,
+                style = MainTestTheme.typography.subText,
             )
 
             if (connectionErrorDialogShown.value) {

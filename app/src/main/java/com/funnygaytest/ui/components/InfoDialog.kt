@@ -20,7 +20,7 @@ import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.funnygaytest.R
-import com.funnygaytest.ui.themes.GayTestTheme
+import com.funnygaytest.ui.themes.MainTestTheme
 
 @Composable
 fun InfoDialog(
@@ -49,12 +49,12 @@ fun InfoDialog(
                         Spacer(modifier = Modifier.height(24.dp))
                         Text(
                             text = title.uppercase(),
-                            style = GayTestTheme.typography.dialogTitle
+                            style = MainTestTheme.typography.dialogTitle
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = desc,
-                            style = GayTestTheme.typography.dialogDescription
+                            style = MainTestTheme.typography.dialogDescription
                         )
                         Spacer(modifier = Modifier.height(24.dp))
                         MainButton(

@@ -7,14 +7,14 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 
-data class GayTestColors(
+data class MainTestColors(
     val primaryBackground: Color = Color(0xFF00BFFF),
     val primaryText: Color = Color(0xFFFFFFFF),
     val primaryElement: Color = Color(0xFF4169E1),
     val gray: Color = Color(0xFFD3D3D3)
 )
 
-data class GayTestTypography(
+data class MainTestTypography(
     val heading: TextStyle,
     val description: TextStyle,
     val subText: TextStyle,
@@ -23,42 +23,42 @@ data class GayTestTypography(
     val dialogDescription: TextStyle,
 )
 
-data class GayTestShape(
+data class MainTestShape(
     val padding: Dp,
     val cornersStyle: Shape
 )
 
-object GayTestTheme {
-    val colors: GayTestColors
+object MainTestTheme {
+    val colors: MainTestColors
         @Composable
         get() = LocalGayTestColors.current
 
-    val typography: GayTestTypography
+    val typography: MainTestTypography
         @Composable
         get() = LocalGayTestTypography.current
 
-    val shapes: GayTestShape
+    val shapes: MainTestShape
         @Composable
         get() = LocalGayTestShape.current
 
 }
 
-enum class GayTestSize {
+enum class MainTestSize {
     Minimum, Small, Medium, Big
 }
 
-enum class GayTestCorners {
+enum class MainTestCorners {
     Flat, Rounded
 }
 
-val LocalGayTestColors = staticCompositionLocalOf<GayTestColors> {
+val LocalGayTestColors = staticCompositionLocalOf<MainTestColors> {
     error("No colors provided")
 }
 
-val LocalGayTestTypography = staticCompositionLocalOf<GayTestTypography> {
+val LocalGayTestTypography = staticCompositionLocalOf<MainTestTypography> {
     error("No font provided")
 }
 
-val LocalGayTestShape = staticCompositionLocalOf<GayTestShape> {
+val LocalGayTestShape = staticCompositionLocalOf<MainTestShape> {
     error("No shapes provided")
 }

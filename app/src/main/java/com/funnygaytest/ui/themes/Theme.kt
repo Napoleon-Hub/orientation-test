@@ -17,13 +17,13 @@ import com.funnygaytest.R
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainTheme(
-    paddingSize: GayTestSize = GayTestSize.Medium,
-    corners: GayTestCorners = GayTestCorners.Rounded,
+    paddingSize: MainTestSize = MainTestSize.Medium,
+    corners: MainTestCorners = MainTestCorners.Rounded,
     content: @Composable () -> Unit
 ) {
-    val colors = GayTestColors()
+    val colors = MainTestColors()
 
-    val typography = GayTestTypography(
+    val typography = MainTestTypography(
         heading = TextStyle(
             fontSize = 40.sp,
             fontFamily = FontFamily(Font(R.font.appetite_italic)),
@@ -63,16 +63,16 @@ fun MainTheme(
         )
     )
 
-    val shapes = GayTestShape(
+    val shapes = MainTestShape(
         padding = when (paddingSize) {
-            GayTestSize.Minimum -> 10.dp
-            GayTestSize.Small -> 12.dp
-            GayTestSize.Medium -> 16.dp
-            GayTestSize.Big -> 20.dp
+            MainTestSize.Minimum -> 10.dp
+            MainTestSize.Small -> 12.dp
+            MainTestSize.Medium -> 16.dp
+            MainTestSize.Big -> 20.dp
         },
         cornersStyle = when (corners) {
-            GayTestCorners.Flat -> RoundedCornerShape(0.dp)
-            GayTestCorners.Rounded -> RoundedCornerShape(8.dp)
+            MainTestCorners.Flat -> RoundedCornerShape(0.dp)
+            MainTestCorners.Rounded -> RoundedCornerShape(8.dp)
         }
     )
 
