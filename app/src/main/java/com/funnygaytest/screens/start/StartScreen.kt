@@ -21,9 +21,8 @@ import com.funnygaytest.BuildConfig
 import com.funnygaytest.GAME_SCREEN_NAME
 import com.funnygaytest.R
 import com.funnygaytest.ui.themes.GayTestTheme
-import com.funnygaytest.ui.themes.components.InfoDialog
-import com.funnygaytest.ui.themes.components.MainButton
-import kotlinx.coroutines.flow.collect
+import com.funnygaytest.ui.components.InfoDialog
+import com.funnygaytest.ui.components.MainButton
 
 private const val TEXT_TITLE_ID = "textTitle"
 private const val TEXT_DESCRIPTION_ID = "textDescription"

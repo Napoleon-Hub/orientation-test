@@ -1,28 +1,31 @@
-package com.funnygaytest.ui.themes.components
+package com.funnygaytest.ui.components
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.ui.themes.GayTestTheme
 
 @Composable
-fun IconButton(
+fun MainButton(
     modifier: Modifier = Modifier,
     backgroundColor: Color = GayTestTheme.colors.primaryElement,
-    iconId: Int,
+    text: String? = null,
+    textStyle: TextStyle = GayTestTheme.typography.buttonText,
     onClick: () -> Unit,
     enabled: Boolean = true
 ) {
     val lastClickTime = remember { mutableStateOf(0L) }
+
+    var scaledTextStyle by remember { mutableStateOf(textStyle) }
+    var readyToDraw by remember { mutableStateOf(false) }
+
 
     OutlinedButton(
         modifier = modifier,
@@ -39,10 +42,29 @@ fun IconButton(
             pressedElevation = 5.dp,
             disabledElevation = 0.dp
         ),
-        contentPadding = PaddingValues(0.dp),
         shape = RoundedCornerShape(10.dp),
         colors = ButtonDefaults.outlinedButtonColors(backgroundColor = backgroundColor)
     ) {
-        Icon(painter = painterResource(id = iconId), contentDescription = null, tint = Color.White)
+
+        text?.let {
+            Text(
+                text = it,
+                modifier = modifier.drawWithContent {
+                    if (readyToDraw) {
+                        drawContent()
+                    }
+                },
+                style = scaledTextStyle,
+                softWrap = false,
+                onTextLayout = { textLayoutResult ->
+                    if (textLayoutResult.didOverflowWidth) {
+                        scaledTextStyle =
+                            scaledTextStyle.copy(fontSize = scaledTextStyle.fontSize * 0.9)
+                    } else {
+                        readyToDraw = true
+                    }
+                }
+            )
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.funnygaytest.ui.themes.components
+package com.funnygaytest.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -1,4 +1,4 @@
-package com.funnygaytest.ui.themes.components
+package com.funnygaytest.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -18,10 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.R
 import com.funnygaytest.domain.models.Answer
@@ -91,9 +89,7 @@ fun RadioGroup(
                         )
                     }
 
-                    val annotatedString = buildAnnotatedString {
-                        withStyle(style = SpanStyle()) { append("\n${stringResource(id = answer.answerResId)}\n") }
-                    }
+                    val annotatedString = AnnotatedString("\n${stringResource(id = answer.answerResId)}\n")
 
                     ClickableText(
                         text = annotatedString,
@@ -108,6 +104,8 @@ fun RadioGroup(
                     )
                 }
             }
+            
+            Spacer(modifier = Modifier.fillMaxWidth().height(16.dp))
         }
     }
 }

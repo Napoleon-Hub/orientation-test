@@ -1,4 +1,4 @@
-package com.funnygaytest.ui.themes.components
+package com.funnygaytest.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background

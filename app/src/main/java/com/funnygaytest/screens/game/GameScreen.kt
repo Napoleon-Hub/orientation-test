@@ -19,11 +19,10 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import com.funnygaytest.R
 import com.funnygaytest.RESULT_SCREEN_NAME
-import com.funnygaytest.ui.themes.components.AdvertView
-import com.funnygaytest.ui.themes.components.InfoDialog
-import com.funnygaytest.ui.themes.components.MainButton
-import com.funnygaytest.ui.themes.components.RadioGroup
-import kotlinx.coroutines.flow.collect
+import com.funnygaytest.ui.components.RadioGroup
+import com.funnygaytest.ui.components.AdvertView
+import com.funnygaytest.ui.components.InfoDialog
+import com.funnygaytest.ui.components.MainButton
 import kotlin.math.roundToInt
 
 private const val RADIO_GROUP_ID = "radioGroup"

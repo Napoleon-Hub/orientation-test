@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import android.net.Uri
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -25,9 +26,9 @@ import androidx.navigation.NavController
 import com.funnygaytest.R
 import com.funnygaytest.START_SCREEN_NAME
 import com.funnygaytest.ui.themes.GayTestTheme
-import com.funnygaytest.ui.themes.components.IconButton
-import com.funnygaytest.ui.themes.components.InfoDialog
-import com.funnygaytest.ui.themes.components.MainButton
+import com.funnygaytest.ui.components.IconButton
+import com.funnygaytest.ui.components.InfoDialog
+import com.funnygaytest.ui.components.MainButton
 import com.funnygaytest.utils.extentions.getActivity
 
 private const val CONSTRAINT_RESULT_BUTTONS_ID = "constraintResultButtons"
@@ -155,13 +156,13 @@ fun ResultScreen(
 
 
                 MainButton(
-                    modifier = Modifier.layoutId(BUTTON_RESTART_ID),
+                    modifier = Modifier.layoutId(BUTTON_RESTART_ID).height(55.dp),
                     text = stringResource(id = R.string.result_button_restart),
                     onClick = { viewModel.setEvent(ResultContract.Event.OnRestartGameClick) }
                 )
 
                 MainButton(
-                    modifier = Modifier.layoutId(BUTTON_ANOTHER_APPS_ID),
+                    modifier = Modifier.layoutId(BUTTON_ANOTHER_APPS_ID).height(55.dp),
                     text = stringResource(id = R.string.result_button_another_apps),
                     onClick = { viewModel.setEvent(ResultContract.Event.OnAnotherAppsClick) }
                 )
