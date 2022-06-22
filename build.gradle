@@ -14,7 +14,6 @@ buildscript {
         classpath globalDependencies.googleServicesPlugin
         classpath globalDependencies.firebaseCrashlytics
         classpath globalDependencies.hiltGradlePlugin
-        classpath globalDependencies.navigationSafeArgsPlugin
     }
 
 }

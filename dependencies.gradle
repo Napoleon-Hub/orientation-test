@@ -42,7 +42,6 @@ ext {
             googleServicesPlugin    : "com.google.gms:google-services:${libraryVersions.googleServicesVersion}",
             firebaseCrashlytics     : "com.google.firebase:firebase-crashlytics-gradle:${libraryVersions.firebaseCrashlyticsVersion}",
             hiltGradlePlugin        : "com.google.dagger:hilt-android-gradle-plugin:${libraryVersions.hiltVersion}",
-            navigationSafeArgsPlugin: "androidx.navigation:navigation-safe-args-gradle-plugin:${libraryVersions.navigationVersion}"
 
     ]
 
