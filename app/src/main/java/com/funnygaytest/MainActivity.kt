@@ -5,8 +5,12 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -23,6 +27,12 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.ump.ConsentInformation
 import com.google.android.ump.ConsentRequestParameters
 import com.google.android.ump.UserMessagingPlatform
@@ -45,8 +55,20 @@ class MainActivity : ComponentActivity() {
     private var interstitialAd: InterstitialAd? = null
     private lateinit var fullScreenContentCallback: FullScreenContentCallback
 
+    private var appUpdateManager: AppUpdateManager? = null
+    private var activityResultLauncher: ActivityResultLauncher<IntentSenderRequest>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        activityResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartIntentSenderForResult()
+        ) { result ->
+            if (result.resultCode != RESULT_OK) {
+                // Process decline if needed
+            }
+        }
+        checkAppUpdatesAvailable()
 
         addNetworkCallback()
         MobileAds.initialize(this)
@@ -162,5 +184,26 @@ class MainActivity : ComponentActivity() {
                     })
             }
         }
+    }
+
+    private fun checkAppUpdatesAvailable() {
+        appUpdateManager = AppUpdateManagerFactory.create(this)
+
+        val appUpdateInfoTask = appUpdateManager?.appUpdateInfo
+
+        appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo: AppUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            ) {
+                appUpdateManager?.startUpdateFlowForResult(
+                    appUpdateInfo,
+                    activityResultLauncher!!,
+                    AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build()
+                )
+            } else {
+                Toast.makeText(this, "In-app updates unavailable or not needed", Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 }

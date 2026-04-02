@@ -13,10 +13,10 @@ fun AdvertView(modifier: Modifier = Modifier, width: Int) {
     AndroidView(
         factory = { context ->
             AdView(context).apply {
-                adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
-                    context,
-                    width
-                )
+//                adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(
+//                    context,
+//                    width
+//                )
                 adUnitId = context.getString(R.string.banner_ad_unit_id)
                 loadAd(AdRequest.Builder().build())
             }
