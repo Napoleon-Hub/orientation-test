@@ -1,89 +1,92 @@
 package com.funnygaytest.screens.game
 
-import android.content.Context
-import android.content.res.Configuration
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.funnygaytest.base.BaseViewModel
 import com.funnygaytest.data.prefs.PrefsEntity
 import com.funnygaytest.domain.models.Answer
 import com.funnygaytest.domain.models.Question
 import com.funnygaytest.utils.helpers.QuestionsGenerator
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.logEvent
+import com.funnygaytest.utils.music.AudioManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val EVENT_QUESTION = "question_"
-private const val LOCALE_RU = "ru"
-private const val LOCALE_EN = "en"
+data class GameUiState(
+    val currentQuestion: Question,
+    val selectedAnswer: Answer? = null,
+    val isFinish: Boolean = false,
+    val questionNumber: Int = 1,
+    val totalQuestions: Int = 1,
+    val isMuted: Boolean = false
+)
+
+sealed class GameUiEffect {
+    object NavigateToResultScreen : GameUiEffect()
+}
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
     preferences: PrefsEntity,
-    private val firebaseAnalytics: FirebaseAnalytics
-) : BaseViewModel<GameContract.Event, GameContract.State, GameContract.Effect>(preferences) {
+    audioManager: AudioManager
+) : BaseViewModel(preferences, audioManager) {
 
-    val listOfQuestions = QuestionsGenerator().generateQuestions()
+    private val listOfQuestions = QuestionsGenerator().generateQuestions()
 
-    private var _lastQuestion: MutableLiveData<Question> =
-        MutableLiveData(listOfQuestions[lastQuestionIndex])
-    val lastQuestion: LiveData<Question> = _lastQuestion
+    private val _uiState = MutableStateFlow(
+        GameUiState(
+            currentQuestion = listOfQuestions[preferences.lastQuestionIndex],
+            questionNumber = preferences.lastQuestionIndex + 1,
+            totalQuestions = listOfQuestions.size,
+            isFinish = preferences.lastQuestionIndex == listOfQuestions.lastIndex
+        )
+    )
+    val uiState = _uiState.asStateFlow()
 
-    var selectedAnswer: Answer = Answer()
-        private set
+    private val _uiEffect = MutableSharedFlow<GameUiEffect>()
+    val uiEffect = _uiEffect.asSharedFlow()
 
-    override fun createInitialState(): GameContract.State =
-        if (lastQuestionIndex == 23) GameContract.State.ViewStateFinishGame
-        else GameContract.State.ViewStatePlayGame
+    fun onAnswerSelected(answer: Answer) {
+        _uiState.update { it.copy(selectedAnswer = answer) }
+    }
 
-    override fun handleEvent(event: GameContract.Event) {
-        when (event) {
-            is GameContract.Event.OnAnswerClick -> {
-                selectedAnswer = event.answer
-            }
-            is GameContract.Event.OnNextClick -> {
-                if (selectedAnswer.answerPoints != -1) {
-                    if (isConnected) {
-                        sendAnswerQuestionEvent(lastQuestionIndex + 1, getLocalizedString(event.context))
-                        points += selectedAnswer.answerPoints
-                        if (!event.isFinish) {
-                            changeQuestion()
-                        } else {
-                            setEffect { GameContract.Effect.NavigateToResultScreen }
-                        }
-                    } else {
-                        setEffect { GameContract.Effect.ShowConnectionErrorDialog }
-                    }
+    fun onNextClicked() {
+        val currentState = _uiState.value
+
+        if (currentState.selectedAnswer?.answerResId != 0) {
+            if (isConnected) {
+                points += currentState.selectedAnswer!!.answerPoints
+
+                if (!currentState.isFinish) {
+                    changeQuestion()
                 } else {
-                    setEffect { GameContract.Effect.ShowChooseAnswerToast }
+                    viewModelScope.launch { _uiEffect.emit(GameUiEffect.NavigateToResultScreen) }
                 }
             }
         }
+
     }
 
     private fun changeQuestion() {
-        selectedAnswer = Answer()
         lastQuestionIndex++
-        _lastQuestion.value = listOfQuestions[lastQuestionIndex]
-        if (listOfQuestions.last() == _lastQuestion.value) {
-            setState { GameContract.State.ViewStateFinishGame }
+        val newIndex = lastQuestionIndex
+
+        _uiState.update {
+            it.copy(
+                currentQuestion = listOfQuestions[newIndex],
+                selectedAnswer = null,
+                questionNumber = newIndex + 1,
+                isFinish = newIndex == listOfQuestions.lastIndex
+            )
         }
     }
 
-    private fun getLocalizedString(context: Context): String {
-        return if (context.resources.configuration.locales[0].language == LOCALE_RU) {
-            val conf = Configuration(context.resources.configuration)
-            conf.setLocale(Locale(LOCALE_EN))
-            context.createConfigurationContext(conf).getString(selectedAnswer.answerResId)
-        } else context.getString(selectedAnswer.answerResId)
-    }
-
-    private fun sendAnswerQuestionEvent(questionNumber: Int, answer: String) {
-        firebaseAnalytics.logEvent(EVENT_QUESTION + questionNumber) {
-            param(FirebaseAnalytics.Param.ITEM_NAME, answer)
-        }
+    fun toggleMusic() {
+        _uiState.update { it.copy(isMuted = !it.isMuted) }
     }
 
 }

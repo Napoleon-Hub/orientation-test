@@ -75,12 +75,13 @@ dependencies {
     // Jetpack Compose
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.ui)
-    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
+    debugImplementation(libs.compose.ui.tooling)
     implementation(libs.compose.foundation)
     implementation(libs.compose.material)
+    implementation(libs.compose.material.icons)
     implementation(libs.compose.runtime.livedata)
     implementation(libs.lottie.compose)
-    implementation(libs.androidx.constraintlayout.compose)
 
     // Activity
     implementation(libs.androidx.activity.compose)
@@ -107,11 +108,13 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
 
-    // Google Play & Ads
-    implementation(libs.play.services.ads)
+    // Google Play
     implementation(libs.billing.ktx)
     implementation(libs.play.app.update.ktx)
     implementation(libs.user.messaging.platform)
+
+    // Yandex Mobile Ads
+    //implementation(libs.yandex.mobile.ads)
 
     // Work Runtime
     constraints { implementation(libs.work.runtime) }

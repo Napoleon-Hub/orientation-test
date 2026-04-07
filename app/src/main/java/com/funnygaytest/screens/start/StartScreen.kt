@@ -1,198 +1,266 @@
 package com.funnygaytest.screens.start
 
-import android.content.res.Configuration
-import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.ConstraintSet
-import androidx.constraintlayout.compose.Dimension
-import androidx.navigation.NavController
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.funnygaytest.BuildConfig
-import com.funnygaytest.GAME_SCREEN_NAME
 import com.funnygaytest.R
-import com.funnygaytest.ui.themes.MainTestTheme
-import com.funnygaytest.ui.components.InfoDialog
+import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.MainButton
-
-private const val TEXT_TITLE_ID = "textTitle"
-private const val TEXT_DESCRIPTION_ID = "textDescription"
-private const val BUTTON_NEXT_ID = "buttonNext"
-private const val TEXT_VERSION_ID = "textVersion"
+import com.funnygaytest.ui.components.MusicToggleButton
+import com.funnygaytest.ui.components.QuestionBox
+import com.funnygaytest.ui.themes.MainTestTheme
+import com.funnygaytest.ui.themes.MainTheme
 
 @Composable
 fun StartScreen(
-    screenOrientation: Int,
-    navController: NavController,
-    viewModel: StartViewModel
+    modifier: Modifier = Modifier,
+    viewModel: StartViewModel = hiltViewModel(),
+    onGameStart: () -> Unit,
+    onLoseResultShow: () -> Unit
 ) {
+    val uiState by viewModel.uiState.collectAsState()
 
-    val connectionErrorDialogShown = remember { mutableStateOf(false) }
-    var descriptionText by remember { mutableStateOf("") }
-    var nextButtonText by remember { mutableStateOf("") }
-
-    val viewState = viewModel.uiState.collectAsState()
-
-    when (viewState.value) {
-        StartContract.State.ViewStateGameNotStarted -> {
-            descriptionText = stringResource(R.string.start_description)
-            nextButtonText = stringResource(R.string.start_button)
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+            when (event) {
+                androidx.lifecycle.Lifecycle.Event.ON_PAUSE -> {
+                    viewModel.pauseMusic()
+                }
+                androidx.lifecycle.Lifecycle.Event.ON_RESUME -> {
+                    if (!uiState.isMuted) {
+                        viewModel.playMusic(R.raw.start_music)
+                    }
+                }
+                else -> {}
+            }
         }
-        StartContract.State.ViewStateGameStarted -> {
-            descriptionText = stringResource(R.string.start_description_continue)
-            nextButtonText = stringResource(R.string.start_button_continue)
+
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+            viewModel.releaseMusic()
         }
+    }
+
+    LaunchedEffect(uiState.isMuted) {
+        viewModel.setMuteMusic(uiState.isMuted)
     }
 
     LaunchedEffect(Unit) {
-        viewModel.effect.collect { effect ->
+        viewModel.uiEffect.collect { effect ->
             when (effect) {
-                StartContract.Effect.NavigateToGameScreen -> {
-                    navController.navigate(GAME_SCREEN_NAME)
-                }
-                StartContract.Effect.ShowConnectionErrorDialog -> {
-                    connectionErrorDialogShown.value = true
+                is StartUiEffect.NavigateToGame -> {
+                    onGameStart()
                 }
             }
         }
     }
 
-    BoxWithConstraints {
+    StartScreenContent(
+        modifier = modifier,
+        gameStartedState = uiState.isGameStarted,
+        showDifficulty = uiState.showDifficulty,
+        isMuted = uiState.isMuted,
+        onStartGameClicked = { viewModel.onNextClicked() },
+        onDifficultyGameClicked = { viewModel.onDifficultyClicked() },
+        onEasyClicked = { onLoseResultShow() },
+        onHardClicked = { viewModel.onDifficultySelected(true) },
+        onToggleMusic = { viewModel.toggleMusic() }
+    )
 
-        val constraints = if (screenOrientation == Configuration.ORIENTATION_PORTRAIT) {
-            portraitConstraintSet()
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun StartScreenContent(
+    modifier: Modifier = Modifier,
+    gameStartedState: Boolean,
+    showDifficulty: Boolean,
+    isMuted: Boolean,
+    onStartGameClicked: () -> Unit = {},
+    onDifficultyGameClicked: () -> Unit = {},
+    onEasyClicked: () -> Unit = {},
+    onHardClicked: () -> Unit = {},
+    onToggleMusic: () -> Unit = {}
+) {
+    BackgroundWrapper(backgroundId = R.drawable.start_background) {
+
+        val playButtonText = if (gameStartedState) {
+            stringResource(R.string.start_button_continue)
         } else {
-            landscapeConstraintSet()
+            stringResource(R.string.start_button)
         }
 
-        ConstraintLayout(constraintSet = constraints, Modifier.fillMaxSize()) {
+        val bottomInfoRes = if (gameStartedState) {
+            R.string.start_description_continue
+        } else {
+            R.string.start_description
+        }
 
-            Text(
-                modifier = Modifier
-                    .layoutId(TEXT_TITLE_ID)
-                    .padding(horizontal = 24.dp),
-                text = stringResource(R.string.app_name),
-                style = MainTestTheme.typography.heading
-            )
+        Box(modifier = modifier.fillMaxSize()) {
 
-            Text(
-                modifier = Modifier
-                    .layoutId(TEXT_DESCRIPTION_ID)
-                    .padding(horizontal = 24.dp)
-                    .verticalScroll(rememberScrollState()),
-                text = descriptionText,
-                style = MainTestTheme.typography.description
-            )
-
-            MainButton(
-                modifier = Modifier
-                    .layoutId(BUTTON_NEXT_ID)
-                    .height(66.dp),
-                onClick = { viewModel.setEvent(StartContract.Event.OnNextClick) },
-                text = nextButtonText
-            )
-
-            Text(
-                modifier = Modifier.layoutId(TEXT_VERSION_ID),
-                text = stringResource(R.string.app_version, BuildConfig.VERSION_NAME),
-                style = MainTestTheme.typography.subText,
-            )
-
-            if (connectionErrorDialogShown.value) {
-                InfoDialog(
-                    title = stringResource(id = R.string.dialog_connection_error_title),
-                    desc = stringResource(id = R.string.dialog_connection_error_description),
-                    onDismiss = { connectionErrorDialogShown.value = false }
+            Box(modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(end = 12.dp, top = 12.dp)
+            ) {
+                MusicToggleButton(
+                    isMuted = isMuted,
+                    onClick = onToggleMusic
                 )
             }
 
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 40.dp, vertical = 32.dp),
+            ) {
+
+                Row(
+                    modifier = Modifier.weight(1f),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight(),
+                        contentAlignment = Alignment.Center
+                    ) {
+
+                        AnimatedContent(
+                            targetState = showDifficulty,
+                            label = "ButtonTransition",
+                            transitionSpec = {
+                                if (!targetState) {
+                                    (fadeIn(animationSpec = tween(300)) + slideIntoContainer(
+                                        AnimatedContentTransitionScope.SlideDirection.Down,
+                                        animationSpec = tween(300)
+                                    )).togetherWith(
+                                        fadeOut(animationSpec = tween(150)) + slideOutOfContainer(
+                                            AnimatedContentTransitionScope.SlideDirection.Down,
+                                            animationSpec = tween(300)
+                                        )
+                                    )
+                                } else {
+                                    (fadeIn(animationSpec = tween(300)) + slideIntoContainer(
+                                        AnimatedContentTransitionScope.SlideDirection.Up,
+                                        animationSpec = tween(300)
+                                    )).togetherWith(
+                                        fadeOut(animationSpec = tween(150)) + slideOutOfContainer(
+                                            AnimatedContentTransitionScope.SlideDirection.Up,
+                                            animationSpec = tween(300)
+                                        )
+                                    )
+                                }
+                            }
+                        ) { targetShowDifficulty ->
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                if (!targetShowDifficulty) {
+                                    MainButton(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(55.dp),
+                                        onClick = onStartGameClicked,
+                                        text = playButtonText
+                                    )
+
+                                    Spacer(modifier = Modifier.height(20.dp))
+
+                                    MainButton(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(55.dp),
+                                        onClick = onDifficultyGameClicked,
+                                        text = stringResource(R.string.start_button_difficulty)
+                                    )
+
+                                    Spacer(modifier = Modifier.height(16.dp))
+
+                                    Text(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        text = stringResource(R.string.app_version, BuildConfig.VERSION_NAME),
+                                        style = MainTestTheme.typography.subText,
+                                        color = MainTestTheme.colors.secondaryText.copy(alpha = 0.5f),
+                                        textAlign = TextAlign.Center
+                                    )
+                                } else {
+                                    MainButton(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(55.dp),
+                                        onClick = onEasyClicked,
+                                        text = stringResource(R.string.start_button_difficulty_easy)
+                                    )
+
+                                    Spacer(modifier = Modifier.height(16.dp))
+
+                                    MainButton(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(55.dp),
+                                        onClick = onHardClicked,
+                                        text = stringResource(R.string.start_button_difficulty_hard)
+                                    )
+                                }
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.weight(2f))
+
+                }
+
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    QuestionBox(
+                        modifier = Modifier.weight(0.85f),
+                        textStyle = MainTestTheme.typography.description,
+                        questionResId = bottomInfoRes
+                    )
+                    Spacer(modifier = Modifier.weight(0.15f))
+                }
+
+            }
         }
     }
-
 }
 
-private fun portraitConstraintSet(): ConstraintSet {
-    return ConstraintSet {
-        val textTitle = createRefFor(TEXT_TITLE_ID)
-        val textDescription = createRefFor(TEXT_DESCRIPTION_ID)
-        val buttonNext = createRefFor(BUTTON_NEXT_ID)
-        val textVersion = createRefFor(TEXT_VERSION_ID)
-
-        constrain(textTitle) {
-            linkTo(start = parent.start, end = parent.end)
-            linkTo(top = parent.top, bottom = buttonNext.top, bias = 0.1F)
-        }
-
-        constrain(textDescription) {
-            linkTo(start = parent.start, end = parent.end)
-            linkTo(
-                top = textTitle.bottom, bottom = buttonNext.top,
-                topMargin = 18.dp, bottomMargin = 18.dp, bias = 0F
-            )
-            height = Dimension.fillToConstraints
-        }
-
-        constrain(buttonNext) {
-            linkTo(
-                start = parent.start, end = parent.end,
-                startMargin = 20.dp, endMargin = 20.dp
-            )
-            bottom.linkTo(textVersion.top, 12.dp)
-            width = Dimension.fillToConstraints
-        }
-
-        constrain(textVersion) {
-            linkTo(start = parent.start, end = parent.end)
-            bottom.linkTo(parent.bottom, 24.dp)
-        }
-    }
-}
-
-private fun landscapeConstraintSet(): ConstraintSet {
-    return ConstraintSet {
-        val textTitle = createRefFor(TEXT_TITLE_ID)
-        val textDescription = createRefFor(TEXT_DESCRIPTION_ID)
-        val buttonNext = createRefFor(BUTTON_NEXT_ID)
-        val textVersion = createRefFor(TEXT_VERSION_ID)
-        val guideline = createGuidelineFromStart(0.65F)
-
-        constrain(textTitle) {
-            linkTo(start = parent.start, end = parent.end)
-            top.linkTo(parent.top, margin = 12.dp)
-        }
-
-        constrain(textDescription) {
-            linkTo(start = parent.start, end = guideline)
-            linkTo(
-                top = textTitle.bottom, bottom = parent.bottom,
-                topMargin = 18.dp, bottomMargin = 22.dp
-            )
-            height = Dimension.fillToConstraints
-            width = Dimension.fillToConstraints
-        }
-
-        constrain(buttonNext) {
-            linkTo(
-                start = guideline, end = parent.end,
-                startMargin = 12.dp, endMargin = 12.dp
-            )
-            linkTo(top = parent.top, bottom = parent.bottom)
-            width = Dimension.fillToConstraints
-        }
-
-        constrain(textVersion) {
-            linkTo(start = buttonNext.start, end = buttonNext.end)
-            top.linkTo(buttonNext.bottom, 12.dp)
-        }
-
+@Preview(widthDp = 720, heightDp = 500)
+@Composable
+fun PreviewStartScreen() {
+    MainTheme {
+        StartScreenContent(
+            showDifficulty = false,
+            gameStartedState = false,
+            isMuted = false
+        )
     }
 }

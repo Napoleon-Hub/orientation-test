@@ -6,14 +6,18 @@
 
     <!-- Start -->
     <string name="start_button">Начать</string>
-    <string name="start_description">Вероятно самый точный и самый интересный тест на гея, который только можно отыскать в интернете. Над ним потели ученые изо всех стран мира
-        только ради того, чтобы ответить тебе на мучающий вопрос. Ты собственно по мальчикам или как?\n\nПриложение абсолютно бесплатно! (Но в нём есть немного рекламы, нужно же чем-то кормить бедных ученых)\n</string>
+    <string name="start_description">Вероятно самый точный и самый интересный существующий гейтест. Над ним потели ученые изо всех стран мира только ради того, чтобы ответить тебе на мучающий вопрос.
+        Ты собственно по мальчикам или как?\nВ приложении есть немного рекламы, нужно же чем-то кормить бедных ученых</string>
     <string name="start_button_continue">Продолжить</string>
-    <string name="start_description_continue">Да, он сто процентов гей, тут даже тест не нужен.\n\nОй, ты здесь? Вернись обратно в испытательную зону, негодник!</string>
+    <string name="start_description_continue">Да, он - стопроцентный гей, тут даже тест не нужен.\nЭй, ты здесь? Вернись обратно в испытательную зону, негодник!</string>
+    <string name="start_button_difficulty">Сложность</string>
+    <string name="start_button_difficulty_easy">Хлюпик</string>
+    <string name="start_button_difficulty_hard">Гигачад</string>
 
     <!-- Game -->
     <string name="game_button_next">Далее</string>
     <string name="game_button_finish">Завершить</string>
+    <string name="game_questions">ВОПРОС</string>
     <string name="game_questions_counter">%1$d/%2$d</string>
 
     <!-- Result -->

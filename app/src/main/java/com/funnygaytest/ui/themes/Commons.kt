@@ -3,15 +3,25 @@ package com.funnygaytest.ui.themes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.Dp
+
+// UI Цвета
+val LabGreen = Color(0xFF00FFC2)
+val LabDarkBackground = Color(0xFF000000)
+val LabSurface = Color(0xFF1A1A1A)
+val LabError = Color(0xFFFF3D00)
+
+// Текстовые цвета
+val LabTextPrimary = Color(0xFFE0E0E0)
+val LabTextSecondary = Color(0xFF9E9E9E)
+
 
 data class MainTestColors(
-    val primaryBackground: Color = Color(0xFF00BFFF),
-    val primaryText: Color = Color(0xFFFFFFFF),
-    val primaryElement: Color = Color(0xFF4169E1),
-    val gray: Color = Color(0xFFD3D3D3)
+    val primaryBackground: Color = LabGreen,
+    val primaryText: Color = LabTextPrimary,
+    val primaryElement: Color = LabSurface,
+    val secondaryText: Color = LabTextSecondary,
+    val error: Color = LabError
 )
 
 data class MainTestTypography(
@@ -20,12 +30,7 @@ data class MainTestTypography(
     val subText: TextStyle,
     val buttonText: TextStyle,
     val dialogTitle: TextStyle,
-    val dialogDescription: TextStyle,
-)
-
-data class MainTestShape(
-    val padding: Dp,
-    val cornersStyle: Shape
+    val dialogDescription: TextStyle
 )
 
 object MainTestTheme {
@@ -37,18 +42,6 @@ object MainTestTheme {
         @Composable
         get() = LocalGayTestTypography.current
 
-    val shapes: MainTestShape
-        @Composable
-        get() = LocalGayTestShape.current
-
-}
-
-enum class MainTestSize {
-    Minimum, Small, Medium, Big
-}
-
-enum class MainTestCorners {
-    Flat, Rounded
 }
 
 val LocalGayTestColors = staticCompositionLocalOf<MainTestColors> {
@@ -57,8 +50,4 @@ val LocalGayTestColors = staticCompositionLocalOf<MainTestColors> {
 
 val LocalGayTestTypography = staticCompositionLocalOf<MainTestTypography> {
     error("No font provided")
-}
-
-val LocalGayTestShape = staticCompositionLocalOf<MainTestShape> {
-    error("No shapes provided")
 }

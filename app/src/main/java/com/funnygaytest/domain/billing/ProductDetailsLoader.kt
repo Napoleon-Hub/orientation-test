@@ -24,11 +24,11 @@ class ProductDetailsLoader @Inject constructor(private val billingClient: Billin
         )
         billingClient.queryProductDetailsAsync(params.build()) { billingResult, productDetailsList ->
             val code = billingResult.responseCode
-            if (code == BillingClient.BillingResponseCode.OK && productDetailsList.isNotEmpty()) {
-                productDetails.postValue(productDetailsList[0])
-            } else {
-                FirebaseCrashlytics.getInstance().log("Unable getting sku details, code: $code")
-            }
+//            if (code == BillingClient.BillingResponseCode.OK && productDetailsList.isNotEmpty()) {
+//                productDetails.postValue(productDetailsList[0])
+//            } else {
+//                FirebaseCrashlytics.getInstance().log("Unable getting sku details, code: $code")
+//            }
         }
     }
 

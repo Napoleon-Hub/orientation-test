@@ -26,7 +26,7 @@ object BillingModule {
     ): BillingClient {
         return BillingClient.newBuilder(context)
             .setListener(purchaseUpdatedListener)
-            .enablePendingPurchases()
+//            .enablePendingPurchases()
             .build()
     }
 

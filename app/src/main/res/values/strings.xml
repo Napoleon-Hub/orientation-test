@@ -1,18 +1,22 @@
 <resources>
     <!-- Main -->
-    <string name="app_name">Funny Gay Test</string>
+    <string name="app_name">Hard Funny Gay Test</string>
     <string name="app_version">Version %s</string>
 
     <!-- Start -->
     <string name="start_button">Start</string>
     <string name="start_description">Probably the most accurate and interesting gay test you are able to find on the Internet. Scientists from all over the world have been working on it
-    just in order to answer you a delicate question. Prefer boys?\n\nThe application is absolutely free! (But there is some advertising in it, pure scientists need to be fed with something)</string>
+    just in order to answer you a delicate question. Prefer boys?\nThe application is absolutely free! (But there is some advertising in it, pure scientists need to be fed with something)</string>
     <string name="start_button_continue">Continue</string>
-    <string name="start_description_continue">He\'s one hundred percent gay, he doesn\'t even need a test.\n\nOh are you here? Go back to the test area, damn boy!</string>
+    <string name="start_description_continue">He\'s one hundred percent gay, he doesn\'t even need a test.\nOh are you here? Go back to the test area, damn boy!</string>
+    <string name="start_button_difficulty">Difficulty</string>
+    <string name="start_button_difficulty_easy">Pussy</string>
+    <string name="start_button_difficulty_hard">Unreal</string>
 
     <!-- Game -->
     <string name="game_button_next">Next</string>
     <string name="game_button_finish">Finish</string>
+    <string name="game_questions">QUESTION</string>
     <string name="game_questions_counter">%1$d/%2$d</string>
 
     <!-- Result -->

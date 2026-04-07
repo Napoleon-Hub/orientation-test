@@ -2,9 +2,10 @@ package com.funnygaytest.di
 
 import android.content.Context
 import android.content.res.Resources
+import com.funnygaytest.utils.music.AudioManager
+import com.google.firebase.Firebase
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.analytics.analytics
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,4 +28,11 @@ object AppModule {
     fun provideFirebaseAnalytics(): FirebaseAnalytics {
         return Firebase.analytics
     }
+
+    @Provides
+    @Singleton
+    fun provideAudioManager(@ApplicationContext context: Context): AudioManager {
+        return AudioManager(context)
+    }
+
 }

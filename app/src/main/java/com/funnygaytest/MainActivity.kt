@@ -1,209 +1,186 @@
 package com.funnygaytest
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.Network
-import android.net.NetworkRequest
+//import com.yandex.mobile.ads.common.AdError
+//import com.yandex.mobile.ads.common.AdRequestConfiguration
+//import com.yandex.mobile.ads.common.AdRequestError
+//import com.yandex.mobile.ads.common.ImpressionData
+//import com.yandex.mobile.ads.common.MobileAds
+//import com.yandex.mobile.ads.interstitial.InterstitialAd
+//import com.yandex.mobile.ads.interstitial.InterstitialAdEventListener
+//import com.yandex.mobile.ads.interstitial.InterstitialAdLoadListener
+//import com.yandex.mobile.ads.interstitial.InterstitialAdLoader
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.funnygaytest.screens.game.GameScreen
-import com.funnygaytest.screens.game.GameViewModel
-import com.funnygaytest.screens.result.ResultScreen
-import com.funnygaytest.screens.start.StartScreen
-import com.funnygaytest.screens.start.StartViewModel
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import com.funnygaytest.navigation.AppNavigation
 import com.funnygaytest.ui.themes.MainTheme
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.ump.ConsentInformation
-import com.google.android.ump.ConsentRequestParameters
-import com.google.android.ump.UserMessagingPlatform
-import com.wildlifesurvivaltest.screens.result.ResultViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
-const val START_SCREEN_NAME: String = "start"
-const val GAME_SCREEN_NAME: String = "game"
-const val RESULT_SCREEN_NAME: String = "result"
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    private var interstitialAd: InterstitialAd? = null
-    private lateinit var fullScreenContentCallback: FullScreenContentCallback
+//    private lateinit var consentManager: ConsentManager
+//
+//    private var interstitialAd: InterstitialAd? = null
+//    private var interstitialAdLoader: InterstitialAdLoader? = null
 
     private var appUpdateManager: AppUpdateManager? = null
     private var activityResultLauncher: ActivityResultLauncher<IntentSenderRequest>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.javaClass
 
-        activityResultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartIntentSenderForResult()
-        ) { result ->
-            if (result.resultCode != RESULT_OK) {
-                // Process decline if needed
-            }
-        }
-        checkAppUpdatesAvailable()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        hideSystemUI()
 
-        addNetworkCallback()
-        MobileAds.initialize(this)
-        checkRequestConsentInfoUpdate()
-
-        fullScreenContentCallback = object : FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                interstitialAd = null
-            }
-        }
+        //configureConsentManager()
+        setupAppUpdate()
 
         setContent {
             MainTheme {
-                val navController = rememberNavController()
-
-                NavHost(navController = navController, startDestination = START_SCREEN_NAME) {
-                    composable(START_SCREEN_NAME) {
-                        val startViewModel = hiltViewModel<StartViewModel>()
-                        StartScreen(
-                            screenOrientation = resources.configuration.orientation,
-                            navController = navController,
-                            viewModel = startViewModel
-                        )
-                    }
-
-                    composable(GAME_SCREEN_NAME) {
-                        loadVideoAd()
-                        val gameViewModel = hiltViewModel<GameViewModel>()
-                        GameScreen(
-                            screenOrientation = resources.configuration.orientation,
-                            navController = navController,
-                            viewModel = gameViewModel
-                        )
-                    }
-
-                    composable(RESULT_SCREEN_NAME) {
-                        if (interstitialAd != null) interstitialAd?.show(this@MainActivity)
-                        val resultViewModel = hiltViewModel<ResultViewModel>()
-                        ResultScreen(
-                            screenOrientation = resources.configuration.orientation,
-                            navController = navController,
-                            viewModel = resultViewModel
-                        )
-                    }
-                }
-
+                AppNavigation(
+                    onRequestLoadAd = {  },
+                    onRequestShowAd = {  }//showAd()
+                )
             }
         }
     }
 
-    private fun addNetworkCallback() {
-        val cm: ConnectivityManager =
-            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        val builder: NetworkRequest.Builder = NetworkRequest.Builder()
-        cm.registerNetworkCallback(
-            builder.build(),
-            object : ConnectivityManager.NetworkCallback() {
-
-                override fun onAvailable(network: Network) {
-                    runOnUiThread {
-                        viewModel.setConnection(true)
-                    }
-                }
-
-                override fun onLost(network: Network) {
-                    runOnUiThread {
-                        viewModel.setConnection(false)
-                    }
-                }
-            }
-        )
-    }
-
-    // GDPR
-    private fun checkRequestConsentInfoUpdate() {
-        val params = ConsentRequestParameters.Builder()
-            .setTagForUnderAgeOfConsent(false)
-            .build()
-
-        val consentInformation = UserMessagingPlatform.getConsentInformation(this)
-        consentInformation.requestConsentInfoUpdate(
-            this,
-            params,
-            { if (consentInformation.isConsentFormAvailable) loadConsentForm(consentInformation) },
-            {}
-        )
-    }
-
-    private fun loadConsentForm(consentInformation: ConsentInformation) {
-        UserMessagingPlatform.loadConsentForm(
-            this,
-            { form ->
-                if (consentInformation.consentStatus == ConsentInformation.ConsentStatus.REQUIRED) {
-                    form.show(this@MainActivity) { loadConsentForm(consentInformation) }
-                }
-            }
-        ) {}
-    }
-
-    private fun loadVideoAd() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val adRequest: AdRequest = AdRequest.Builder().build()
-            withContext(Dispatchers.Main) {
-                InterstitialAd.load(
-                    this@MainActivity,
-                    this@MainActivity.getString(R.string.video_ad_unit_id),
-                    adRequest,
-                    object : InterstitialAdLoadCallback() {
-                        override fun onAdLoaded(ad: InterstitialAd) {
-                            interstitialAd = ad
-                            interstitialAd!!.fullScreenContentCallback = fullScreenContentCallback
-                        }
-                    })
-            }
-        }
+    private fun setupAppUpdate() {
+        activityResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartIntentSenderForResult()
+        ) { _ -> }
+        checkAppUpdatesAvailable()
     }
 
     private fun checkAppUpdatesAvailable() {
         appUpdateManager = AppUpdateManagerFactory.create(this)
-
         val appUpdateInfoTask = appUpdateManager?.appUpdateInfo
 
         appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo: AppUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
-            ) {
-                appUpdateManager?.startUpdateFlowForResult(
-                    appUpdateInfo,
-                    activityResultLauncher!!,
-                    AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build()
-                )
-            } else {
-                Toast.makeText(this, "In-app updates unavailable or not needed", Toast.LENGTH_SHORT).show()
+            try {
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+                ) {
+                    appUpdateManager?.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        activityResultLauncher!!,
+                        AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build()
+                    )
+                }
+            } catch (_: Exception) {
             }
         }
 
     }
+//
+//    private fun configureConsentManager() {
+//        consentManager = ConsentManager(this)
+//        consentManager.gatherConsent { error ->
+//            initializeMobileAds(error == null)
+//        }
+//    }
+//
+//    private fun initializeMobileAds(withConsent: Boolean) {
+//        MobileAds.apply {
+//            setUserConsent(withConsent)
+//            setAppAdAnalyticsReporting(true)
+//            initialize(this@MainActivity) {
+//                interstitialAdLoader = InterstitialAdLoader(this@MainActivity).apply {
+//                    setAdLoadListener(object : InterstitialAdLoadListener {
+//                        override fun onAdLoaded(interstitialAd: InterstitialAd) {
+//                            this@MainActivity.interstitialAd = interstitialAd
+//                            // The ad was loaded successfully. Now you can show loaded ad.
+//                        }
+//
+//                        override fun onAdFailedToLoad(error: AdRequestError) {
+//                            // Ad failed to load with AdRequestError.
+//                            // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
+//                        }
+//                    })
+//                }
+//                loadInterstitialAd()
+//            }
+//        }
+//    }
+//
+//    private fun loadInterstitialAd() {
+//        val adRequestConfiguration = AdRequestConfiguration.Builder("demo-interstitial-yandex").build()
+//        interstitialAdLoader?.loadAd(adRequestConfiguration)
+//    }
+//
+//    private fun showAd() {
+//        interstitialAd?.apply {
+//            setAdEventListener(object : InterstitialAdEventListener {
+//                override fun onAdShown() {
+//                    // Called when ad is shown.
+//                }
+//                override fun onAdFailedToShow(adError: AdError) {
+//                    // Called when an InterstitialAd failed to show.
+//                    // Clean resources after Ad dismissed
+//                    interstitialAd?.setAdEventListener(null)
+//                    interstitialAd = null
+//
+//                    // Now you can preload the next interstitial ad.
+//                    loadInterstitialAd()
+//                }
+//                override fun onAdDismissed() {
+//                    // Called when ad is dismissed.
+//                    // Clean resources after Ad dismissed
+//                    interstitialAd?.setAdEventListener(null)
+//                    interstitialAd = null
+//
+//                    // Now you can preload the next interstitial ad.
+//                    loadInterstitialAd()
+//                }
+//                override fun onAdClicked() {
+//                    // Called when a click is recorded for an ad.
+//                }
+//                override fun onAdImpression(impressionData: ImpressionData?) {
+//                    // Called when an impression is recorded for an ad.
+//                }
+//            })
+//            show(this@MainActivity)
+//        }
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        interstitialAdLoader?.setAdLoadListener(null)
+//        interstitialAdLoader = null
+//        destroyInterstitialAd()
+//    }
+//
+//    private fun destroyInterstitialAd() {
+//        interstitialAd?.setAdEventListener(null)
+//        interstitialAd = null
+//    }
+
+    override fun onResume() {
+        super.onResume()
+        hideSystemUI()
+    }
+
+    private fun hideSystemUI() {
+        val controller = WindowInsetsControllerCompat(window, window.decorView)
+        controller.hide(WindowInsetsCompat.Type.systemBars())
+        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    }
+
 }
