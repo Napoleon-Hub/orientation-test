@@ -8,9 +8,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.funnygaytest.screens.game.GameScreen
-import com.funnygaytest.screens.result.ResultScreen
-import com.funnygaytest.screens.start.StartScreen
+import com.funnygaytest.ui.screens.game.GameScreen
+import com.funnygaytest.ui.screens.result.ResultScreen
+import com.funnygaytest.ui.screens.start.StartScreen
 
 @Composable
 fun AppNavigation(
@@ -26,7 +26,9 @@ fun AppNavigation(
                     navController.navigate(ScreenRoutes.Game.route)
                 },
                 onLoseResultShow = {
-                    navController.navigate(ScreenRoutes.Result.withArgs("true"))
+                    navController.navigate(ScreenRoutes.Result.withArgs("true")) {
+                        popUpTo(ScreenRoutes.Start.route) { inclusive = true }
+                    }
                 }
             )
         }
@@ -34,29 +36,37 @@ fun AppNavigation(
         composable(ScreenRoutes.Game.route) {
             GameScreen(
                 goToResult = {
-                    navController.navigate(ScreenRoutes.Result.withArgs("false"))
+                    navController.navigate(ScreenRoutes.Result.withArgs("false")) {
+                        popUpTo(ScreenRoutes.Start.route) { inclusive = true }
+                    }
                 }
             )
         }
 
         composable(
-            route = ScreenRoutes.Result.route + "/${NavArgs.LOSE_RESULT}",
+            route = ScreenRoutes.Result.route + "/{$LOSE_RESULT}",
             arguments = listOf(
-                navArgument(NavArgs.LOSE_RESULT) {
+                navArgument(LOSE_RESULT) {
                     type = NavType.BoolType
                     defaultValue = false
                 }
             )
         ) { navBackStackEntry ->
 
-            val isPermanentLose = navBackStackEntry.arguments?.getBoolean(NavArgs.LOSE_RESULT) ?: false
+            val isPermanentLose = navBackStackEntry.arguments?.getBoolean(LOSE_RESULT) ?: false
 
             LaunchedEffect(Unit) {
                 if (!isPermanentLose) onRequestShowAd()
             }
 
             ResultScreen(
-                navController = navController
+                goToStart = {
+                    navController.navigate(ScreenRoutes.Start.route) {
+                        popUpTo(ScreenRoutes.Result.route + "/{$LOSE_RESULT}") {
+                            inclusive = true
+                        }
+                    }
+                }
             )
         }
     }

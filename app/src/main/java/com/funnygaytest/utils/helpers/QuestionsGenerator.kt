@@ -1,8 +1,8 @@
 package com.funnygaytest.utils.helpers
 
 import com.funnygaytest.R
-import com.funnygaytest.domain.models.Answer
-import com.funnygaytest.domain.models.Question
+import com.funnygaytest.models.Answer
+import com.funnygaytest.models.Question
 
 class QuestionsGenerator {
 
@@ -15,7 +15,8 @@ class QuestionsGenerator {
                     Answer(R.string.question_1_answer_1, 0),
                     Answer(R.string.question_1_answer_2, 5),
                     Answer(R.string.question_1_answer_3, 0),
-                    Answer(R.string.question_1_answer_4, 6)
+                    Answer(R.string.question_1_answer_4, 6),
+                    Answer(R.string.question_1_answer_5, 6)
                 )
             ),
             Question(

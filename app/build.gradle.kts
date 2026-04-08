@@ -97,7 +97,7 @@ dependencies {
     ksp(libs.hilt.android.compiler)
 
     // Navigation Components
-    implementation(libs.navigation.ui.ktx)
+    implementation(libs.navigation.compose)
 
     // Coroutines
     implementation(libs.coroutines.core)
@@ -108,13 +108,19 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
 
-    // Google Play
-    implementation(libs.billing.ktx)
+    // Google Play Services
     implementation(libs.play.app.update.ktx)
+    implementation(libs.play.review)
+    implementation(libs.play.review.ktx)
+
+    // Messaging
     implementation(libs.user.messaging.platform)
 
     // Yandex Mobile Ads
     //implementation(libs.yandex.mobile.ads)
+
+    // Billing
+    implementation(libs.billing.ktx)
 
     // Work Runtime
     constraints { implementation(libs.work.runtime) }

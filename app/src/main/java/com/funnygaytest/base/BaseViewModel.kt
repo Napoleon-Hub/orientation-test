@@ -2,8 +2,9 @@ package com.funnygaytest.base
 
 import androidx.annotation.RawRes
 import androidx.lifecycle.ViewModel
-import com.funnygaytest.data.prefs.PrefsEntity
-import com.funnygaytest.utils.music.AudioManager
+import com.funnygaytest.prefs.PrefsEntity
+import com.funnygaytest.managers.music.AudioManager
+import kotlinx.coroutines.flow.update
 
 abstract class BaseViewModel(
     private val preferences: PrefsEntity,
@@ -17,6 +18,12 @@ abstract class BaseViewModel(
         get() = preferences.gameBegun
         set(value) {
             preferences.gameBegun = value
+        }
+
+    protected var isMuted: Boolean
+        get() = preferences.isMuted
+        set(value) {
+            preferences.isMuted = value
         }
 
     protected var lastQuestionIndex: Int
@@ -45,6 +52,10 @@ abstract class BaseViewModel(
 
     fun setMuteMusic(isMuted: Boolean) {
         audioManager.setMute(isMuted)
+    }
+
+    open fun toggleMusic() {
+        isMuted = !isMuted
     }
 
 }

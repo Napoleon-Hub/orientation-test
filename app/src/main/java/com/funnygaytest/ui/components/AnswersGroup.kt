@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.funnygaytest.domain.models.Answer
+import com.funnygaytest.models.Answer
 import com.funnygaytest.ui.themes.MainTestTheme
 
 @Composable
@@ -49,13 +49,12 @@ fun AnswersGroup(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(min = 56.dp) // Минимальная высота для удобного тапа
+                    .heightIn(min = 56.dp)
                     .clip(RoundedCornerShape(12.dp))
                     .background(
                         if (isSelected) MainTestTheme.colors.primaryBackground.copy(alpha = 0.25f)
                         else Color.Black.copy(alpha = 0.4f)
                     )
-                    // Неоновая рамка при выборе
                     .border(
                         width = if (isSelected) 2.dp else 1.dp,
                         color = if (isSelected) borderColor else MainTestTheme.colors.primaryBackground.copy(alpha = 0.1f),
@@ -68,7 +67,6 @@ fun AnswersGroup(
                 Text(
                     text = stringResource(id = answer.answerResId),
                     style = MainTestTheme.typography.subText,
-                    // Текст тоже может слегка "подсвечиваться" при выборе
                     color = if (isSelected) Color.White else MainTestTheme.colors.primaryText.copy(alpha = 0.8f),
                     textAlign = TextAlign.Start
                 )

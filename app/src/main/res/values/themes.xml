@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
 <!--        <item name="android:windowBackground">@color/blue_main</item>-->
 <!--        <item name="android:statusBarColor">@color/blue_main</item>-->
 <!--        <item name="android:navigationBarColor">@color/blue_main</item>-->

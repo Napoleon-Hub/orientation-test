@@ -1,21 +1,18 @@
 <resources>
     <!-- Main -->
-    <string name="app_name">Hard Funny Gay Test</string>
+    <string name="app_name">Hardcore Gay Test</string>
     <string name="app_version">Version %s</string>
 
     <!-- Start -->
-    <string name="start_button">Start</string>
-    <string name="start_description">Probably the most accurate and interesting gay test you are able to find on the Internet. Scientists from all over the world have been working on it
-    just in order to answer you a delicate question. Prefer boys?\nThe application is absolutely free! (But there is some advertising in it, pure scientists need to be fed with something)</string>
-    <string name="start_button_continue">Continue</string>
-    <string name="start_description_continue">He\'s one hundred percent gay, he doesn\'t even need a test.\nOh are you here? Go back to the test area, damn boy!</string>
+    <string name="start_button">Get Started</string>
+    <string name="start_description">The most accurate and mind-bending gay test ever created. Top scientists from around the globe grinded day and night just to answer the one question keeping you up at night: Are you actually into boys or what?\n(Heads up: there are some ads. We gotta keep those poor scientists fed, you know?)</string>
+    <string name="start_button_continue">Keep Going</string>
+    <string name="start_description_continue">Oh, he\'s 100% gay, no test even needed.\nYo, you still there? Get your fruity ass back to the testing zone!</string>
     <string name="start_button_difficulty">Difficulty</string>
     <string name="start_button_difficulty_easy">Pussy</string>
-    <string name="start_button_difficulty_hard">Unreal</string>
+    <string name="start_button_difficulty_hard">GigaChad</string>
 
     <!-- Game -->
-    <string name="game_button_next">Next</string>
-    <string name="game_button_finish">Finish</string>
     <string name="game_questions">QUESTION</string>
     <string name="game_questions_counter">%1$d/%2$d</string>
 
@@ -34,7 +31,7 @@
     <string name="result_text_full">Scientists can finally relax and return home to their families, because inventing questions was not so easy)\n
         If you liked the app, rate it or share the result with your friends, this way you can find out whether your friends are those who they seem to be!\n
         If you want more tests like this one, support the scientists and their families, this way you will help to speed up the scientific process (%s) :) Good luck!\n</string>
-    <string name="result_button_restart">Take test again</string>
+    <string name="result_button_restart">Try again</string>
     <string name="result_button_another_apps">Another tests</string>
     <string name="result_button_pay">Feed scientists</string>
     <string name="result_test_share">I passed a gay test with this result:\n%s\nAny guesses about YOUR result?)\n\nhttps://play.google.com/store/apps/details?id=com.funnygaytest</string>
@@ -46,145 +43,145 @@
     <string name="toast_choose_error">Please select an answer before proceeding further</string>
 
     <!-- Questions -->
-    <string name="question_1">What do you think, if we were in the Middle Ages, what will be your occupation?</string>
-    <string name="question_1_answer_1">Pied Piper</string>
-    <string name="question_1_answer_2">Whipping boy</string>
+    <string name="question_1">Welcome to the Middle Ages. You\'re not the king, though. What\'s your job?</string>
+    <string name="question_1_answer_1">Rat Catcher (Professional Snitch Exterminator)</string>
+    <string name="question_1_answer_2">Whipping Boy (Professional Pain Taker)</string>
     <string name="question_1_answer_3">Penguin flipper</string>
-    <string name="question_1_answer_4">Chimney sweep</string>
+    <string name="question_1_answer_4">Chimney Sweep</string>
+    <string name="question_1_answer_5">Gong Farmer (The Night Soil Specialist)</string>
 
-    <string name="question_2">Which vegetable from the following list do you like the most?</string>
+    <string name="question_2">Which of these veggies is your favorite? (Choose wisely…)</string>
     <string name="question_2_answer_1">Cucumber</string>
-    <string name="question_2_answer_2">Aubergine</string>
-    <string name="question_2_answer_3">Carrot</string>
-    <string name="question_2_answer_4">It doesn\'t matter, the main things are shape and size!</string>
+    <string name="question_2_answer_2">Eggplant(Yeah, that one)</string>
+    <string name="question_2_answer_3">Carrot (Long and crunchy)</string>
+    <string name="question_2_answer_4">Who cares about the taste? It\'s all about the shape and size!</string>
 
-    <string name="question_3">Imagine the situation. You came to the meeting with two friends. One of them is a guy and the other one is a girl. At the same moment the guy is stretching out his hand to greet you,
-        and the girl is going to hug you. Who you will response first and why?</string>
-    <string name="question_3_answer_1">The guy will be the first because any guy is more important for me than a girl.</string>
-    <string name="question_3_answer_2">The guy will be the first, and I will not shake his hand, but hug him!</string>
-    <string name="question_3_answer_3">The guy will be the first because I like boys more.</string>
-    <string name="question_3_answer_4">Hey scientists! May I have some normal options? I\'m not a gay damn you!</string>
+    <string name="question_3">You pull up to meet two friends—a guy and a girl. The bro instantly goes in for a high-five, while the girl is already leaning in for a hug.
+        Who are you locking in with first and what\'s the move?</string>
+    <string name="question_3_answer_1">Bros before hoes. The homie gets the handshake first, no questions asked.</string>
+    <string name="question_3_answer_2">Forget the handshake, I\'m going in for the hug. My boy needs some love too!</string>
+    <string name="question_3_answer_3">The guy, obviously. You already know I\'m into boys.</string>
+    <string name="question_3_answer_4">Yo, scientists, give me some real options! I\'m straight as an arrow, dammit!</string>
 
-    <string name="question_4">Imagine the situation. You are walking down the street with your friend (female), and several guys appeared in front of you and are up to block your way.
-        You realise that nothing good will happen, your actions?</string>
-    <string name="question_4_answer_1">Remember what you were taught at physical education classes and run without looking back</string>
-    <string name="question_4_answer_2">Probably if you cry loudly, they will not hit you hard, and if you wet yourself, they are unlikely to touch you at all</string>
-    <string name="question_4_answer_3">Start praying to God loudly, there is a chance that they will not beat a religious person and immediately will start to pester the girl</string>
-    <string name="question_4_answer_4">There is no chance to save a girl in this situation, so it would be wise to pretend a pimp, there is a slight possibility to benefit from the situation</string>
+    <string name="question_4">Picture this: walking with a girl, and a group of guys blocks your path. The vibes are immaculate…ly bad. What\'s the move?</string>
+    <string name="question_4_answer_1">Mama\'s Little Track Star. Remember PE class and hit a world record speedrun out of there.</string>
+    <string name="question_4_answer_2">Mama\'s Little Crybaby. Start sobbing uncontrollably. If I pee myself, maybe they\'ll be too disgusted to touch me.</string>
+    <string name="question_4_answer_3">Mama\'s Little Saint. Start praying out loud. Maybe they won\'t hit a man of God and will just go for the girl instead.</string>
+    <string name="question_4_answer_4">Mama\'s Little Strategist. She\'s cooked anyway. I\'ll just pretend to be her pimp and try to make some profit. Stonks!</string>
 
-    <string name="question_5">How many male sexual partners did you have?</string>
-    <string name="question_5_answer_1">Didn\'t count</string>
-    <string name="question_5_answer_2">One</string>
-    <string name="question_5_answer_3">Shall I count a hand?</string>
-    <string name="question_5_answer_4">Many</string>
+    <string name="question_5">What\'s your body count? (We\'re talking about guys, obviously)</string>
+    <string name="question_5_answer_1">I didn\'t count</string>
+    <string name="question_5_answer_2">Just a lonely one</string>
+    <string name="question_5_answer_3">Does my hand count?</string>
+    <string name="question_5_answer_4">Too many to list here</string>
 
-    <string name="question_6">Why do you think there is no normal option in the answers?</string>
-    <string name="question_6_answer_1">Because the scientists who created this are crazy</string>
-    <string name="question_6_answer_2">Because normal answers are boring!</string>
-    <string name="question_6_answer_3">Because scientists are hinting, since I downloaded this test, the likelihood that I am gay is high</string>
-    <string name="question_6_answer_4">All of the above</string>
+    <string name="question_6">Be honest: why do you think there are zero \"normal\" options in this test?</string>
+    <string name="question_6_answer_1">Because the \"scientists\" who made this have officially lost their minds.</string>
+    <string name="question_6_answer_2">Because normal answers are mid. Chaos is better.</string>
+    <string name="question_6_answer_3">Because the dev knows that if I downloaded this, I\'m already sus.</string>
+    <string name="question_6_answer_4">All of the above. It\'s a total circus.</string>
 
-    <string name="question_7">Imagine the situation. You were asked to change into women\'s clothing and take a couple of photos. You will be paid 1000$ for this. Will you agree?</string>
-    <string name="question_7_answer_1">For 1000$ in cash I can do more than that</string>
-    <string name="question_7_answer_2">Sometimes I do it for free, so why not</string>
-    <string name="question_7_answer_3">1000$? Where have you been earlier? I agreed on this for a bottle of beer once</string>
+    <string name="question_7">Picture this: someone offers you 1000$ for a photoshoot in women\'s clothes. You taking it?</string>
+    <string name="question_7_answer_1">For a grand in cash? I\'d do way worse things than that.</string>
+    <string name="question_7_answer_2">I sometimes do that for free anyway, so easy money, I guess.</string>
+    <string name="question_7_answer_3">1000$? Where were you sooner? I once did it for a 2-liter bottle of cheap beer…</string>
 
-    <string name="question_8">What from the following variants would you like to do more?</string>
-    <string name="question_8_answer_1">Rhythmic gymnastics</string>
-    <string name="question_8_answer_2">Figure skating</string>
-    <string name="question_8_answer_3">Ballet</string>
-    <string name="question_8_answer_4">Belly dance</string>
+    <string name="question_8">Which of these would you pick as a hobby?</string>
+    <string name="question_8_answer_1">Rhythmic Gymnastics (Stay flexible, bro)</string>
+    <string name="question_8_answer_2">Figure Skating (Ice is my stage)</string>
+    <string name="question_8_answer_3">Ballet (Tight leggings? Yes please)</string>
+    <string name="question_8_answer_4">Belly Dancing (Shake what your mama gave ya)</string>
 
-    <string name="question_9">Do you remember the question of what will you do if several guys appeared in front of you and your female friend? So I\'ll give you one more chance to answer, because your previous answer was wrong</string>
-    <string name="question_9_answer_1">In a stress situation, you need to think quickly, so you will start shouting to the whole street Allah Akbar and take something out of your pocket, pretending that it is a detonator</string>
-    <string name="question_9_answer_2">Saying that your mommy won\'t let you hang out with strangers. And after they start dragging your girlfriend into the car, tell her not to take candy from the bandits</string>
-    <string name="question_9_answer_3">You will be beaten anyway, so why not hit your girlfriend first, probably they will decide that you are insane and leave you alone</string>
+    <string name="question_9">Remember the question about the thugs and your girlfriend? I\'m giving you one more shot, because your previous answer was a total fail.</string>
+    <string name="question_9_answer_1">**Mama\'s Little Demolition Man.** Go full kamikaze mode: scream at the top of your lungs and pretend you have a detonator in your pocket.</string>
+    <string name="question_9_answer_2">**Mama\'s Little Good Boy.** Tell them your mom doesn\'t let you talk to strangers. As they drag your girl into a van, remind her not to take any candy!</string>
+    <string name="question_9_answer_3">**Mama\'s Little Menace.** Punch the girl first. If you act completely unhinged, maybe they\'ll think you\'re a psycho and leave you alone.</string>
 
-    <string name="question_10">Which of the following do you think best describes you?</string>
-    <string name="question_10_answer_1">I\'m constantly exercising and staying in a good physical fit. Also I don\'t mind trying a thong</string>
-    <string name="question_10_answer_2">I\'m an outstanding person and always in the spotlight. Especially I like to chat about guys with my friends.</string>
-    <string name="question_10_answer_3">I\'m reasonable person and always ready to listen. I really like to hug and comfort my friends, especially guys</string>
-    <string name="question_10_answer_4">I\'m not a gay, look at yourself, scientists! (This answer is incorrect, but you may try to choose it)</string>
+    <string name="question_10">How would you best describe yourself?</string>
+    <string name="question_10_answer_1">I\'m a total gym rat and always in shape. I usually work out in a thong for better mobility.</string>
+    <string name="question_10_answer_2">I\'m a social butterfly and always the center of attention. I love gossiping about guys with my girls.</string>
+    <string name="question_10_answer_3">I\'m the \"therapist\" friend. I love hugging and comforting my homies, especially the cute ones.</string>
+    <string name="question_10_answer_4">I\'m not gay, look at yourselves, you nerds! (Incorrect answer, but feel free to try).</string>
 
-    <string name="question_11">What do you think a gay person thinks about in the morning?</string>
-    <string name="question_11_answer_1">How should I know?? I\'m not a gay</string>
-    <string name="question_11_answer_2">I\'m not a gay, but for sure which tights to wear today</string>
-    <string name="question_11_answer_3">Of course I have no idea, but probably about the guys</string>
-    <string name="question_11_answer_4">I think I\'m starting to realize that the more I deny that I am gay, the more likely it is that you will write in a result that I am a latent gay</string>
+    <string name="question_11">What do you think is the very first thing a gay guy thinks about in the morning?</string>
+    <string name="question_11_answer_1">How should I know?! I\'m not gay.</string>
+    <string name="question_11_answer_2">No clue, but I bet it involves a Lavender Oat Milk Latte.</string>
+    <string name="question_11_answer_3">I wouldn\'t know, but probably guys.</string>
+    <string name="question_11_answer_4">I think I see where this is going: the more I deny it, the more likely you\'ll call me \"closeted\" in the end, right?</string>
 
-    <string name="question_12">Do you have gay friends?</string>
-    <string name="question_12_answer_1">Yes, I am not against such people in my social circle</string>
-    <string name="question_12_answer_2">Yes, basically only such people surround me</string>
-    <string name="question_12_answer_3">Yes, I often call my friends gay, probably some of them really are</string>
-    <string name="question_12_answer_4">Yes, also I think \"tell me whom you make friends with and I will tell you who you are\"</string>
+    <string name="question_12">Do you have any \"rainbow\" friends?</string>
+    <string name="question_12_answer_1">Yeah, I\'m cool with everyone.</string>
+    <string name="question_12_answer_2">Yeah, that\'s pretty much my entire squad.</string>
+    <string name="question_12_answer_3">Yeah, I call my homies \"gay\" so much that some of them probably are.</string>
+    <string name="question_12_answer_4">Yeah. Birds of a feather flock together, you know?</string>
 
-    <string name="question_13">Imagine the situation. Life has been developed in such a way that you have to share a room with a friend gay. And you have got to the point that he offers you sexual intimacy, your actions?</string>
-    <string name="question_13_answer_1">Just once doesn\'t mean I\'m going to become a gay, right?</string>
-    <string name="question_13_answer_2">I would agree, just ask to do it quickly</string>
-    <string name="question_13_answer_3">Of course, I would agree, eventually we are friends.</string>
-    <string name="question_13_answer_4">Only if he\'s in front</string>
+    <string name="question_13">Scenario: You live with a gay roommate. He makes a \"move\" on you. What are you doing?</string>
+    <string name="question_13_answer_1">It\'s only gay if you make eye contact.</string>
+    <string name="question_13_answer_2">I\'d do it, but only if we keep it quick.</string>
+    <string name="question_13_answer_3">I\'d say yes. Anything for a true friend, right?</string>
+    <string name="question_13_answer_4">Fine, but I\'m the top. No debate.</string>
 
-    <string name="question_14">Imagine the situation. You are on a desert island and you are given a set of three things to survive. Which set of the following will you choose?</string>
-    <string name="question_14_answer_1">Tent, medical kit, bagful of long cucumbers</string>
-    <string name="question_14_answer_2">Lighter, flare, lipstick</string>
-    <string name="question_14_answer_3">Warm clothes set, canister of drinking water, nail polish</string>
-    <string name="question_14_answer_4">Food for the week, shotgun with cartridges, pink dress</string>
+    <string name="question_14">Scenario: You\'re stranded on a desert island. You can only pick one survival kit. Which one is it?</string>
+    <string name="question_14_answer_1">A tent, a medkit, and a giant sack of cucumbers (only for eating, obviously).</string>
+    <string name="question_14_answer_2">A lighter, a hunting knife, and bright red lipstick (to look fabulous for the rescue team).</string>
+    <string name="question_14_answer_3">Fresh water, warm clothes, and a nail polish set (in \"Hot Pink\").</string>
+    <string name="question_14_answer_4">A flare gun, a week\'s supply of food, and a floor-length pink evening dress.</string>
 
-    <string name="question_15">By the way, I forgot to ask, how do you feel about heterosexuals?</string>
-    <string name="question_15_answer_1">Naturally positive</string>
-    <string name="question_15_answer_2">Naturally negative</string>
-    <string name="question_15_answer_3">Everyone has their own way, I don\'t care</string>
+    <string name="question_15">Btw, I forgot to ask: what\'s your take on heterosexuals?</string>
+    <string name="question_15_answer_1">Positive. They seem like nice people.</string>
+    <string name="question_15_answer_2">Negative. I don\'t really approve of their lifestyle.</string>
+    <string name="question_15_answer_3">Everyone has their own path. I couldn\'t care less.</string>
 
-    <string name="question_16">What kind of girls do you like?</string>
-    <string name="question_16_answer_1">Have never thought about it..At least alive and that\'s good</string>
-    <string name="question_16_answer_2">I don\'t like girls that much, guys are more interesting</string>
-    <string name="question_16_answer_3">Smart, beautiful, slim, generous, ready to do anything for me, cooks deliciously, tall, modest, does not drink alcohol, does not smoke. This is only part of the criteria, but it will work for a start.</string>
+    <string name="question_16">What would your dream girl look like?</string>
+    <string name="question_16_answer_1">I\'ve never really thought about it… As long as she\'s a living, breathing person, I\'m good.</string>
+    <string name="question_16_answer_2">I\'m not really into girls. Guys are more my speed.</string>
+    <string name="question_16_answer_3">Smart, beautiful, rich, and ready to do anything for me. And that\'s just the start—the list of red flags is ten pages long.</string>
 
-    <string name="question_17">If you were not born a human, who would you be?</string>
-    <string name="question_17_answer_1">Racoon</string>
-    <string name="question_17_answer_2">Blob fish</string>
-    <string name="question_17_answer_3">Chimpanzee</string>
-    <string name="question_17_answer_4">Dolphin</string>
+    <string name="question_17">If you weren\'t born human, which animal body would you feel most comfortable in?</string>
+    <string name="question_17_answer_1">A Raccoon (I just love touching things and digging through trash).</string>
+    <string name="question_17_answer_2">A Penguin (I like forming \"same-sex\" pairs and hatching rocks together).</string>
+    <string name="question_17_answer_3">A Giraffe (Up to 90% of our \"special time\" is between bros. Look it up!).</string>
+    <string name="question_17_answer_4">A Dolphin (I\'m just very affectionate and I don\'t care about gender).</string>
 
-    <string name="question_18">Imagine the situation. You are not gay, how are you going to live on?</string>
-    <string name="question_18_answer_1">Don\'t say that, I can\'t stand it!</string>
-    <string name="question_18_answer_2">Well, girls will do too, I basically don\'t care, the main thing is a mutual respect and warmth</string>
-    <string name="question_18_answer_3">I have a shop nearby that sells soap and rope, I think I\'ll go there to buy it</string>
-    <string name="question_18_answer_4">And let\'s imagine that you are not gays, scientists. How will you then come up with such questions?? (This answer is not correct, but you may try to choose it)</string>
+    <string name="question_18">Scenario: You wake up and you\'re NOT gay. How do you even go on?</string>
+    <string name="question_18_answer_1">Don\'t even say that! I can\'t handle that kind of trauma!</string>
+    <string name="question_18_answer_2">I guess girls are fine too… As long as the vibes are good and there\'s mutual respect.</string>
+    <string name="question_18_answer_3">I\'m headed to the hardware store for some rope. A world without boys isn\'t a world I want to live in.</string>
+    <string name="question_18_answer_4">How about we imagine YOU guys aren\'t gay? Where would these questions come from then?! (Wrong answer, but go ahead and try).</string>
 
-    <string name="question_19">How do you feel about a fight on the street if your honor is at stake?</string>
-    <string name="question_19_answer_1">I will try to solve the problem peacefully, because only recently has the manicure refreshed.</string>
-    <string name="question_19_answer_2">I will not get into a fight, because I do not want to be beaten, and then also pissed on my face</string>
-    <string name="question_19_answer_3">I am afraid of fights, once my granny beat me with a stick, after that I\'m avoiding conflicts</string>
-    <string name="question_19_answer_4">Fights for Neanderthals, I will pay a person as much as he wants, the main thing is not to beat me</string>
+    <string name="question_19">How do you feel about street fighting if your honor is on the line?</string>
+    <string name="question_19_answer_1">I prefer peaceful talks. I just got my nails done yesterday and they\'re literally perfect.</string>
+    <string name="question_19_answer_2">I\'m staying out of it. Getting beaten up is one thing, but I don\'t want to get \"humiliated\" afterwards.</string>
+    <string name="question_19_answer_3">Fights terrify me. My grandma once beat me with a stick, and I\'ve been in \"pacifist mode\" ever since.</string>
+    <string name="question_19_answer_4">Fighting is for Neanderthals. I\'ll do whatever the guy wants, as long as he doesn\'t touch my face.</string>
 
-    <string name="question_20">Are you an emotional person? Is it easy to bring you to tears?</string>
-    <string name="question_20_answer_1">I\'m crying every day because life is cruel</string>
-    <string name="question_20_answer_2">I\'m very emotional, I\'m breaking into tears already in the first minute of Hachiko\'s move</string>
-    <string name="question_20_answer_3">I was crying constantly during the first 15 years of my life, because in this country my sexual orientation is hard to live with</string>
+    <string name="question_20">How emotional are you? Are you a \"cry me a river\" type of guy?</string>
+    <string name="question_20_answer_1">I cry every single day. Life is just too cruel to a sensitive soul like mine.</string>
+    <string name="question_20_answer_2">I\'m a total wreck. I start sobbing during the opening credits of \"Hachiko\".</string>
+    <string name="question_20_answer_3">I ran out of tears by age 15. Living with my \"preferences\" in this place is a struggle.</string>
 
-    <string name="question_21">How often do you and your friends are joking about homosexuality?</string>
-    <string name="question_21_answer_1">I have no friends, and I often joke with myself, although I\'m not sure that it is a joke at all.</string>
-    <string name="question_21_answer_2">We used to joke about this, but once my buddies became more than friends. It turned out as a funny joke </string>
-    <string name="question_21_answer_3">We constantly discuss this topic and try to engage more and more people into this.</string>
-    <string name="question_21_answer_4">Often. And lately we also started to compete whose penis is larger</string>
+    <string name="question_21">How often do you and your homies joke about being gay?</string>
+    <string name="question_21_answer_1">I have no friends. I joke to myself, but honestly, I\'m losing the punchline.</string>
+    <string name="question_21_answer_2">We joked until it became real. Now we\'re \"more than friends\". Oops.</string>
+    <string name="question_21_answer_3">All the time. We\'re basically missionaries spreading the \"good word\".</string>
+    <string name="question_21_answer_4">Constantly. Lately, we\'ve even started \"sword fighting\" to see who has the biggest blade.</string>
 
     <string name="question_22">How do you feel about your body hair?</string>
-    <string name="question_22_answer_1">I shave all my body hair wherever it is!</string>
-    <string name="question_22_answer_2">I don\'t have hair on my body, I did a full body depilation</string>
-    <string name="question_22_answer_3">I don\'t have body hair like my two dads</string>
-    <string name="question_22_answer_4">I believe that shaving body hair is a sin, so I look like Chewbacca</string>
+    <string name="question_22_answer_1">I shave everything! I can\'t stand being hairy.</string>
+    <string name="question_22_answer_2">I don\'t grow hair at all. Had a full-body laser removal ages ago.</string>
+    <string name="question_22_answer_3">I\'m naturally smooth, just like both of my dads.</string>
+    <string name="question_22_answer_4">I think shaving is a sin, so I basically look like Chewbacca\'s cousin.</string>
 
-    <string name="question_23">Imagine the situation. You share a room with a friend. One day you enter the room and he is watching a gay porn and jerks off. What are you going to do in this a situation?</string>
-    <string name="question_23_answer_1">I\'ll help him, we are still friends</string>
-    <string name="question_23_answer_2">I\'ll tell him that I have just watched exactly the same video</string>
-    <string name="question_23_answer_3">What a shame, I told my boyfriend not to post this video on the Internet!</string>
-    <string name="question_23_answer_4">What a shame, every time he starts watching it without me!</string>
+    <string name="question_23">Scenario: You walk in on your bro watching gay porn and jerking off. What\'s your move?</string>
+    <string name="question_23_answer_1">I\'ll lend him a hand. Real friends don\'t let friends struggle alone.</string>
+    <string name="question_23_answer_2">I\'ll let him know I\'ve seen that video too. 10/10 recommendation.</string>
+    <string name="question_23_answer_3">How embarrassing! I told my boyfriend NOT to upload that video online!</string>
+    <string name="question_23_answer_4">Unbelievable… He always starts watching the good stuff without me!</string>
 
-    <string name="question_24">And the last question. Did do you like the test?)</string>
-    <string name="question_24_answer_1">These scientists are absolutely crazy. So I didn\'t like it</string>
-    <string name="question_24_answer_2">Thanks for the test, I learned a lot about myself</string>
-    <string name="question_24_answer_3">Not a bad test, but I don\'t think I will be happy with the result</string>
+    <string name="question_24">Final question: So, how did you like the test?</string>
+    <string name="question_24_answer_1">These \"scientists\" are clinically insane. I hated every second of it.</string>
+    <string name="question_24_answer_2">Thanks for the test! I learned things about myself that I should probably keep secret.</string>
+    <string name="question_24_answer_3">Forget the test… I don\'t even believe I\'m straight anymore.</string>
 
     <!-- Untranslatable -->
     <string name="app_ad_id" translatable="false">ca-app-pub-6102855810007577~2402981725</string>
