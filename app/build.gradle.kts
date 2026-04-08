@@ -124,6 +124,10 @@ dependencies {
 
     // Work Runtime
     constraints { implementation(libs.work.runtime) }
+
+    // Gson
+    implementation(libs.gson)
+
 }
 
 fun generateVersionCode(major: Int, minor: Int, patch: Int): Int = major * 100 + minor * 10 + patch

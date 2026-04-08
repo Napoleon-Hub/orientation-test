@@ -41,6 +41,12 @@ fun MainTheme(content: @Composable () -> Unit) {
             color = colors.primaryText,
             textAlign = TextAlign.Center
         ),
+        noteText = TextStyle(
+            fontSize = 12.sp,
+            fontFamily = FontFamily(Font(R.font.jet_brains_mono_italic)),
+            color = colors.primaryText,
+            textAlign = TextAlign.Center
+        ),
         dialogTitle = TextStyle(
             fontSize = 22.sp,
             fontFamily = FontFamily(Font(R.font.jet_brains_mono_medium)),

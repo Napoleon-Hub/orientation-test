@@ -1,6 +1,8 @@
 package com.funnygaytest.ui.components
 
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -20,13 +22,19 @@ fun BackgroundWrapper(
     content: @Composable BoxScope.() -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = backgroundId),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop,
-            alignment = Alignment.Center
-        )
+        Crossfade(
+            targetState = backgroundId,
+            animationSpec = tween(durationMillis = 1000),
+            label = "BackgroundTransition"
+        ) { targetBackgroundId ->
+            Image(
+                painter = painterResource(id = targetBackgroundId),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center
+            )
+        }
         Box(
             modifier = modifier
                 .fillMaxSize()

@@ -42,10 +42,10 @@ import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.themes.MainTestTheme
 import com.funnygaytest.ui.themes.MainTheme
 
+private const val APP_URI =
+    "https://play.google.com/store/apps/details?id=com.funnygaytest"
 private const val DEVELOPER_URI =
     "https://play.google.com/store/apps/dev?id=6364243335711753284"
-private const val MAX_POINTS: Double = 111.0
-private const val SHARE_TEXT_TYPE = "text/plain"
 
 @Composable
 fun ResultScreen(
@@ -101,11 +101,13 @@ fun ResultScreen(
         }
     }
 
-    val resultText = getResultText(uiState.points, context)
+    val titleText = getTitleText(context, uiState.healthLeft, uiState.lastQuestionNumber)
+    val resultText = getResultText(context, uiState.healthLeft, uiState.lastQuestionNumber)
 
     ResultScreenContent(
         modifier = modifier,
         uiState = uiState,
+        titleTest = titleText,
         resultText = resultText,
         onRestartClicked = {
             viewModel.onRestartClicked()
@@ -117,7 +119,7 @@ fun ResultScreen(
             showAnotherApps(context)
         },
         onShareClicked = {
-            share(context, resultText)
+            share(context, uiState.healthLeft, uiState.lastQuestionNumber)
         },
         onRateClicked = {
             activity?.let { viewModel.rateUs(it) }
@@ -133,6 +135,7 @@ fun ResultScreen(
 fun ResultScreenContent(
     modifier: Modifier = Modifier,
     uiState: ResultUiState,
+    titleTest: String,
     resultText: String,
     onRestartClicked: () -> Unit = {},
     onPayClicked: () -> Unit = {},
@@ -160,8 +163,8 @@ fun ResultScreenContent(
             ) {
 
                 Text(
-                    text = stringResource(R.string.result_title),
-                    style = MainTestTheme.typography.heading.copy(fontSize = 24.sp),
+                    text = titleTest,
+                    style = MainTestTheme.typography.heading.copy(fontSize = 22.sp),
                     color = MainTestTheme.colors.primaryText.copy(alpha = 0.7f)
                 )
 
@@ -253,27 +256,56 @@ fun PreviewResultScreen() {
     MainTheme {
         ResultScreenContent(
             uiState = ResultUiState(),
-            resultText = stringResource(R.string.result_text_result_not_gay, 99)
+            titleTest = stringResource(R.string.result_title_win),
+            resultText = stringResource(R.string.result_text_result_win_100)
         )
     }
 }
 
-private fun getResultText(points: Int, context: Context): String {
-    val result = ((points.toDouble() / MAX_POINTS) * 100).toInt()
-    return when {
-        result < 25 -> context.getString(R.string.result_text_result_not_gay, result)
-        result < 50 -> context.getString(R.string.result_text_result_little_gay, result)
-        result < 75 -> context.getString(R.string.result_text_result_probably_gay, result)
-        else -> context.getString(R.string.result_text_result_definitely_gay, result)
+private fun getTitleText(context: Context, healthLeft: Int, lastQuestionNumber: Int): String {
+    return if (healthLeft > 0) context.getString(R.string.result_title_win)
+    else if (lastQuestionNumber == 1) context.getString(R.string.result_title_lose_pussy)
+    else context.getString(R.string.result_title_lose)
+}
+
+private fun getResultText(context: Context, healthLeft: Int, lastQuestionNumber: Int): String {
+    return if (healthLeft > 0) {
+        when (healthLeft) {
+            100 -> context.getString(R.string.result_text_result_win_100)
+            in 66..99 -> context.getString(R.string.result_text_result_win_66_99)
+            in 33..65 -> context.getString(R.string.result_text_result_win_33_65)
+            else -> context.getString(R.string.result_text_result_win_1_32)
+        }
+    } else {
+        when (lastQuestionNumber) {
+            in 2..7 -> context.getString(R.string.result_text_result_lose_4_7)
+            in 8..11 -> context.getString(R.string.result_text_result_lose_8_11)
+            in 12..15 -> context.getString(R.string.result_text_result_lose_12_15)
+            in 16..19 -> context.getString(R.string.result_text_result_lose_16_19)
+            20 -> context.getString(R.string.result_text_result_lose_20)
+            else -> context.getString(R.string.result_text_result_lose_pussy)
+        }
     }
 }
 
-private fun share(context: Context, resultText: String) {
-    val shareText = context.getString(R.string.result_test_share, resultText)
+private fun share(context: Context, healthLeft: Int, lastQuestionNumber: Int) {
+    val shareText = when (lastQuestionNumber) {
+        20 if healthLeft > 0 -> context.getString(
+            R.string.result_test_share_win,
+            healthLeft,
+            APP_URI
+        )
+        1 if healthLeft == 0 -> context.getString(
+            R.string.result_test_share_permanent_lose,
+            APP_URI
+        )
+        else -> context.getString(R.string.result_test_share_lose, lastQuestionNumber, APP_URI)
+    }
+
     val sendIntent = Intent().apply {
         action = Intent.ACTION_SEND
         putExtra(Intent.EXTRA_TEXT, shareText)
-        type = SHARE_TEXT_TYPE
+        type = "text/plain"
     }
     context.startActivity(Intent.createChooser(sendIntent, null))
 }

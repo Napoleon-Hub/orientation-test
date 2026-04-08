@@ -10,7 +10,7 @@ import com.funnygaytest.managers.music.AudioManager
 import com.funnygaytest.prefs.PrefsEntity
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
-import com.google.android.play.core.review.testing.FakeReviewManager
+import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -22,9 +22,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class ResultUiState(
-    val points: Int = 0,
     val isMuted: Boolean = false,
-    val isRateEnabled: Boolean = true
+    val isRateEnabled: Boolean = true,
+    val healthLeft: Int = 0,
+    val lastQuestionNumber: Int = 0
 )
 
 sealed class ResultUiEffect {
@@ -41,8 +42,9 @@ class ResultViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(
         ResultUiState(
-            points = points,
-            isMuted = isMuted
+            isMuted = isMuted,
+            healthLeft = health,
+            lastQuestionNumber = lastQuestionIndex + 1
         )
     )
     val uiState = _uiState.asStateFlow()
@@ -66,8 +68,7 @@ class ResultViewModel @Inject constructor(
     }
 
     fun getReviewInfo() {
-        reviewManager = FakeReviewManager(appContext)
-        //reviewManager = ReviewManagerFactory.create(appContext)
+        reviewManager = ReviewManagerFactory.create(appContext)
         val request = reviewManager?.requestReviewFlow()
         request?.addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -107,6 +108,8 @@ class ResultViewModel @Inject constructor(
     fun refreshGameData() {
         gameBegun = false
         lastQuestionIndex = 0
+        health = 100
+        currentQuestionList = listOf()
     }
 
     override fun toggleMusic() {

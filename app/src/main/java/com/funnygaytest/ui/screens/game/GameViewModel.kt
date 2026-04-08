@@ -5,8 +5,8 @@ import com.funnygaytest.base.BaseViewModel
 import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.models.Answer
 import com.funnygaytest.models.Question
-import com.funnygaytest.utils.helpers.QuestionsGenerator
 import com.funnygaytest.managers.music.AudioManager
+import com.funnygaytest.utils.helpers.generateNewGameRun
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +22,9 @@ data class GameUiState(
     val isFinish: Boolean = false,
     val questionNumber: Int = 1,
     val totalQuestions: Int = 1,
-    val isMuted: Boolean = false
+    val isMuted: Boolean = false,
+    val currentHp: Int = 100,
+    val maxHp: Int = 100
 )
 
 sealed class GameUiEffect {
@@ -35,15 +37,14 @@ class GameViewModel @Inject constructor(
     audioManager: AudioManager
 ) : BaseViewModel(preferences, audioManager) {
 
-    private val listOfQuestions = QuestionsGenerator().generateQuestions()
-
     private val _uiState = MutableStateFlow(
         GameUiState(
-            currentQuestion = listOfQuestions[lastQuestionIndex],
+            currentQuestion = currentQuestionList[lastQuestionIndex],
             questionNumber = lastQuestionIndex + 1,
-            totalQuestions = listOfQuestions.size,
-            isFinish = lastQuestionIndex == listOfQuestions.lastIndex,
-            isMuted = isMuted
+            totalQuestions = currentQuestionList.size,
+            isFinish = lastQuestionIndex == currentQuestionList.lastIndex,
+            isMuted = isMuted,
+            currentHp = health
         )
     )
     val uiState = _uiState.asStateFlow()
@@ -57,31 +58,38 @@ class GameViewModel @Inject constructor(
 
     fun onNextClicked() {
         val currentState = _uiState.value
+        val answer = currentState.selectedAnswer
 
-        if (currentState.selectedAnswer?.answerResId != 0) {
+        if (answer != null && answer.answerResId != 0) {
             if (isConnected) {
-                points += currentState.selectedAnswer!!.answerPoints
 
-                if (!currentState.isFinish) {
-                    changeQuestion()
+                val newHp = (currentState.currentHp + answer.hpChange).coerceIn(0, 100)
+                health = newHp
+
+                if (newHp <= 0) {
+                    _uiState.update { it.copy(currentHp = 0) }
+                    viewModelScope.launch { _uiEffect.emit(GameUiEffect.NavigateToResultScreen) }
+                } else if (!currentState.isFinish) {
+                    changeQuestion(newHp)
                 } else {
+                    _uiState.update { it.copy(currentHp = newHp) }
                     viewModelScope.launch { _uiEffect.emit(GameUiEffect.NavigateToResultScreen) }
                 }
             }
         }
-
     }
 
-    private fun changeQuestion() {
+    private fun changeQuestion(newHp: Int) {
         lastQuestionIndex++
         val newIndex = lastQuestionIndex
 
         _uiState.update {
             it.copy(
-                currentQuestion = listOfQuestions[newIndex],
+                currentHp = newHp,
+                currentQuestion = currentQuestionList[newIndex],
                 selectedAnswer = null,
                 questionNumber = newIndex + 1,
-                isFinish = newIndex == listOfQuestions.lastIndex
+                isFinish = newIndex == currentQuestionList.lastIndex
             )
         }
     }

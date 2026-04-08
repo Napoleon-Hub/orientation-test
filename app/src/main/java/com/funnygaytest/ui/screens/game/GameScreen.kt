@@ -1,6 +1,7 @@
 package com.funnygaytest.ui.screens.game
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,6 +20,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.material.ripple
 import androidx.compose.runtime.Composable
@@ -45,11 +47,11 @@ import com.funnygaytest.R
 import com.funnygaytest.models.Answer
 import com.funnygaytest.ui.components.AnswersGroup
 import com.funnygaytest.ui.components.BackgroundWrapper
-import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.components.DescriptionBox
+import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.themes.MainTestTheme
 import com.funnygaytest.ui.themes.MainTheme
-import com.funnygaytest.utils.helpers.QuestionsGenerator
+import com.funnygaytest.utils.helpers.generateNewGameRun
 
 @Composable
 fun GameScreen(
@@ -117,7 +119,13 @@ fun GameScreenContent(
     onToggleMusic: () -> Unit = {}
 ) {
 
-    BackgroundWrapper(backgroundId = R.drawable.game_background) {
+    val currentBackgroundRes = if (uiState.questionNumber <= 10) {
+        R.drawable.game_background
+    } else {
+        R.drawable.game_background_2
+    }
+
+    BackgroundWrapper(backgroundId = currentBackgroundRes) {
 
         Column(
             modifier = modifier
@@ -125,6 +133,24 @@ fun GameScreenContent(
                 .padding(horizontal = 40.dp, vertical = 24.dp),
             verticalArrangement = Arrangement.Center
         ) {
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.game_health_title),
+                    style = MainTestTheme.typography.noteText,
+                    color = MainTestTheme.colors.primaryText.copy(alpha = 0.5f),
+                    modifier = Modifier.padding(start = 4.dp, bottom = 4.dp)
+                )
+
+                HealthBar(
+                    currentHp = uiState.currentHp,
+                    maxHp = uiState.maxHp
+                )
+            }
 
             Row(
                 modifier = Modifier.fillMaxWidth()
@@ -137,7 +163,7 @@ fun GameScreenContent(
                 )
 
                 Box(
-                    modifier = Modifier.padding(horizontal = 12.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp)
                 ) {
                     MusicToggleButton(
                         isMuted = uiState.isMuted,
@@ -152,7 +178,7 @@ fun GameScreenContent(
 
                 AnswersGroup(
                     modifier = Modifier
-                        .weight(0.8f)
+                        .weight(0.82f)
                         .fillMaxHeight()
                         .padding(end = 18.dp),
                     answers = uiState.currentQuestion.listOfAnswers,
@@ -162,7 +188,7 @@ fun GameScreenContent(
 
                 Column(
                     modifier = Modifier
-                        .weight(0.2f)
+                        .weight(0.18f)
                         .fillMaxHeight(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
@@ -194,6 +220,46 @@ fun GameScreenContent(
 
     }
 
+}
+
+@Composable
+fun HealthBar(
+    currentHp: Int,
+    maxHp: Int,
+    modifier: Modifier = Modifier
+) {
+
+    val progress = (currentHp.toFloat() / maxHp.toFloat()).coerceIn(0f, 1f)
+
+    val animatedProgress by animateFloatAsState(
+        targetValue = progress,
+        animationSpec = tween(durationMillis = 600),
+        label = "HpProgress"
+    )
+
+    val targetColor = when {
+        progress > 0.8f -> Color(0xFF4CAF50)
+        progress > 0.6f -> Color(0xFF8BC34A)
+        progress > 0.4f -> Color(0xFFFFEB3B)
+        progress > 0.2f -> Color(0xFFFF9800)
+        else -> Color(0xFFF44336)
+    }
+
+    val animatedColor by animateColorAsState(
+        targetValue = targetColor,
+        animationSpec = tween(durationMillis = 600),
+        label = "HpColor"
+    )
+
+    LinearProgressIndicator(
+        progress = animatedProgress,
+        color = animatedColor,
+        backgroundColor = Color.Black.copy(alpha = 0.3f),
+        modifier = modifier
+            .fillMaxWidth()
+            .height(8.dp)
+            .clip(CircleShape)
+    )
 }
 
 @Composable
@@ -249,7 +315,7 @@ fun PreviewGameScreen() {
     MainTheme {
         GameScreenContent(
             uiState = GameUiState(
-                currentQuestion = QuestionsGenerator().generateQuestions()[0]
+                currentQuestion = generateNewGameRun()[0]
             )
         )
     }

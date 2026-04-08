@@ -24,10 +24,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -59,6 +61,7 @@ fun StartScreen(
                 }
 
                 Lifecycle.Event.ON_RESUME -> {
+                    viewModel.updateMutedState()
                     viewModel.playMusic(R.raw.start_music)
                 }
 
@@ -93,9 +96,13 @@ fun StartScreen(
         gameStartedState = uiState.isGameStarted,
         showDifficulty = uiState.showDifficulty,
         isMuted = uiState.isMuted,
+        wasPussyModeClicked = uiState.wasPussyModeClicked,
         onStartGameClicked = { viewModel.onNextClicked() },
         onDifficultyGameClicked = { viewModel.onDifficultyClicked() },
-        onEasyClicked = { onLoseResultShow() },
+        onEasyClicked = {
+            viewModel.onPermanentLose()
+            onLoseResultShow()
+        },
         onHardClicked = { viewModel.onDifficultySelected() },
         onToggleMusic = { viewModel.toggleMusic() }
     )
@@ -109,6 +116,7 @@ fun StartScreenContent(
     gameStartedState: Boolean,
     showDifficulty: Boolean,
     isMuted: Boolean,
+    wasPussyModeClicked: Boolean,
     onStartGameClicked: () -> Unit = {},
     onDifficultyGameClicked: () -> Unit = {},
     onEasyClicked: () -> Unit = {},
@@ -141,7 +149,7 @@ fun StartScreenContent(
         }
 
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(horizontal = 40.dp, vertical = 32.dp),
         ) {
@@ -222,8 +230,19 @@ fun StartScreenContent(
                                         .fillMaxWidth()
                                         .height(55.dp),
                                     onClick = onEasyClicked,
+                                    enabled = !wasPussyModeClicked,
                                     text = stringResource(R.string.start_button_difficulty_easy)
                                 )
+
+                                if (wasPussyModeClicked) {
+                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Text(
+                                        text = stringResource(R.string.start_button_difficulty_easy_gotcha),
+                                        style = MainTestTheme.typography.noteText,
+                                        color = Color.Red.copy(alpha = 0.7f),
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
 
                                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -264,7 +283,8 @@ fun PreviewStartScreen() {
         StartScreenContent(
             showDifficulty = false,
             gameStartedState = false,
-            isMuted = false
+            isMuted = false,
+            wasPussyModeClicked = false
         )
     }
 }

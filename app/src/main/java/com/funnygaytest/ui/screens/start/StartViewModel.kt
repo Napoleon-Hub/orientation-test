@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.funnygaytest.base.BaseViewModel
 import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.managers.music.AudioManager
+import com.funnygaytest.utils.helpers.generateNewGameRun
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,7 +18,8 @@ import javax.inject.Inject
 data class StartUiState(
     val isGameStarted: Boolean = false,
     val showDifficulty: Boolean = false,
-    val isMuted: Boolean = false
+    val isMuted: Boolean = false,
+    val wasPussyModeClicked: Boolean = false
 )
 
 sealed class StartUiEffect {
@@ -26,7 +28,7 @@ sealed class StartUiEffect {
 
 @HiltViewModel
 class StartViewModel @Inject constructor(
-    preferences: PrefsEntity,
+    private val preferences: PrefsEntity,
     audioManager: AudioManager
 ) : BaseViewModel(preferences, audioManager) {
 
@@ -37,10 +39,15 @@ class StartViewModel @Inject constructor(
     val uiEffect = _uiEffect.asSharedFlow()
 
     init {
-        _uiState.update { it.copy(isGameStarted = gameBegun) }
+        _uiState.update {
+            it.copy(
+                isGameStarted = gameBegun,
+                wasPussyModeClicked = preferences.pussyModeChosen
+            )
+        }
 
         if (!gameBegun) {
-            points = 0
+            health = 100
         }
     }
 
@@ -48,7 +55,9 @@ class StartViewModel @Inject constructor(
         if (isConnected) {
             if (!gameBegun) {
                 gameBegun = true
-                points = 0
+                lastQuestionIndex = 0
+                health = 100
+                currentQuestionList = generateNewGameRun()
             }
             viewModelScope.launch {
                 _uiEffect.emit(StartUiEffect.NavigateToGame)
@@ -64,6 +73,19 @@ class StartViewModel @Inject constructor(
 
     fun onDifficultySelected() {
         _uiState.update { it.copy(showDifficulty = false) }
+    }
+
+    fun onPermanentLose() {
+        preferences.pussyModeChosen = true
+        _uiState.update { it.copy(wasPussyModeClicked = true) }
+
+        gameBegun = true
+        lastQuestionIndex = 0
+        health = 0
+    }
+
+    fun updateMutedState() {
+        _uiState.update { it.copy(isMuted = isMuted) }
     }
 
     override fun toggleMusic() {

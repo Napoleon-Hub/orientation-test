@@ -4,7 +4,7 @@ import androidx.annotation.RawRes
 import androidx.lifecycle.ViewModel
 import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.managers.music.AudioManager
-import kotlinx.coroutines.flow.update
+import com.funnygaytest.models.Question
 
 abstract class BaseViewModel(
     private val preferences: PrefsEntity,
@@ -32,10 +32,16 @@ abstract class BaseViewModel(
             preferences.lastQuestionIndex = value
         }
 
-    var points: Int
-        get() = preferences.points
-        protected set(value) {
-            preferences.points = value
+    protected var health: Int
+        get() = preferences.health
+        set(value) {
+            preferences.health = value
+        }
+
+    protected var currentQuestionList: List<Question>
+        get() = preferences.currentQuestionList
+        set(value) {
+            preferences.currentQuestionList = value
         }
 
     fun playMusic(@RawRes resId: Int) {

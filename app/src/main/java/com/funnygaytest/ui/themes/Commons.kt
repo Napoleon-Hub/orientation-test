@@ -29,6 +29,7 @@ data class MainTestTypography(
     val description: TextStyle,
     val subText: TextStyle,
     val buttonText: TextStyle,
+    val noteText: TextStyle,
     val dialogTitle: TextStyle,
     val dialogDescription: TextStyle
 )
