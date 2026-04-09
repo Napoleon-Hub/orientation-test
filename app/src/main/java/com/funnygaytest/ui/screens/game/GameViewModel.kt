@@ -2,11 +2,10 @@ package com.funnygaytest.ui.screens.game
 
 import androidx.lifecycle.viewModelScope
 import com.funnygaytest.base.BaseViewModel
-import com.funnygaytest.prefs.PrefsEntity
+import com.funnygaytest.managers.music.AudioManager
 import com.funnygaytest.models.Answer
 import com.funnygaytest.models.Question
-import com.funnygaytest.managers.music.AudioManager
-import com.funnygaytest.utils.helpers.generateNewGameRun
+import com.funnygaytest.prefs.PrefsEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -61,20 +60,17 @@ class GameViewModel @Inject constructor(
         val answer = currentState.selectedAnswer
 
         if (answer != null && answer.answerResId != 0) {
-            if (isConnected) {
+            val newHp = (currentState.currentHp + answer.hpChange).coerceIn(0, 100)
+            health = newHp
 
-                val newHp = (currentState.currentHp + answer.hpChange).coerceIn(0, 100)
-                health = newHp
-
-                if (newHp <= 0) {
-                    _uiState.update { it.copy(currentHp = 0) }
-                    viewModelScope.launch { _uiEffect.emit(GameUiEffect.NavigateToResultScreen) }
-                } else if (!currentState.isFinish) {
-                    changeQuestion(newHp)
-                } else {
-                    _uiState.update { it.copy(currentHp = newHp) }
-                    viewModelScope.launch { _uiEffect.emit(GameUiEffect.NavigateToResultScreen) }
-                }
+            if (newHp <= 0) {
+                _uiState.update { it.copy(currentHp = 0) }
+                viewModelScope.launch { _uiEffect.emit(GameUiEffect.NavigateToResultScreen) }
+            } else if (!currentState.isFinish) {
+                changeQuestion(newHp)
+            } else {
+                _uiState.update { it.copy(currentHp = newHp) }
+                viewModelScope.launch { _uiEffect.emit(GameUiEffect.NavigateToResultScreen) }
             }
         }
     }

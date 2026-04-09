@@ -11,16 +11,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val preferences: PrefsEntity,
-    networkMonitor: NetworkMonitor
+    private val preferences: PrefsEntity
 ) : ViewModel() {
 
-    init {
-        networkMonitor.isConnected
-            .onEach { status ->
-                preferences.isConnected = status
-            }
-            .launchIn(viewModelScope)
-    }
 
 }

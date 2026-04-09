@@ -12,6 +12,8 @@
     <string name="start_button_difficulty_easy">Pussy</string>
     <string name="start_button_difficulty_easy_gotcha">Trying to cheat again?</string>
     <string name="start_button_difficulty_hard">GigaChad</string>
+    <string name="start_button_counter_loses">Pathetic attempts to rig the system: %d</string>
+    <string name="start_button_counter_wins">Cheated off some straight guy: %d</string>
 
     <!-- Game -->
     <string name="game_health_title">Straight-O-Meter</string>
@@ -56,6 +58,10 @@
     <string name="result_test_share_lose">I was exposed on question %1$d! My Straight-O-Meter dropped to zero… Which question will break you?\n\nGet it here: %2$s</string>
     <string name="result_test_share_permanent_lose">EXPERIMENT ABORTED: I chose \"Pussy\" mode and got ejected from the lab. My Straight-O-Meter didn\'t even have time to start… Maybe you\'re braver than me?\n\nGet it here: %s</string>
 
+    <!-- Connection -->
+    <string name="connection_no_internet_title">SYSTEM BLACKOUT!</string>
+    <string name="connection_no_internet_description">Server link severed. We can\'t run this test offline; the lab needs to process your data on the fly. Turn the internet back on and let\'s get back to your evaluation.</string>
+
     <!-- Errors -->
     <string name="dialog_connection_error_title">OOps</string>
     <string name="dialog_connection_error_description">You need an Internet connection to use this app. Check your connection and try again</string>
@@ -72,7 +78,7 @@
 
     <string name="question_1_b">Which of these veggies is your favorite? (Choose wisely…)</string>
     <string name="question_1_b_answer_1">Cucumber</string>
-    <string name="question_1_b_answer_2">Eggplant(Yeah, that one)</string>
+    <string name="question_1_b_answer_2">Eggplant (Yeah, that one)</string>
     <string name="question_1_b_answer_3">Carrot (Long and crunchy)</string>
     <string name="question_1_b_answer_4">Who cares about the taste? It\'s all about the shape and size!</string>
 

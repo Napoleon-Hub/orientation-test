@@ -93,10 +93,7 @@ fun StartScreen(
 
     StartScreenContent(
         modifier = modifier,
-        gameStartedState = uiState.isGameStarted,
-        showDifficulty = uiState.showDifficulty,
-        isMuted = uiState.isMuted,
-        wasPussyModeClicked = uiState.wasPussyModeClicked,
+        uiState = uiState,
         onStartGameClicked = { viewModel.onNextClicked() },
         onDifficultyGameClicked = { viewModel.onDifficultyClicked() },
         onEasyClicked = {
@@ -113,10 +110,7 @@ fun StartScreen(
 @Composable
 fun StartScreenContent(
     modifier: Modifier = Modifier,
-    gameStartedState: Boolean,
-    showDifficulty: Boolean,
-    isMuted: Boolean,
-    wasPussyModeClicked: Boolean,
+    uiState: StartUiState,
     onStartGameClicked: () -> Unit = {},
     onDifficultyGameClicked: () -> Unit = {},
     onEasyClicked: () -> Unit = {},
@@ -125,13 +119,13 @@ fun StartScreenContent(
 ) {
     BackgroundWrapper(backgroundId = R.drawable.start_background) {
 
-        val playButtonText = if (gameStartedState) {
+        val playButtonText = if (uiState.isGameStarted) {
             stringResource(R.string.start_button_continue)
         } else {
             stringResource(R.string.start_button)
         }
 
-        val bottomInfoRes = if (gameStartedState) {
+        val bottomInfoRes = if (uiState.isGameStarted) {
             R.string.start_description_continue
         } else {
             R.string.start_description
@@ -143,7 +137,7 @@ fun StartScreenContent(
                 .padding(end = 12.dp, top = 12.dp)
         ) {
             MusicToggleButton(
-                isMuted = isMuted,
+                isMuted = uiState.isMuted,
                 onClick = onToggleMusic
             )
         }
@@ -166,7 +160,7 @@ fun StartScreenContent(
                 ) {
 
                     AnimatedContent(
-                        targetState = showDifficulty,
+                        targetState = uiState.showDifficulty,
                         label = "ButtonTransition",
                         transitionSpec = {
                             if (!targetState) {
@@ -230,11 +224,11 @@ fun StartScreenContent(
                                         .fillMaxWidth()
                                         .height(55.dp),
                                     onClick = onEasyClicked,
-                                    enabled = !wasPussyModeClicked,
+                                    enabled = !uiState.wasPussyModeClicked,
                                     text = stringResource(R.string.start_button_difficulty_easy)
                                 )
 
-                                if (wasPussyModeClicked) {
+                                if (uiState.wasPussyModeClicked) {
                                     Spacer(modifier = Modifier.height(4.dp))
                                     Text(
                                         text = stringResource(R.string.start_button_difficulty_easy_gotcha),
@@ -261,14 +255,41 @@ fun StartScreenContent(
                 Spacer(modifier = Modifier.weight(2f))
 
             }
-
-            Row(modifier = Modifier.fillMaxWidth()) {
-                DescriptionBox(
-                    modifier = Modifier.weight(0.85f),
-                    textStyle = MainTestTheme.typography.description,
-                    descriptionString = stringResource(bottomInfoRes)
-                )
-                Spacer(modifier = Modifier.weight(0.15f))
+            Column(modifier = Modifier.fillMaxWidth()) {
+                Column {
+                    if (uiState.countOfLoses > 0) {
+                        Text(
+                            text = stringResource(
+                                R.string.start_button_counter_loses,
+                                uiState.countOfLoses
+                            ),
+                            style = MainTestTheme.typography.noteText,
+                            color = MainTestTheme.colors.secondaryText.copy(alpha = 0.5f),
+                            textAlign = TextAlign.Start
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(2.dp))
+                    if (uiState.countOfWins > 0) {
+                        Text(
+                            text = stringResource(
+                                R.string.start_button_counter_wins,
+                                uiState.countOfWins
+                            ),
+                            style = MainTestTheme.typography.noteText,
+                            color = MainTestTheme.colors.secondaryText.copy(alpha = 0.5f),
+                            textAlign = TextAlign.Start
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    DescriptionBox(
+                        modifier = Modifier.weight(0.85f),
+                        textStyle = MainTestTheme.typography.description,
+                        descriptionString = stringResource(bottomInfoRes)
+                    )
+                    Spacer(modifier = Modifier.weight(0.15f))
+                }
             }
 
         }
@@ -281,10 +302,10 @@ fun StartScreenContent(
 fun PreviewStartScreen() {
     MainTheme {
         StartScreenContent(
-            showDifficulty = false,
-            gameStartedState = false,
-            isMuted = false,
-            wasPussyModeClicked = false
+            uiState = StartUiState(
+                countOfLoses = 5,
+                countOfWins = 1
+            )
         )
     }
 }

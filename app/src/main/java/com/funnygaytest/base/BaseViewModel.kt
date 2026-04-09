@@ -11,9 +11,6 @@ abstract class BaseViewModel(
     private val audioManager: AudioManager
 ) : ViewModel() {
 
-    protected val isConnected: Boolean
-        get() = preferences.isConnected
-
     protected var gameBegun: Boolean
         get() = preferences.gameBegun
         set(value) {
@@ -42,6 +39,18 @@ abstract class BaseViewModel(
         get() = preferences.currentQuestionList
         set(value) {
             preferences.currentQuestionList = value
+        }
+
+    protected var countOfLoses: Int
+        get() = preferences.countOfLoses
+        set(value) {
+            preferences.countOfLoses = value
+        }
+
+    protected var countOfWins: Int
+        get() = preferences.countOfWins
+        set(value) {
+            preferences.countOfWins = value
         }
 
     fun playMusic(@RawRes resId: Int) {

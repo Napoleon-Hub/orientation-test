@@ -16,10 +16,17 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.funnygaytest.managers.network.NetworkMonitor
 import com.funnygaytest.navigation.AppNavigation
+import com.funnygaytest.ui.screens.connection.NoInternetScreen
 import com.funnygaytest.ui.themes.MainTheme
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -28,9 +35,13 @@ import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var networkMonitor: NetworkMonitor
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -44,7 +55,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.javaClass
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         hideSystemUI()
@@ -54,10 +64,18 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MainTheme {
-                AppNavigation(
-                    onRequestLoadAd = {  },
-                    onRequestShowAd = {  }//showAd()
-                )
+                val isConnected by networkMonitor.isConnected.collectAsState(initial = true)
+
+                Box(modifier = Modifier.fillMaxSize()) {
+                    AppNavigation(
+                        onRequestLoadAd = {  },
+                        onRequestShowAd = {  }//showAd()
+                    )
+
+                    if (!isConnected) {
+                        NoInternetScreen()
+                    }
+                }
             }
         }
     }

@@ -62,9 +62,7 @@ class ResultViewModel @Inject constructor(
     }
 
     fun onRestartClicked() {
-        if (isConnected) {
-            viewModelScope.launch { _uiEffect.emit(ResultUiEffect.NavigateToStartScreen) }
-        }
+        viewModelScope.launch { _uiEffect.emit(ResultUiEffect.NavigateToStartScreen) }
     }
 
     fun getReviewInfo() {
@@ -106,6 +104,9 @@ class ResultViewModel @Inject constructor(
     }
 
     fun refreshGameData() {
+        if (health > 0) countOfWins += 1
+        else countOfLoses += 1
+
         gameBegun = false
         lastQuestionIndex = 0
         health = 100

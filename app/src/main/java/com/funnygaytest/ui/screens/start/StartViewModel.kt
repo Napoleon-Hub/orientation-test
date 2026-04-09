@@ -2,8 +2,8 @@ package com.funnygaytest.ui.screens.start
 
 import androidx.lifecycle.viewModelScope
 import com.funnygaytest.base.BaseViewModel
-import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.managers.music.AudioManager
+import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.utils.helpers.generateNewGameRun
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -19,7 +19,9 @@ data class StartUiState(
     val isGameStarted: Boolean = false,
     val showDifficulty: Boolean = false,
     val isMuted: Boolean = false,
-    val wasPussyModeClicked: Boolean = false
+    val wasPussyModeClicked: Boolean = false,
+    val countOfLoses: Int = 0,
+    val countOfWins: Int = 0,
 )
 
 sealed class StartUiEffect {
@@ -42,7 +44,9 @@ class StartViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 isGameStarted = gameBegun,
-                wasPussyModeClicked = preferences.pussyModeChosen
+                wasPussyModeClicked = preferences.pussyModeChosen,
+                countOfLoses = countOfLoses,
+                countOfWins = countOfWins
             )
         }
 
@@ -52,18 +56,16 @@ class StartViewModel @Inject constructor(
     }
 
     fun onNextClicked() {
-        if (isConnected) {
-            if (!gameBegun) {
-                gameBegun = true
-                lastQuestionIndex = 0
-                health = 100
-                currentQuestionList = generateNewGameRun()
-            }
-            viewModelScope.launch {
-                _uiEffect.emit(StartUiEffect.NavigateToGame)
-                delay(1000)
-                _uiState.update { it.copy(isGameStarted = true) }
-            }
+        if (!gameBegun) {
+            gameBegun = true
+            lastQuestionIndex = 0
+            health = 100
+            currentQuestionList = generateNewGameRun()
+        }
+        viewModelScope.launch {
+            _uiEffect.emit(StartUiEffect.NavigateToGame)
+            delay(1000)
+            _uiState.update { it.copy(isGameStarted = true) }
         }
     }
 

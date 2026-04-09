@@ -220,7 +220,8 @@ fun ResultScreenContent(
                             .fillMaxWidth()
                             .height(55.dp),
                         onClick = onAnotherTestsClicked,
-                        text = stringResource(R.string.result_button_another_apps)
+                        text = stringResource(R.string.result_button_another_apps),
+                        enabled = false
                     )
 
                     Row(modifier = Modifier.fillMaxWidth()) {

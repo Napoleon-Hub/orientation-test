@@ -14,6 +14,8 @@
     <string name="start_button_difficulty_easy">Пуси</string>
     <string name="start_button_difficulty_easy_gotcha">Снова решил смухлевать?</string>
     <string name="start_button_difficulty_hard">Гигачад</string>
+    <string name="start_button_counter_loses">Жалких попыток обмануть систему: %d</string>
+    <string name="start_button_counter_wins">Списал тест у какого-то натурала: %d</string>
 
     <!-- Game -->
     <string name="game_health_title">Шкала натурала</string>
@@ -58,6 +60,10 @@
     <string name="result_test_share_win">Моя броня натурала выдержала на %1$d! Я зашел в эту лабораторию и не дрогнул. А на каком вопросе сломаешься ты?\n\nСсылка: %2$s</string>
     <string name="result_test_share_lose">Меня раскрыли на %1$d вопросе! Шкала натурала упала до нуля… А на каком вопросе сломаешься ты?\n\nСсылка: %2$s</string>
     <string name="result_test_share_permanent_lose">ЭКСПЕРИМЕНТ ПРЕРВАН: Я выбрал режим \"Пуси\" и меня выкинули из лаборатории. Шкала натурала даже не успела включиться… Может ты смелее меня?\n\nСсылка: %s</string>
+
+    <!-- Connection -->
+    <string name="connection_no_internet_title">СИСТЕМА ОБЕСТОЧЕНА!</string>
+    <string name="connection_no_internet_description">Связь с сервером потеряна. Ученые не могут проводить опыты в офлайне — им нужно анализировать твои данные в реальном времени. Включи интернет, и мы продолжим тебя испытывать.</string>
 
     <!-- Errors -->
     <string name="dialog_connection_error_title">Упс</string>
