@@ -46,7 +46,7 @@ fun NoInternetScreen(
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun NoInternetScreenContent(
+private fun NoInternetScreenContent(
     uiState: NoInternetUiState,
     onToggleMusic: () -> Unit = {}
 ) {

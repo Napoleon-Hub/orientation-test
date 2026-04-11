@@ -14,8 +14,25 @@
     <string name="start_button_difficulty_easy">Пуси</string>
     <string name="start_button_difficulty_easy_gotcha">Снова решил смухлевать?</string>
     <string name="start_button_difficulty_hard">Гигачад</string>
-    <string name="start_button_counter_loses">Жалких попыток обмануть систему: %d</string>
-    <string name="start_button_counter_wins">Списал тест у какого-то натурала: %d</string>
+
+    <!-- Endings -->
+    <string name="endings_title">Концовки</string>
+    <string name="endings_stats_title">Статистика лаборатории</string>
+    <string name="endings_counter_loses">Жалких попыток обмануть систему: %d</string>
+    <string name="endings_counter_wins">Списал тест у какого-то натурала: %d</string>
+    <string name="endings_locked_title">Не открыто</string>
+
+    <string name="ending_win_1">Самый гейский натурал</string>
+    <string name="ending_win_33">Стринги стриптизерши</string>
+    <string name="ending_win_66">Ставлю жопу, ты гей</string>
+    <string name="ending_win_100">Мужик</string>
+    <string name="ending_lose_4">Горбатая гора</string>
+    <string name="ending_lose_8">Иди, пожалуйся своему парню</string>
+    <string name="ending_lose_12">2–3 года в Дагестане и забудь</string>
+    <string name="ending_lose_16">Трушный заднеприводный</string>
+    <string name="ending_lose_20">Латентный гей</string>
+    <string name="ending_lose_pussy">Попався, пидарок</string>
+    <string name="ending_all">Гейлорд</string>
 
     <!-- Game -->
     <string name="game_health_title">Шкала натурала</string>
@@ -45,18 +62,15 @@
         Хотя в этой лаборатории, конечно, больше голубых нет, поэтому выметайся отсюда, нам наши пятые точки дороги, у нас семьи!</string>
     <string name="result_text_result_lose_20">Так хорошо идти и оступиться на последнем вопросе… А я уже готов был подписывать бумаги о том, что ты натурал. Хорошо, что мы тут с остальными учеными не пальцем деланные, умеем таких, как ты, распознавать.
         Поэтому брысь отсюда, латентный пидарок, чтобы духу твоего здесь больше не было! Рассказывай истории о том, какие тебе девушки нравятся, в цирке, а у нас тут все серьезно!</string>
-    <string name="result_text_result_lose_pussy">Попався, пройдоха! Думал обмануть систему, упростить себе вопросы, чтобы мы не узнали, кто ты есть на самом деле? Но увы, ты был пойман за руку, пидарок. Ждем тебя на пересдаче, хотя, будем честны, она тебе не поможет, ведь тут и так все ясно. Выносите его, мужики!</string>
-
-
-    <string name="result_text_notice">Ученые наконец могут расслабиться и вернуться домой к семьям, ведь создание вопросов было непростым.\n
-        Если тебе понравилось приложение, оцени его или поделись результатом со своими друзьями, ведь так ты сможешь узнать, возможно твои друзья не те, кем кажутся!)\n</string>
-    <string name="result_text_full">Ученые наконец могут расслабиться и вернуться домой к семьям, ведь создание вопросов было непростым.\n
-        Если тебе понравилось приложение, оцени его или поделись результатом со своими друзьями, ведь так ты сможешь узнать, возможно твои друзья не те, кем кажутся!)\n
-        Если хочешь больше подобных тестов, поддержи ученых и их семьи, так ты поможешь ускорить научный процесс(%s) :) Хорошего настроения!\n</string>
+    <string name="result_text_result_lose_pussy">Попався, пидарок! Думал обмануть систему, упростить себе вопросы, чтобы мы не узнали, кто ты есть на самом деле? Но увы, ты был пойман за руку, пидарок. Ждем тебя на пересдаче, хотя, будем честны, она тебе не поможет, ведь тут и так все ясно. Выносите его, мужики!</string>
 
     <string name="result_button_restart">Перепройти тест</string>
     <string name="result_button_another_apps">Другие тесты</string>
     <string name="result_button_pay">Покормить ученых</string>
+
+    <string name="result_endings_new">Задокументирована новая концовка</string>
+    <string name="result_endings_all_unlocked">Ты собрал все концовки, теперь ты истинный гейлорд!</string>
+
     <string name="result_test_share_win">Моя броня натурала выдержала на %1$d! Я зашел в эту лабораторию и не дрогнул. А на каком вопросе сломаешься ты?\n\nСсылка: %2$s</string>
     <string name="result_test_share_lose">Меня раскрыли на %1$d вопросе! Шкала натурала упала до нуля… А на каком вопросе сломаешься ты?\n\nСсылка: %2$s</string>
     <string name="result_test_share_permanent_lose">ЭКСПЕРИМЕНТ ПРЕРВАН: Я выбрал режим \"Пуси\" и меня выкинули из лаборатории. Шкала натурала даже не успела включиться… Может ты смелее меня?\n\nСсылка: %s</string>

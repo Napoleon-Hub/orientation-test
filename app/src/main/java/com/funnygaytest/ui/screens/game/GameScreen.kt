@@ -111,7 +111,7 @@ fun GameScreen(
 }
 
 @Composable
-fun GameScreenContent(
+private fun GameScreenContent(
     modifier: Modifier = Modifier,
     uiState: GameUiState,
     onAnswerSelected: (Answer) -> Unit = {},

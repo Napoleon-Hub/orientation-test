@@ -29,7 +29,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -37,9 +36,9 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.funnygaytest.BuildConfig
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
+import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
-import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.themes.MainTestTheme
 import com.funnygaytest.ui.themes.MainTheme
 
@@ -48,6 +47,7 @@ fun StartScreen(
     modifier: Modifier = Modifier,
     viewModel: StartViewModel = hiltViewModel(),
     onGameStart: () -> Unit,
+    onEndingsShow: () -> Unit,
     onLoseResultShow: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -95,6 +95,7 @@ fun StartScreen(
         modifier = modifier,
         uiState = uiState,
         onStartGameClicked = { viewModel.onNextClicked() },
+        onEndingsClicked = { onEndingsShow() },
         onDifficultyGameClicked = { viewModel.onDifficultyClicked() },
         onEasyClicked = {
             viewModel.onPermanentLose()
@@ -108,10 +109,11 @@ fun StartScreen(
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun StartScreenContent(
+private fun StartScreenContent(
     modifier: Modifier = Modifier,
     uiState: StartUiState,
     onStartGameClicked: () -> Unit = {},
+    onEndingsClicked: () -> Unit = {},
     onDifficultyGameClicked: () -> Unit = {},
     onEasyClicked: () -> Unit = {},
     onHardClicked: () -> Unit = {},
@@ -191,22 +193,32 @@ fun StartScreenContent(
                                 MainButton(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(55.dp),
+                                        .height(48.dp),
                                     onClick = onStartGameClicked,
                                     text = playButtonText
                                 )
 
-                                Spacer(modifier = Modifier.height(20.dp))
+                                Spacer(modifier = Modifier.height(12.dp))
 
                                 MainButton(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(55.dp),
+                                        .height(48.dp),
                                     onClick = onDifficultyGameClicked,
                                     text = stringResource(R.string.start_button_difficulty)
                                 )
 
-                                Spacer(modifier = Modifier.height(16.dp))
+                                Spacer(modifier = Modifier.height(12.dp))
+
+                                MainButton(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(48.dp),
+                                    onClick = onEndingsClicked,
+                                    text = stringResource(R.string.endings_title)
+                                )
+
+                                Spacer(modifier = Modifier.height(12.dp))
 
                                 Text(
                                     modifier = Modifier.fillMaxWidth(),
@@ -222,7 +234,7 @@ fun StartScreenContent(
                                 MainButton(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(55.dp),
+                                        .height(48.dp),
                                     onClick = onEasyClicked,
                                     enabled = !uiState.wasPussyModeClicked,
                                     text = stringResource(R.string.start_button_difficulty_easy)
@@ -243,7 +255,7 @@ fun StartScreenContent(
                                 MainButton(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(55.dp),
+                                        .height(48.dp),
                                     onClick = onHardClicked,
                                     text = stringResource(R.string.start_button_difficulty_hard)
                                 )
@@ -255,41 +267,13 @@ fun StartScreenContent(
                 Spacer(modifier = Modifier.weight(2f))
 
             }
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Column {
-                    if (uiState.countOfLoses > 0) {
-                        Text(
-                            text = stringResource(
-                                R.string.start_button_counter_loses,
-                                uiState.countOfLoses
-                            ),
-                            style = MainTestTheme.typography.noteText,
-                            color = MainTestTheme.colors.secondaryText.copy(alpha = 0.5f),
-                            textAlign = TextAlign.Start
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(2.dp))
-                    if (uiState.countOfWins > 0) {
-                        Text(
-                            text = stringResource(
-                                R.string.start_button_counter_wins,
-                                uiState.countOfWins
-                            ),
-                            style = MainTestTheme.typography.noteText,
-                            color = MainTestTheme.colors.secondaryText.copy(alpha = 0.5f),
-                            textAlign = TextAlign.Start
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(4.dp))
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    DescriptionBox(
-                        modifier = Modifier.weight(0.85f),
-                        textStyle = MainTestTheme.typography.description,
-                        descriptionString = stringResource(bottomInfoRes)
-                    )
-                    Spacer(modifier = Modifier.weight(0.15f))
-                }
+            Row(modifier = Modifier.fillMaxWidth()) {
+                DescriptionBox(
+                    modifier = Modifier.weight(0.85f),
+                    textStyle = MainTestTheme.typography.description,
+                    descriptionString = stringResource(bottomInfoRes)
+                )
+                Spacer(modifier = Modifier.weight(0.15f))
             }
 
         }

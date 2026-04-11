@@ -12,8 +12,25 @@
     <string name="start_button_difficulty_easy">Pussy</string>
     <string name="start_button_difficulty_easy_gotcha">Trying to cheat again?</string>
     <string name="start_button_difficulty_hard">GigaChad</string>
-    <string name="start_button_counter_loses">Pathetic attempts to rig the system: %d</string>
-    <string name="start_button_counter_wins">Cheated off some straight guy: %d</string>
+
+    <!-- Endings -->
+    <string name="endings_title">Endings</string>
+    <string name="endings_stats_title">Lab Statistics</string>
+    <string name="endings_counter_loses">Pathetic attempts to rig the system: %d</string>
+    <string name="endings_counter_wins">Cheated off some straight guy: %d</string>
+    <string name="endings_locked_title">Locked</string>
+
+    <string name="ending_win_1">Gayest Straight Guy</string>
+    <string name="ending_win_33">Stripper\'s thong</string>
+    <string name="ending_win_66">Bet my ass your\'re gay</string>
+    <string name="ending_win_100">Real man</string>
+    <string name="ending_lose_4">Brokeback Mountain</string>
+    <string name="ending_lose_8">True Blue Gay</string>
+    <string name="ending_lose_12">2–3 years in Dagestan and forget</string>
+    <string name="ending_lose_16">Real rear-wheeler</string>
+    <string name="ending_lose_20">Latent twink</string>
+    <string name="ending_lose_pussy">Gotcha, sneaky bastard</string>
+    <string name="ending_all">Gaylord</string>
 
     <!-- Game -->
     <string name="game_health_title">Straight-O-Meter</string>
@@ -45,15 +62,13 @@
         Now beat it, you latent twink! Save your stories about liking girls for the circus. Everything is serious here!</string>
     <string name="result_text_result_lose_pussy">Gotcha, you sneaky bastard! Thought you could outsmart the system and easy-mode your way out so we wouldn\'t find out who you really are? Too bad, you\'ve been caught red-handed, you little twink. We\'ll see you at the retake, though let\'s be honest: it won\'t help. Everything is clear as day already. Boys, carry him out!</string>
 
-    <string name="result_text_notice">Scientists can finally relax and return home to their families, because inventing questions was not so easy)\n
-        If you liked the app, rate it or share the result with your friends, this way you can find out whether your friends are those who they seem to be!\n</string>
-    <string name="result_text_full">Scientists can finally relax and return home to their families, because inventing questions was not so easy)\n
-        If you liked the app, rate it or share the result with your friends, this way you can find out whether your friends are those who they seem to be!\n
-        If you want more tests like this one, support the scientists and their families, this way you will help to speed up the scientific process (%s) :) Good luck!\n</string>
-
     <string name="result_button_restart">Try again</string>
     <string name="result_button_another_apps">Another tests</string>
     <string name="result_button_pay">Feed scientists</string>
+
+    <string name="result_endings_new">New outcome documented</string>
+    <string name="result_endings_all_unlocked">You have collected all endings. Now you are a true Gaylord!</string>
+
     <string name="result_test_share_win">My Straight-O-Meter survived with %1$d! I entered the lab and barely flinched. Which question will break you?\n\nGet it here: %2$s</string>
     <string name="result_test_share_lose">I was exposed on question %1$d! My Straight-O-Meter dropped to zero… Which question will break you?\n\nGet it here: %2$s</string>
     <string name="result_test_share_permanent_lose">EXPERIMENT ABORTED: I chose \"Pussy\" mode and got ejected from the lab. My Straight-O-Meter didn\'t even have time to start… Maybe you\'re braver than me?\n\nGet it here: %s</string>

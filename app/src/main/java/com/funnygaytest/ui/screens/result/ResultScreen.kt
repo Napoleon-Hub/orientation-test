@@ -25,6 +25,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +38,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
+import com.funnygaytest.ui.components.EndingCard
 import com.funnygaytest.ui.components.buttons.IconButton
 import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
@@ -84,7 +87,6 @@ fun ResultScreen(
 
     LaunchedEffect(Unit) {
         viewModel.getReviewInfo()
-        viewModel.refreshGameData()
     }
 
     LaunchedEffect(uiState.isMuted) {
@@ -132,7 +134,7 @@ fun ResultScreen(
 }
 
 @Composable
-fun ResultScreenContent(
+private fun ResultScreenContent(
     modifier: Modifier = Modifier,
     uiState: ResultUiState,
     titleTest: String,
@@ -164,7 +166,7 @@ fun ResultScreenContent(
 
                 Text(
                     text = titleTest,
-                    style = MainTestTheme.typography.heading.copy(fontSize = 22.sp),
+                    style = MainTestTheme.typography.heading.copy(fontSize = 20.sp),
                     color = MainTestTheme.colors.primaryText.copy(alpha = 0.7f)
                 )
 
@@ -172,9 +174,36 @@ fun ResultScreenContent(
 
                 DescriptionBox(
                     modifier = Modifier.fillMaxWidth(),
-                    textStyle = MainTestTheme.typography.heading,
+                    textStyle = MainTestTheme.typography.heading.copy(fontSize = 16.sp),
                     descriptionString = resultText
                 )
+
+                if (uiState.isNewEnding) {
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    uiState.currentEnding?.let { ending ->
+                        Box(modifier = Modifier.fillMaxWidth()) {
+                            EndingCard(
+                                title = stringResource(id = ending.titleRes),
+                                iconRes = ending.iconRes
+                            )
+                        }
+                    }
+
+                    if (uiState.isAllEndingsUnlocked) {
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 4.dp),
+                            text = stringResource(R.string.result_endings_all_unlocked),
+                            style = MainTestTheme.typography.noteText,
+                            color = MainTestTheme.colors.primaryText,
+                            textAlign = TextAlign.Start
+                        )
+                    }
+                }
             }
 
             Column(
@@ -256,7 +285,10 @@ fun ResultScreenContent(
 fun PreviewResultScreen() {
     MainTheme {
         ResultScreenContent(
-            uiState = ResultUiState(),
+            uiState = ResultUiState(
+//                currentEnding = EndingType.LOSE_12,
+//                isNewEnding = true
+            ),
             titleTest = stringResource(R.string.result_title_win),
             resultText = stringResource(R.string.result_text_result_win_100)
         )

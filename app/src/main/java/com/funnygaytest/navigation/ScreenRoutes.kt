@@ -3,6 +3,7 @@ package com.funnygaytest.navigation
 sealed class ScreenRoutes(val route: String) {
 
     data object Start : ScreenRoutes("start")
+    data object Endings : ScreenRoutes("endings")
     data object Game : ScreenRoutes("game")
     data object Result : ScreenRoutes("result")
 

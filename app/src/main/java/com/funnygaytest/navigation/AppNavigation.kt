@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.funnygaytest.ui.screens.endings.EndingsScreen
 import com.funnygaytest.ui.screens.game.GameScreen
 import com.funnygaytest.ui.screens.result.ResultScreen
 import com.funnygaytest.ui.screens.start.StartScreen
@@ -15,7 +16,6 @@ import com.funnygaytest.ui.screens.start.StartScreen
 @Composable
 fun AppNavigation(
     navController: NavHostController = rememberNavController(),
-    onRequestLoadAd: () -> Unit,
     onRequestShowAd: () -> Unit
 ) {
     NavHost(navController = navController, startDestination = ScreenRoutes.Start.route) {
@@ -25,10 +25,21 @@ fun AppNavigation(
                 onGameStart = {
                     navController.navigate(ScreenRoutes.Game.route)
                 },
+                onEndingsShow = {
+                    navController.navigate(ScreenRoutes.Endings.route)
+                },
                 onLoseResultShow = {
                     navController.navigate(ScreenRoutes.Result.withArgs("true")) {
                         popUpTo(ScreenRoutes.Start.route) { inclusive = true }
                     }
+                }
+            )
+        }
+
+        composable(ScreenRoutes.Endings.route) {
+            EndingsScreen(
+                onBack = {
+                    navController.popBackStack()
                 }
             )
         }

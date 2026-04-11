@@ -68,8 +68,7 @@ class MainActivity : ComponentActivity() {
 
                 Box(modifier = Modifier.fillMaxSize()) {
                     AppNavigation(
-                        onRequestLoadAd = {  },
-                        onRequestShowAd = {  }//showAd()
+                        onRequestShowAd = {  } //showAd()
                     )
 
                     if (!isConnected) {
