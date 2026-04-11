@@ -222,7 +222,7 @@ private fun EndingGridItem(item: EndingItemState) {
                 )
             } else {
                 Text(
-                    text = stringResource(R.string.endings_locked_title),
+                    text = "???",
                     style = MainTestTheme.typography.heading,
                     color = MainTestTheme.colors.secondaryText.copy(alpha = 0.5f)
                 )
