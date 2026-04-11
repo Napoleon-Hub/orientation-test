@@ -70,7 +70,7 @@ fun ResultScreen(
                 }
 
                 Lifecycle.Event.ON_RESUME -> {
-                    viewModel.playMusic(R.raw.game_music)
+                    viewModel.playMusic(R.raw.endings_music)
                 }
 
                 else -> {}
