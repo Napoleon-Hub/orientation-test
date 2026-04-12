@@ -6,6 +6,7 @@ sealed class ScreenRoutes(val route: String) {
     data object Endings : ScreenRoutes("endings")
     data object Game : ScreenRoutes("game")
     data object Result : ScreenRoutes("result")
+    data object Feed : ScreenRoutes("feed")
 
     fun withArgs(vararg args: String?): String {
         return buildString {

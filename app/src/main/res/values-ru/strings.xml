@@ -33,6 +33,7 @@
     <string name="ending_lose_20">Латентный гей</string>
     <string name="ending_lose_pussy">Попався, пидарок</string>
     <string name="ending_all">Гейлорд</string>
+    <string name="ending_donate">Самый лучший гей</string>
 
     <!-- Game -->
     <string name="game_health_title">Шкала натурала</string>
@@ -68,7 +69,7 @@
     <string name="result_button_another_apps">Другие тесты</string>
     <string name="result_button_pay">Покормить ученых</string>
 
-    <string name="result_endings_new">Задокументирована новая концовка</string>
+    <string name="result_endings_new">Задокументирован новый результат</string>
     <string name="result_endings_all_unlocked">Ты собрал все концовки, теперь ты истинный гейлорд!</string>
 
     <string name="result_test_share_win">Моя броня натурала выдержала на %1$d! Я зашел в эту лабораторию и не дрогнул. А на каком вопросе сломаешься ты?\n\nСсылка: %2$s</string>
@@ -79,11 +80,12 @@
     <string name="connection_no_internet_title">СИСТЕМА ОБЕСТОЧЕНА!</string>
     <string name="connection_no_internet_description">Связь с сервером потеряна. Ученые не могут проводить опыты в офлайне — им нужно анализировать твои данные в реальном времени. Включи интернет, и мы продолжим тебя испытывать.</string>
 
-    <!-- Errors -->
-    <string name="dialog_connection_error_title">Упс</string>
-    <string name="dialog_connection_error_description">Для продолжения необходимо интернет-соединение. Проверьте подключение и попробуйте снова</string>
-    <string name="dialog_connection_error_button">Закрыть</string>
-    <string name="toast_choose_error">Пожалуйста, выберите ответ, прежде чем продолжить</string>
+    <!-- Feed -->
+    <string name="feed_button">Покормить</string>
+    <string name="feed_description_before_pay">Пока ты проходишь этот тест, мы уже проектируем новую «полосу препятствий» для твоего разума. Но сейчас работа замерла: у ведущих лаборантов закончились огурцы.\n
+        Так вышло, что наши ученые работают исключительно за «зеленый паек». И поверь, они находят ему применение, которое не всегда описано в кулинарных книгах. Поддержи нашу команду «огурцом» — помоги науке двигаться дальше, а ученым — не скучать в темных коридорах.\n
+        Все средства уйдут на разработку нового контента, а благодаря тебе наши лаборанты смогут позволить себе огурцы любого нужного им размера и формы.</string>
+    <string name="feed_description_after_pay">Транзакция завершена. Огурцы заказаны, лаборанты в предвкушении, работа над новым тестом ускорена на 200%. Не спрашивай, что происходит в темных коридорах прямо сейчас.</string>
 
     <!-- Questions -->
     <string name="question_1_a">Мы в средневековье, и ты тут не король. Твоя профессия:</string>

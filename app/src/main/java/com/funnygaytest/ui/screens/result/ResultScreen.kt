@@ -25,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -54,7 +53,8 @@ private const val DEVELOPER_URI =
 fun ResultScreen(
     modifier: Modifier = Modifier,
     viewModel: ResultViewModel = hiltViewModel(),
-    goToStart: () -> Unit
+    onStartScreen: () -> Unit,
+    onFeedScreen: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -93,16 +93,6 @@ fun ResultScreen(
         viewModel.setMuteMusic(uiState.isMuted)
     }
 
-    LaunchedEffect(Unit) {
-        viewModel.uiEffect.collect { effect ->
-            when (effect) {
-                is ResultUiEffect.NavigateToStartScreen -> {
-                    goToStart()
-                }
-            }
-        }
-    }
-
     val titleText = getTitleText(context, uiState.healthLeft, uiState.lastQuestionNumber)
     val resultText = getResultText(context, uiState.healthLeft, uiState.lastQuestionNumber)
 
@@ -112,10 +102,10 @@ fun ResultScreen(
         titleTest = titleText,
         resultText = resultText,
         onRestartClicked = {
-            viewModel.onRestartClicked()
+            onStartScreen()
         },
         onPayClicked = {
-            activity?.let { viewModel.launchBillingFlow(it) }
+            onFeedScreen()
         },
         onAnotherTestsClicked = {
             showAnotherApps(context)

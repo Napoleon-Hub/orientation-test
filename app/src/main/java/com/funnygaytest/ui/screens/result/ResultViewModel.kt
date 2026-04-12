@@ -2,10 +2,7 @@ package com.funnygaytest.ui.screens.result
 
 import android.app.Activity
 import android.content.Context
-import androidx.lifecycle.viewModelScope
-import com.android.billingclient.api.BillingFlowParams
 import com.funnygaytest.base.BaseViewModel
-import com.funnygaytest.managers.billing.BillingInteractor
 import com.funnygaytest.managers.music.AudioManager
 import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.utils.enums.EndingType
@@ -14,12 +11,9 @@ import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class ResultUiState(
@@ -32,15 +26,10 @@ data class ResultUiState(
     val isAllEndingsUnlocked: Boolean = false
 )
 
-sealed class ResultUiEffect {
-    object NavigateToStartScreen : ResultUiEffect()
-}
-
 @HiltViewModel
 class ResultViewModel @Inject constructor(
     private val preferences: PrefsEntity,
     audioManager: AudioManager,
-    private val billingInteractor: BillingInteractor,
     @param:ApplicationContext private val appContext: Context
 ) : BaseViewModel(preferences, audioManager) {
 
@@ -53,22 +42,12 @@ class ResultViewModel @Inject constructor(
     )
     val uiState = _uiState.asStateFlow()
 
-    private val _uiEffect = MutableSharedFlow<ResultUiEffect>()
-    val uiEffect = _uiEffect.asSharedFlow()
-
-    private val productDetails = billingInteractor.productDetails
-
     private var reviewManager: ReviewManager? = null
     private var reviewInfo: ReviewInfo? = null
 
     init {
-        billingInteractor.init()
         processCurrentEnding()
         refreshGameData()
-    }
-
-    fun onRestartClicked() {
-        viewModelScope.launch { _uiEffect.emit(ResultUiEffect.NavigateToStartScreen) }
     }
 
     fun getReviewInfo() {
@@ -91,21 +70,6 @@ class ResultViewModel @Inject constructor(
             flow?.addOnCompleteListener {
                 _uiState.update { it.copy(isRateEnabled = false) }
             }
-        }
-    }
-
-    fun launchBillingFlow(activity: Activity) {
-        productDetails.value?.let { details ->
-            val productDetailsParamsList = listOf(
-                BillingFlowParams.ProductDetailsParams.newBuilder()
-                    .setProductDetails(details)
-                    .build()
-            )
-            val billingFlowParams = BillingFlowParams.newBuilder()
-                .setProductDetailsParamsList(productDetailsParamsList)
-                .build()
-
-            billingInteractor.launchBillingFlow(activity, billingFlowParams)
         }
     }
 
@@ -159,6 +123,7 @@ class ResultViewModel @Inject constructor(
             EndingType.LOSE_20 -> if (preferences.endingLose20 == 0) { preferences.endingLose20 = 1; wasNew = true }
             EndingType.LOSE_PUSSY -> if (preferences.endingLosePussy == 0) { preferences.endingLosePussy = 1; wasNew = true }
             EndingType.ALL -> {}
+            EndingType.DONATE -> {}
         }
         return wasNew
     }

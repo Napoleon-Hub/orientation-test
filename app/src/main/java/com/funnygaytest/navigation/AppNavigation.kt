@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.funnygaytest.ui.screens.endings.EndingsScreen
+import com.funnygaytest.ui.screens.feed.FeedScreen
 import com.funnygaytest.ui.screens.game.GameScreen
 import com.funnygaytest.ui.screens.result.ResultScreen
 import com.funnygaytest.ui.screens.start.StartScreen
@@ -71,7 +72,10 @@ fun AppNavigation(
             }
 
             ResultScreen(
-                goToStart = {
+                onFeedScreen = {
+                    navController.navigate(ScreenRoutes.Feed.route)
+                },
+                onStartScreen = {
                     navController.navigate(ScreenRoutes.Start.route) {
                         popUpTo(ScreenRoutes.Result.route + "/{$LOSE_RESULT}") {
                             inclusive = true
@@ -80,5 +84,14 @@ fun AppNavigation(
                 }
             )
         }
+
+        composable(ScreenRoutes.Feed.route) {
+            FeedScreen(
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
     }
 }

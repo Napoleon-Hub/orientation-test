@@ -29,5 +29,6 @@ class PrefsEntity @Inject constructor(@param:ApplicationContext val ctx: Context
     var endingLose20 by activeInt(0)
     var endingLosePussy by activeInt(0)
     var endingAll by activeInt(0)
+    var endingDonate by activeInt(0)
 
 }

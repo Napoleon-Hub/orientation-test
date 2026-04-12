@@ -128,6 +128,8 @@ dependencies {
     // Gson
     implementation(libs.gson)
 
+    // Timber
+    implementation(libs.timber)
 }
 
 fun generateVersionCode(major: Int, minor: Int, patch: Int): Int = major * 100 + minor * 10 + patch

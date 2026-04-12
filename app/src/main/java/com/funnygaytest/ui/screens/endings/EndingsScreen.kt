@@ -48,6 +48,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
+import com.funnygaytest.ui.components.buttons.LabBackButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.themes.MainTestTheme
 import com.funnygaytest.ui.themes.MainTheme
@@ -238,35 +239,8 @@ private fun EndingGridItem(item: EndingItemState) {
             color = if (item.isUnlocked) MainTestTheme.colors.primaryText
             else MainTestTheme.colors.secondaryText.copy(alpha = 0.7f),
             textAlign = TextAlign.Center,
-            maxLines = 2,
+            maxLines = 3,
             minLines = 2
-        )
-    }
-}
-
-@Composable
-private fun LabBackButton(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = modifier
-            .size(48.dp)
-            .clip(RoundedCornerShape(12.dp))
-            .background(MainTestTheme.colors.primaryBackground.copy(alpha = 0.15f))
-            .border(
-                width = 1.dp,
-                color = MainTestTheme.colors.secondaryText,
-                shape = RoundedCornerShape(12.dp)
-            )
-            .clickable(onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = "Back",
-            tint = MainTestTheme.colors.primaryText.copy(alpha = 0.8f),
-            modifier = Modifier.size(20.dp)
         )
     }
 }
@@ -282,15 +256,16 @@ fun PreviewEndingsScreen() {
                 endings = listOf(
                     EndingItemState(EndingType.WIN_100, true),
                     EndingItemState(EndingType.WIN_66, true),
-                    EndingItemState(EndingType.WIN_33, false),
+                    EndingItemState(EndingType.WIN_33, true),
                     EndingItemState(EndingType.WIN_1, true),
                     EndingItemState(EndingType.LOSE_4, true),
-                    EndingItemState(EndingType.LOSE_8, false),
-                    EndingItemState(EndingType.LOSE_12, false),
+                    EndingItemState(EndingType.LOSE_8, true),
+                    EndingItemState(EndingType.LOSE_12, true),
                     EndingItemState(EndingType.LOSE_16, true),
                     EndingItemState(EndingType.LOSE_20, true),
                     EndingItemState(EndingType.LOSE_PUSSY, true),
-                    EndingItemState(EndingType.ALL, false)
+                    EndingItemState(EndingType.ALL, true),
+                    EndingItemState(EndingType.DONATE, true),
                 )
             )
         )

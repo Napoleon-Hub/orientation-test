@@ -35,11 +35,7 @@ fun BackgroundWrapper(
                 alignment = Alignment.Center
             )
         }
-        Box(
-            modifier = modifier
-                .fillMaxSize()
-                .background(Color.Black.copy(alpha = 0.4f))
-        ) {
+        Box(modifier = modifier.fillMaxSize()) {
             content()
         }
     }

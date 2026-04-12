@@ -42,7 +42,8 @@ class EndingsViewModel @Inject constructor(
             EndingItemState(EndingType.LOSE_16, preferences.endingLose16 > 0),
             EndingItemState(EndingType.LOSE_20, preferences.endingLose20 > 0),
             EndingItemState(EndingType.LOSE_PUSSY, preferences.endingLosePussy > 0),
-            EndingItemState(EndingType.ALL, preferences.endingAll > 0)
+            EndingItemState(EndingType.ALL, preferences.endingAll > 0),
+            EndingItemState(EndingType.DONATE, preferences.endingDonate > 0)
         ),
         isMuted = isMuted
     ))

@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +31,10 @@ fun AnswersGroup(
     onAnswerSelected: (Answer) -> Unit
 ) {
     val scrollState = rememberScrollState()
+
+    LaunchedEffect(key1 = answers) {
+        scrollState.animateScrollTo(0)
+    }
 
     Column(
         modifier = modifier

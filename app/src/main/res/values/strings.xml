@@ -31,6 +31,7 @@
     <string name="ending_lose_20">Latent twink</string>
     <string name="ending_lose_pussy">Gotcha, sneaky bastard</string>
     <string name="ending_all">Gaylord</string>
+    <string name="ending_donate">Best gay ever</string>
 
     <!-- Game -->
     <string name="game_health_title">Straight-O-Meter</string>
@@ -77,11 +78,12 @@
     <string name="connection_no_internet_title">SYSTEM BLACKOUT!</string>
     <string name="connection_no_internet_description">Server link severed. We can\'t run this test offline; the lab needs to process your data on the fly. Turn the internet back on and let\'s get back to your evaluation.</string>
 
-    <!-- Errors -->
-    <string name="dialog_connection_error_title">OOps</string>
-    <string name="dialog_connection_error_description">You need an Internet connection to use this app. Check your connection and try again</string>
-    <string name="dialog_connection_error_button">OK</string>
-    <string name="toast_choose_error">Please select an answer before proceeding further</string>
+    <!-- Feed -->
+    <string name="feed_button">Feed</string>
+    <string name="feed_description_before_pay">While you are completing this test, we are already designing a new \"obstacle course\" for your mind. But progress has stalled: the lead lab assistants have run out of cucumbers.\n
+        It just so happens that our scientists work strictly for \"green rations.\" And believe us, they find uses for them that aren\'t always found in cookbooks. Support our team with a \"cucumber\" — help science move forward and keep the scientists from getting lonely in the dark corridors.\n
+        All funds will go toward developing new content, and thanks to you, our researchers will be able to afford cucumbers of any size and form they require.</string>
+    <string name="feed_description_after_pay">Transaction complete. The cucumbers have been ordered, the lab assistants are vibrating with anticipation, and work on the new test has been accelerated by 200%. Don\'t ask what\'s happening in the dark corridors right now.</string>
 
     <!-- Questions -->
     <string name="question_1_a">Welcome to the Middle Ages. You\'re not the king, though. What\'s your job?</string>
