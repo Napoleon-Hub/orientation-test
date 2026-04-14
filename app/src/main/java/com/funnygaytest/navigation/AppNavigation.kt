@@ -1,13 +1,10 @@
 package com.funnygaytest.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.funnygaytest.ui.screens.endings.EndingsScreen
 import com.funnygaytest.ui.screens.feed.FeedScreen
 import com.funnygaytest.ui.screens.game.GameScreen
@@ -30,7 +27,7 @@ fun AppNavigation(
                     navController.navigate(ScreenRoutes.Endings.route)
                 },
                 onLoseResultShow = {
-                    navController.navigate(ScreenRoutes.Result.withArgs("true")) {
+                    navController.navigate(ScreenRoutes.Result.route) {
                         popUpTo(ScreenRoutes.Start.route) { inclusive = true }
                     }
                 }
@@ -48,36 +45,22 @@ fun AppNavigation(
         composable(ScreenRoutes.Game.route) {
             GameScreen(
                 goToResult = {
-                    navController.navigate(ScreenRoutes.Result.withArgs("false")) {
+                    navController.navigate(ScreenRoutes.Result.route) {
                         popUpTo(ScreenRoutes.Start.route) { inclusive = true }
                     }
+                    onRequestShowAd()
                 }
             )
         }
 
-        composable(
-            route = ScreenRoutes.Result.route + "/{$LOSE_RESULT}",
-            arguments = listOf(
-                navArgument(LOSE_RESULT) {
-                    type = NavType.BoolType
-                    defaultValue = false
-                }
-            )
-        ) { navBackStackEntry ->
-
-            val isPermanentLose = navBackStackEntry.arguments?.getBoolean(LOSE_RESULT) ?: false
-
-            LaunchedEffect(Unit) {
-                if (!isPermanentLose) onRequestShowAd()
-            }
-
+        composable(ScreenRoutes.Result.route) {
             ResultScreen(
                 onFeedScreen = {
                     navController.navigate(ScreenRoutes.Feed.route)
                 },
                 onStartScreen = {
                     navController.navigate(ScreenRoutes.Start.route) {
-                        popUpTo(ScreenRoutes.Result.route + "/{$LOSE_RESULT}") {
+                        popUpTo(ScreenRoutes.Result.route) {
                             inclusive = true
                         }
                     }

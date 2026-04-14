@@ -5,7 +5,7 @@
 
     <!-- Start -->
     <string name="start_button">Get Started</string>
-    <string name="start_description">The most accurate and mind-bending gay test ever created. Top scientists from around the globe grinded day and night just to answer the one question keeping you up at night: Are you actually into boys or what?\n(Heads up: there are some ads. We gotta keep those poor scientists fed, you know?)</string>
+    <string name="start_description">The most accurate and mind-bending gay test ever created. Top scientists from around the globe grinded day and night just to answer the one question keeping you up at night: Are you actually into boys or what?</string>
     <string name="start_button_continue">Keep Going</string>
     <string name="start_description_continue">Oh, he\'s 100% gay, no test even needed.\nYo, you still there? Get your fruity ass back to the testing zone!</string>
     <string name="start_button_difficulty">Difficulty</string>
@@ -77,6 +77,14 @@
     <!-- Connection -->
     <string name="connection_no_internet_title">SYSTEM BLACKOUT!</string>
     <string name="connection_no_internet_description">Server link severed. We can\'t run this test offline; the lab needs to process your data on the fly. Turn the internet back on and let\'s get back to your evaluation.</string>
+
+    <!-- Access Dialog -->
+    <string name="access_dialog_title">Research Access Protocol</string>
+    <string name="access_dialog_warning">WARNING: This application is intended for entertainment purposes only. We do not seek to offend anyone\'s feelings or dignity. All tests and results are products of our lead lab assistants\' imaginations and hold no scientific or diagnostic value.</string>
+    <string name="access_dialog_ad_description">To maintain our laboratory equipment and ensure our scientists receive their salaries, this app contains minimal advertising. We require your consent for data processing to deliver relevant advertisements.</string>
+    <string name="access_dialog_privacy_policy">Review the Privacy Policy</string>
+    <string name="access_dialog_button_continue">Accept and proceed!</string>
+    <string name="access_dialog_button_finish">Exit Laboratory</string>
 
     <!-- Feed -->
     <string name="feed_button">Feed</string>
@@ -228,7 +236,5 @@
 
     <!-- Untranslatable -->
     <string name="app_ad_id" translatable="false">ca-app-pub-6102855810007577~2402981725</string>
-    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-6102855810007577/6871342794</string>
-    <string name="video_ad_unit_id" translatable="false">ca-app-pub-6102855810007577/9031043217</string>
 
 </resources>

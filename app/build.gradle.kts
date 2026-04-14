@@ -11,7 +11,7 @@ plugins {
 
 val appVersionMajor = 3
 val appVersionMinor = 0
-val appVersionPatch = 2
+val appVersionPatch = 3
 
 val keystorePropertiesFile: File? = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
@@ -113,11 +113,10 @@ dependencies {
     implementation(libs.play.review)
     implementation(libs.play.review.ktx)
 
-    // Messaging
-    implementation(libs.user.messaging.platform)
-
     // Yandex Mobile Ads
-    //implementation(libs.yandex.mobile.ads)
+    implementation(libs.yandex.mobile.ads)
+    implementation(libs.yandex.mobile.ads.applovin)
+    implementation(libs.yandex.mobile.ads.unityads)
 
     // Billing
     implementation(libs.billing.ktx)

@@ -9,6 +9,7 @@ import javax.inject.Inject
 
 class PrefsEntity @Inject constructor(@param:ApplicationContext val ctx: Context) {
     var gameBegun by activeBoolean(false)
+    var consentShown by activeBoolean(false)
     var isMuted by activeBoolean(false)
     var lastQuestionIndex by activeInt(0)
     var health by activeInt(100)

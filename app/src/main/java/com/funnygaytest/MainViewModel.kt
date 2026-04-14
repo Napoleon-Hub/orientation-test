@@ -1,18 +1,29 @@
 package com.funnygaytest
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.funnygaytest.prefs.PrefsEntity
-import com.funnygaytest.managers.network.NetworkMonitor
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+
+
+data class MainUiState(val consentShown: Boolean)
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val preferences: PrefsEntity
 ) : ViewModel() {
 
+    private val _uiState = MutableStateFlow(
+        MainUiState(consentShown = preferences.consentShown)
+    )
+    val uiState = _uiState.asStateFlow()
+
+    fun updateConsentState() {
+        preferences.consentShown = true
+        _uiState.update { it.copy(consentShown = true) }
+    }
 
 }
