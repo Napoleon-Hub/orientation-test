@@ -18,6 +18,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.funnygaytest.managers.ads.AdFrequencyManager
+import com.funnygaytest.managers.firebase.firestore.FirestoreManager
 import com.funnygaytest.managers.network.NetworkMonitor
 import com.funnygaytest.navigation.AppNavigation
 import com.funnygaytest.ui.components.dialogs.LaboratoryAccessDialog
@@ -52,6 +53,9 @@ class MainActivity : ComponentActivity() {
     lateinit var networkMonitor: NetworkMonitor
 
     @Inject
+    lateinit var firestoreManager: FirestoreManager
+
+    @Inject
     lateinit var adFrequencyManager: AdFrequencyManager
 
     private val viewModel: MainViewModel by viewModels()
@@ -68,7 +72,7 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         hideSystemUI()
 
-        viewModel.authorizeFirebase()
+        firestoreManager.authorizeFirebase(this)
         setupAppUpdate()
 
         setContent {

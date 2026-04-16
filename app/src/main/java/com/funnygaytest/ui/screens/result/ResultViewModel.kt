@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.funnygaytest.base.BaseViewModel
-import com.funnygaytest.managers.firestore.FirestoreManager
+import com.funnygaytest.managers.firebase.firestore.FirestoreManager
 import com.funnygaytest.managers.music.AudioManager
 import com.funnygaytest.models.firebase.LabStats
 import com.funnygaytest.prefs.PrefsEntity

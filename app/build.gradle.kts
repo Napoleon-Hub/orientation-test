@@ -11,11 +11,11 @@ plugins {
 
 val appVersionMajor = 3
 val appVersionMinor = 0
-val appVersionPatch = 3
+val appVersionPatch = 4
 
-val keystorePropertiesFile: File? = rootProject.file("keystore.properties")
+val keystorePropertiesFile: File = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
-if (keystorePropertiesFile != null && keystorePropertiesFile.exists()) {
+if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(keystorePropertiesFile.inputStream())
 }
 
@@ -34,7 +34,7 @@ android {
 
     signingConfigs {
         create("release") {
-            if (keystorePropertiesFile != null && keystorePropertiesFile.exists()) {
+            if (keystorePropertiesFile.exists()) {
                 keyAlias = keystoreProperties["keyAlias"] as String
                 keyPassword = keystoreProperties["keyPassword"] as String
                 storeFile = file(keystoreProperties["storeFile"] as String)
@@ -47,7 +47,7 @@ android {
         release {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            if (keystorePropertiesFile != null && keystorePropertiesFile.exists()) {
+            if (keystorePropertiesFile.exists()) {
                 signingConfig = signingConfigs.getByName("release")
             }
         }
@@ -114,6 +114,7 @@ dependencies {
     implementation(libs.play.app.update.ktx)
     implementation(libs.play.review)
     implementation(libs.play.review.ktx)
+    implementation(libs.play.games)
 
     // Yandex Mobile Ads
     implementation(libs.yandex.mobile.ads)

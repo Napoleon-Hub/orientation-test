@@ -1,5 +1,7 @@
-package com.funnygaytest.managers.firestore
+package com.funnygaytest.managers.firebase.firestore
 
+import android.app.Activity
+import com.funnygaytest.managers.firebase.auth.AuthManager
 import com.funnygaytest.models.firebase.LabStats
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
@@ -15,7 +17,8 @@ import javax.inject.Singleton
 @Singleton
 class FirestoreManager @Inject constructor(
     firestore: FirebaseFirestore,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val authManager: AuthManager
 ) {
     private val usersCollection = firestore.collection("subjects")
 
@@ -56,11 +59,9 @@ class FirestoreManager @Inject constructor(
         awaitClose { registration.remove() }
     }
 
-    fun authorizeFirebase() {
-        if (auth.currentUser == null) {
-            auth.signInAnonymously().addOnSuccessListener { result ->
-                Timber.i("New user registered, uid: ${result.user?.uid}")
-            }
+    fun authorizeFirebase(activity: Activity) {
+        authManager.startAuthFlow(activity) { uid ->
+            Timber.d("Лаборатория готова для испытуемового: $uid")
         }
     }
 

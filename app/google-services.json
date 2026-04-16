@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "374661098496",
     "project_id": "funny-gay-test",
-    "storage_bucket": "funny-gay-test.appspot.com"
+    "storage_bucket": "funny-gay-test.firebasestorage.app"
   },
   "client": [
     {
@@ -14,7 +14,23 @@
       },
       "oauth_client": [
         {
-          "client_id": "374661098496-rknqorsnh35k7rmgtf9vtot5p23avdks.apps.googleusercontent.com",
+          "client_id": "374661098496-4u779t7a46jambh8ba0c6moolmvcchft.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.funnygaytest",
+            "certificate_hash": "06c1b5925f0fe8e5b5148b74e8090cc173acc6ee"
+          }
+        },
+        {
+          "client_id": "374661098496-giehhc5rokv61m4q883hfrfu2nbhlaki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.funnygaytest",
+            "certificate_hash": "71811373ad452a3f5f79838bb0be591583479233"
+          }
+        },
+        {
+          "client_id": "374661098496-oka8ujpkl8hj61bmkolmj0ukevc2t8l5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,12 +43,13 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "374661098496-rknqorsnh35k7rmgtf9vtot5p23avdks.apps.googleusercontent.com",
+              "client_id": "374661098496-oka8ujpkl8hj61bmkolmj0ukevc2t8l5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-6102855810007577~2402981725"
     }
   ],
   "configuration_version": "1"

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.billingclient.api.BillingFlowParams
 import com.funnygaytest.managers.billing.BillingInteractor
-import com.funnygaytest.managers.firestore.FirestoreManager
+import com.funnygaytest.managers.firebase.firestore.FirestoreManager
 import com.funnygaytest.utils.enums.EndingType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
