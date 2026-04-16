@@ -286,10 +286,7 @@ private fun StartScreenContent(
 fun PreviewStartScreen() {
     MainTheme {
         StartScreenContent(
-            uiState = StartUiState(
-                countOfLoses = 5,
-                countOfWins = 1
-            )
+            uiState = StartUiState()
         )
     }
 }

@@ -5,12 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.billingclient.api.BillingFlowParams
 import com.funnygaytest.managers.billing.BillingInteractor
-import com.funnygaytest.prefs.PrefsEntity
+import com.funnygaytest.managers.firestore.FirestoreManager
+import com.funnygaytest.utils.enums.EndingType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 data class FeedUiState(
@@ -21,8 +24,8 @@ data class FeedUiState(
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(
-    private val preferences: PrefsEntity,
-    private val billingInteractor: BillingInteractor
+    private val billingInteractor: BillingInteractor,
+    private val firestoreManager: FirestoreManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(FeedUiState())
@@ -30,8 +33,20 @@ class FeedViewModel @Inject constructor(
 
     private val productDetails = billingInteractor.productDetails
 
+    private var currentAchievements: List<String> = emptyList()
+
     init {
         billingInteractor.init()
+
+        viewModelScope.launch {
+            firestoreManager.getStats()
+                .catch { e ->
+                    Timber.e(e, "Ошибка доступа к личному делу исследователя")
+                }
+                .collect { stats ->
+                currentAchievements = stats?.achievements ?: emptyList()
+            }
+        }
 
         viewModelScope.launch {
             billingInteractor.purchaseEvent.collect { quantity ->
@@ -56,15 +71,17 @@ class FeedViewModel @Inject constructor(
     }
 
     private fun handleSuccessfulDonation(quantity: Int) {
+        val isAlreadyUnlocked = currentAchievements.contains(EndingType.DONATE.id)
+
         _uiState.update {
             it.copy(
                 isDonated = true,
                 countOfProduct = it.countOfProduct + quantity,
-                isDonateAchieveUnlocked = preferences.endingDonate == 0
+                isDonateAchieveUnlocked = !isAlreadyUnlocked
             )
         }
-        if (preferences.endingDonate == 0) {
-            preferences.endingDonate = 1
+        if (!isAlreadyUnlocked) {
+            firestoreManager.recordTestResult(achievementId = EndingType.DONATE.id)
         }
     }
 

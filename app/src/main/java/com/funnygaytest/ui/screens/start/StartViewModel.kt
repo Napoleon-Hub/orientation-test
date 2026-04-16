@@ -19,9 +19,7 @@ data class StartUiState(
     val isGameStarted: Boolean = false,
     val showDifficulty: Boolean = false,
     val isMuted: Boolean = false,
-    val wasPussyModeClicked: Boolean = false,
-    val countOfLoses: Int = 0,
-    val countOfWins: Int = 0,
+    val wasPussyModeClicked: Boolean = false
 )
 
 sealed class StartUiEffect {
@@ -44,9 +42,7 @@ class StartViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 isGameStarted = gameBegun,
-                wasPussyModeClicked = preferences.pussyModeChosen,
-                countOfLoses = countOfLoses,
-                countOfWins = countOfWins
+                wasPussyModeClicked = preferences.pussyModeChosen
             )
         }
 

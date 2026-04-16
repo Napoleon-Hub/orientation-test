@@ -2,9 +2,6 @@ package com.funnygaytest.di
 
 import android.content.Context
 import android.content.res.Resources
-import com.google.firebase.Firebase
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.analytics
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,12 +17,6 @@ object AppModule {
     @Singleton
     fun provideResources(@ApplicationContext context: Context): Resources {
         return context.resources
-    }
-
-    @Provides
-    @Singleton
-    fun provideFirebaseAnalytics(): FirebaseAnalytics {
-        return Firebase.analytics
     }
 
 }

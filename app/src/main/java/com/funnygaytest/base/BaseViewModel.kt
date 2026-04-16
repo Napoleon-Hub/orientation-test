@@ -41,18 +41,6 @@ abstract class BaseViewModel(
             preferences.currentQuestionList = value
         }
 
-    protected var countOfLoses: Int
-        get() = preferences.countOfLoses
-        set(value) {
-            preferences.countOfLoses = value
-        }
-
-    protected var countOfWins: Int
-        get() = preferences.countOfWins
-        set(value) {
-            preferences.countOfWins = value
-        }
-
     fun playMusic(@RawRes resId: Int) {
         audioManager.playMusic(resId)
     }

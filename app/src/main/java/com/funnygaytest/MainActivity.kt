@@ -68,6 +68,7 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         hideSystemUI()
 
+        viewModel.authorizeFirebase()
         setupAppUpdate()
 
         setContent {

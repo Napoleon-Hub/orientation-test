@@ -2,8 +2,11 @@ package com.funnygaytest.ui.screens.result
 
 import android.app.Activity
 import android.content.Context
+import androidx.lifecycle.viewModelScope
 import com.funnygaytest.base.BaseViewModel
+import com.funnygaytest.managers.firestore.FirestoreManager
 import com.funnygaytest.managers.music.AudioManager
+import com.funnygaytest.models.firebase.LabStats
 import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.utils.enums.EndingType
 import com.google.android.play.core.review.ReviewInfo
@@ -13,7 +16,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class ResultUiState(
@@ -28,8 +33,9 @@ data class ResultUiState(
 
 @HiltViewModel
 class ResultViewModel @Inject constructor(
-    private val preferences: PrefsEntity,
+    preferences: PrefsEntity,
     audioManager: AudioManager,
+    private val firestoreManager: FirestoreManager,
     @param:ApplicationContext private val appContext: Context
 ) : BaseViewModel(preferences, audioManager) {
 
@@ -98,49 +104,31 @@ class ResultViewModel @Inject constructor(
             }
         }
 
-        val isNew = saveAndCheckIfNew(endingType)
-        checkAllEndingsUnlocked()
+        viewModelScope.launch {
+            val currentStats = firestoreManager.getStats().firstOrNull() ?: LabStats()
 
-        _uiState.update {
-            it.copy(
-                currentEnding = endingType,
-                isNewEnding = isNew
-            )
-        }
-    }
+            val isNew = !currentStats.achievements.contains(endingType.id)
 
-    private fun saveAndCheckIfNew(ending: EndingType): Boolean {
-        var wasNew = false
-        when (ending) {
-            EndingType.WIN_100 -> if (preferences.endingWin100 == 0) { preferences.endingWin100 = 1; wasNew = true }
-            EndingType.WIN_66 -> if (preferences.endingWin66 == 0) { preferences.endingWin66 = 1; wasNew = true }
-            EndingType.WIN_33 -> if (preferences.endingWin33 == 0) { preferences.endingWin33 = 1; wasNew = true }
-            EndingType.WIN_1 -> if (preferences.endingWin1 == 0) { preferences.endingWin1 = 1; wasNew = true }
-            EndingType.LOSE_4 -> if (preferences.endingLose4 == 0) { preferences.endingLose4 = 1; wasNew = true }
-            EndingType.LOSE_8 -> if (preferences.endingLose8 == 0) { preferences.endingLose8 = 1; wasNew = true }
-            EndingType.LOSE_12 -> if (preferences.endingLose12 == 0) { preferences.endingLose12 = 1; wasNew = true }
-            EndingType.LOSE_16 -> if (preferences.endingLose16 == 0) { preferences.endingLose16 = 1; wasNew = true }
-            EndingType.LOSE_20 -> if (preferences.endingLose20 == 0) { preferences.endingLose20 = 1; wasNew = true }
-            EndingType.LOSE_PUSSY -> if (preferences.endingLosePussy == 0) { preferences.endingLosePussy = 1; wasNew = true }
-            EndingType.ALL -> {}
-            EndingType.DONATE -> {}
-        }
-        return wasNew
-    }
+            firestoreManager.recordTestResult(isWin = hp > 0, achievementId = endingType.id)
 
-    private fun checkAllEndingsUnlocked() {
-        if (preferences.endingAll == 0) {
-            val allUnlocked = preferences.endingWin100 > 0 && preferences.endingWin66 > 0 &&
-                    preferences.endingWin33 > 0 && preferences.endingWin1 > 0 &&
-                    preferences.endingLose4 > 0 && preferences.endingLose8 > 0 &&
-                    preferences.endingLose12 > 0 && preferences.endingLose16 > 0 &&
-                    preferences.endingLose20 > 0 && preferences.endingLosePussy > 0
+            val allUnlockedAchievements = currentStats.achievements + endingType.id
+            val uniqueCoreEndings = allUnlockedAchievements.filter {
+                it != EndingType.ALL.id && it != EndingType.DONATE.id
+            }.distinct().size
 
-            if (allUnlocked) {
-                preferences.endingAll = 1
-                _uiState.update {
-                    it.copy(isAllEndingsUnlocked = true)
-                }
+            var isAllUnlockedNow = currentStats.achievements.contains(EndingType.ALL.id)
+
+            if (uniqueCoreEndings >= 10 && !isAllUnlockedNow) {
+                firestoreManager.recordTestResult(achievementId = EndingType.ALL.id)
+                isAllUnlockedNow = true
+            }
+
+            _uiState.update {
+                it.copy(
+                    currentEnding = endingType,
+                    isNewEnding = isNew,
+                    isAllEndingsUnlocked = isAllUnlockedNow
+                )
             }
         }
     }
@@ -151,9 +139,6 @@ class ResultViewModel @Inject constructor(
     }
 
     private fun refreshGameData() {
-        if (health > 0) countOfWins += 1
-        else countOfLoses += 1
-
         gameBegun = false
         lastQuestionIndex = 0
         health = 100
