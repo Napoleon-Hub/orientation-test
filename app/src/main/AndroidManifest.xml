@@ -42,4 +42,6 @@
 
     </application>
 
+    <attribution android:tag="audio_tag" android:label="@string/app_name" />
+
 </manifest>

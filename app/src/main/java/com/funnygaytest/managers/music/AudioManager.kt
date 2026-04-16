@@ -2,6 +2,7 @@ package com.funnygaytest.managers.music
 
 import android.content.Context
 import android.media.MediaPlayer
+import android.os.Build
 import androidx.annotation.RawRes
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -21,7 +22,12 @@ class AudioManager @Inject constructor(
         stopMusic()
 
         currentResId = resId
-        mediaPlayer = MediaPlayer.create(context, resId).apply {
+
+        val attributedContext = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            context.createAttributionContext("audio_tag")
+        } else context
+
+        mediaPlayer = MediaPlayer.create(attributedContext, resId).apply {
             this.isLooping = isLooping
             setVolume(if (isMuted) 0f else 0.5f, if (isMuted) 0f else 0.5f)
             start()

@@ -14,5 +14,4 @@ class PrefsEntity @Inject constructor(@param:ApplicationContext val ctx: Context
     var lastQuestionIndex by activeInt(0)
     var health by activeInt(100)
     var currentQuestionList by activeQuestionList()
-    var pussyModeChosen by activeBoolean(false)
 }

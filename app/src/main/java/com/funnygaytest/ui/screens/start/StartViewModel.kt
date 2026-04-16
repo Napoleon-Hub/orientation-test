@@ -2,8 +2,11 @@ package com.funnygaytest.ui.screens.start
 
 import androidx.lifecycle.viewModelScope
 import com.funnygaytest.base.BaseViewModel
+import com.funnygaytest.managers.firebase.firestore.FirestoreManager
 import com.funnygaytest.managers.music.AudioManager
+import com.funnygaytest.models.firebase.LabStats
 import com.funnygaytest.prefs.PrefsEntity
+import com.funnygaytest.utils.enums.EndingType
 import com.funnygaytest.utils.helpers.generateNewGameRun
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -11,8 +14,10 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 data class StartUiState(
@@ -28,8 +33,9 @@ sealed class StartUiEffect {
 
 @HiltViewModel
 class StartViewModel @Inject constructor(
-    private val preferences: PrefsEntity,
-    audioManager: AudioManager
+    preferences: PrefsEntity,
+    audioManager: AudioManager,
+    private val firestoreManager: FirestoreManager
 ) : BaseViewModel(preferences, audioManager) {
 
     private val _uiState = MutableStateFlow(StartUiState(isMuted = isMuted))
@@ -40,14 +46,28 @@ class StartViewModel @Inject constructor(
 
     init {
         _uiState.update {
-            it.copy(
-                isGameStarted = gameBegun,
-                wasPussyModeClicked = preferences.pussyModeChosen
-            )
+            it.copy(isGameStarted = gameBegun)
         }
 
         if (!gameBegun) {
             health = 100
+        }
+
+        viewModelScope.launch {
+            firestoreManager.getStats()
+                .catch { e ->
+                    Timber.e(e, "Ошибка доступа к личному делу исследователя")
+                }
+                .collect { stats ->
+                    val currentStats = stats ?: LabStats()
+                    val achievements = currentStats.achievements
+
+                    _uiState.update { state ->
+                        state.copy(
+                            wasPussyModeClicked = achievements.contains(EndingType.LOSE_PUSSY.id)
+                        )
+                    }
+                }
         }
     }
 
@@ -74,9 +94,6 @@ class StartViewModel @Inject constructor(
     }
 
     fun onPermanentLose() {
-        preferences.pussyModeChosen = true
-        _uiState.update { it.copy(wasPussyModeClicked = true) }
-
         gameBegun = true
         lastQuestionIndex = 0
         health = 0
