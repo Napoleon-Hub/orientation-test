@@ -90,7 +90,7 @@ private fun FeedScreenContent(
             Row(modifier = Modifier.fillMaxWidth()) {
                 DescriptionBox(
                     modifier = Modifier.fillMaxWidth(),
-                    textStyle = MainTestTheme.typography.heading.copy(fontSize = 15.sp),
+                    textStyle = MainTestTheme.typography.heading.copy(fontSize = 13.sp),
                     descriptionString = stringResource(
                         if (uiState.isDonated) R.string.feed_description_after_pay
                         else R.string.feed_description_before_pay
