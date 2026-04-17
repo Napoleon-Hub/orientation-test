@@ -7,6 +7,7 @@ import com.funnygaytest.prefs.ActiveProperty
 import com.funnygaytest.prefs.PrefsEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import timber.log.Timber
 
 class ActiveQuestionList(context: Context) : ActiveProperty<List<Question>>(context) {
     private val gson = Gson()
@@ -14,12 +15,21 @@ class ActiveQuestionList(context: Context) : ActiveProperty<List<Question>>(cont
 
     override fun getFromPrefs(key: String): List<Question> {
         val json = sp.getString(key, null)
-        return if (json == null) emptyList() else gson.fromJson(json, type)
+        if (json == null) {
+            Timber.w("Prefs: Список вопросов по ключу $key отсутствует (null)")
+            return emptyList()
+        }
+        return try {
+            gson.fromJson(json, type)
+        } catch (e: Exception) {
+            Timber.e(e, "Prefs: Ошибка парсинга JSON для списка вопросов")
+            emptyList()
+        }
     }
 
     override fun saveToPrefs(key: String, value: List<Question>) {
         val json = gson.toJson(value)
-        sp.edit { putString(key, json) }
+        sp.edit(commit = true) { putString(key, json) }
     }
 }
 

@@ -234,6 +234,10 @@
     <string name="question_20_answer_2">Thanks for the test! I learned things about myself that I should probably keep secret.</string>
     <string name="question_20_answer_3">Forget the test… I don\'t even believe I\'m straight anymore.</string>
 
+    <!-- Errors -->
+    <string name="error">Error</string>
+    <string name="error_empty_questions">Error loading questions. Restarting the test…</string>
+
     <!-- Untranslatable -->
     <string name="app_ad_id" translatable="false">ca-app-pub-6102855810007577~2402981725</string>
     <string name="web_client_id" translatable="false">374661098496-oka8ujpkl8hj61bmkolmj0ukevc2t8l5.apps.googleusercontent.com</string>

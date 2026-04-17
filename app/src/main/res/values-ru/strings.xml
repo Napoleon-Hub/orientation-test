@@ -234,4 +234,8 @@
     <string name="question_20_answer_2">Спасибо за тест! Узнал о себе много нового.</string>
     <string name="question_20_answer_3">Да плевать на тест… Кажется, я больше не верю, что я натурал.</string>
 
+    <!-- Errors -->
+    <string name="error">Ошибка</string>
+    <string name="error_empty_questions">Возникла ошибка формирования вопросов, тест перезапущен</string>
+
 </resources>

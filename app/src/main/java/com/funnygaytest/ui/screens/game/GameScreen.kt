@@ -1,5 +1,6 @@
 package com.funnygaytest.ui.screens.game
 
+import android.widget.Toast
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -34,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -62,6 +64,7 @@ fun GameScreen(
 
     val uiState by viewModel.uiState.collectAsState()
 
+    val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
@@ -95,6 +98,9 @@ fun GameScreen(
             when (effect) {
                 is GameUiEffect.NavigateToResultScreen -> {
                     goToResult()
+                }
+                is GameUiEffect.ShowToast -> {
+                    Toast.makeText(context, effect.messageRes, Toast.LENGTH_LONG).show()
                 }
             }
         }
