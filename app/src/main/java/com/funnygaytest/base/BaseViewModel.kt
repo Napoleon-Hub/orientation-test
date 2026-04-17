@@ -45,12 +45,8 @@ abstract class BaseViewModel(
         audioManager.playMusic(resId)
     }
 
-    fun pauseMusic() {
+    fun stopMusic() {
         audioManager.stopMusic()
-    }
-
-    fun releaseMusic() {
-        audioManager.release()
     }
 
     fun setMuteMusic(isMuted: Boolean) {

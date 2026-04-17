@@ -57,7 +57,7 @@ fun StartScreen(
         val observer = LifecycleEventObserver { _, event ->
             when (event) {
                 Lifecycle.Event.ON_PAUSE -> {
-                    viewModel.pauseMusic()
+                    viewModel.stopMusic()
                 }
 
                 Lifecycle.Event.ON_RESUME -> {
@@ -73,7 +73,6 @@ fun StartScreen(
 
         onDispose {
             lifecycleOwner.lifecycle.removeObserver(observer)
-            viewModel.releaseMusic()
         }
     }
 

@@ -36,8 +36,10 @@ class AudioManager @Inject constructor(
 
     fun setMute(mute: Boolean) {
         isMuted = mute
-        val volume = if (isMuted) 0f else 0.5f
-        mediaPlayer?.setVolume(volume, volume)
+        mediaPlayer?.let {
+            val volume = if (isMuted) 0f else 0.5f
+            it.setVolume(volume, volume)
+        }
     }
 
     fun stopMusic() {
@@ -45,9 +47,5 @@ class AudioManager @Inject constructor(
         mediaPlayer?.release()
         mediaPlayer = null
         currentResId = null
-    }
-
-    fun release() {
-        stopMusic()
     }
 }
