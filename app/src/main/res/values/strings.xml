@@ -64,6 +64,7 @@
     <string name="result_text_result_lose_pussy">Gotcha, you sneaky bastard! Thought you could outsmart the system and easy-mode your way out so we wouldn\'t find out who you really are? Too bad, you\'ve been caught red-handed, you little twink. We\'ll see you at the retake, though let\'s be honest: it won\'t help. Everything is clear as day already. Boys, carry him out!</string>
 
     <string name="result_button_restart">Try again</string>
+    <string name="result_button_restart_description">Questions may vary</string>
     <string name="result_button_another_apps">Another tests</string>
     <string name="result_button_pay">Feed scientists</string>
 
@@ -124,29 +125,52 @@
     <string name="question_3_b_answer_2">Negative. I don\'t really approve of their lifestyle.</string>
     <string name="question_3_b_answer_3">Everyone has their own path. I couldn\'t care less.</string>
 
-    <string name="question_4">Picture this: someone offers you 1000$ for a photoshoot in women\'s clothes. You taking it?</string>
-    <string name="question_4_answer_1">For a grand in cash? I\'d do way worse things than that.</string>
-    <string name="question_4_answer_2">I sometimes do that for free anyway, so easy money, I guess.</string>
-    <string name="question_4_answer_3">1000$? Where were you sooner? I once did it for a 2-liter bottle of cheap beer…</string>
+    <string name="question_4_a">Picture this: someone offers you 1000$ for a photoshoot in women\'s clothes. You taking it?</string>
+    <string name="question_4_a_answer_1">For a grand in cash? I\'d do way worse things than that.</string>
+    <string name="question_4_a_answer_2">I sometimes do that for free anyway, so easy money, I guess.</string>
+    <string name="question_4_a_answer_3">1000$? Where were you sooner? I once did it for a 2-liter bottle of cheap beer…</string>
 
-    <string name="question_5">Which of these would you pick as a hobby?</string>
-    <string name="question_5_answer_1">Rhythmic Gymnastics (Stay flexible, bro)</string>
-    <string name="question_5_answer_2">Figure Skating (Ice is my stage)</string>
-    <string name="question_5_answer_3">Ballet (Tight leggings? Yes please)</string>
-    <string name="question_5_answer_4">Belly Dancing (Shake what your mama gave ya)</string>
+    <string name="question_4_b">Your gym bro is struggling with a heavy bench press. How do you \"spot\" him?</string>
+    <string name="question_4_b_answer_1">I stand behind him and give him some tactile motivation from the chest.</string>
+    <string name="question_4_b_answer_2">I just scream \"LIGHTWEIGHT BABY\" until his ears bleed.</string>
+    <string name="question_4_b_answer_3">I record it for his OnlyFans account. Content is king.</string>
 
-    <string name="question_6">Be honest: why do you think there are zero \"normal\" options in this test?</string>
-    <string name="question_6_answer_1">Because the \"scientists\" who made this have officially lost their minds.</string>
-    <string name="question_6_answer_2">Because normal answers are mid. Chaos is better.</string>
-    <string name="question_6_answer_3">Because the dev knows that if I downloaded this, I\'m already sus.</string>
-    <string name="question_6_answer_4">All of the above. It\'s a total circus.</string>
+    <string name="question_5_a">Which of these would you pick as a hobby?</string>
+    <string name="question_5_a_answer_1">Rhythmic Gymnastics (Stay flexible, bro)</string>
+    <string name="question_5_a_answer_2">Figure Skating (Ice is my stage)</string>
+    <string name="question_5_a_answer_3">Ballet (Tight leggings? Yes please)</string>
+    <string name="question_5_a_answer_4">Belly Dancing (Shake what your mama gave ya)</string>
 
-    <string name="question_7">You pull up to meet two friends—a guy and a girl. The bro instantly goes in for a high-five, while the girl is already leaning in for a hug.
+    <string name="question_5_b">Let\'s play along for a second and pretend we believe you\'re straight. Pick a drink:</string>
+    <string name="question_5_b_answer_1">A glass of chilled Rosé</string>
+    <string name="question_5_b_answer_2">Non-alcoholic beer</string>
+    <string name="question_5_b_answer_3">Aperol Spritz</string>
+    <string name="question_5_b_answer_4">Lavender oat milk latte</string>
+
+    <string name="question_6_a">Be honest: why do you think there are zero \"normal\" options in this test?</string>
+    <string name="question_6_a_answer_1">Because the \"scientists\" who made this have officially lost their minds.</string>
+    <string name="question_6_a_answer_2">Because normal answers are mid. Chaos is better.</string>
+    <string name="question_6_a_answer_3">Because the dev knows that if I downloaded this, I\'m already sus.</string>
+    <string name="question_6_a_answer_4">All of the above. It\'s a total circus.</string>
+
+    <string name="question_6_b">In which of these locations would you prefer to build your \"cozy nest\"?</string>
+    <string name="question_6_b_answer_1">Germany, Berlin</string>
+    <string name="question_6_b_answer_2">Thailand, Bangkok</string>
+    <string name="question_6_b_answer_3">USA, California</string>
+    <string name="question_6_b_answer_4">The Netherlands, Amsterdam</string>
+
+    <string name="question_7_a">You pull up to meet two friends—a guy and a girl. The bro instantly goes in for a high-five, while the girl is already leaning in for a hug.
         Who are you locking in with first and what\'s the move?</string>
-    <string name="question_7_answer_1">Bros before hoes. The homie gets the handshake first, no questions asked.</string>
-    <string name="question_7_answer_2">Forget the handshake, I\'m going in for the hug. My boy needs some love too!</string>
-    <string name="question_7_answer_3">The guy, obviously. You already know I\'m into boys.</string>
-    <string name="question_7_answer_4">Yo, scientists, give me some real options! I\'m straight as an arrow, dammit!</string>
+    <string name="question_7_a_answer_1">Bros before hoes. The homie gets the handshake first, no questions asked.</string>
+    <string name="question_7_a_answer_2">Forget the handshake, I\'m going in for the hug. My boy needs some love too!</string>
+    <string name="question_7_a_answer_3">The guy, obviously. You already know I\'m into boys.</string>
+    <string name="question_7_a_answer_4">Yo, scientists, give me some real options! I\'m straight as an arrow, dammit!</string>
+
+    <string name="question_7_b">Club scenario: a girl approaches you and tries to hit on. Your response?</string>
+    <string name="question_7_b_answer_1">\"Sorry, I\'m already taken, and I would never cheat on him.\"</string>
+    <string name="question_7_b_answer_2">I\'d probably get so awkward I\'d embarrass myself… maybe even soil my pants.</string>
+    <string name="question_7_b_answer_3">I don\'t do clubs. I prefer vanilla house parties with my besties.</string>
+    <string name="question_7_b_answer_4">Yo, scientists, give me some real options! I\'m straight as an arrow, dammit!</string>
 
     <string name="question_8">Remember the question about the thugs and your girlfriend? I\'m giving you one more shot, because your previous answer was a total fail.</string>
     <string name="question_8_answer_1">Mama\'s Little Demolition Man. Go full kamikaze mode: scream at the top of your lungs and pretend you have a detonator in your pocket.</string>
@@ -176,11 +200,16 @@
     <string name="question_11_answer_3">I\'m the \"therapist\" friend. I love hugging and comforting my homies, especially the cute ones.</string>
     <string name="question_11_answer_4">I\'m not gay, look at yourselves, you nerds! (Incorrect answer, but feel free to try).</string>
 
-    <string name="question_12">How do you feel about street fighting if your honor is on the line?</string>
-    <string name="question_12_answer_1">I prefer peaceful talks. I just got my nails done yesterday and they\'re literally perfect.</string>
-    <string name="question_12_answer_2">Fights terrify me. Getting beaten up is one thing, but I don\'t want to get \"humiliated\" afterward.</string>
-    <string name="question_12_answer_3">I\'m staying out of it. My grandma once beat me with a stick, and I\'ve been in \"pacifist mode\" ever since.</string>
-    <string name="question_12_answer_4">Fighting is for Neanderthals. I\'ll do whatever the guy wants, as long as he doesn\'t touch my face.</string>
+    <string name="question_12_a">How do you feel about street fighting if your honor is on the line?</string>
+    <string name="question_12_a_answer_1">I prefer peaceful talks. I just got my nails done yesterday and they\'re literally perfect.</string>
+    <string name="question_12_a_answer_2">Fights terrify me. Getting beaten up is one thing, but I don\'t want to get \"humiliated\" afterward.</string>
+    <string name="question_12_a_answer_3">I\'m staying out of it. My grandma once beat me with a stick, and I\'ve been in \"pacifist mode\" ever since.</string>
+    <string name="question_12_a_answer_4">Fighting is for Neanderthals. I\'ll do whatever the guy wants, as long as he doesn\'t touch my face.</string>
+
+    <string name="question_12_b">Is true friendship possible between a man and a woman?</string>
+    <string name="question_12_b_answer_1">Sure, I have plenty of girlfriends. We even go shopping together.</string>
+    <string name="question_12_b_answer_2">Yes, I’ve been a permanent resident of the friendzone my whole life.</string>
+    <string name="question_12_b_answer_3">Yes, I always make it clear to them that we are just friends.</string>
 
     <string name="question_13_a">Do you have any \"rainbow\" friends?</string>
     <string name="question_13_a_answer_1">Yeah, I\'m cool with everyone.</string>
@@ -206,10 +235,17 @@
     <string name="question_15_answer_3">I\'m headed to the hardware store for some rope. A world without boys isn\'t a world I want to live in.</string>
     <string name="question_15_answer_4">How about we imagine YOU guys aren\'t gay? Where would these questions come from then?! (Wrong answer, but go ahead and try).</string>
 
-    <string name="question_16">How emotional are you? Are you a \"cry me a river\" type of guy?</string>
-    <string name="question_16_answer_1">I cry every single day. Life is just too cruel to a sensitive soul like mine.</string>
-    <string name="question_16_answer_2">I\'m a total wreck. I start sobbing during the opening credits of \"Hachiko\".</string>
-    <string name="question_16_answer_3">I ran out of tears by age 15. Living with my \"preferences\" in this place is a struggle.</string>
+    <string name="question_16_a">How emotional are you? Are you a \"cry me a river\" type of guy?</string>
+    <string name="question_16_a_answer_1">I cry every single day. Life is just too cruel to a sensitive soul like mine.</string>
+    <string name="question_16_a_answer_2">I\'m a total wreck. I start sobbing during the opening credits of \"Hachiko\".</string>
+    <string name="question_16_a_answer_3">I ran out of tears by age 15. Living with my \"preferences\" in this place is a struggle.</string>
+
+    <string name="question_16_b">You enter the gym: on the left, a fit girl is squatting; on the right, a massive bodybuilder is doing the same.
+        Where does your gaze go first?</string>
+    <string name="question_16_b_answer_1">The girl. I need to know where she got those stylish leggings.</string>
+    <string name="question_16_b_answer_2">The guy. Those glutes are a literal work of art.</string>
+    <string name="question_16_b_answer_3">The guy. That\'s my gym bro! Time for a tactical sneak-attack glute pinch.</string>
+    <string name="question_16_b_answer_4">The girl. She\'s my coach, I need to say hello before the workout.</string>
 
     <string name="question_17">How often do you and your homies joke about being gay?</string>
     <string name="question_17_answer_1">I have no friends. I joke to myself, but honestly, I\'m losing the punchline.</string>

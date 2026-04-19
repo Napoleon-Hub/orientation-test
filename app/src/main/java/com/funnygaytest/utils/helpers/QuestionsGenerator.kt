@@ -68,56 +68,99 @@ fun generateNewGameRun(): List<Question> {
     )
     runQuestions.add(slot3Variants.random())
 
-    runQuestions.add(
+    val slot4Variants = listOf(
         Question(
-            id = "q_4",
-            questionResId = R.string.question_4,
+            id = "q_4_a",
+            questionResId = R.string.question_4_a,
             listOfAnswers = listOf(
-                Answer(R.string.question_4_answer_1, -10),
-                Answer(R.string.question_4_answer_2, -30),
-                Answer(R.string.question_4_answer_3, 0)
+                Answer(R.string.question_4_a_answer_1, -10),
+                Answer(R.string.question_4_a_answer_2, -30),
+                Answer(R.string.question_4_a_answer_3, 0)
+            )
+        ),
+        Question(
+            id = "q_4_b",
+            questionResId = R.string.question_4_b,
+            listOfAnswers = listOf(
+                Answer(R.string.question_4_b_answer_1, -20),
+                Answer(R.string.question_4_b_answer_2, 5),
+                Answer(R.string.question_4_b_answer_3, -30)
             )
         )
     )
+    runQuestions.add(slot4Variants.random())
 
-    runQuestions.add(
+    val slot5Variants = listOf(
         Question(
-            id = "q_5",
-            questionResId = R.string.question_5,
+            id = "q_5_a",
+            questionResId = R.string.question_5_a,
             listOfAnswers = listOf(
-                Answer(R.string.question_5_answer_1, -15),
-                Answer(R.string.question_5_answer_2, 0),
-                Answer(R.string.question_5_answer_3, -10),
-                Answer(R.string.question_5_answer_4, -30)
+                Answer(R.string.question_5_a_answer_1, -15),
+                Answer(R.string.question_5_a_answer_2, 0),
+                Answer(R.string.question_5_a_answer_3, -10),
+                Answer(R.string.question_5_a_answer_4, -30)
+            )
+        ),
+        Question(
+            id = "q_5_b",
+            questionResId = R.string.question_5_b,
+            listOfAnswers = listOf(
+                Answer(R.string.question_5_b_answer_1, 0),
+                Answer(R.string.question_5_b_answer_2, -15),
+                Answer(R.string.question_5_b_answer_3, 0),
+                Answer(R.string.question_5_b_answer_4, -30)
             )
         )
     )
+    runQuestions.add(slot5Variants.random())
 
-    runQuestions.add(
+    val slot6Variants = listOf(
         Question(
-            id = "q_6",
-            questionResId = R.string.question_6,
+            id = "q_6_a",
+            questionResId = R.string.question_6_a,
             listOfAnswers = listOf(
-                Answer(R.string.question_6_answer_1, -10),
-                Answer(R.string.question_6_answer_2, 0),
-                Answer(R.string.question_6_answer_3, -10),
-                Answer(R.string.question_6_answer_4, 5)
+                Answer(R.string.question_6_a_answer_1, -10),
+                Answer(R.string.question_6_a_answer_2, 0),
+                Answer(R.string.question_6_a_answer_3, -10),
+                Answer(R.string.question_6_a_answer_4, 5)
+            )
+        ),
+        Question(
+            id = "q_6_b",
+            questionResId = R.string.question_6_b,
+            listOfAnswers = listOf(
+                Answer(R.string.question_6_b_answer_1, 0),
+                Answer(R.string.question_6_b_answer_2, -10),
+                Answer(R.string.question_6_b_answer_3, -30),
+                Answer(R.string.question_6_b_answer_4, -10)
             )
         )
     )
+    runQuestions.add(slot6Variants.random())
 
-    runQuestions.add(
+    val slot7Variants = listOf(
         Question(
-            id = "q_7",
-            questionResId = R.string.question_7,
+            id = "q_7_a",
+            questionResId = R.string.question_7_a,
             listOfAnswers = listOf(
-                Answer(R.string.question_7_answer_1, 0),
-                Answer(R.string.question_7_answer_2, -20),
-                Answer(R.string.question_7_answer_3, -40),
-                Answer(R.string.question_7_answer_4, -10)
+                Answer(R.string.question_7_a_answer_1, 0),
+                Answer(R.string.question_7_a_answer_2, -20),
+                Answer(R.string.question_7_a_answer_3, -40),
+                Answer(R.string.question_7_a_answer_4, -5)
+            )
+        ),
+        Question(
+            id = "q_7_b",
+            questionResId = R.string.question_7_b,
+            listOfAnswers = listOf(
+                Answer(R.string.question_7_b_answer_1, -30),
+                Answer(R.string.question_7_b_answer_2, 0),
+                Answer(R.string.question_7_b_answer_3, -30),
+                Answer(R.string.question_7_b_answer_4, -5)
             )
         )
     )
+    runQuestions.add(slot7Variants.random())
 
     runQuestions.add(
         Question(
@@ -180,18 +223,28 @@ fun generateNewGameRun(): List<Question> {
         )
     )
 
-    runQuestions.add(
+    val slot12Variants = listOf(
         Question(
-            id = "q_12",
-            questionResId = R.string.question_12,
+            id = "q_12_a",
+            questionResId = R.string.question_12_a,
             listOfAnswers = listOf(
-                Answer(R.string.question_12_answer_1, -50),
-                Answer(R.string.question_12_answer_2, -5),
-                Answer(R.string.question_12_answer_3, 0),
-                Answer(R.string.question_12_answer_4, -15)
+                Answer(R.string.question_12_a_answer_1, -50),
+                Answer(R.string.question_12_a_answer_2, -5),
+                Answer(R.string.question_12_a_answer_3, 0),
+                Answer(R.string.question_12_a_answer_4, -15)
+            )
+        ),
+        Question(
+            id = "q_12_b",
+            questionResId = R.string.question_12_b,
+            listOfAnswers = listOf(
+                Answer(R.string.question_12_b_answer_1, -30),
+                Answer(R.string.question_12_b_answer_2, 0),
+                Answer(R.string.question_12_b_answer_3, -5)
             )
         )
     )
+    runQuestions.add(slot12Variants.random())
 
     val slot13Variants = listOf(
         Question(
@@ -243,17 +296,28 @@ fun generateNewGameRun(): List<Question> {
         )
     )
 
-    runQuestions.add(
+    val slot16Variants = listOf(
         Question(
-            id = "q_16",
-            questionResId = R.string.question_16,
+            id = "q_16_a",
+            questionResId = R.string.question_16_a,
             listOfAnswers = listOf(
-                Answer(R.string.question_16_answer_1, -15),
-                Answer(R.string.question_16_answer_2, 0),
-                Answer(R.string.question_16_answer_3, -25)
+                Answer(R.string.question_16_a_answer_1, -15),
+                Answer(R.string.question_16_a_answer_2, 0),
+                Answer(R.string.question_16_a_answer_3, -25)
+            )
+        ),
+        Question(
+            id = "q_16_b",
+            questionResId = R.string.question_16_b,
+            listOfAnswers = listOf(
+                Answer(R.string.question_16_b_answer_1, -30),
+                Answer(R.string.question_16_b_answer_2, -20),
+                Answer(R.string.question_16_b_answer_3, 0),
+                Answer(R.string.question_16_b_answer_4, -10)
             )
         )
     )
+    runQuestions.add(slot16Variants.random())
 
     runQuestions.add(
         Question(

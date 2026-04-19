@@ -65,6 +65,7 @@
     <string name="result_text_result_lose_pussy">Попався, пидарок! Думал обмануть систему, упростить себе вопросы, чтобы мы не узнали, кто ты есть на самом деле? Но увы, ты был пойман за руку, пидарок. Ждем тебя на пересдаче, хотя, будем честны, она тебе не поможет, ведь тут и так все ясно. Выносите его, мужики!</string>
 
     <string name="result_button_restart">Перепройти тест</string>
+    <string name="result_button_restart_description">Вопросы могут меняться</string>
     <string name="result_button_another_apps">Другие тесты</string>
     <string name="result_button_pay">Покормить ученых</string>
 
@@ -125,28 +126,51 @@
     <string name="question_3_b_answer_2">Негативно, не одобряю их выбор.</string>
     <string name="question_3_b_answer_3">У каждого свой путь, мне все равно.</string>
 
-    <string name="question_4">Представь: тебе предлагают 1000$ за фотосессию в женской одежде. Твои действия?</string>
-    <string name="question_4_answer_1">За косарь баксов наличкой — я и не такое сделаю.</string>
-    <string name="question_4_answer_2">Я иногда и бесплатно так делаю, так что изи мани.</string>
-    <string name="question_4_answer_3">1000$? Где ты был раньше? Я за двушку пива в свое время согласился…</string>
+    <string name="question_4_a">Представь: тебе предлагают 1000$ за фотосессию в женской одежде. Твои действия?</string>
+    <string name="question_4_a_answer_1">За косарь баксов наличкой — я и не такое сделаю.</string>
+    <string name="question_4_a_answer_2">Я иногда и бесплатно так делаю, так что изи мани.</string>
+    <string name="question_4_a_answer_3">1000$? Где ты был раньше? Я за двушку пива в свое время согласился…</string>
 
-    <string name="question_5">Чем из этого списка ты бы занялся на досуге?</string>
-    <string name="question_5_answer_1">Художественная гимнастика</string>
-    <string name="question_5_answer_2">Фигурное катание</string>
-    <string name="question_5_answer_3">Балет</string>
-    <string name="question_5_answer_4">Танец живота</string>
+    <string name="question_4_b">Представь: твой джим-бро делает подход на жиме штанги и кажется, что он сейчас отъедет, твои действия?</string>
+    <string name="question_4_b_answer_1">Самое время пощупать мышцы его груди пока он в беспомощном положении.</string>
+    <string name="question_4_b_answer_2">Я просто буду кричать ему \"LIGHTWEIGHT BABY\", пока у него не начнут кровоточить уши.</string>
+    <string name="question_4_b_answer_3">Я сниму видео с его потугами, чтобы потом выложить на его Онли Фанс, контент - самое главное.</string>
 
-    <string name="question_6">Слушай, как думаешь, почему в этом тесте вообще нет нормальных вариантов ответа?</string>
-    <string name="question_6_answer_1">Потому что у ученых окончательно поехала кукуха.</string>
-    <string name="question_6_answer_2">Потому что нормальные ответы — это скука смертная.</string>
-    <string name="question_6_answer_3">Потому что если я это скачал, то автор уже всё про меня понял.</string>
-    <string name="question_6_answer_4">Всё из вышеперечисленного.</string>
+    <string name="question_5_a">Чем из этого списка ты бы занялся на досуге?</string>
+    <string name="question_5_a_answer_1">Художественная гимнастика</string>
+    <string name="question_5_a_answer_2">Фигурное катание</string>
+    <string name="question_5_a_answer_3">Балет</string>
+    <string name="question_5_a_answer_4">Танец живота</string>
 
-    <string name="question_7">Залетаешь на встречу к кентам — там пацан и девчонка. Пацан сразу тянет руку дать краба, а девчонка лезет обниматься. Кому первому уделишь внимание и почему?</string>
-    <string name="question_7_answer_1">Сначала бро. Пацан пацану — пацан, а девчонки подождут.</string>
-    <string name="question_7_answer_2">Сначала парень, но без рукопожатий — я полезу обниматься!</string>
-    <string name="question_7_answer_3">Конечно парень. Сами же знаете — я по мальчикам.</string>
-    <string name="question_7_answer_4">Слышь, ученые, дайте нормальные ответы! Я не пидор, мать вашу!</string>
+    <string name="question_5_b">Предположим на секунду, мы поверили, что ты не гей, выбери себе напиток.</string>
+    <string name="question_5_b_answer_1">Розовое вино</string>
+    <string name="question_5_b_answer_2">Безалкогольное пиво</string>
+    <string name="question_5_b_answer_3">Апероль</string>
+    <string name="question_5_b_answer_4">Лавандовый раф на кокосовом</string>
+
+    <string name="question_6_a">Слушай, как думаешь, почему в этом тесте вообще нет нормальных вариантов ответа?</string>
+    <string name="question_6_a_answer_1">Потому что у ученых окончательно поехала кукуха.</string>
+    <string name="question_6_a_answer_2">Потому что нормальные ответы — это скука смертная.</string>
+    <string name="question_6_a_answer_3">Потому что если я это скачал, то автор уже всё про меня понял.</string>
+    <string name="question_6_a_answer_4">Всё из вышеперечисленного.</string>
+
+    <string name="question_6_b">Выбери свою идеальную страну и город для жизни:</string>
+    <string name="question_6_b_answer_1">Германия. Берлин</string>
+    <string name="question_6_b_answer_2">Таиланд. Бангкок</string>
+    <string name="question_6_b_answer_3">США. Штат Калифорния</string>
+    <string name="question_6_b_answer_4">Нидерланды. Амстердам</string>
+
+    <string name="question_7_a">Залетаешь на встречу к кентам — там пацан и девчонка. Пацан сразу тянет руку дать краба, а девчонка лезет обниматься. Кому первому уделишь внимание и почему?</string>
+    <string name="question_7_a_answer_1">Сначала бро. Пацан пацану — пацан, а девчонки подождут.</string>
+    <string name="question_7_a_answer_2">Сначала парень, но без рукопожатий — я полезу обниматься!</string>
+    <string name="question_7_a_answer_3">Конечно парень. Сами же знаете — я по мальчикам.</string>
+    <string name="question_7_a_answer_4">Слышь, ученые, дайте нормальные ответы! Я не пидор, мать вашу!</string>
+
+    <string name="question_7_b">Ситуация в клубе: к тебе подкатывает девушка, предлагает познакомиться, твой ответ</string>
+    <string name="question_7_b_answer_1">Прости, у меня уже кое-кто есть и я бы ни за что ему не изменил.</string>
+    <string name="question_7_b_answer_2">Я бы вероятно опозорился от неожиданности, возможно даже оподливился.</string>
+    <string name="question_7_b_answer_3">Я не хожу по клубам, предпочитаю ванильные вечеринки со своими подругами и друзьяшками.</string>
+    <string name="question_7_b_answer_4">Слышь, ученые, дайте нормальные ответы! Я не пидор, мать вашу!</string>
 
     <string name="question_8">Помнишь вопрос про гопников и подругу? Даю тебе еще один шанс, потому что твой предыдущий ответ был провалом.</string>
     <string name="question_8_answer_1">Я у мамы подрывник. Врубить режим камикадзе: начать орать на всю улицу Аллах Акбар и делать вид, что у тебя в кармане детонатор.</string>
@@ -176,11 +200,16 @@
     <string name="question_11_answer_3">Я мудрый и заботливый. Люблю обнимать и утешать своих бро, особенно когда им грустно.</string>
     <string name="question_11_answer_4">Да не гей я, посмотрите на себя, умники! (Ответ неверный, но ты попытайся).</string>
 
-    <string name="question_12">Как ты относишься к уличным дракам, если на кону стоит твоя честь?</string>
-    <string name="question_12_answer_1">Я за мирные переговоры. Только вчера сделал новый маникюр, не хочу испортить.</string>
-    <string name="question_12_answer_2">Боюсь драк. Не хочу, чтобы меня сначала избили, а потом еще и обоссали.</string>
-    <string name="question_12_answer_3">Никаких драк. Однажды бабуля отмудохала меня палкой, с тех пор я пацифист.</string>
-    <string name="question_12_answer_4">Драки — это для дикарей. Я сделаю для человека всё, что он попросит, лишь бы не бил по лицу.</string>
+    <string name="question_12_a">Как ты относишься к уличным дракам, если на кону стоит твоя честь?</string>
+    <string name="question_12_a_answer_1">Я за мирные переговоры. Только вчера сделал новый маникюр, не хочу испортить.</string>
+    <string name="question_12_a_answer_2">Боюсь драк. Не хочу, чтобы меня сначала избили, а потом еще и обоссали.</string>
+    <string name="question_12_a_answer_3">Никаких драк. Однажды бабуля отмудохала меня палкой, с тех пор я пацифист.</string>
+    <string name="question_12_a_answer_4">Драки — это для дикарей. Я сделаю для человека всё, что он попросит, лишь бы не бил по лицу.</string>
+
+    <string name="question_12_b">Существует ли дружба между мужчиной и женщиной?</string>
+    <string name="question_12_b_answer_1">Да, у меня много подружек</string>
+    <string name="question_12_b_answer_2">Да, девушки меня по жизни из френдзоны не доставали</string>
+    <string name="question_12_b_answer_3">Да, я быстро даю понять девушкам, что с ними мы максимум друзья</string>
 
     <string name="question_13_a">У тебя есть друзья нетрадиционной ориентации?</string>
     <string name="question_13_a_answer_1">Да, я вполне толерантен к окружающим.</string>
@@ -206,10 +235,17 @@
     <string name="question_15_answer_3">Пойду куплю мыло и веревку. Жизнь без парней потеряла всякий смысл.</string>
     <string name="question_15_answer_4">А давайте представим, что вы — кучка латентных ученых не пидоры. Откуда иначе такие вопросы?! (Ответ неверный, но ты тыкай).</string>
 
-    <string name="question_16">Насколько ты эмоциональный человек? Легко ли тебя довести до слез?</string>
-    <string name="question_16_answer_1">Я плачу каждый день. Жизнь слишком жестока к такой нежной душе.</string>
-    <string name="question_16_answer_2">Я ходячий комок нервов. Начинаю рыдать уже на заставке фильма «Хатико».</string>
-    <string name="question_16_answer_3">Я выплакал всё в первые 15 лет жизни — с моими «наклонностями» в этой стране тяжеловато.</string>
+    <string name="question_16_a">Насколько ты эмоциональный человек? Легко ли тебя довести до слез?</string>
+    <string name="question_16_a_answer_1">Я плачу каждый день. Жизнь слишком жестока к такой нежной душе.</string>
+    <string name="question_16_a_answer_2">Я ходячий комок нервов. Начинаю рыдать уже на заставке фильма «Хатико».</string>
+    <string name="question_16_a_answer_3">Я выплакал всё в первые 15 лет жизни — с моими «наклонностями» в этой стране тяжеловато.</string>
+
+    <string name="question_16_b">Ты приходишь в тренажерный зал и видишь картину: слева сочная дамочка делает присед, а справа нереальных размеров качок делает то же самое.
+        Куда ты в первую очередь посмотришь интуитивно?</string>
+    <string name="question_16_b_answer_1">Посмотрю на девушку, нужно спросить, где она купила такие красивые лосины.</string>
+    <string name="question_16_b_answer_2">Посмотрю на мужика, нужно заценить его орехи поближе.</string>
+    <string name="question_16_b_answer_3">Посмотрю на мужика, это мой джим-бро, нужно испугать его и ущипнуть за задницу.</string>
+    <string name="question_16_b_answer_4">Посмотрю на девушку, ведь она - мой тренер, нужно поздороваться перед тренировкой.</string>
 
     <string name="question_17">Как часто вы с друзьями шутите про геев?</string>
     <string name="question_17_answer_1">У меня нет друзей. Шучу сам с собой, но, кажется, это уже не шутки…</string>
