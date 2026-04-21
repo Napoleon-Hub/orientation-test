@@ -12,6 +12,7 @@
     <string name="start_button_difficulty_easy">Pussy</string>
     <string name="start_button_difficulty_easy_gotcha">Trying to cheat again?</string>
     <string name="start_button_difficulty_hard">GigaChad</string>
+    <string name="start_select_language_button">Select language</string>
 
     <!-- Endings -->
     <string name="endings_title">Results</string>

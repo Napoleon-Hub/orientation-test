@@ -1,5 +1,6 @@
 package com.funnygaytest.ui.screens.start
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -22,6 +23,9 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.os.LocaleListCompat
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -37,10 +42,13 @@ import com.funnygaytest.BuildConfig
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
+import com.funnygaytest.ui.components.buttons.LanguageToggleButton
 import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
+import com.funnygaytest.ui.components.dialogs.LanguageSelectionDialog
 import com.funnygaytest.ui.themes.MainTestTheme
 import com.funnygaytest.ui.themes.MainTheme
+import java.util.Locale
 
 @Composable
 fun StartScreen(
@@ -118,6 +126,23 @@ private fun StartScreenContent(
     onHardClicked: () -> Unit = {},
     onToggleMusic: () -> Unit = {}
 ) {
+    var showLanguageDialog by remember { mutableStateOf(false) }
+    val currentLanguage = remember { getCurrentLanguageTag() }
+
+    if (showLanguageDialog) {
+        LanguageSelectionDialog(
+            currentLanguage = currentLanguage,
+            onLanguageSelected = { selectedLang ->
+                showLanguageDialog = false
+                if (currentLanguage != selectedLang) {
+                    val appLocale = LocaleListCompat.forLanguageTags(selectedLang)
+                    AppCompatDelegate.setApplicationLocales(appLocale)
+                }
+            },
+            onDismiss = { showLanguageDialog = false }
+        )
+    }
+
     BackgroundWrapper(backgroundId = R.drawable.start_background) {
 
         val playButtonText = if (uiState.isGameStarted) {
@@ -132,7 +157,7 @@ private fun StartScreenContent(
             R.string.start_description
         }
 
-        Box(
+        Column(
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(end = 12.dp, top = 12.dp)
@@ -140,6 +165,11 @@ private fun StartScreenContent(
             MusicToggleButton(
                 isMuted = uiState.isMuted,
                 onClick = onToggleMusic
+            )
+
+            LanguageToggleButton(
+                currentLanguage = currentLanguage,
+                onClick = { showLanguageDialog = true }
             )
         }
 
@@ -287,5 +317,14 @@ fun PreviewStartScreen() {
         StartScreenContent(
             uiState = StartUiState()
         )
+    }
+}
+
+private fun getCurrentLanguageTag(): String {
+    val locales = AppCompatDelegate.getApplicationLocales()
+    return if (!locales.isEmpty) {
+        locales[0]?.language ?: "ru"
+    } else {
+        Locale.getDefault().language
     }
 }
