@@ -15,21 +15,24 @@
     <string name="start_button_difficulty_hard">Гигачад</string>
 
     <!-- Endings -->
-    <string name="endings_title">Концовки</string>
-    <string name="endings_stats_title">Статистика лаборатории</string>
+    <string name="endings_title">Результаты</string>
+    <string name="endings_stats_title">Статистика</string>
+    <string name="endings_diagnosis_title">Диагнозы испытуемого</string>
+    <string name="endings_diagnosis_description">Вы получаете разные диагнозы в зависимости от того, на каком вопросе вы провалили тест или же с какой Шкалой натурала финишировали. Нажмите на иконку, чтобы узнать подробности</string>
     <string name="endings_counter_loses">Жалких попыток обмануть систему: %d</string>
     <string name="endings_counter_wins">Списал тест у какого-то натурала: %d</string>
     <string name="endings_locked_title">Не открыто</string>
+    <string name="diagnosis_dialog_button_close">Принято</string>
 
     <string name="ending_win_1">Самый гейский натурал</string>
-    <string name="ending_win_33">Стринги стриптизерши</string>
+    <string name="ending_win_33">Повод для гордости</string>
     <string name="ending_win_66">Ставлю жопу, ты гей</string>
     <string name="ending_win_100">Мужик</string>
     <string name="ending_lose_4">Горбатая гора</string>
-    <string name="ending_lose_8">Иди, пожалуйся своему парню</string>
+    <string name="ending_lose_8">Один раз - не пида…</string>
     <string name="ending_lose_12">2–3 года в Дагестане и забудешь</string>
     <string name="ending_lose_16">Трушный заднеприводный</string>
-    <string name="ending_lose_20">Латентный гей</string>
+    <string name="ending_lose_20">Латентный пидарок</string>
     <string name="ending_lose_pussy">Попався, пидарок</string>
     <string name="ending_all">Гейлорд</string>
     <string name="ending_donate">Самый лучший гей</string>
@@ -62,14 +65,15 @@
         Хотя в этой лаборатории, конечно, больше голубых нет, поэтому выметайся отсюда, нам наши пятые точки дороги, у нас семьи!</string>
     <string name="result_text_result_lose_20">Так хорошо идти и оступиться на последнем вопросе… А я уже готов был подписывать бумаги о том, что ты натурал. Хорошо, что мы тут с остальными учеными не пальцем деланные, умеем таких, как ты, распознавать.
         Поэтому брысь отсюда, латентный пидарок, чтобы духу твоего здесь больше не было! Рассказывай истории о том, какие тебе девушки нравятся, в цирке, а у нас тут все серьезно!</string>
-    <string name="result_text_result_lose_pussy">Попався, пидарок! Думал обмануть систему, упростить себе вопросы, чтобы мы не узнали, кто ты есть на самом деле? Но увы, ты был пойман за руку, пидарок. Ждем тебя на пересдаче, хотя, будем честны, она тебе не поможет, ведь тут и так все ясно. Выносите его, мужики!</string>
+    <string name="result_text_result_lose_pussy">Попався, пидарок! Думал обмануть систему, упростить себе вопросы, чтобы мы не узнали, кто ты есть на самом деле? Но увы, ты был пойман за руку, негодник. Ждем тебя на пересдаче, хотя, будем честны, она тебе не поможет, ведь тут и так все ясно. Выносите его, мужики!</string>
+    <string name="result_text_result_gaylord">Ты познал эту жизнь, девушки боятся тебя, мужчины уважают. Мы отправили твои результаты в нужные инстанции, скоро тебе позвонят и пригласят поучаствовать в Гачимучи, наши поздравления!</string>
 
     <string name="result_button_restart">Перепройти тест</string>
     <string name="result_button_restart_description">Вопросы могут меняться</string>
     <string name="result_button_another_apps">Другие тесты</string>
     <string name="result_button_pay">Покормить ученых</string>
 
-    <string name="result_endings_new">Задокументирован новый результат</string>
+    <string name="result_endings_new">Задокументирован новый диагноз</string>
     <string name="result_endings_all_unlocked">Ты собрал все концовки, теперь ты истинный гейлорд!</string>
 
     <string name="result_test_share_win">Моя броня натурала выдержала на %1$d! Я зашел в эту лабораторию и не дрогнул. А на каком вопросе сломаешься ты?\n\nСсылка: %2$s</string>

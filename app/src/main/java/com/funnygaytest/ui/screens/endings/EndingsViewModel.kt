@@ -19,11 +19,11 @@ import javax.inject.Inject
 data class EndingsUiState(
     val wins: Int = 0,
     val loses: Int = 0,
-    val endings: List<EndingItemState> = emptyList(),
+    val endings: List<DiagnosisItemState> = emptyList(),
     val isMuted: Boolean = false
 )
 
-data class EndingItemState(
+data class DiagnosisItemState(
     val type: EndingType,
     val isUnlocked: Boolean
 )
@@ -53,18 +53,18 @@ class EndingsViewModel @Inject constructor(
                         wins = currentStats.wins,
                         loses = currentStats.losses,
                         endings = listOf(
-                            EndingItemState(EndingType.WIN_100, achievements.contains(EndingType.WIN_100.id)),
-                            EndingItemState(EndingType.WIN_66, achievements.contains(EndingType.WIN_66.id)),
-                            EndingItemState(EndingType.WIN_33, achievements.contains(EndingType.WIN_33.id)),
-                            EndingItemState(EndingType.WIN_1, achievements.contains(EndingType.WIN_1.id)),
-                            EndingItemState(EndingType.LOSE_4, achievements.contains(EndingType.LOSE_4.id)),
-                            EndingItemState(EndingType.LOSE_8, achievements.contains(EndingType.LOSE_8.id)),
-                            EndingItemState(EndingType.LOSE_12, achievements.contains(EndingType.LOSE_12.id)),
-                            EndingItemState(EndingType.LOSE_16, achievements.contains(EndingType.LOSE_16.id)),
-                            EndingItemState(EndingType.LOSE_20, achievements.contains(EndingType.LOSE_20.id)),
-                            EndingItemState(EndingType.LOSE_PUSSY, achievements.contains(EndingType.LOSE_PUSSY.id)),
-                            EndingItemState(EndingType.ALL, achievements.contains(EndingType.ALL.id)),
-                            EndingItemState(EndingType.DONATE, achievements.contains(EndingType.DONATE.id))
+                            DiagnosisItemState(EndingType.WIN_100, achievements.contains(EndingType.WIN_100.id)),
+                            DiagnosisItemState(EndingType.WIN_66, achievements.contains(EndingType.WIN_66.id)),
+                            DiagnosisItemState(EndingType.WIN_33, achievements.contains(EndingType.WIN_33.id)),
+                            DiagnosisItemState(EndingType.WIN_1, achievements.contains(EndingType.WIN_1.id)),
+                            DiagnosisItemState(EndingType.LOSE_4, achievements.contains(EndingType.LOSE_4.id)),
+                            DiagnosisItemState(EndingType.LOSE_8, achievements.contains(EndingType.LOSE_8.id)),
+                            DiagnosisItemState(EndingType.LOSE_12, achievements.contains(EndingType.LOSE_12.id)),
+                            DiagnosisItemState(EndingType.LOSE_16, achievements.contains(EndingType.LOSE_16.id)),
+                            DiagnosisItemState(EndingType.LOSE_20, achievements.contains(EndingType.LOSE_20.id)),
+                            DiagnosisItemState(EndingType.LOSE_PUSSY, achievements.contains(EndingType.LOSE_PUSSY.id)),
+                            DiagnosisItemState(EndingType.ALL, achievements.contains(EndingType.ALL.id)),
+                            DiagnosisItemState(EndingType.DONATE, achievements.contains(EndingType.DONATE.id))
                         )
                     )
                 }

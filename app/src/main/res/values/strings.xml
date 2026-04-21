@@ -14,18 +14,21 @@
     <string name="start_button_difficulty_hard">GigaChad</string>
 
     <!-- Endings -->
-    <string name="endings_title">Endings</string>
-    <string name="endings_stats_title">Lab Statistics</string>
+    <string name="endings_title">Results</string>
+    <string name="endings_stats_title">Statistics</string>
+    <string name="endings_diagnosis_title">Subject Diagnoses</string>
+    <string name="endings_diagnosis_description">Your diagnosis depends on where you failed or your final Straight-O-Meter Scale. Tap an icon for the full clinical report</string>
     <string name="endings_counter_loses">Pathetic attempts to rig the system: %d</string>
     <string name="endings_counter_wins">Cheated off some straight guy: %d</string>
     <string name="endings_locked_title">Locked</string>
+    <string name="diagnosis_dialog_button_close">Understood</string>
 
     <string name="ending_win_1">Gayest Straight Guy</string>
-    <string name="ending_win_33">Stripper\'s thong</string>
+    <string name="ending_win_33">Hide the Pride</string>
     <string name="ending_win_66">Bet my ass your\'re gay</string>
     <string name="ending_win_100">Real man</string>
     <string name="ending_lose_4">Brokeback Mountain</string>
-    <string name="ending_lose_8">True Blue Gay</string>
+    <string name="ending_lose_8">Once is a try, twice is a guy</string>
     <string name="ending_lose_12">2–3 years in Dagestan and forget</string>
     <string name="ending_lose_16">Real rear-wheeler</string>
     <string name="ending_lose_20">Latent twink</string>
@@ -61,14 +64,16 @@
         Don\'t worry, you\'re not alone. Though there are no other \"rear-wheelers\" in this lab, so get out. We value our backsides; we have families!</string>
     <string name="result_text_result_lose_20">To come so far only to fumble on the very last question… I was actually ready to sign your \"straight\" papers. Good thing we scientists weren\'t born yesterday; we know how to spot your kind.
         Now beat it, you latent twink! Save your stories about liking girls for the circus. Everything is serious here!</string>
-    <string name="result_text_result_lose_pussy">Gotcha, you sneaky bastard! Thought you could outsmart the system and easy-mode your way out so we wouldn\'t find out who you really are? Too bad, you\'ve been caught red-handed, you little twink. We\'ll see you at the retake, though let\'s be honest: it won\'t help. Everything is clear as day already. Boys, carry him out!</string>
+    <string name="result_text_result_lose_pussy">Gotcha, you sneaky bastard! Thought you could outsmart the system and easy-mode your way out so we wouldn\'t find out who you really are? Too bad, you\'ve been caught red-handed, you little twink.
+        We\'ll see you at the retake, though let\'s be honest: it won\'t help. Everything is clear as day already. Boys, carry him out!</string>
+    <string name="result_text_result_gaylord">You\'ve mastered life—women fear you, men respect you. We\'ve forwarded your results to the relevant authorities; expect a call shortly with an invitation to join Gachimuchi. Congratulations!</string>
 
     <string name="result_button_restart">Try again</string>
     <string name="result_button_restart_description">Questions may vary</string>
     <string name="result_button_another_apps">Another tests</string>
     <string name="result_button_pay">Feed scientists</string>
 
-    <string name="result_endings_new">New outcome documented</string>
+    <string name="result_endings_new">New diagnosis documented</string>
     <string name="result_endings_all_unlocked">You have collected all endings. Now you are a true Gaylord!</string>
 
     <string name="result_test_share_win">My Straight-O-Meter survived with %1$d! I entered the lab and barely flinched. Which question will break you?\n\nGet it here: %2$s</string>

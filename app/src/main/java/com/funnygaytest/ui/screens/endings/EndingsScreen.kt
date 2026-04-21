@@ -3,6 +3,7 @@ package com.funnygaytest.ui.screens.endings
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,9 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,6 +49,7 @@ import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.buttons.LabBackButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
+import com.funnygaytest.ui.components.dialogs.DiagnosisDetailsDialog
 import com.funnygaytest.ui.themes.MainTestTheme
 import com.funnygaytest.ui.themes.MainTheme
 import com.funnygaytest.utils.enums.EndingType
@@ -97,6 +102,17 @@ private fun EndingsScreenContent(
     onBackClicked: () -> Unit = {},
     onToggleMusic: () -> Unit = {}
 ) {
+    var selectedDiagnosisForDialog by remember { mutableStateOf<DiagnosisItemState?>(null) }
+
+    selectedDiagnosisForDialog?.let { item ->
+        DiagnosisDetailsDialog(
+            iconRes = item.type.iconRes,
+            title = stringResource(item.type.titleRes),
+            description = stringResource(item.type.descriptionRes),
+            onDismiss = { selectedDiagnosisForDialog = null }
+        )
+    }
+
     BackgroundWrapper(backgroundId = R.drawable.endings_background) {
 
         Box(
@@ -132,18 +148,68 @@ private fun EndingsScreenContent(
                 )
             }
 
-            StatsSection(uiState.wins, uiState.loses)
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(6),
-                contentPadding = PaddingValues(bottom = 32.dp),
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                items(uiState.endings) { item ->
-                    EndingGridItem(item)
+                Column(
+                    modifier = Modifier
+                        .weight(0.55f)
+                        .background(
+                            Color.Black.copy(alpha = 0.3f),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+                        .border(
+                            width = 1.dp,
+                            color = MainTestTheme.colors.primaryBackground.copy(alpha = 0.3f),
+                            shape = RoundedCornerShape(12.dp)
+                        )
+                        .padding(16.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.endings_diagnosis_title),
+                        style = MainTestTheme.typography.heading,
+                        color = MainTestTheme.colors.primaryText,
+                        textAlign = TextAlign.Start
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Text(
+                        text = stringResource(R.string.endings_diagnosis_description),
+                        style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
+                        color = MainTestTheme.colors.secondaryText,
+                        textAlign = TextAlign.Start
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    LazyVerticalGrid(
+                        modifier = Modifier.fillMaxSize(),
+                        columns = GridCells.Fixed(3),
+                        contentPadding = PaddingValues(4.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        items(uiState.endings) { item ->
+                            DiagnosisGridItem(
+                                item = item,
+                                onItemClicked = {
+                                    if(item.isUnlocked) selectedDiagnosisForDialog = item
+                                }
+                            )
+                        }
+                    }
+                }
+
+                Box(
+                    modifier = Modifier.weight(0.45f),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    StatsSection(
+                        wins = uiState.wins,
+                        loses = uiState.loses
+                    )
                 }
             }
         }
@@ -151,9 +217,13 @@ private fun EndingsScreenContent(
 }
 
 @Composable
-private fun StatsSection(wins: Int, loses: Int) {
+private fun StatsSection(
+    modifier: Modifier = Modifier,
+    wins: Int,
+    loses: Int
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .wrapContentWidth()
             .background(
                 Color.Black.copy(alpha = 0.3f),
@@ -174,23 +244,31 @@ private fun StatsSection(wins: Int, loses: Int) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Column (modifier = Modifier.wrapContentWidth(), verticalArrangement = Arrangement.SpaceBetween) {
+        Column(
+            modifier = Modifier.wrapContentWidth(),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
             Text(
                 text = stringResource(R.string.endings_counter_wins, wins),
-                style = MainTestTheme.typography.subText,
-                color = MainTestTheme.colors.primaryText
+                style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
+                color = MainTestTheme.colors.primaryText,
+                textAlign = TextAlign.Start
             )
             Text(
                 text = stringResource(R.string.endings_counter_loses, loses),
-                style = MainTestTheme.typography.subText,
-                color = MainTestTheme.colors.primaryText
+                style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
+                color = MainTestTheme.colors.primaryText,
+                textAlign = TextAlign.Start
             )
         }
     }
 }
 
 @Composable
-private fun EndingGridItem(item: EndingItemState) {
+private fun DiagnosisGridItem(
+    item: DiagnosisItemState,
+    onItemClicked: () -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
@@ -205,7 +283,8 @@ private fun EndingGridItem(item: EndingItemState) {
                     color = if (item.isUnlocked) MainTestTheme.colors.primaryText.copy(alpha = 0.5f)
                     else MainTestTheme.colors.secondaryText.copy(alpha = 0.2f),
                     shape = RoundedCornerShape(16.dp)
-                ),
+                )
+                .clickable(onClick = onItemClicked),
             contentAlignment = Alignment.Center
         ) {
             if (item.isUnlocked) {
@@ -248,18 +327,18 @@ fun PreviewEndingsScreen() {
                 wins = 3,
                 loses = 100,
                 endings = listOf(
-                    EndingItemState(EndingType.WIN_100, true),
-                    EndingItemState(EndingType.WIN_66, true),
-                    EndingItemState(EndingType.WIN_33, true),
-                    EndingItemState(EndingType.WIN_1, true),
-                    EndingItemState(EndingType.LOSE_4, true),
-                    EndingItemState(EndingType.LOSE_8, true),
-                    EndingItemState(EndingType.LOSE_12, true),
-                    EndingItemState(EndingType.LOSE_16, true),
-                    EndingItemState(EndingType.LOSE_20, true),
-                    EndingItemState(EndingType.LOSE_PUSSY, true),
-                    EndingItemState(EndingType.ALL, true),
-                    EndingItemState(EndingType.DONATE, true),
+                    DiagnosisItemState(EndingType.WIN_100, true),
+                    DiagnosisItemState(EndingType.WIN_66, true),
+                    DiagnosisItemState(EndingType.WIN_33, true),
+                    DiagnosisItemState(EndingType.WIN_1, true),
+                    DiagnosisItemState(EndingType.LOSE_4, true),
+                    DiagnosisItemState(EndingType.LOSE_8, true),
+                    DiagnosisItemState(EndingType.LOSE_12, true),
+                    DiagnosisItemState(EndingType.LOSE_16, true),
+                    DiagnosisItemState(EndingType.LOSE_20, true),
+                    DiagnosisItemState(EndingType.LOSE_PUSSY, true),
+                    DiagnosisItemState(EndingType.ALL, true),
+                    DiagnosisItemState(EndingType.DONATE, true),
                 )
             )
         )
