@@ -24,9 +24,9 @@ fun LanguageToggleButton(
 ) {
     val flagRes = if (currentLanguage.startsWith("ru")) {
         R.drawable.ic_flag_ru
-    } else {
+    } else if(currentLanguage.startsWith("en")) {
         R.drawable.ic_flag_en
-    }
+    } else R.drawable.ic_flag_de
 
     IconButton(
         onClick = onClick,

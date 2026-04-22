@@ -40,7 +40,7 @@
     <!-- Game -->
     <string name="game_health_title">Straight-O-Meter</string>
     <string name="game_questions">QUESTION</string>
-    <string name="game_questions_counter">%1$d/%2$d</string>
+    <string name="game_questions_counter" translatable="false">%1$d/%2$d</string>
 
     <!-- Result -->
     <string name="result_title_win">Test passed! You are NOT gay!</string>
@@ -67,6 +67,7 @@
         Now beat it, you latent twink! Save your stories about liking girls for the circus. Everything is serious here!</string>
     <string name="result_text_result_lose_pussy">Gotcha, you sneaky bastard! Thought you could outsmart the system and easy-mode your way out so we wouldn\'t find out who you really are? Too bad, you\'ve been caught red-handed, you little twink.
         We\'ll see you at the retake, though let\'s be honest: it won\'t help. Everything is clear as day already. Boys, carry him out!</string>
+
     <string name="result_text_result_gaylord">You\'ve mastered life—women fear you, men respect you. We\'ve forwarded your results to the relevant authorities; expect a call shortly with an invitation to join Gachimuchi. Congratulations!</string>
 
     <string name="result_button_restart">Try again</string>

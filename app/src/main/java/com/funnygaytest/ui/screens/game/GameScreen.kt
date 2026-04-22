@@ -314,13 +314,16 @@ fun NextArrowButton(
     }
 }
 
-@Preview(widthDp = 720, heightDp = 500)
+@Preview(widthDp = 800, heightDp = 450, locale = "ru")
 @Composable
 fun PreviewGameScreen() {
     MainTheme {
         GameScreenContent(
             uiState = GameUiState(
-                currentQuestion = generateNewGameRun()[0]
+                currentQuestion = generateNewGameRun()[3],
+                totalQuestions = 20,
+                questionNumber = 8,
+                currentHp = 20
             )
         )
     }

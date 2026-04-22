@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main -->
+    <string name="app_name">Hardcore Schwulentest</string>
+    <string name="app_version">Version %s</string>
+
+    <!-- Start -->
+    <string name="start_button">Starten</string>
+    <string name="start_description">Der komplexeste und zugleich interessanteste Schwulentest aller Zeiten. Wissenschaftler aus der ganzen Welt haben Tag und Nacht geschwitzt, nur um dir die eine Frage zu beantworten: Stehst du eigentlich auf Jungs oder was?</string>
+    <string name="start_button_continue">Fortsetzen</string>
+    <string name="start_description_continue">Oh ja, er ist zu 100% schwul, da erübrigt sich eigentlich jeder Test.\nHey, bist du noch da? Zurück in die Testzone mit dir, du Früchtchen!</string>
+    <string name="start_button_difficulty">Schwierigkeit</string>
+    <string name="start_button_difficulty_easy">Pussy</string>
+    <string name="start_button_difficulty_easy_gotcha">Wolltest du etwa schon wieder schummeln?</string>
+    <string name="start_button_difficulty_hard">GigaChad</string>
+    <string name="start_select_language_button">Sprache wählen</string>
+
+    <!-- Endings -->
+    <string name="endings_title">Ergebnisse</string>
+    <string name="endings_stats_title">Statistik</string>
+    <string name="endings_diagnosis_title">Diagnosen des Subjekts</string>
+    <string name="endings_diagnosis_description">Deine Diagnose hängt davon ab, bei welcher Frage du versagt hast oder mit welchem Wert auf der Hetero-Meter du das Ziel erreicht hast.</string>
+    <string name="endings_counter_loses">Erbärmliche Versuche, das System zu manipulieren: %d</string>
+    <string name="endings_counter_wins">Vom Hetero abgeschrieben: %d</string>
+    <string name="endings_locked_title">Verschlüsselt</string>
+    <string name="diagnosis_dialog_button_close">Verstanden</string>
+
+    <string name="ending_win_1">Der schwulste Hetero</string>
+    <string name="ending_win_33">Stolz verstecken</string>
+    <string name="ending_win_66">Ich wette meinen Arsch, dass du schwul bist</string>
+    <string name="ending_win_100">Ein ganzer Mann</string>
+    <string name="ending_lose_4">Brokeback Mountain</string>
+    <string name="ending_lose_8">Einmal ist keinmal…</string>
+    <string name="ending_lose_12">2–3 Jahre Dagestan und du vergisst alles</string>
+    <string name="ending_lose_16">Echter Hecktriebler</string>
+    <string name="ending_lose_20">Latenter Hinterlader</string>
+    <string name="ending_lose_pussy">In flagranti erwischt, du Früchtchen!</string>
+    <string name="ending_all">Gaylord</string>
+    <string name="ending_donate">Der beste Schwule aller Zeiten</string>
+
+    <!-- Game -->
+    <string name="game_health_title">Hetero-Meter</string>
+    <string name="game_questions">FRAGE</string>
+
+    <!-- Result -->
+    <string name="result_title_win">Test bestanden! Du bist NICHT schwul… anscheinend.</string>
+    <string name="result_title_lose">Test abgeschlossen! Urteil: SCHWUL</string>
+    <string name="result_title_lose_pussy">Test fehlgeschlagen! Du bist eine PUSSY!</string>
+
+    <string name="result_text_result_win_1_32">Bei diesem Ergebnis betrachten wir dich einfach als den schwulsten Hetero, den wir je getroffen haben. Deine Antworten haben im Pausenraum eine Massenschlägerei ausgelöst.
+        Sei froh, dass die \"Hetero\"-Fraktion den Kampf um deine Ehre gewonnen hat, sonst hätte ich schon ein Zertifikat mit dem Stempel \"Schwul\" für dich ausgedruckt. Husch, raus hier!</string>
+    <string name="result_text_result_win_33_65">Wir haben während des Tests deine dürren Beinchen zittern sehen. Du bist zwar gerade so durchgekommen, aber Ergebnis ist Ergebnis: Du bist NICHT schwul.
+        Freu dich oder heul doch. Ich persönlich habe dagegen gewettet, und jetzt landet mein Monatsgehalt im Tanga einer Stripperin. Scheiß auf diesen Job, ich kündige!</string>
+    <string name="result_text_result_win_66_99">Du hast dich wacker geschlagen. Wir haben zwar kurz gezweifelt, aber du hast bewiesen, dass deine \"Aubergine\" in die richtige Richtung zeigt!
+        Einer der Wissenschaftler hat seinen Arsch darauf verwettet, dass du auf Jungs stehst… Nun, zumindest muss er den Schwulentest jetzt nicht mehr selbst machen! Du hingegen darfst gehen.</string>
+    <string name="result_text_result_win_100">Einige hielten es für unmöglich, aber du hast das Gegenteil bewiesen. Du bist das heterosexuellste Exemplar, das wir je untersucht haben.
+        Einer der Forscher hat sein Auto darauf verwettet, dass du auf Jungs stehst… Der Arme wird heute Abend von seiner Frau rausgeworfen, aber zumindest wissen wir sicher: Du bist NICHT schwul!</string>
+    <string name="result_text_result_lose_4_7">Als wir die Daten analysiert haben, standen wir unter Schock. Die Wissenschaftler haben angefangen, ihre Hinterteile in Sicherheit zu bringen, denn niemand weiß, wozu du fähig bist!
+        Ehrlich gesagt, habe ich selbst ein bisschen Angst vor dir. Hier ist dein Zertifikat: Du bist ein wahrer Schwuler. Der schwulste Schwule, den wir je getroffen haben, Glückwunsch!</string>
+    <string name="result_text_result_lose_8_11">Du hast natürlich versucht, es zu verbergen, aber deine Neigungen haben sich selbst verraten. Hier arbeiten keine Schuljungen, sondern qualifizierte Wissenschaftler – ein kleines Früchtchen wie dich zu durchschauen, ist ein Kinderspiel.
+        Hier ist dein Zertifikat, zeig es deinem festen Freund, während wir weiterarbeiten. Und wehe, du starrst unser Personal auf dem Weg nach draußen an!</string>
+    <string name="result_text_result_lose_12_15">Kurz gesagt: Du bist schwul. Klar hast du es nicht sofort gezeigt, aber wir sitzen hier ja nicht umsonst mit 2–3 Doktortiteln und arbeiten für ein Butterbrot im Namen der Wissenschaft.
+        Ein kleiner Hinweis reicht, um deinen \"Heckantrieb\" zu erkennen.\nJungs, bringt ihn weg. Wohin? 2-3 Jahre nach Dagestan. Dort bringen sie dir schon alles bei.</string>
+    <string name="result_text_result_lose_16_19">Die Forscher haben lange gestritten, manche haben sich sogar geprügelt, aber das Urteil steht fest. Du bist schwul! Tief im Inneren weißt du das wahrscheinlich auch, selbst wenn du es noch nicht akzeptiert hast.
+        Keine Sorge, du bist nicht allein. Obwohl es in diesem Labor keine anderen \"Hecktriebler\" gibt, also verschwinde. Uns sind unsere Hinterteile heilig, wir haben Familien!</string>
+    <string name="result_text_result_lose_20">So weit zu kommen und dann bei der allerletzten Frage zu stolpern… Ich war eigentlich schon bereit, deine \"Hetero\"-Papiere zu unterschreiben. Gut, dass wir Wissenschaftler nicht von gestern sind und wissen, wie man Typen wie dich erkennt.
+        Also zisch ab, du latenter Hinterlader, und lass dich hier nie wieder blicken! Heb dir deine Geschichten darüber, dass du auf Mädchen stehst, für den Zirkus auf, hier ist alles hochoffiziell!</string>
+    <string name="result_text_result_lose_pussy">In flagranti erwischt! Dachtest du, du könntest das System austricksen, dir die Fragen leichter machen, damit wir nicht herausfinden, wer du wirklich bist? Pech gehabt, du wurdest auf frischer Tat ertappt, du kleines Früchtchen.
+        Wir sehen uns bei der Nachprüfung, obwohl, seien wir ehrlich: Die wird dir auch nicht helfen. Es ist eh schon alles sonnenklar. Jungs, tragt ihn raus!</string>
+
+    <string name="result_text_result_gaylord">Du hast das Leben durchschaut – Frauen fürchten dich, Männer respektieren dich. Wir haben deine Ergebnisse an die zuständigen Behörden weitergeleitet, erwarte in Kürze einen Anruf und eine Einladung zu Gachimuchi. Unsere Glückwünsche!</string>
+
+    <string name="result_button_restart">Test wiederholen</string>
+    <string name="result_button_restart_description">Fragen können variieren</string>
+    <string name="result_button_another_apps">Weitere Tests</string>
+    <string name="result_button_pay">Wissenschaftler füttern</string>
+
+    <string name="result_endings_new">Neue Diagnose protokolliert</string>
+    <string name="result_endings_all_unlocked">Du hast alle Protokolle gesammelt, jetzt bist du ein wahrer Gaylord!</string>
+
+    <string name="result_test_share_win">Meine Hetero-Rüstung hat zu %1$d standgehalten! Ich habe dieses Labor betreten und nicht gezuckt. Bei welcher Frage brichst du ein?\n\nLink: %2$s</string>
+    <string name="result_test_share_lose">Ich wurde bei Frage %1$d enttarnt! Das Hetero-Meter ist auf null gefallen… Bei welcher Frage brichst du ein?\n\nLink: %2$s</string>
+    <string name="result_test_share_permanent_lose">EXPERIMENT ABGEBROCHEN: Ich habe den \"Pussy\"-Modus gewählt und wurde aus dem Labor geworfen. Das Hetero-Meter wurde nicht mal eingeschaltet… Bist du mutiger als ich?\n\nLink: %s</string>
+
+    <!-- Connection -->
+    <string name="connection_no_internet_title">SYSTEM STROMLOS!</string>
+    <string name="connection_no_internet_description">Serververbindung unterbrochen. Unsere Forscher können keine Offline-Experimente durchführen – sie müssen deine Daten in Echtzeit analysieren.
+        Stell das Internet wieder her, damit wir dich weiter testen können.</string>
+
+    <!-- Access Dialog -->
+    <string name="access_dialog_title">Zugriffsprotokoll für Forschungsdaten</string>
+    <string name="access_dialog_warning">WARNUNG: Diese Anwendung dient ausschließlich Unterhaltungszwecken. Wir haben nicht die Absicht, Gefühle oder die Würde von Personen zu verletzen.
+        Alle Tests und Ergebnisse sind ein Produkt der Fantasie unserer leitenden Laboranten und haben keinerlei wissenschaftlichen oder diagnostischen Wert.</string>
+    <string name="access_dialog_ad_description">Um die Ausrüstung zu warten und die Gehälter der Wissenschaftler zu zahlen, enthält diese App ein wenig Werbung.
+        Wir benötigen dein Einverständnis zur Datenverarbeitung, um dir relevante Anzeigen zu zeigen.</string>
+    <string name="access_dialog_privacy_policy">Datenschutzerklärung lesen</string>
+    <string name="access_dialog_button_continue">Akzeptieren und loslegen!</string>
+    <string name="access_dialog_button_finish">Labor verlassen</string>
+
+    <!-- Feed -->
+    <string name="feed_button">Füttern</string>
+    <string name="feed_description_before_pay">Während du diesen Test absolvierst, entwerfen wir bereits einen neuen \„Hindernisparcours\“ für deinen Verstand. Aber momentan steht die Arbeit still: Unseren leitenden Labormitarbeitern sind die Gurken ausgegangen.
+        \nEs ist so, dass unsere Forscher ausschließlich für \„grüne Rationen\“ arbeiten. Und glaub uns, sie finden Verwendungsmöglichkeiten für Gurken, die nicht unbedingt in Kochbüchern stehen.
+        Unterstütze unser Team mit einer \„Gurke\“ – hilf der Wissenschaft voran und sorge dafür, dass sich die Forscher in den dunklen Korridoren nicht langweilen.\nSämtliche Mittel fließen direkt in die Entwicklung neuer Inhalte. Dank dir können sich unsere Labormitarbeiter Gurken in jeder gewünschten Größe und Form leisten.</string>
+    <string name="feed_description_after_pay">Transaktion abgeschlossen. Die Gurken sind bestellt, die Labormitarbeiter vibrieren vor Vorfreude und die Arbeit am neuen Test wurde um 200% beschleunigt. Frag lieber nicht, was gerade in den dunklen Gängen passiert.</string>
+
+    <!-- Questions -->
+    <string name="question_1_a">Willkommen im Mittelalter. Du bist allerdings nicht der König. Dein Beruf?</string>
+    <string name="question_1_a_answer_1">Rattenfänger (Professioneller Nager-Exterminator)</string>
+    <string name="question_1_a_answer_2">Prügelknabe (Profi im Einstecken)</string>
+    <string name="question_1_a_answer_3">Pinguinschubser</string>
+    <string name="question_1_a_answer_4">Schornsteinfeger</string>
+    <string name="question_1_a_answer_5">Nachtgold-Spezialist (Latrinenreiniger)</string>
+
+    <string name="question_1_b">Welches Gemüse ist dein Favorit? (Wähle weise…)</string>
+    <string name="question_1_b_answer_1">Gurke</string>
+    <string name="question_1_b_answer_2">Aubergine</string>
+    <string name="question_1_b_answer_3">Karotte</string>
+    <string name="question_1_b_answer_4">Geschmack egal, Hauptsache Form und Größe stimmen!</string>
+
+    <string name="question_2">Stell dir vor: Du gehst mit deiner Freundin spazieren, und plötzlich versperrt eine Gruppe Kerle den Weg. Die Stimmung ist… im Arsch. Dein Plan?</string>
+    <string name="question_2_answer_1">Mutters kleiner Sprinter. Denk an den Sportunterricht und leg einen Weltrekord-Speedrun hin.</string>
+    <string name="question_2_answer_2">Mutters kleine Heulsuse. Hemmungslos schluchzen. Wenn ich mich einnässe, lassen sie mich vor Ekel vielleicht in Ruhe.</string>
+    <string name="question_2_answer_3">Mutters kleiner Heiliger. Laut beten. Vielleicht rühren sie einen Gottesfürchtigen nicht an und nehmen sich stattdessen das Mädchen vor.</string>
+    <string name="question_2_answer_4">Mutters kleiner Stratege. Sie ist eh geliefert. Ich tue so, als wäre ich ihr Zuhälter und mache Kasse. Stonks!</string>
+
+    <string name="question_3_a">Wie hoch ist dein Bodycount? (Wir reden von Jungs, offensichtlich)</string>
+    <string name="question_3_a_answer_1">Nicht mitgezählt</string>
+    <string name="question_3_a_answer_2">Nur ein einsamer Einziger</string>
+    <string name="question_3_a_answer_3">Zählt die eigene Hand mit?</string>
+    <string name="question_3_a_answer_4">Beim Bund ist jedes Loch ein Tor.</string>
+
+    <string name="question_3_b">Übrigens, wie stehst du eigentlich zu Heterosexuellen?</string>
+    <string name="question_3_b_answer_1">Positiv. Sie scheinen ganz nette Leute zu sein.</string>
+    <string name="question_3_b_answer_2">Negativ. Ich billige ihren Lebensstil nicht wirklich.</string>
+    <string name="question_3_b_answer_3">Jeder hat seinen eigenen Weg. Das ist mir völlig egal.</string>
+
+    <string name="question_4_a">Stell dir vor: Jemand bietet dir 1000 $ für ein Fotoshooting in Frauenkleidern an. Nimmst du an?</string>
+    <string name="question_4_a_answer_1">Für einen Tausender bar auf Kralle? Da würde ich noch ganz andere Sachen machen.</string>
+    <string name="question_4_a_answer_2">Ich mache das manchmal sowieso umsonst, also leicht verdientes Geld.</string>
+    <string name="question_4_a_answer_3">1000 $? Wo warst du früher? Ich hab das mal für eine 2-Liter-Flasche Billigbier gemacht…</string>
+
+    <string name="question_4_b">Dein Gym-Bro kämpft gerade mit einer schweren Hantel beim Bankdrücken. Wie leistest du Hilfestellung?</string>
+    <string name="question_4_b_answer_1">Ich stelle mich hinter ihn und gebe ihm taktile Motivation direkt an der Brust.</string>
+    <string name="question_4_b_answer_2">Ich schreie einfach \„LIGHTWEIGHT BABY\“, bis ihm die Ohren bluten.</string>
+    <string name="question_4_b_answer_3">Ich filme das Ganze für seinen OnlyFans-Account. Content ist King.</string>
+
+    <string name="question_5_a">Welches dieser Hobbys würdest du wählen?</string>
+    <string name="question_5_a_answer_1">Rhythmische Sportgymnastik (Schön geschmeidig bleiben, Bro)</string>
+    <string name="question_5_a_answer_2">Eiskunstlauf (Das Eis ist meine Bühne)</string>
+    <string name="question_5_a_answer_3">Ballett (Eng anliegende Leggings? Ja, bitte!)</string>
+    <string name="question_5_a_answer_4">Bauchtanz (Lass die Hüften kreisen)</string>
+
+    <string name="question_5_b">Tun wir mal für eine Sekunde so, als würden wir glauben, dass du hetero bist. Wähl ein Getränk:</string>
+    <string name="question_5_b_answer_1">Ein gekühltes Glas Roséwein</string>
+    <string name="question_5_b_answer_2">Alkoholfreies Bier</string>
+    <string name="question_5_b_answer_3">Aperol Spritz</string>
+    <string name="question_5_b_answer_4">Lavendel-Latte mit Hafermilch</string>
+
+    <string name="question_6_a">Sei ehrlich: Was glaubst du, warum es in diesem Test keine \„normalen\“ Antwortmöglichkeiten gibt?</string>
+    <string name="question_6_a_answer_1">Weil die \„Wissenschaftler\“, die das hier entwickelt haben, völlig den Verstand verloren haben.</string>
+    <string name="question_6_a_answer_2">Weil normale Antworten einfach nur Mid sind. Chaos ist besser.</string>
+    <string name="question_6_a_answer_3">Weil der Entwickler weiß: Wenn ich das hier heruntergeladen habe, bin ich ohnehin schon sus.</string>
+    <string name="question_6_a_answer_4">Alles oben Genannte. Das hier ist ein reiner Zirkus.</string>
+
+    <string name="question_6_b">In welchem dieser Orte würdest du am liebsten dein \„gemütliches Nest\“ bauen?</string>
+    <string name="question_6_b_answer_1">Deutschland, Berlin</string>
+    <string name="question_6_b_answer_2">Thailand, Bangkok</string>
+    <string name="question_6_b_answer_3">USA, Kalifornien</string>
+    <string name="question_6_b_answer_4">Niederlande, Amsterdam</string>
+
+    <string name="question_7_a">Du triffst dich mit zwei Freunden – einem Typen und einem Mädchen. Der Bro will sofort einschlagen, während das Mädchen dich schon umarmen will. Wem widmest du dich zuerst und warum?</string>
+    <string name="question_7_a_answer_1">Bros before Hoes. Der Homie bekommt den Handschlag zuerst, keine Fragen gestellt.</string>
+    <string name="question_7_a_answer_2">Vergiss den Handschlag, ich gehe direkt auf die Umarmung. Mein Bro braucht auch ein bisschen Liebe!</string>
+    <string name="question_7_a_answer_3">Dem Typen, ganz klar. Ihr wisst doch eh schon, dass ich auf Jungs stehe.</string>
+    <string name="question_7_a_answer_4">Hey, Wissenschaftler, gebt mir mal vernünftige Optionen! Ich bin zu 100 % hetero, verdammt noch mal!</string>
+
+    <string name="question_7_b">Club-Szenario: Ein Mädchen kommt auf dich zu und fängt an, mit dir zu flirten. Deine Reaktion?</string>
+    <string name="question_7_b_answer_1">\„Sorry, ich bin schon vergeben und würde ihn niemals betrügen.\“</string>
+    <string name="question_7_b_answer_2">Ich wäre wahrscheinlich so peinlich berührt, dass ich mich blamiere… vielleicht geht der Schuss in der Hose sogar buchstäblich nach hinten los.</string>
+    <string name="question_7_b_answer_3">Ich gehe nicht in Clubs. Ich bevorzuge softe Hauspartys mit meinen Besties.</string>
+    <string name="question_7_b_answer_4">Hey, Wissenschaftler, gebt mir mal vernünftige Optionen! Ich bin zu 100 % hetero, verdammt noch mal!</string>
+
+    <string name="question_8">Erinnerst du dich an die Frage mit den Schlägern und deiner Freundin? Ich gebe dir noch eine Chance, denn deine letzte Antwort war ein totaler Reinfall.</string>
+    <string name="question_8_answer_1">Mutters kleiner Sprengmeister. Voller Kamikaze-Modus: Aus voller Lunge schreien und so tun, als hätte man einen Zünder in der Tasche.</string>
+    <string name="question_8_answer_2">Mutters kleiner braver Junge. Ihnen sagen, dass Mama verboten hat, mit Fremden zu sprechen. Wenn sie dein Mädchen in einen Lieferwagen zerren, sie lautstark daran erinnern, keine Süßigkeiten von ihnen anzunehmen!</string>
+    <string name="question_8_answer_3">Mutters kleiner Psycho. Das Mädchen zuerst schlagen. Wenn du dich komplett irre verhältst, denken sie vielleicht, du bist ein Verrückter, und lassen dich in Ruhe.</string>
+
+    <string name="question_9_a">Was ist deiner Meinung nach der allererste Gedanke eines Schwulen am Morgen?</string>
+    <string name="question_9_a_answer_1">Woher soll ich das wissen?! Ich bin nicht schwul.</string>
+    <string name="question_9_a_answer_2">Keine Ahnung, aber ich wette, es hat mit einem Lavendel-Hafermilch-Latte zu tun.</string>
+    <string name="question_9_a_answer_3">Ich weiß es nicht, aber wahrscheinlich Jungs.</string>
+    <string name="question_9_a_answer_4">Ich durchschaue euer Spiel: Je mehr ich es leugne, desto eher stempelt ihr mich am Ende als \„latent\“ ab, oder?</string>
+
+    <string name="question_9_b">Wie würde deine Traumfrau aussehen?</string>
+    <string name="question_9_b_answer_1">Hab ich nie drüber nachgedacht… Hauptsache, sie ist eine lebende, atmende Person.</string>
+    <string name="question_9_b_answer_2">Mädchen sind nicht so mein Ding. Jungs liegen mir eher.</string>
+    <string name="question_9_b_answer_3">Schlau, schön, reich und bereit, alles für mich zu tun. Und das ist erst der Anfang – die Liste der Red Flags ist zehn Seiten lang.</string>
+
+    <string name="question_10">Szenario: Du wohnst mit einem schwulen Mitbewohner zusammen. Er macht dir ein \„unanständiges\“ Angebot. Was tust du?</string>
+    <string name="question_10_answer_1">Einmal ist keinmal – solange man sich nicht in die Augen schaut.</string>
+    <string name="question_10_answer_2">Ich würde es machen, aber nur wenn es schnell geht.</string>
+    <string name="question_10_answer_3">Klar, was tut man nicht alles für einen echten Freund?</string>
+    <string name="question_10_answer_4">Okay, aber ich bin der Aktive. Keine Diskussion.</string>
+
+    <string name="question_11">Tritt beiseite, ich übernehme das hier. Also dann… Wie würdest du dich am besten beschreiben?</string>
+    <string name="question_11_answer_1">Ich bin eine totale Sportskanone и immer in Form. Meistens trainiere ich im String-Tanga, um die Bewegungsfreiheit nicht einzuschränken.</string>
+    <string name="question_11_answer_2">Ich bin eine Rampensau und stehe immer im Mittelpunkt. Ich liebe es, mit meinen Mädels über Jungs zu lästern.</string>
+    <string name="question_11_answer_3">Ich bin der \„Therapeut\“ im Freundeskreis. Ich liebe es, meine Bros zu umarmen und zu trösten, besonders die süßen.</string>
+    <string name="question_11_answer_4">Ich bin nicht schwul, schaut euch doch selbst an, ihr Nerds! (Falsche Antwort, aber versuch’s ruhig).</string>
+
+    <string name="question_12_a">Wie stehst du zu Straßenkämpfen, wenn deine Ehre auf dem Spiel steht?</string>
+    <string name="question_12_a_answer_1">Ich bevorzuge friedliche Verhandlungen. Ich habe mir erst gestern die Nägel machen lassen – sie sind buchstäblich perfekt.</string>
+    <string name="question_12_a_answer_2">Kämpfe machen mir Angst. Verprügelt zu werden ist das eine, aber ich will danach nicht gedemütigt werden.</string>
+    <string name="question_12_a_answer_3">Ich halte mich da raus. Meine Oma hat mich mal mit einem Stock verprügelt, seitdem bin ich im \„Pazifisten-Modus\“.</string>
+    <string name="question_12_a_answer_4">Kämpfen ist was für Neandertaler. Ich tue alles, was der Typ will, solange er mein Gesicht nicht anrührt.</string>
+
+    <string name="question_12_b">Ist eine wahre Freundschaft zwischen Mann und Frau möglich?</string>
+    <string name="question_12_b_answer_1">Sicher, ich habe jede Menge Freundinnen. Wir gehen sogar zusammen shoppen.</string>
+    <string name="question_12_b_answer_2">Ja, ich bin quasi Dauergast in der Friendzone.</string>
+    <string name="question_12_b_answer_3">Ja, ich mache ihnen immer sofort klar, dass wir nur Freunde sind.</string>
+
+    <string name="question_13_a">Hast du Freunde aus der \„Regenbogen-Szene\“?</string>
+    <string name="question_13_a_answer_1">Ja, ich komme mit jedem klar.</string>
+    <string name="question_13_a_answer_2">Ja, das ist eigentlich meine ganze Clique.</string>
+    <string name="question_13_a_answer_3">Ja, ich nenne meine Homies so oft \„schwul\“, dass es einige wahrscheinlich wirklich sind.</string>
+    <string name="question_13_a_answer_4">Ja. Gleich und Gleich gesellt sich gern, nicht wahr?</string>
+
+    <string name="question_13_b">Wenn du nicht als Mensch geboren wärst, in welchem Tierkörper würdest du dich am wohlsten fühlen?</string>
+    <string name="question_13_b_answer_1">Waschbär (Ich liebe es, Dinge zu betatschen und im Müll zu wühlen).</string>
+    <string name="question_13_b_answer_2">Pinguin (Ich mag es, gleichgeschlechtliche Paare zu bilden und gemeinsam Steine auszubrüten).</string>
+    <string name="question_13_b_answer_3">Giraffe (Bis zu 90 % unserer \„besonderen Zeit\“ findet unter Bros statt. Google es!).</string>
+    <string name="question_13_b_answer_4">Delfin (Ich bin einfach sehr liebesbedürftig und das Geschlecht ist mir egal).</string>
+
+    <string name="question_14">Szenario: Du bist auf einer einsamen Insel gestrandet. Du darfst nur ein Überlebensset wählen. Welches nimmst du?</string>
+    <string name="question_14_answer_1">Ein Zelt, ein Medikit und einen riesigen Sack Gurken (natürlich nur zum Essen).</string>
+    <string name="question_14_answer_2">Ein Feuerzeug, ein Jagdmesser und einen knallroten Lippenstift (um für das Rettungsteam fabelhaft auszusehen).</string>
+    <string name="question_14_answer_3">Frisches Wasser, warme Kleidung und ein Nagellack-Set (in der Farbe \„Hot Pink\“).</string>
+    <string name="question_14_answer_4">Eine Signalpistole, Essensvorräte für eine Woche und ein bodenlanges rosa Abendkleid.</string>
+
+    <string name="question_15">Stell dir das Grauen vor: Du wachst auf und bist NICHT schwul. Wie planst du, dein Leben weiterzuführen?</string>
+    <string name="question_15_answer_1">Sag sowas nicht! So ein Trauma kann ich nicht verkraften!</string>
+    <string name="question_15_answer_2">Ich schätze, Mädchen sind auch okay… solange der Vibe stimmt und es gegenseitigen Respekt gibt.</string>
+    <string name="question_15_answer_3">Ich bin auf dem Weg zum Baumarkt, um mir einen Strick zu kaufen. Eine Welt ohne Jungs macht einfach keinen Sinn.</string>
+    <string name="question_15_answer_4">Wie wäre es, wenn wir uns vorstellen, dass IHR keine latenten Wissenschaftler seid? Woher kämen dann diese Fragen?! (Falsche Antwort, aber versuch\'s ruhig).</string>
+
+    <string name="question_16_a">Wie emotional bist du? Bist du ein Typ, который \„nah am Wasser gebaut\“ ist?</string>
+    <string name="question_16_a_answer_1">Ich weine jeden Tag. Das Leben ist einfach zu grausam für eine sensible Seele wie meine.</string>
+    <string name="question_16_a_answer_2">Ich bin ein totales Wrack. Ich fange schon beim Vorspann von \„Hachiko\“ an zu schluchzen.</string>
+    <string name="question_16_a_answer_3">Mit 15 waren meine Tränensäcke leer. Mit meinen \„Vorlieben\“ in diesem Land zu leben, ist ein einziger Kampf.</string>
+
+    <string name="question_16_b">Du betrittst das Fitnessstudio: Links macht eine fitte Lady Kniebeugen, rechts ein massiver Bodybuilder. Wohin geht dein Blick zuerst?</string>
+    <string name="question_16_b_answer_1">Zur Frau. Ich muss wissen, wo sie diese stylischen Leggings her hat.</string>
+    <string name="question_16_b_answer_2">Zum Typen. Diese Gluteus-Muskulatur ist ein wahres Kunstwerk.</string>
+    <string name="question_16_b_answer_3">Zum Typen. Das ist mein Gym-Bro! Zeit für einen taktischen Arsch-Kneifer aus dem Hinterhalt.</string>
+    <string name="question_16_b_answer_4">Zur Frau. Sie ist meine Trainerin, ich muss sie vor dem Training begrüßen.</string>
+
+    <string name="question_17">Wie oft macht ihr Witze darüber, schwul zu sein?</string>
+    <string name="question_17_answer_1">Ich habe keine Freunde. Ich mache Witze mit mir selbst, aber ganz ehrlich: Mir gehen die Pointen aus.</string>
+    <string name="question_17_answer_2">Wir haben gewitzelt, bis es ernst wurde. Jetzt sind wir \„mehr als Freunde\“. Ups.</string>
+    <string name="question_17_answer_3">Die ganze Zeit. Wir sind quasi Missionare, die die \„frohe Botschaft\“ verbreiten.</string>
+    <string name="question_17_answer_4">Ständig. In letzter Zeit haben wir sogar mit \„Schwertkämpfen\“ angefangen, um zu sehen, wer die längste Klinge hat.</string>
+
+    <string name="question_18">Wie stehst du zu deiner Körperbehaarung?</string>
+    <string name="question_18_answer_1">Ich rasiere alles! Ich ertrage es nicht, behaart zu sein.</string>
+    <string name="question_18_answer_2">Bei mir wächst gar nichts. Ich hatte vor Jahren eine Ganzkörper-Laserhaarentfernung.</string>
+    <string name="question_18_answer_3">Ich bin von Natur aus glatt, genau wie meine beiden Väter.</string>
+    <string name="question_18_answer_4">Ich finde Rasieren ist eine Sünde, also sehe ich im Grunde aus wie Chewbaccas Cousin.</string>
+
+    <string name="question_19">Szenario: Du erwischst deinen Bro dabei, wie er sich Pornos anschaut und es sich selbst macht. Was tust du?</string>
+    <string name="question_19_answer_1">Ich lege mit Hand an. Wahre Freunde lassen einander in schwierigen Situationen nicht allein.</string>
+    <string name="question_19_answer_2">Ich sage ihm, dass ich das Video auch schon kenne. 10/10 Empfehlung.</string>
+    <string name="question_19_answer_3">Wie peinlich! Ich habe meinem Freund gesagt, er soll das Video NICHT online hochladen!</string>
+    <string name="question_19_answer_4">Unglaublich… Er fängt immer an, die guten Sachen ohne mich zu schauen!</string>
+
+    <string name="question_20">Abschließende Frage: Und, wie hat dir der Test gefallen?</string>
+    <string name="question_20_answer_1">Diese \„Wissenschaftler\“ sind klinisch irre. Ich habe jede Sekunde gehasst.</string>
+    <string name="question_20_answer_2">Danke für den Test! Ich habe Dinge über mich gelernt, die ich wohl besser für mich behalten sollte.</string>
+    <string name="question_20_answer_3">Vergiss den Test… Ich glaube nicht mal mehr selbst, dass ich hetero bin.</string>
+
+    <!-- Errors -->
+    <string name="error">SYSTEMFEHLER</string>
+    <string name="error_empty_questions">Fehler bei der Protokollerstellung. Das Experiment wird neu gestartet…</string>
+
+</resources>

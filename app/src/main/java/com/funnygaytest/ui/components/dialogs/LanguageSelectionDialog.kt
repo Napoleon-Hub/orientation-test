@@ -71,6 +71,13 @@ fun LanguageSelectionDialog(
                     isSelected = currentLanguage.startsWith("en"),
                     onClick = { onLanguageSelected("en") }
                 )
+
+                LanguageOption(
+                    text = "Deutsch",
+                    iconRes = R.drawable.ic_flag_de,
+                    isSelected = currentLanguage.startsWith("de"),
+                    onClick = { onLanguageSelected("de") }
+                )
             }
         }
     }
