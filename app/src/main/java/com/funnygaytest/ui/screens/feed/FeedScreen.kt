@@ -59,9 +59,9 @@ private fun FeedScreenContent(
     onBackClicked: () -> Unit = {}
 ) {
     val currentBackgroundRes = if (uiState.isDonated) {
-        R.drawable.feed_background_2
+        R.drawable.background_feed_2
     } else {
-        R.drawable.feed_background_1
+        R.drawable.background_feed_1
     }
 
     BackgroundWrapper(backgroundId = currentBackgroundRes) {

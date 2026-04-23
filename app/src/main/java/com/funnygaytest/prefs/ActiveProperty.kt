@@ -2,7 +2,6 @@ package com.funnygaytest.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.funnygaytest.prefs.PrefsEntity
 import kotlin.reflect.KProperty
 
 abstract class ActiveProperty<T>(context: Context, private var key: String? = null) {

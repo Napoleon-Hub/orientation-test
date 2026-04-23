@@ -125,9 +125,9 @@ private fun GameScreenContent(
 ) {
 
     val currentBackgroundRes = if (uiState.questionNumber <= 10) {
-        R.drawable.game_background_1
+        R.drawable.background_game_1
     } else {
-        R.drawable.game_background_2
+        R.drawable.background_game_2
     }
 
     BackgroundWrapper(backgroundId = currentBackgroundRes) {

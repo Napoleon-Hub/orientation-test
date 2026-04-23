@@ -31,10 +31,10 @@ import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import com.yandex.mobile.ads.common.AdError
-import com.yandex.mobile.ads.common.AdRequestConfiguration
+import com.yandex.mobile.ads.common.AdRequest
 import com.yandex.mobile.ads.common.AdRequestError
 import com.yandex.mobile.ads.common.ImpressionData
-import com.yandex.mobile.ads.common.MobileAds
+import com.yandex.mobile.ads.common.YandexAds
 import com.yandex.mobile.ads.interstitial.InterstitialAd
 import com.yandex.mobile.ads.interstitial.InterstitialAdEventListener
 import com.yandex.mobile.ads.interstitial.InterstitialAdLoadListener
@@ -46,7 +46,8 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        private const val AD_UNIT_ID = "R-M-19046095-1"
+       private const val AD_UNIT_ID = "R-M-19046095-1"
+       // private const val AD_UNIT_ID = "demo-interstitial-applovin"
     }
 
     @Inject
@@ -144,30 +145,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeMobileAds() {
-        MobileAds.apply {
+        YandexAds.apply {
             setUserConsent(true)
             setAppAdAnalyticsReporting(true)
             initialize(this@MainActivity) {
-                interstitialAdLoader = InterstitialAdLoader(this@MainActivity).apply {
-                    setAdLoadListener(object : InterstitialAdLoadListener {
-                        override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                            this@MainActivity.interstitialAd = interstitialAd
-                        }
-
-                        override fun onAdFailedToLoad(error: AdRequestError) {
-                            // Ad failed to load with AdRequestError.
-                            // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
-                        }
-                    })
-                }
+                interstitialAdLoader = InterstitialAdLoader(this@MainActivity)
                 loadInterstitialAd()
             }
         }
     }
 
     private fun loadInterstitialAd() {
-        val adRequestConfiguration = AdRequestConfiguration.Builder(AD_UNIT_ID).build()
-        interstitialAdLoader?.loadAd(adRequestConfiguration)
+        interstitialAdLoader?.loadAd(
+            adRequest = AdRequest.Builder(AD_UNIT_ID).build(),
+            listener = object : InterstitialAdLoadListener {
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    this@MainActivity.interstitialAd = interstitialAd
+                }
+
+                override fun onAdFailedToLoad(error: AdRequestError) {
+                    // Ad failed to load with AdRequestError.
+                    // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
+                }
+            }
+        )
     }
 
     private fun showAd() {
@@ -207,7 +208,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        interstitialAdLoader?.setAdLoadListener(null)
+        interstitialAdLoader?.cancelLoading()
         interstitialAdLoader = null
         destroyInterstitialAd()
     }

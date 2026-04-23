@@ -143,7 +143,7 @@ private fun StartScreenContent(
         )
     }
 
-    BackgroundWrapper(backgroundId = R.drawable.start_background) {
+    BackgroundWrapper(backgroundId = R.drawable.background_start) {
 
         val playButtonText = if (uiState.isGameStarted) {
             stringResource(R.string.start_button_continue)

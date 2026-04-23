@@ -50,7 +50,7 @@ private fun NoInternetScreenContent(
     uiState: NoInternetUiState,
     onToggleMusic: () -> Unit = {}
 ) {
-    BackgroundWrapper(backgroundId = R.drawable.connection_background) {
+    BackgroundWrapper(backgroundId = R.drawable.background_connection) {
 
         Box(
             modifier = Modifier

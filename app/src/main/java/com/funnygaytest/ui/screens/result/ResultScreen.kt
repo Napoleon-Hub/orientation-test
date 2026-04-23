@@ -34,7 +34,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.funnygaytest.BuildConfig
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
@@ -136,7 +135,7 @@ private fun ResultScreenContent(
     onRateClicked: () -> Unit = {},
     onToggleMusic: () -> Unit = {}
 ) {
-    BackgroundWrapper(backgroundId = R.drawable.result_background) {
+    BackgroundWrapper(backgroundId = R.drawable.background_result) {
 
         Row(
             modifier = modifier

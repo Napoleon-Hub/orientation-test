@@ -113,7 +113,7 @@ private fun EndingsScreenContent(
         )
     }
 
-    BackgroundWrapper(backgroundId = R.drawable.endings_background) {
+    BackgroundWrapper(backgroundId = R.drawable.background_endings) {
 
         Box(
             modifier = Modifier
