@@ -13,8 +13,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,6 +44,7 @@ import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.themes.MainTestTheme
 import com.funnygaytest.ui.themes.MainTheme
+import com.funnygaytest.utils.enums.EndingType
 
 private const val APP_URI =
     "https://play.google.com/store/apps/details?id=com.funnygaytest"
@@ -153,44 +155,54 @@ private fun ResultScreenContent(
                 verticalArrangement = Arrangement.Center
             ) {
 
-                Text(
-                    text = titleTest,
-                    style = MainTestTheme.typography.heading.copy(fontSize = 20.sp),
-                    color = MainTestTheme.colors.primaryText.copy(alpha = 0.7f)
-                )
+                Column(
+                    modifier = Modifier
+                        .weight(0.66f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom
+                ) {
 
-                Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(modifier = Modifier.weight(0.3f))
 
-                DescriptionBox(
-                    modifier = Modifier.fillMaxWidth(),
-                    textStyle = MainTestTheme.typography.heading.copy(fontSize = 16.sp),
-                    descriptionString = resultText
-                )
+                    Text(
+                        text = titleTest,
+                        style = MainTestTheme.typography.heading.copy(fontSize = 20.sp),
+                        color = MainTestTheme.colors.primaryText.copy(alpha = 0.7f)
+                    )
 
-                if (uiState.isNewEnding) {
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
 
-                    uiState.currentEnding?.let { ending ->
-                        Box(modifier = Modifier.fillMaxWidth()) {
-                            EndingCard(
-                                title = stringResource(id = ending.titleRes),
-                                iconRes = ending.iconRes
-                            )
+                    DescriptionBox(
+                        modifier = Modifier
+                            .weight(0.7f)
+                            .fillMaxWidth(),
+                        textStyle = MainTestTheme.typography.heading.copy(fontSize = 16.sp),
+                        descriptionString = AnnotatedString(resultText)
+                    )
+
+                }
+
+                Column(
+                    modifier = Modifier
+                        .weight(0.33f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom
+                ) {
+                    if (uiState.isNewEnding) {
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        uiState.currentEnding?.let { ending ->
+                            Box(
+                                modifier = Modifier.fillMaxWidth(),
+                                contentAlignment = Alignment.BottomCenter
+                            ) {
+                                EndingCard(
+                                    title = stringResource(id = ending.titleRes),
+                                    iconRes = ending.iconRes,
+                                    finalTextShown = uiState.isAllEndingsUnlocked
+                                )
+                            }
                         }
-                    }
-
-                    if (uiState.isAllEndingsUnlocked) {
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 4.dp),
-                            text = stringResource(R.string.result_endings_all_unlocked),
-                            style = MainTestTheme.typography.noteText,
-                            color = MainTestTheme.colors.primaryText,
-                            textAlign = TextAlign.Start
-                        )
                     }
                 }
             }
@@ -203,8 +215,8 @@ private fun ResultScreenContent(
 
                 Box(
                     modifier = Modifier
-                        .weight(1f)
                         .fillMaxWidth()
+                        .padding(bottom = 8.dp)
                 ) {
                     MusicToggleButton(
                         modifier = Modifier.align(Alignment.TopEnd),
@@ -214,13 +226,17 @@ private fun ResultScreenContent(
                 }
 
                 Column(
-                    modifier = Modifier.weight(6f),
+                    modifier = Modifier.weight(1f),
                     verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically)
                 ) {
+
+                    val actionModifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .heightIn(max = 55.dp)
+
                     MainButton(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(55.dp),
+                        modifier = actionModifier,
                         onClick = onRestartClicked,
                         text = stringResource(R.string.result_button_restart)
                     )
@@ -233,37 +249,30 @@ private fun ResultScreenContent(
                     )
 
                     MainButton(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(55.dp),
+                        modifier = actionModifier,
                         onClick = onPayClicked,
                         text = stringResource(R.string.result_button_pay)
                     )
 
                     MainButton(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(55.dp),
+                        modifier = actionModifier,
                         onClick = onAnotherTestsClicked,
                         text = stringResource(R.string.result_button_another_apps),
                         enabled = false
                     )
 
-                    Row(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        modifier = actionModifier,
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
                         IconButton(
-                            modifier = Modifier
-                                .weight(1f)
-                                .height(55.dp),
+                            modifier = Modifier.weight(1f).fillMaxHeight(),
                             iconId = R.drawable.ic_share,
                             onClick = onShareClicked
                         )
 
-                        Spacer(modifier = Modifier.width(12.dp))
-
                         IconButton(
-                            modifier = Modifier
-                                .weight(1f)
-                                .height(55.dp),
+                            modifier = Modifier.weight(1f).fillMaxHeight(),
                             iconId = R.drawable.ic_rate_us,
                             onClick = onRateClicked,
                             enabled = uiState.isRateEnabled
@@ -282,8 +291,8 @@ fun PreviewResultScreen() {
     MainTheme {
         ResultScreenContent(
             uiState = ResultUiState(
-//                currentEnding = EndingType.LOSE_12,
-//                isNewEnding = true
+                currentEnding = EndingType.LOSE_12,
+                isNewEnding = true
             ),
             titleTest = stringResource(R.string.result_title_win),
             resultText = stringResource(R.string.result_text_result_win_100)
@@ -324,10 +333,12 @@ private fun share(context: Context, healthLeft: Int, lastQuestionNumber: Int) {
             healthLeft,
             APP_URI
         )
+
         1 if healthLeft == 0 -> context.getString(
             R.string.result_test_share_permanent_lose,
             APP_URI
         )
+
         else -> context.getString(R.string.result_test_share_lose, lastQuestionNumber, APP_URI)
     }
 

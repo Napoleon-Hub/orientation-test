@@ -13,12 +13,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.LinearProgressIndicator
@@ -38,6 +39,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -135,14 +137,14 @@ private fun GameScreenContent(
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(horizontal = 40.dp, vertical = 24.dp),
+                .padding(horizontal = 24.dp, vertical = 16.dp),
             verticalArrangement = Arrangement.Center
         ) {
 
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp)
+                    .padding(bottom = 12.dp)
             ) {
                 Text(
                     text = stringResource(R.string.game_health_title),
@@ -157,68 +159,88 @@ private fun GameScreenContent(
                 )
             }
 
-            Row(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-
-                DescriptionBox(
-                    modifier = Modifier.weight(1f),
-                    textStyle = MainTestTheme.typography.heading,
-                    descriptionString = stringResource(uiState.currentQuestion.questionResId)
-                )
-
-                Box(
-                    modifier = Modifier.padding(horizontal = 8.dp)
-                ) {
-                    MusicToggleButton(
-                        isMuted = uiState.isMuted,
-                        onClick = onToggleMusic
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(18.dp))
-
-            Row(modifier = Modifier.fillMaxSize()) {
-
-                AnswersGroup(
+            Column(modifier = Modifier.weight(1f)) {
+                Row(
                     modifier = Modifier
-                        .weight(0.82f)
-                        .fillMaxHeight()
-                        .padding(end = 18.dp),
-                    answers = uiState.currentQuestion.listOfAnswers,
-                    selectedAnswer = uiState.selectedAnswer,
-                    onAnswerSelected = { onAnswerSelected(it) }
-                )
-
-                Column(
-                    modifier = Modifier
-                        .weight(0.18f)
-                        .fillMaxHeight(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
+                        .fillMaxWidth()
+                        .weight(0.35f)
                 ) {
 
-                    NextArrowButton(
-                        onClick = onNextClicked,
-                        isEnabled = uiState.selectedAnswer != null
+                    DescriptionBox(
+                        modifier = Modifier
+                            .weight(0.85f)
+                            .fillMaxHeight(),
+                        textStyle = MainTestTheme.typography.heading,
+                        descriptionString = AnnotatedString(stringResource(uiState.currentQuestion.questionResId))
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            text = stringResource(R.string.game_questions),
-                            style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
-                            color = MainTestTheme.colors.primaryText.copy(alpha = 0.5f)
-                        )
-                        Text(
-                            text = "${uiState.questionNumber} / ${uiState.totalQuestions}",
-                            style = MainTestTheme.typography.subText,
-                            color = MainTestTheme.colors.primaryText.copy(alpha = 0.6f)
+                    Box(
+                        modifier = Modifier
+                            .weight(0.15f)
+                            .fillMaxHeight(),
+                        contentAlignment = Alignment.TopCenter
+                    ) {
+                        MusicToggleButton(
+                            isMuted = uiState.isMuted,
+                            onClick = onToggleMusic
                         )
                     }
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .weight(0.65f)
+                ) {
+
+                    AnswersGroup(
+                        modifier = Modifier
+                            .weight(0.80f)
+                            .fillMaxHeight()
+                            .padding(end = 12.dp),
+                        answers = uiState.currentQuestion.listOfAnswers,
+                        selectedAnswer = uiState.selectedAnswer,
+                        onAnswerSelected = { onAnswerSelected(it) }
+                    )
+
+                    Column(
+                        modifier = Modifier
+                            .weight(0.18f)
+                            .fillMaxHeight(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+
+                        NextArrowButton(
+                            modifier = Modifier
+                                .fillMaxWidth(0.6f)
+                                .aspectRatio(1f)
+                                .sizeIn(maxWidth = 56.dp, maxHeight = 56.dp),
+                            onClick = onNextClicked,
+                            isEnabled = uiState.selectedAnswer != null
+                        )
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(
+                                text = stringResource(R.string.game_questions),
+                                style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
+                                color = MainTestTheme.colors.primaryText.copy(alpha = 0.5f),
+                                maxLines = 1
+                            )
+                            Text(
+                                text = "${uiState.questionNumber} / ${uiState.totalQuestions}",
+                                style = MainTestTheme.typography.subText,
+                                color = MainTestTheme.colors.primaryText.copy(alpha = 0.6f),
+                                maxLines = 1
+                            )
+                        }
+                    }
+                }
+
             }
 
         }
@@ -287,7 +309,6 @@ fun NextArrowButton(
 
     Box(
         modifier = modifier
-            .size(72.dp)
             .clip(CircleShape)
             .background(targetBackgroundColor)
             .border(
@@ -297,9 +318,7 @@ fun NextArrowButton(
             )
             .clickable(
                 enabled = isEnabled,
-                onClick = {
-                    onClick()
-                },
+                onClick = { onClick() },
                 indication = ripple(bounded = true, color = MainTestTheme.colors.primaryElement),
                 interactionSource = remember { MutableInteractionSource() }
             ),
@@ -309,7 +328,7 @@ fun NextArrowButton(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_arrow_next),
             contentDescription = "Next",
             tint = targetArrowColor,
-            modifier = Modifier.size(36.dp)
+            modifier = Modifier.fillMaxSize(0.5f)
         )
     }
 }

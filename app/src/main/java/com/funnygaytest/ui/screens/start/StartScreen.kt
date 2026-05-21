@@ -8,6 +8,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,6 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -176,12 +178,14 @@ private fun StartScreenContent(
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(horizontal = 40.dp, vertical = 32.dp),
+                .padding(horizontal = 24.dp, vertical = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
             Row(
-                modifier = Modifier.weight(1f),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier
+                    .weight(0.7f)
+                    .fillMaxHeight()
             ) {
                 Box(
                     modifier = Modifier
@@ -189,7 +193,6 @@ private fun StartScreenContent(
                         .fillMaxHeight(),
                     contentAlignment = Alignment.Center
                 ) {
-
                     AnimatedContent(
                         targetState = uiState.showDifficulty,
                         label = "ButtonTransition",
@@ -217,7 +220,9 @@ private fun StartScreenContent(
                             }
                         }
                     ) { targetShowDifficulty ->
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
                             if (!targetShowDifficulty) {
                                 MainButton(
                                     modifier = Modifier
@@ -296,11 +301,18 @@ private fun StartScreenContent(
                 Spacer(modifier = Modifier.weight(2f))
 
             }
-            Row(modifier = Modifier.fillMaxWidth()) {
+
+            Row(
+                modifier = Modifier
+                    .weight(0.3f)
+                    .fillMaxWidth()
+            ) {
                 DescriptionBox(
-                    modifier = Modifier.weight(0.85f),
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .weight(0.85f),
                     textStyle = MainTestTheme.typography.description,
-                    descriptionString = stringResource(bottomInfoRes)
+                    descriptionString = AnnotatedString(stringResource(bottomInfoRes))
                 )
                 Spacer(modifier = Modifier.weight(0.15f))
             }

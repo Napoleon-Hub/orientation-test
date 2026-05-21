@@ -5,7 +5,15 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -13,11 +21,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.models.Answer
@@ -28,6 +41,7 @@ fun AnswersGroup(
     modifier: Modifier = Modifier,
     answers: List<Answer>,
     selectedAnswer: Answer?,
+    textStyle: TextStyle = MainTestTheme.typography.subText,
     onAnswerSelected: (Answer) -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -40,10 +54,13 @@ fun AnswersGroup(
         modifier = modifier
             .fillMaxHeight()
             .verticalScroll(scrollState),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         answers.forEach { answer ->
             val isSelected = answer == selectedAnswer
+
+            var scaledTextStyle by remember(answer) { mutableStateOf(textStyle) }
+            var readyToDraw by remember(answer) { mutableStateOf(false) }
 
             val borderColor by animateColorAsState(
                 targetValue = if (isSelected) MainTestTheme.colors.primaryBackground else Color.Transparent,
@@ -54,7 +71,7 @@ fun AnswersGroup(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .heightIn(min = 56.dp)
+                    .heightIn(min = 48.dp)
                     .clip(RoundedCornerShape(12.dp))
                     .background(
                         if (isSelected) MainTestTheme.colors.primaryBackground.copy(alpha = 0.25f)
@@ -71,9 +88,25 @@ fun AnswersGroup(
             ) {
                 Text(
                     text = stringResource(id = answer.answerResId),
-                    style = MainTestTheme.typography.subText,
+                    modifier = Modifier.drawWithContent {
+                        if (readyToDraw) {
+                            drawContent()
+                        }
+                    },
+                    style = scaledTextStyle,
                     color = if (isSelected) Color.White else MainTestTheme.colors.primaryText.copy(alpha = 0.8f),
-                    textAlign = TextAlign.Start
+                    textAlign = TextAlign.Start,
+                    softWrap = true,
+                    onTextLayout = { textLayoutResult ->
+                        if (textLayoutResult.hasVisualOverflow) {
+                            scaledTextStyle = scaledTextStyle.copy(
+                                fontSize = scaledTextStyle.fontSize * 0.95
+                            )
+                        } else {
+                            readyToDraw = true
+                        }
+                    },
+                    maxLines = 2
                 )
             }
         }

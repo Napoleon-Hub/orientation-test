@@ -40,6 +40,7 @@ import com.yandex.mobile.ads.interstitial.InterstitialAdEventListener
 import com.yandex.mobile.ads.interstitial.InterstitialAdLoadListener
 import com.yandex.mobile.ads.interstitial.InterstitialAdLoader
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -164,8 +165,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onAdFailedToLoad(error: AdRequestError) {
-                    // Ad failed to load with AdRequestError.
-                    // Attempting to load a new ad from the onAdFailedToLoad() method is strongly discouraged.
+                    Timber.e(error.description)
                 }
             }
         )

@@ -59,7 +59,7 @@
         Here\'s your certificate: you are a True Blue Gay. The gayest gay we\'ve ever encountered. Congratulations!</string>
     <string name="result_text_result_lose_8_11">You tried to hide it, but your tendencies spoke for themselves. We aren\'t schoolboys here; we are credentialed scientists, so spotting a little twink like you is easy work.
         Here\'s your certificate — show it to your boyfriend while we get back to work. And don\'t you dare stare at our staff on your way out!</string>
-    <string name="result_text_result_lose_12_15">In short: you\'re gay. Sure, you didn\'t show it right away, but we don\'t have multiple PhDs and work for breadcrumbs for nothing. One hint is all we need to identify your \"rear-wheel drive.\"
+    <string name="result_text_result_lose_12_15">In short: you\'re gay. Sure, you didn\'t show it right away, but we don\'t have multiple PhDs and work for breadcrumbs for nothing. One hint is all we need to identify your \"rear-wheel drive\".
         Boys, take him away. Where? 2-3 years in Dagestan and forget.</string>
     <string name="result_text_result_lose_16_19">The scientists argued for a long time — some even threw punches — but the verdict is in. You are gay! Deep down you probably know it, even if you haven\'t accepted it yet.
         Don\'t worry, you\'re not alone. Though there are no other \"rear-wheelers\" in this lab, so get out. We value our backsides; we have families!</string>
@@ -76,7 +76,7 @@
     <string name="result_button_pay">Feed scientists</string>
 
     <string name="result_endings_new">New diagnosis documented</string>
-    <string name="result_endings_all_unlocked">You have collected all endings. Now you are a true Gaylord!</string>
+    <string name="result_endings_all_unlocked">You have collected all diagnosis. Now you are a true Gaylord!</string>
 
     <string name="result_test_share_win">My Straight-O-Meter survived with %1$d! I entered the lab and barely flinched. Which question will break you?\n\nGet it here: %2$s</string>
     <string name="result_test_share_lose">I was exposed on question %1$d! My Straight-O-Meter dropped to zero… Which question will break you?\n\nGet it here: %2$s</string>
@@ -96,10 +96,15 @@
 
     <!-- Feed -->
     <string name="feed_button">Feed</string>
-    <string name="feed_description_before_pay">While you are completing this test, we are already designing a new \"obstacle course\" for your mind. But progress has stalled: the lead lab assistants have run out of cucumbers.\n
-        It just so happens that our scientists work strictly for \"green rations.\" And believe us, they find uses for them that aren\'t always found in cookbooks. Support our team with a \"cucumber\" — help science move forward and keep the scientists from getting lonely in the dark corridors.\n
-        All funds will go toward developing new content, and thanks to you, our researchers will be able to afford cucumbers of any size and form they require.</string>
-    <string name="feed_description_after_pay">Transaction complete. The cucumbers have been ordered, the lab assistants are vibrating with anticipation, and work on the new test has been accelerated by 200%. Don\'t ask what\'s happening in the dark corridors right now.</string>
+    <string name="feed_status_no_donate">STATUS: CRITICAL CUCUMBER SHORTAGE</string>
+    <string name="feed_status_donate">STATUS: GREEN RATIONS DISTRIBUTED</string>
+    <string name="feed_title_no_donate">RESOURCE REQUEST #069</string>
+    <string name="feed_title_donate">SUPPLIES REPLENISHED</string>
+    <string name="feed_description_no_donate_1">Progress has stalled: the poor lab assistants have completely run out of cucumbers.</string>
+    <string name="feed_description_no_donate_2">Our scientists work strictly for \"green rations\" of various shapes and sizes.</string>
+    <string name="feed_description_no_donate_3">Support the team with a cucumber — help science move forward.</string>
+    <string name="feed_description_no_donate_4">We\'ve already started designing a new obstacle course for your mind, and it\'s going to be something else.</string>
+    <string name="feed_description_donate">Thanks to your contribution, the lab assistants are back in action. Cucumbers have been delivered to all sectors. Please ignore the strange noises coming from the dark corridors — those are just sounds of pure joy.</string>
 
     <!-- Questions -->
     <string name="question_1_a">Welcome to the Middle Ages. You\'re not the king, though. What\'s your job?</string>

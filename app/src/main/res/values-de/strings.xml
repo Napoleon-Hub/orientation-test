@@ -76,7 +76,7 @@
     <string name="result_button_pay">Wissenschaftler füttern</string>
 
     <string name="result_endings_new">Neue Diagnose protokolliert</string>
-    <string name="result_endings_all_unlocked">Du hast alle Protokolle gesammelt, jetzt bist du ein wahrer Gaylord!</string>
+    <string name="result_endings_all_unlocked">Du hast alle Diagnose gesammelt, jetzt bist du ein wahrer Gaylord!</string>
 
     <string name="result_test_share_win">Meine Hetero-Rüstung hat zu %1$d standgehalten! Ich habe dieses Labor betreten und nicht gezuckt. Bei welcher Frage brichst du ein?\n\nLink: %2$s</string>
     <string name="result_test_share_lose">Ich wurde bei Frage %1$d enttarnt! Das Hetero-Meter ist auf null gefallen… Bei welcher Frage brichst du ein?\n\nLink: %2$s</string>
@@ -99,10 +99,15 @@
 
     <!-- Feed -->
     <string name="feed_button">Füttern</string>
-    <string name="feed_description_before_pay">Während du diesen Test absolvierst, entwerfen wir bereits einen neuen \„Hindernisparcours\“ für deinen Verstand. Aber momentan steht die Arbeit still: Unseren leitenden Labormitarbeitern sind die Gurken ausgegangen.
-        \nEs ist so, dass unsere Forscher ausschließlich für \„grüne Rationen\“ arbeiten. Und glaub uns, sie finden Verwendungsmöglichkeiten für Gurken, die nicht unbedingt in Kochbüchern stehen.
-        Unterstütze unser Team mit einer \„Gurke\“ – hilf der Wissenschaft voran und sorge dafür, dass sich die Forscher in den dunklen Korridoren nicht langweilen.\nSämtliche Mittel fließen direkt in die Entwicklung neuer Inhalte. Dank dir können sich unsere Labormitarbeiter Gurken in jeder gewünschten Größe und Form leisten.</string>
-    <string name="feed_description_after_pay">Transaktion abgeschlossen. Die Gurken sind bestellt, die Labormitarbeiter vibrieren vor Vorfreude und die Arbeit am neuen Test wurde um 200% beschleunigt. Frag lieber nicht, was gerade in den dunklen Gängen passiert.</string>
+    <string name="feed_status_no_donate">STATUS: KRITISCHER GURKENMANGEL</string>
+    <string name="feed_status_donate">STATUS: GRÜNE RATIONEN AUSGEGEBEN</string>
+    <string name="feed_title_no_donate">RESSOURCENANFORDERUNG #069</string>
+    <string name="feed_title_donate">LIEFERUNGEN FORTGESETZT</string>
+    <string name="feed_description_no_donate_1">Der Fortschritt stockt: Den armen Laborassistenten sind die Gurken ausgegangen.</string>
+    <string name="feed_description_no_donate_2">Unsere Wissenschaftler arbeiten ausschließlich für \"grüne Rationen\" jeglicher Form und Größe.</string>
+    <string name="feed_description_no_donate_3">Unterstütze das Team mit einer Gurke — hilf der Wissenschaft, voranzukommen.</string>
+    <string name="feed_description_no_donate_4">Wir haben bereits mit der Entwicklung eines neuen Hindernisparcours für deinen Verstand begonnen, das wird absolut genial.</string>
+    <string name="feed_description_donate">Dank deines Beitrags sind die Laborassistenten wieder an der Arbeit. Die Gurken wurden in alle Sektoren geliefert. Bitte ignoriere die unheimlichen Geräusche aus den dunklen Korridoren — das sind Geräusche der Freude.</string>
 
     <!-- Questions -->
     <string name="question_1_a">Willkommen im Mittelalter. Du bist allerdings nicht der König. Dein Beruf?</string>

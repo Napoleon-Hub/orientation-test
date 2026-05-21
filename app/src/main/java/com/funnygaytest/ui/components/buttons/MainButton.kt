@@ -20,6 +20,7 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.funnygaytest.ui.themes.MainTestTheme
 
 @Composable
@@ -69,15 +70,16 @@ fun MainButton(
             text?.let {
                 Text(
                     text = it,
-                    modifier = modifier.wrapContentHeight().drawWithContent {
+                    modifier = Modifier.wrapContentHeight().drawWithContent {
                         if (readyToDraw) {
                             drawContent()
                         }
                     },
                     style = scaledTextStyle,
                     softWrap = false,
+                    maxLines = 1,
                     onTextLayout = { textLayoutResult ->
-                        if (textLayoutResult.didOverflowWidth) {
+                        if (textLayoutResult.didOverflowWidth || textLayoutResult.didOverflowHeight) {
                             scaledTextStyle = scaledTextStyle.copy(
                                 fontSize = scaledTextStyle.fontSize * 0.95
                             )
