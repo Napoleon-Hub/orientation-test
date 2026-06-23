@@ -72,6 +72,7 @@
 
     <string name="result_button_restart">Test wiederholen</string>
     <string name="result_button_restart_description">Fragen können variieren</string>
+    <string name="result_rate_description">Experiment bewerten und Ergebnisse teilen!</string>
     <string name="result_button_another_apps">Weitere Tests</string>
     <string name="result_button_pay">Wissenschaftler füttern</string>
 

@@ -11,7 +11,7 @@ plugins {
 
 val appVersionMajor = 3
 val appVersionMinor = 1
-val appVersionPatch = 1
+val appVersionPatch = 2
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
@@ -21,12 +21,12 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.funnygaytest"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.funnygaytest"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
 
         versionCode = generateVersionCode(appVersionMajor, appVersionMinor, appVersionPatch)
         versionName = generateVersionName(appVersionMajor, appVersionMinor, appVersionPatch)
@@ -95,6 +95,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
+    ksp(libs.kotlin.metadata.jvm)
 
     // Navigation Components
     implementation(libs.navigation.compose)

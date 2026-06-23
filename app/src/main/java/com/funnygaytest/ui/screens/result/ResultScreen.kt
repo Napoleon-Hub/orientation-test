@@ -36,6 +36,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.funnygaytest.R
+import com.funnygaytest.ui.components.AutoScaledText
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.EndingCard
@@ -241,11 +242,12 @@ private fun ResultScreenContent(
                         text = stringResource(R.string.result_button_restart)
                     )
 
-                    Text(
+                    AutoScaledText(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(R.string.result_button_restart_description),
                         style = MainTestTheme.typography.noteText,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        maxLines = 1
                     )
 
                     MainButton(
@@ -278,6 +280,14 @@ private fun ResultScreenContent(
                             enabled = uiState.isRateEnabled
                         )
                     }
+
+                    AutoScaledText(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = stringResource(R.string.result_rate_description),
+                        style = MainTestTheme.typography.noteText,
+                        textAlign = TextAlign.Center,
+                        maxLines = 1
+                    )
                 }
 
             }
