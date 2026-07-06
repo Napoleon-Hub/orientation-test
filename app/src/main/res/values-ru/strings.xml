@@ -8,9 +8,9 @@
     <string name="start_button">Начать</string>
     <string name="start_description">Cамый сложный и одновременно интересный гейтест. Над ним потели ученые изо всех стран мира только ради того, чтобы ответить тебе на вопрос. Ты собственно по мальчикам или как?</string>
     <string name="start_button_continue">Продолжить</string>
-    <string name="start_description_continue">Да, он - стопроцентный гей, тут даже тест не нужен.\nЭй, ты здесь? Вернись обратно в испытательную зону, пидарок!</string>
+    <string name="start_description_continue">Да, он - стопроцентный гей, тут даже тест не нужен.\nЭй, ты здесь? Вернись обратно в испытательную зону, негодник!</string>
     <string name="start_button_difficulty">Сложность</string>
-    <string name="start_button_difficulty_easy">Пуси</string>
+    <string name="start_button_difficulty_easy">Маленькие бубенцы</string>
     <string name="start_button_difficulty_easy_gotcha">Снова решил смухлевать?</string>
     <string name="start_button_difficulty_hard">Гигачад</string>
     <string name="start_select_language_button">Выберите язык</string>
@@ -18,23 +18,23 @@
     <!-- Endings -->
     <string name="endings_title">Результаты</string>
     <string name="endings_stats_title">Статистика</string>
-    <string name="endings_diagnosis_title">Диагнозы испытуемого</string>
-    <string name="endings_diagnosis_description">Вы получаете разные диагнозы в зависимости от того, на каком вопросе вы провалили тест или же с какой Шкалой натурала финишировали. Нажмите на иконку, чтобы узнать подробности</string>
+    <string name="endings_diagnosis_title">Вердикты симуляции</string>
+    <string name="endings_diagnosis_description">Вы получаете разные вердикты в зависимости от того, на каком вопросе вы провалили тест или же с каким уровнем Шкалой натурала финишировали. Нажмите на иконку, чтобы узнать подробности.</string>
     <string name="endings_counter_loses">Жалких попыток обмануть систему: %d</string>
     <string name="endings_counter_wins">Списал тест у какого-то натурала: %d</string>
     <string name="endings_locked_title">Не открыто</string>
     <string name="diagnosis_dialog_button_close">Принято</string>
 
-    <string name="ending_win_1">Самый гейский натурал</string>
+    <string name="ending_win_1">Подозрительный новобранец</string>
     <string name="ending_win_33">Повод для гордости</string>
     <string name="ending_win_66">Ставлю жопу, ты гей</string>
     <string name="ending_win_100">Мужик</string>
     <string name="ending_lose_4">Горбатая гора</string>
     <string name="ending_lose_8">Один раз - не пида…</string>
     <string name="ending_lose_12">2–3 года в Дагестане и забудешь</string>
-    <string name="ending_lose_16">Трушный заднеприводный</string>
-    <string name="ending_lose_20">Латентный пидарок</string>
-    <string name="ending_lose_pussy">Попався, пидарок</string>
+    <string name="ending_lose_16">Трушный ветеран радужного крыла</string>
+    <string name="ending_lose_20">Скрытый тыловой агент</string>
+    <string name="ending_lose_pussy">Попався, малыш</string>
     <string name="ending_all">Гейлорд</string>
     <string name="ending_donate">Самый лучший гей</string>
 
@@ -47,11 +47,11 @@
     <string name="result_title_lose">Тест окончен! Вердикт: ГЕЙ</string>
     <string name="result_title_lose_pussy">Тест провален! Ты пойман за руку!</string>
 
-    <string name="result_text_result_win_1_32">С таким результатом будем считать, что ты — самый гейский натурал из всех, кого мы встречали. Твои ответы вызвали споры и массовую драку.
-        Радуйся, что в этот раз победили те, кто посчитал тебя натуралом, иначе у меня уже была подготовлена справочка на твое имя с пометочкой «Гей». Кыш отсюда!</string>
-    <string name="result_text_result_win_33_65">В процессе теста мы видели, как трясутся твои дрыщавые ножки. Отвечал ты, конечно, со скрипом, но результат есть результат — ты не гей! Радуйся или же плачь.
-        Я вот, например, ставил на обратное, и теперь моя месячная зарплата окажется в стрингах очередной стриптизерши. Тьфу на эту работу, я увольняюсь!</string>
-    <string name="result_text_result_win_66_99">Ты держался достойно. В моменте мы немного в тебе сомневались, но ты доказал, что баклажанчик у тебя поднимается в нужном направлении! Один из ученых поставил очко на то, что ты по мальчикам…
+    <string name="result_text_result_win_1_32">С таким результатом будем считать, что ты — самый подозрительный натурал из всех, кого мы встречали. Твои ответы вызвали споры и массовую драку в ординаторской.
+        Радуйся, что в этот раз победили те, кто посчитал твои ответы нормальными, иначе у меня уже была подготовлена справочка на твое имя с пометочкой «Гей». Кыш отсюда!</string>
+    <string name="result_text_result_win_33_65">В процессе теста мы видели, как трясутся твои коленки. Отвечал ты, конечно, со скрипом, но результат есть результат — ты не гей! Радуйся или же плачь.
+        Я вот, например, ставил на обратное, и теперь моя месячная зарплата окажется в кармане какого-то олуха. Тьфу на эту работу, я увольняюсь!</string>
+    <string name="result_text_result_win_66_99">Ты держался достойно. В моменте мы немного в тебе сомневались, но ты доказал, что баклажанчик у тебя поднимается в стандартном направлении! Один из ученых поставил очко на то, что ты по мальчикам…
         Ну, зато ему теперь даже Гейтест проходить не нужно! А ты на этом можешь быть свободен.</string>
     <string name="result_text_result_win_100">Кто-то считал это невозможным, но ты доказал обратное. Ты самый натуральный натурал из всех, кого мы когда-либо видели. Один из ученых поставил свою тачку на то, что ты по мальчикам…
         Бедолагу выгонит из дома жена, но теперь мы точно знаем, что ты не гей!</string>
