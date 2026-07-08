@@ -11,7 +11,7 @@ plugins {
 
 val appVersionMajor = 3
 val appVersionMinor = 1
-val appVersionPatch = 2
+val appVersionPatch = 3
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
@@ -46,6 +46,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             if (keystorePropertiesFile.exists()) {
                 signingConfig = signingConfigs.getByName("release")

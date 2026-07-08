@@ -203,8 +203,8 @@ fun generateNewGameRun(): List<Question> {
             questionResId = R.string.question_10,
             listOfAnswers = listOf(
                 Answer(R.string.question_10_answer_1, 0),
-                Answer(R.string.question_10_answer_2, -10),
-                Answer(R.string.question_10_answer_3, -20),
+                Answer(R.string.question_10_answer_2, -15),
+                Answer(R.string.question_10_answer_3, -10),
                 Answer(R.string.question_10_answer_4, -25)
             )
         )

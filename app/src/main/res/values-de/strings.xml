@@ -10,7 +10,7 @@
     <string name="start_button_continue">Fortsetzen</string>
     <string name="start_description_continue">Oh ja, er ist zu 100% schwul, da erübrigt sich eigentlich jeder Test.\nHey, bist du noch da? Zurück in die Testzone mit dir, du Früchtchen!</string>
     <string name="start_button_difficulty">Schwierigkeit</string>
-    <string name="start_button_difficulty_easy">Pussy</string>
+    <string name="start_button_difficulty_easy">Weichei-Modus</string>
     <string name="start_button_difficulty_easy_gotcha">Wolltest du etwa schon wieder schummeln?</string>
     <string name="start_button_difficulty_hard">GigaChad</string>
     <string name="start_select_language_button">Sprache wählen</string>
@@ -25,16 +25,16 @@
     <string name="endings_locked_title">Verschlüsselt</string>
     <string name="diagnosis_dialog_button_close">Verstanden</string>
 
-    <string name="ending_win_1">Der schwulste Hetero</string>
-    <string name="ending_win_33">Stolz verstecken</string>
+    <string name="ending_win_1">Verdächtiger Rekrut</string>
+    <string name="ending_win_33">Grund zum Stolz</string>
     <string name="ending_win_66">Ich wette meinen Arsch, dass du schwul bist</string>
     <string name="ending_win_100">Ein ganzer Mann</string>
     <string name="ending_lose_4">Brokeback Mountain</string>
     <string name="ending_lose_8">Einmal ist keinmal…</string>
     <string name="ending_lose_12">2–3 Jahre Dagestan und du vergisst alles</string>
-    <string name="ending_lose_16">Echter Hecktriebler</string>
-    <string name="ending_lose_20">Latenter Hinterlader</string>
-    <string name="ending_lose_pussy">In flagranti erwischt, du Früchtchen!</string>
+    <string name="ending_lose_16">Echter Heckantrieb-Veteran</string>
+    <string name="ending_lose_20">Verdeckter Rückstrom-Agent</string>
+    <string name="ending_lose_pussy">In flagranti erwischt, Kleiner!</string>
     <string name="ending_all">Gaylord</string>
     <string name="ending_donate">Der beste Schwule aller Zeiten</string>
 
@@ -45,27 +45,27 @@
     <!-- Result -->
     <string name="result_title_win">Test bestanden! Du bist NICHT schwul… anscheinend.</string>
     <string name="result_title_lose">Test abgeschlossen! Urteil: SCHWUL</string>
-    <string name="result_title_lose_pussy">Test fehlgeschlagen! Du bist eine PUSSY!</string>
+    <string name="result_title_lose_pussy">Test fehlgeschlagen! Du bist erwischt worden, Kleiner!</string>
 
     <string name="result_text_result_win_1_32">Bei diesem Ergebnis betrachten wir dich einfach als den schwulsten Hetero, den wir je getroffen haben. Deine Antworten haben im Pausenraum eine Massenschlägerei ausgelöst.
         Sei froh, dass die \"Hetero\"-Fraktion den Kampf um deine Ehre gewonnen hat, sonst hätte ich schon ein Zertifikat mit dem Stempel \"Schwul\" für dich ausgedruckt. Husch, raus hier!</string>
     <string name="result_text_result_win_33_65">Wir haben während des Tests deine dürren Beinchen zittern sehen. Du bist zwar gerade so durchgekommen, aber Ergebnis ist Ergebnis: Du bist NICHT schwul.
         Freu dich oder heul doch. Ich persönlich habe dagegen gewettet, und jetzt landet mein Monatsgehalt im Tanga einer Stripperin. Scheiß auf diesen Job, ich kündige!</string>
-    <string name="result_text_result_win_66_99">Du hast dich wacker geschlagen. Wir haben zwar kurz gezweifelt, aber du hast bewiesen, dass deine \"Aubergine\" in die richtige Richtung zeigt!
-        Einer der Wissenschaftler hat seinen Arsch darauf verwettet, dass du auf Jungs stehst… Nun, zumindest muss er den Schwulentest jetzt nicht mehr selbst machen! Du hingegen darfst gehen.</string>
+    <string name="result_text_result_win_66_99">Du hast dich wacker geschlagen. Wir haben zwar kurz gezweifelt, aber du hast bewiesen, dass dein innerer Kompass in die richtige Richtung zeigt!
+        Einer der Wissenschaftler hat einiges darauf verwettet, dass du auf Jungs stehst… Nun, zumindest muss er den Schwulentest jetzt nicht mehr selbst machen! Du hingegen darfst gehen.</string>
     <string name="result_text_result_win_100">Einige hielten es für unmöglich, aber du hast das Gegenteil bewiesen. Du bist das heterosexuellste Exemplar, das wir je untersucht haben.
         Einer der Forscher hat sein Auto darauf verwettet, dass du auf Jungs stehst… Der Arme wird heute Abend von seiner Frau rausgeworfen, aber zumindest wissen wir sicher: Du bist NICHT schwul!</string>
-    <string name="result_text_result_lose_4_7">Als wir die Daten analysiert haben, standen wir unter Schock. Die Wissenschaftler haben angefangen, ihre Hinterteile in Sicherheit zu bringen, denn niemand weiß, wozu du fähig bist!
-        Ehrlich gesagt, habe ich selbst ein bisschen Angst vor dir. Hier ist dein Zertifikat: Du bist ein wahrer Schwuler. Der schwulste Schwule, den wir je getroffen haben, Glückwunsch!</string>
+    <string name="result_text_result_lose_4_7">Als wir die Daten analysiert haben, standen wir unter Schock. Die Wissenschaftler haben angefangen, ihre Unterlagen in Sicherheit zu bringen, denn niemand weiß, wozu du fähig bist!
+        Ehrlich gesagt, habe ich selbst ein bisschen Angst vor dir. Hier ist dein Zertifikat: Du bist ein wahrer Schwuler. Der bunteste Vogel, den wir je getroffen haben, Glückwunsch!</string>
     <string name="result_text_result_lose_8_11">Du hast natürlich versucht, es zu verbergen, aber deine Neigungen haben sich selbst verraten. Hier arbeiten keine Schuljungen, sondern qualifizierte Wissenschaftler – ein kleines Früchtchen wie dich zu durchschauen, ist ein Kinderspiel.
         Hier ist dein Zertifikat, zeig es deinem festen Freund, während wir weiterarbeiten. Und wehe, du starrst unser Personal auf dem Weg nach draußen an!</string>
     <string name="result_text_result_lose_12_15">Kurz gesagt: Du bist schwul. Klar hast du es nicht sofort gezeigt, aber wir sitzen hier ja nicht umsonst mit 2–3 Doktortiteln und arbeiten für ein Butterbrot im Namen der Wissenschaft.
-        Ein kleiner Hinweis reicht, um deinen \"Heckantrieb\" zu erkennen.\nJungs, bringt ihn weg. Wohin? 2-3 Jahre nach Dagestan. Dort bringen sie dir schon alles bei.</string>
-    <string name="result_text_result_lose_16_19">Die Forscher haben lange gestritten, manche haben sich sogar geprügelt, aber das Urteil steht fest. Du bist schwul! Tief im Inneren weißt du das wahrscheinlich auch, selbst wenn du es noch nicht akzeptiert hast.
-        Keine Sorge, du bist nicht allein. Obwohl es in diesem Labor keine anderen \"Hecktriebler\" gibt, also verschwinde. Uns sind unsere Hinterteile heilig, wir haben Familien!</string>
+        Ein kleiner Hinweis reicht, um deinen Heckantrieb zu erkennen.\nJungs, bringt ihn weg. Wohin? 2-3 Jahre nach Dagestan. Dort bringen sie dir schon alles bei.</string>
+    <string name="result_text_result_lose_16_19">Die Forscher haben lange gestritten, manche haben sich sogar geprügelt, aber das Urteil steht fest. Du bist ein Offizier der Regenbogen-Bewegung!
+        Tief im Inneren weißt du das wahrscheinlich auch, selbst wenn du es noch nicht akzeptiert hast. Keine Sorge, du bist nicht allein. Obwohl es in diesem Labor keine anderen Gleichgesinnten gibt, also verschwinde, wir müssen das Labor desinfizieren!</string>
     <string name="result_text_result_lose_20">So weit zu kommen und dann bei der allerletzten Frage zu stolpern… Ich war eigentlich schon bereit, deine \"Hetero\"-Papiere zu unterschreiben. Gut, dass wir Wissenschaftler nicht von gestern sind und wissen, wie man Typen wie dich erkennt.
-        Also zisch ab, du latenter Hinterlader, und lass dich hier nie wieder blicken! Heb dir deine Geschichten darüber, dass du auf Mädchen stehst, für den Zirkus auf, hier ist alles hochoffiziell!</string>
-    <string name="result_text_result_lose_pussy">In flagranti erwischt! Dachtest du, du könntest das System austricksen, dir die Fragen leichter machen, damit wir nicht herausfinden, wer du wirklich bist? Pech gehabt, du wurdest auf frischer Tat ertappt, du kleines Früchtchen.
+        Also zisch ab, du verdeckter Rückstrom-Agent, und lass dich hier nie wieder blicken! Heb dir deine Geschichten darüber, dass du auf Mädchen stehst, für den Zirkus auf, hier ist alles hochoffiziell!</string>
+    <string name="result_text_result_lose_pussy">In flagranti erwischt! Dachtest du, du könntest das System austricksen, dir die Fragen leichter machen, damit wir nicht herausfinden, wer du wirklich bist? Pech gehabt, du wurdest auf frischer Tat ertappt, du kleiner Saboteur.
         Wir sehen uns bei der Nachprüfung, obwohl, seien wir ehrlich: Die wird dir auch nicht helfen. Es ist eh schon alles sonnenklar. Jungs, tragt ihn raus!</string>
 
     <string name="result_text_result_gaylord">Du hast das Leben durchschaut – Frauen fürchten dich, Männer respektieren dich. Wir haben deine Ergebnisse an die zuständigen Behörden weitergeleitet, erwarte in Kürze einen Anruf und eine Einladung zu Gachimuchi. Unsere Glückwünsche!</string>
@@ -77,11 +77,11 @@
     <string name="result_button_pay">Wissenschaftler füttern</string>
 
     <string name="result_endings_new">Neue Diagnose protokolliert</string>
-    <string name="result_endings_all_unlocked">Du hast alle Diagnose gesammelt, jetzt bist du ein wahrer Gaylord!</string>
+    <string name="result_endings_all_unlocked">Du hast alle Diagnosen gesammelt, jetzt bist du ein wahrer Gaylord!</string>
 
     <string name="result_test_share_win">Meine Hetero-Rüstung hat zu %1$d standgehalten! Ich habe dieses Labor betreten und nicht gezuckt. Bei welcher Frage brichst du ein?\n\nLink: %2$s</string>
     <string name="result_test_share_lose">Ich wurde bei Frage %1$d enttarnt! Das Hetero-Meter ist auf null gefallen… Bei welcher Frage brichst du ein?\n\nLink: %2$s</string>
-    <string name="result_test_share_permanent_lose">EXPERIMENT ABGEBROCHEN: Ich habe den \"Pussy\"-Modus gewählt und wurde aus dem Labor geworfen. Das Hetero-Meter wurde nicht mal eingeschaltet… Bist du mutiger als ich?\n\nLink: %s</string>
+    <string name="result_test_share_permanent_lose">EXPERIMENT ABGEBROCHEN: Ich habe den \"Weichei\"-Modus gewählt und wurde aus dem Labor geworfen. Das Hetero-Meter wurde nicht mal eingeschaltet… Bist du mutiger als ich?\n\nLink: %s</string>
 
     <!-- Connection -->
     <string name="connection_no_internet_title">SYSTEM STROMLOS!</string>
@@ -122,7 +122,7 @@
     <string name="question_1_b_answer_1">Gurke</string>
     <string name="question_1_b_answer_2">Aubergine</string>
     <string name="question_1_b_answer_3">Karotte</string>
-    <string name="question_1_b_answer_4">Geschmack egal, Hauptsache Form und Größe stimmen!</string>
+    <string name="question_1_b_answer_4">Geschmack egal, Hauptsache die Geometrie stimmt für die Ästhetik!</string>
 
     <string name="question_2">Stell dir vor: Du gehst mit deiner Freundin spazieren, und plötzlich versperrt eine Gruppe Kerle den Weg. Die Stimmung ist… im Arsch. Dein Plan?</string>
     <string name="question_2_answer_1">Mutters kleiner Sprinter. Denk an den Sportunterricht und leg einen Weltrekord-Speedrun hin.</string>
@@ -134,7 +134,7 @@
     <string name="question_3_a_answer_1">Nicht mitgezählt</string>
     <string name="question_3_a_answer_2">Nur ein einsamer Einziger</string>
     <string name="question_3_a_answer_3">Zählt die eigene Hand mit?</string>
-    <string name="question_3_a_answer_4">Beim Bund ist jedes Loch ein Tor.</string>
+    <string name="question_3_a_answer_4">Ungefähr 6–7</string>
 
     <string name="question_3_b">Übrigens, wie stehst du eigentlich zu Heterosexuellen?</string>
     <string name="question_3_b_answer_1">Positiv. Sie scheinen ganz nette Leute zu sein.</string>
@@ -149,7 +149,7 @@
     <string name="question_4_b">Dein Gym-Bro kämpft gerade mit einer schweren Hantel beim Bankdrücken. Wie leistest du Hilfestellung?</string>
     <string name="question_4_b_answer_1">Ich stelle mich hinter ihn und gebe ihm taktile Motivation direkt an der Brust.</string>
     <string name="question_4_b_answer_2">Ich schreie einfach \„LIGHTWEIGHT BABY\“, bis ihm die Ohren bluten.</string>
-    <string name="question_4_b_answer_3">Ich filme das Ganze für seinen OnlyFans-Account. Content ist King.</string>
+    <string name="question_4_b_answer_3">Ich filme das Ganze für seinen privaten Premium-Blog. Exklusiver Content ist King.</string>
 
     <string name="question_5_a">Welches dieser Hobbys würdest du wählen?</string>
     <string name="question_5_a_answer_1">Rhythmische Sportgymnastik (Schön geschmeidig bleiben, Bro)</string>
@@ -183,19 +183,19 @@
 
     <string name="question_7_b">Club-Szenario: Ein Mädchen kommt auf dich zu und fängt an, mit dir zu flirten. Deine Reaktion?</string>
     <string name="question_7_b_answer_1">\„Sorry, ich bin schon vergeben und würde ihn niemals betrügen.\“</string>
-    <string name="question_7_b_answer_2">Ich wäre wahrscheinlich so peinlich berührt, dass ich mich blamiere… vielleicht geht der Schuss in der Hose sogar buchstäblich nach hinten los.</string>
+    <string name="question_7_b_answer_2">Ich wäre vor Panik wahrscheinlich so peinlich berührt, dass ich komplett den Faden verliere und mich total blamiere.</string>
     <string name="question_7_b_answer_3">Ich gehe nicht in Clubs. Ich bevorzuge softe Hauspartys mit meinen Besties.</string>
     <string name="question_7_b_answer_4">Hey, Wissenschaftler, gebt mir mal vernünftige Optionen! Ich bin zu 100 % hetero, verdammt noch mal!</string>
 
     <string name="question_8">Erinnerst du dich an die Frage mit den Schlägern und deiner Freundin? Ich gebe dir noch eine Chance, denn deine letzte Antwort war ein totaler Reinfall.</string>
     <string name="question_8_answer_1">Mutters kleiner Sprengmeister. Voller Kamikaze-Modus: Aus voller Lunge schreien und so tun, als hätte man einen Zünder in der Tasche.</string>
     <string name="question_8_answer_2">Mutters kleiner braver Junge. Ihnen sagen, dass Mama verboten hat, mit Fremden zu sprechen. Wenn sie dein Mädchen in einen Lieferwagen zerren, sie lautstark daran erinnern, keine Süßigkeiten von ihnen anzunehmen!</string>
-    <string name="question_8_answer_3">Mutters kleiner Psycho. Das Mädchen zuerst schlagen. Wenn du dich komplett irre verhältst, denken sie vielleicht, du bist ein Verrückter, und lassen dich in Ruhe.</string>
+    <string name="question_8_answer_3">Mutters kleiner Psycho. Plötzlich anfangen, lautstark mit dem Mädchen zu streiten, weil sie dir deinen Vibe ruiniert. Wenn du dich komplett irre verhältst, denken sie vielleicht, du bist ein Verrückter, und lassen dich in Ruhe.</string>
 
-    <string name="question_9_a">Was ist deiner Meinung nach der allererste Gedanke eines Schwulen am Morgen?</string>
-    <string name="question_9_a_answer_1">Woher soll ich das wissen?! Ich bin nicht schwul.</string>
+    <string name="question_9_a">Was ist deiner Meinung nach der allererste Gedanke eines Mitglieds des Regenbogen-Trupps am Morgen?</string>
+    <string name="question_9_a_answer_1">Woher soll ich das wissen?! Ich bin nicht in diesem Trupp.</string>
     <string name="question_9_a_answer_2">Keine Ahnung, aber ich wette, es hat mit einem Lavendel-Hafermilch-Latte zu tun.</string>
-    <string name="question_9_a_answer_3">Ich weiß es nicht, aber wahrscheinlich Jungs.</string>
+    <string name="question_9_a_answer_3">Ich weiß es nicht, aber wahrscheinlich Gedanken an die anderen Jungs im Trupp.</string>
     <string name="question_9_a_answer_4">Ich durchschaue euer Spiel: Je mehr ich es leugne, desto eher stempelt ihr mich am Ende als \„latent\“ ab, oder?</string>
 
     <string name="question_9_b">Wie würde deine Traumfrau aussehen?</string>
@@ -203,17 +203,17 @@
     <string name="question_9_b_answer_2">Mädchen sind nicht so mein Ding. Jungs liegen mir eher.</string>
     <string name="question_9_b_answer_3">Schlau, schön, reich und bereit, alles für mich zu tun. Und das ist erst der Anfang – die Liste der Red Flags ist zehn Seiten lang.</string>
 
-    <string name="question_10">Szenario: Du wohnst mit einem schwulen Mitbewohner zusammen. Er macht dir ein \„unanständiges\“ Angebot. Was tust du?</string>
-    <string name="question_10_answer_1">Einmal ist keinmal – solange man sich nicht in die Augen schaut.</string>
-    <string name="question_10_answer_2">Ich würde es machen, aber nur wenn es schnell geht.</string>
-    <string name="question_10_answer_3">Klar, was tut man nicht alles für einen echten Freund?</string>
-    <string name="question_10_answer_4">Okay, aber ich bin der Aktive. Keine Diskussion.</string>
+    <string name="question_10">Szenario: Du wohnst mit einem Mitbewohner zusammen, der sich als Anführer des Regenbogen-Trupps entpuppt. Er macht dir ein eindeutiges Angebot. Was tust du?</string>
+    <string name="question_10_answer_1">Einmal ist keinmal – solange niemand davon erfährt.</string>
+    <string name="question_10_answer_2">Ich würde ja sagen, aber nur wenn es ganz schnell geht und diskret bleibt.</string>
+    <string name="question_10_answer_3">Klar, was tut man nicht alles für einen fetten Rabatt bei der WG-Miete, oder?</string>
+    <string name="question_10_answer_4">Okay, aber in dieser Situation werde ich das Ganze steuern. Keine Diskussion.</string>
 
     <string name="question_11">Tritt beiseite, ich übernehme das hier. Also dann… Wie würdest du dich am besten beschreiben?</string>
-    <string name="question_11_answer_1">Ich bin eine totale Sportskanone и immer in Form. Meistens trainiere ich im String-Tanga, um die Bewegungsfreiheit nicht einzuschränken.</string>
+    <string name="question_11_answer_1">Ich trainiere hart und bin immer in Form. Meistens tue ich das in einem neonpinken Sporttrikot für maximale Aerodynamik.</string>
     <string name="question_11_answer_2">Ich bin eine Rampensau und stehe immer im Mittelpunkt. Ich liebe es, mit meinen Mädels über Jungs zu lästern.</string>
-    <string name="question_11_answer_3">Ich bin der \„Therapeut\“ im Freundeskreis. Ich liebe es, meine Bros zu umarmen und zu trösten, besonders die süßen.</string>
-    <string name="question_11_answer_4">Ich bin nicht schwul, schaut euch doch selbst an, ihr Nerds! (Falsche Antwort, aber versuch’s ruhig).</string>
+    <string name="question_11_answer_3">Ich bin der \„Therapeut\“ im Freundeskreis. Ich liebe es, meine Bros zu umarmen und zu trösten, besonders die süßen, wenn sie traurig sind.</string>
+    <string name="question_11_answer_4">Ich bin nicht in eurem Regenbogen-Trupp, schaut euch doch selbst an, ihr Nerds! (Falsche Antwort, aber versuch’s ruhig).</string>
 
     <string name="question_12_a">Wie stehst du zu Straßenkämpfen, wenn deine Ehre auf dem Spiel steht?</string>
     <string name="question_12_a_answer_1">Ich bevorzuge friedliche Verhandlungen. Ich habe mir erst gestern die Nägel machen lassen – sie sind buchstäblich perfekt.</string>
@@ -229,7 +229,7 @@
     <string name="question_13_a">Hast du Freunde aus der \„Regenbogen-Szene\“?</string>
     <string name="question_13_a_answer_1">Ja, ich komme mit jedem klar.</string>
     <string name="question_13_a_answer_2">Ja, das ist eigentlich meine ganze Clique.</string>
-    <string name="question_13_a_answer_3">Ja, ich nenne meine Homies so oft \„schwul\“, dass es einige wahrscheinlich wirklich sind.</string>
+    <string name="question_13_a_answer_3">Ja, ich nenne meine Homies so oft spaßeshalber \„schwul\“, dass es einige wahrscheinlich wirklich sind.</string>
     <string name="question_13_a_answer_4">Ja. Gleich und Gleich gesellt sich gern, nicht wahr?</string>
 
     <string name="question_13_b">Wenn du nicht als Mensch geboren wärst, in welchem Tierkörper würdest du dich am wohlsten fühlen?</string>
@@ -244,13 +244,13 @@
     <string name="question_14_answer_3">Frisches Wasser, warme Kleidung und ein Nagellack-Set (in der Farbe \„Hot Pink\“).</string>
     <string name="question_14_answer_4">Eine Signalpistole, Essensvorräte für eine Woche und ein bodenlanges rosa Abendkleid.</string>
 
-    <string name="question_15">Stell dir das Grauen vor: Du wachst auf und bist NICHT schwul. Wie planst du, dein Leben weiterzuführen?</string>
+    <string name="question_15">Stell dir das Grauen vor: Du bist nicht mehr im elitären Regenbogen-Trupp. Wie planst du, dein Leben weiterzuführen?</string>
     <string name="question_15_answer_1">Sag sowas nicht! So ein Trauma kann ich nicht verkraften!</string>
     <string name="question_15_answer_2">Ich schätze, Mädchen sind auch okay… solange der Vibe stimmt und es gegenseitigen Respekt gibt.</string>
-    <string name="question_15_answer_3">Ich bin auf dem Weg zum Baumarkt, um mir einen Strick zu kaufen. Eine Welt ohne Jungs macht einfach keinen Sinn.</string>
-    <string name="question_15_answer_4">Wie wäre es, wenn wir uns vorstellen, dass IHR keine latenten Wissenschaftler seid? Woher kämen dann diese Fragen?! (Falsche Antwort, aber versuch\'s ruhig).</string>
+    <string name="question_15_answer_3">Ich packe meine Koffer, um in die tiefe Taiga zu ziehen. Eine Welt ohne meine geliebten Bros ist einfach grau und farblos.</string>
+    <string name="question_15_answer_4">Wie wäre es, wenn wir uns vorstellen, dass IHR keine latenten Regenbogen-Wissenschaftler seid? Woher kämen dann diese Fragen?! (Falsche Antwort, aber versuch\'s ruhig).</string>
 
-    <string name="question_16_a">Wie emotional bist du? Bist du ein Typ, который \„nah am Wasser gebaut\“ ist?</string>
+    <string name="question_16_a">Wie emotional bist du? Bist du ein Typ, der „nah am Wasser gebaut“ ist?</string>
     <string name="question_16_a_answer_1">Ich weine jeden Tag. Das Leben ist einfach zu grausam für eine sensible Seele wie meine.</string>
     <string name="question_16_a_answer_2">Ich bin ein totales Wrack. Ich fange schon beim Vorspann von \„Hachiko\“ an zu schluchzen.</string>
     <string name="question_16_a_answer_3">Mit 15 waren meine Tränensäcke leer. Mit meinen \„Vorlieben\“ in diesem Land zu leben, ist ein einziger Kampf.</string>
@@ -273,11 +273,11 @@
     <string name="question_18_answer_3">Ich bin von Natur aus glatt, genau wie meine beiden Väter.</string>
     <string name="question_18_answer_4">Ich finde Rasieren ist eine Sünde, also sehe ich im Grunde aus wie Chewbaccas Cousin.</string>
 
-    <string name="question_19">Szenario: Du erwischst deinen Bro dabei, wie er sich Pornos anschaut und es sich selbst macht. Was tust du?</string>
-    <string name="question_19_answer_1">Ich lege mit Hand an. Wahre Freunde lassen einander in schwierigen Situationen nicht allein.</string>
-    <string name="question_19_answer_2">Ich sage ihm, dass ich das Video auch schon kenne. 10/10 Empfehlung.</string>
-    <string name="question_19_answer_3">Wie peinlich! Ich habe meinem Freund gesagt, er soll das Video NICHT online hochladen!</string>
-    <string name="question_19_answer_4">Unglaublich… Er fängt immer an, die guten Sachen ohne mich zu schauen!</string>
+    <string name="question_19">Szenario: Du betrittst das Zimmer und dein Bro schaut sich super-suspekte Fitness-Videos mit irgendwelchen Muskelmännern an und atmet dabei schwer. Was tust du?</string>
+    <string name="question_19_answer_1">Ich würde ihm da wohl eine helfende Hand anbieten, um es mal so auszudrücken.</string>
+    <string name="question_19_answer_2">Ich würde das Gespräch am Laufen halten und sagen, dass ich dieses Video auch erst neulich gesehen habe.</string>
+    <string name="question_19_answer_3">Wie peinlich! Ich habe meinem Freund doch gesagt, er soll dieses Video NICHT online hochladen!</string>
+    <string name="question_19_answer_4">Na toll, nicht schon wieder… Er fängt immer an, den Premium-Content ohne mich zu schauen!</string>
 
     <string name="question_20">Abschließende Frage: Und, wie hat dir der Test gefallen?</string>
     <string name="question_20_answer_1">Diese \„Wissenschaftler\“ sind klinisch irre. Ich habe jede Sekunde gehasst.</string>

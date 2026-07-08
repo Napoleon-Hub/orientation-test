@@ -259,8 +259,7 @@ private fun ResultScreenContent(
                     MainButton(
                         modifier = actionModifier,
                         onClick = onAnotherTestsClicked,
-                        text = stringResource(R.string.result_button_another_apps),
-                        enabled = false
+                        text = stringResource(R.string.result_button_another_apps)
                     )
 
                     Row(

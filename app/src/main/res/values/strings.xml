@@ -18,7 +18,7 @@
     <string name="endings_title">Results</string>
     <string name="endings_stats_title">Statistics</string>
     <string name="endings_diagnosis_title">Subject Profiles</string>
-    <string name="endings_diagnosis_description">Your final profiles depends on where you failed or your final GigaChad-Meter Scale. Tap an icon for the full lab report</string>
+    <string name="endings_diagnosis_description">Your final profiles depend on where you failed or your final GigaChad-Meter Scale. Tap an icon for the full lab report</string>
     <string name="endings_counter_loses">Pathetic attempts to rig the system: %d</string>
     <string name="endings_counter_wins">Cheated off some straight guy: %d</string>
     <string name="endings_locked_title">Locked</string>
@@ -26,7 +26,7 @@
 
     <string name="ending_win_1">Gayest Straight Guy</string>
     <string name="ending_win_33">Hide the Pride</string>
-    <string name="ending_win_66">Bet my ass your\'re gay</string>
+    <string name="ending_win_66">Bet my ass you\'re gay</string>
     <string name="ending_win_100">Real man</string>
     <string name="ending_lose_4">Brokeback Mountain</string>
     <string name="ending_lose_8">Once is a try, twice is a guy</string>
@@ -72,7 +72,7 @@
     <string name="result_button_restart">Try again</string>
     <string name="result_button_restart_description">Questions may vary</string>
     <string name="result_rate_description">Rate experiment and share results!</string>
-    <string name="result_button_another_apps">Another tests</string>
+    <string name="result_button_another_apps">Other tests</string>
     <string name="result_button_pay">Feed scientists</string>
 
     <string name="result_endings_new">New profile documented</string>
@@ -178,12 +178,11 @@
     <string name="question_7_a_answer_3">The guy, obviously. You already know I\'m into boys.</string>
     <string name="question_7_a_answer_4">Yo, scientists, give me some real options! I\'m straight as an arrow, dammit!</string>
 
-    <string name="question_7_b">Club scenario: a girl approaches you and tries to hit on. Your response?</string>
+    <string name="question_7_b">Club scenario: a girl approaches you and tries to hit on you. Your response?</string>
     <string name="question_7_b_answer_1">\"Sorry, I\'m already taken, and I would never cheat on him.\"</string>
     <string name="question_7_b_answer_2">I\'d probably get so awkward I\'d embarrass myself… maybe even soil my pants.</string>
     <string name="question_7_b_answer_3">I don\'t do clubs. I prefer vanilla house parties with my besties.</string>
     <string name="question_7_b_answer_4">Yo, scientists, give me some real options! I\'m straight as an arrow, dammit!</string>
-
 
     <string name="question_8">Remember the question about the local crew and your girlfriend? I\'m giving you one more shot, because your previous answer was a total fail.</string>
     <string name="question_8_answer_1">Mama\'s Little Demolition Man. Go full kamikaze mode: scream at the top of your lungs and pretend you have a detonator in your pocket.</string>
@@ -203,7 +202,7 @@
     <string name="question_9_b_answer_3">Smart, beautiful, rich, and ready to do anything for me. And that\'s just the start—the list of red flags is ten pages long.</string>
 
     <string name="question_10">Scenario: You live with a roommate who is an elite rainbow commander. He makes a \"move\" on you. What are you doing?</string>
-    <string name="question_10_answer_1">It\'s only awkward if you make eye contact.</string>
+    <string name="question_10_answer_1">It\'s only gay if you make eye contact.</string>
     <string name="question_10_answer_2">I\'d agree, but only if we keep it strictly confidential and fast-paced.</string>
     <string name="question_10_answer_3">I\'d say yes. Anything to keep the roommate discount on rent, right?</string>
     <string name="question_10_answer_4">Fine, but I\'m the one driving. No debate.</string>
@@ -222,7 +221,7 @@
 
     <string name="question_12_b">Is true friendship possible between a man and a woman?</string>
     <string name="question_12_b_answer_1">Sure, I have plenty of girlfriends. We even go shopping together.</string>
-    <string name="question_12_b_answer_2">Yes, I’ve been a permanent resident of the friendzone my whole life.</string>
+    <string name="question_12_b_answer_2">I\'ve been a permanent resident of the friendzone my whole life.</string>
     <string name="question_12_b_answer_3">Yes, I always make it clear to them that we are just friends.</string>
 
     <string name="question_13_a">Do you have any \"rainbow\" friends?</string>
@@ -273,8 +272,8 @@
     <string name="question_18_answer_3">I\'m naturally smooth, just like both of my dads.</string>
     <string name="question_18_answer_4">I think shaving is a sin, so I basically look like Chewbacca\'s cousin.</string>
 
-    <string name="question_19">Scenario: You walk in on your bro watching ultra-sus elite rainbow fitness vids and hyperventilating. What\'s your move?</string>
-    <string name="question_19_answer_1">I\'ll lend him a hand. Real friends don\'t let friends struggle alone.</string>
+    <string name="question_19">Scenario: You walk in on your bro watching ultra-sus elite rainbow fitness vids. What\'s your move?</string>
+    <string name="question_19_answer_1">I\'ll offer some hands-on tactical support. Real friends don\'t let friends struggle alone.</string>
     <string name="question_19_answer_2">I\'ll let him know I\'ve seen that video too. 10/10 recommendation.</string>
     <string name="question_19_answer_3">How embarrassing! I told my boyfriend NOT to upload our training archive online!</string>
     <string name="question_19_answer_4">Unbelievable… He always starts watching the premium content without me!</string>
