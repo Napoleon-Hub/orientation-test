@@ -8,9 +8,9 @@
     <application
         android:name=".App"
         android:configChanges="orientation|screenSize|keyboardHidden"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_gachi"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_gachi_round"
         android:screenOrientation="sensorLandscape"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"

@@ -126,10 +126,12 @@ private fun GameScreenContent(
     onToggleMusic: () -> Unit = {}
 ) {
 
-    val currentBackgroundRes = if (uiState.questionNumber <= 10) {
+    val currentBackgroundRes = if (uiState.questionNumber <= 7) {
         R.drawable.background_game_1
-    } else {
+    } else if (uiState.questionNumber <= 14) {
         R.drawable.background_game_2
+    } else {
+        R.drawable.background_game_3
     }
 
     BackgroundWrapper(backgroundId = currentBackgroundRes) {
