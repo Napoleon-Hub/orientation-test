@@ -77,3 +77,10 @@ lint/tmp/
 # lint/reports/
 
 .kotlin/sessions
+
+# Архив R8-маппинга (задача archiveReleaseMapping в app/build.gradle.kts).
+# ~10 МБ бинарника на каждый релиз — в git такое тянуть не стоит: git не умеет
+# дельтить gzip, репозиторий распухнет безвозвратно. Авторитетные копии маппинга
+# и так лежат в Crashlytics и в Play Console (AAB несёт mapping внутри себя),
+# а эта папка — локальная страховка и материал для диффов между версиями.
+mapping-archive/

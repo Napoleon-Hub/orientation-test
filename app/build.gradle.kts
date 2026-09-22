@@ -1,3 +1,4 @@
+import com.android.build.api.artifact.SingleArtifact
 import java.util.Properties
 
 plugins {
@@ -62,6 +63,40 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+androidComponents {
+    onVariants(selector().withBuildType("release")) { variant ->
+        val versionName = generateVersionName(appVersionMajor, appVersionMinor, appVersionPatch)
+        val mappingFile = variant.artifacts.get(SingleArtifact.OBFUSCATION_MAPPING_FILE)
+        val taskSuffix = variant.name.replaceFirstChar { it.uppercase() }
+
+        val archiveMapping = tasks.register<Tar>("archive${taskSuffix}Mapping") {
+            group = "release"
+            description = "Архивирует mapping.txt и отчёты R8 для версии $versionName"
+
+            compression = Compression.GZIP
+            archiveFileName.set("mapping-$versionName.tar.gz")
+            destinationDirectory.set(rootProject.layout.projectDirectory.dir("mapping-archive"))
+
+            from(mappingFile.map { it.asFile.parentFile }) {
+                include(
+                    "mapping.txt",
+                    "usage.txt",
+                    "seeds.txt",
+                    "configuration.txt",
+                    "resources.txt"
+                )
+            }
+
+            doLast {
+                logger.lifecycle("Маппинг заархивирован: ${archiveFile.get().asFile.path}")
+            }
+        }
+
+        tasks.matching { it.name == "assembleRelease" || it.name == "bundleRelease" }
+            .configureEach { finalizedBy(archiveMapping) }
     }
 }
 
