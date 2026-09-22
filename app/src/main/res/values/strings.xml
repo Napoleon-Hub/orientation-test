@@ -3,18 +3,18 @@
     <string name="app_name">Gachi: Dungeon Master Test</string>
     <string name="app_version">Version %s</string>
 
-    <!-- Start -->
+    <!-- Start Screen -->
     <string name="start_button">Get Started</string>
-    <string name="start_description">The most accurate and deep Gachimuchi test ever created. Top scientists from around the globe grinded day and night just to answer the one question: Are you a true Dungeon Master or just a pathetic weakling?</string>
+    <string name="start_description">Welcome to the dungeon-laboratory! The hardest and deepest Gachimuchi test awaits you here. Scientists from all over the world sweated over it just to answer one crucial question: who are you — a true Dungeon Master, or did you just get the wrong door…?</string>
     <string name="start_button_continue">Keep Going</string>
-    <string name="start_description_continue">He couldn\'t even lift an empty bar, no test needed.\nYo, you\'re still standing there? Get your ass back to the testing zone!</string>
+    <string name="start_description_continue">Gigachad? What Gigachad, this test subject can\'t even bench an empty bar, we don\'t even need a test here.\nHey, are you here? Get your ass back to the dungeon, you naughty boy!</string>
     <string name="start_button_difficulty">Difficulty</string>
-    <string name="start_button_difficulty_easy">Small balls</string>
+    <string name="start_button_difficulty_easy">Tiny Nuts</string>
     <string name="start_button_difficulty_easy_gotcha">Trying to cheat again?</string>
     <string name="start_button_difficulty_hard">GigaChad</string>
     <string name="start_select_language_button">Select language</string>
 
-    <!-- Endings -->
+    <!-- Endings Screen -->
     <string name="endings_title">Results</string>
     <string name="endings_stats_title">Statistics</string>
     <string name="endings_diagnosis_title">Subject Verdicts</string>
@@ -24,51 +24,29 @@
     <string name="endings_locked_title">Locked</string>
     <string name="diagnosis_dialog_button_close">Understood</string>
 
-    <string name="ending_win_1">Lost Gym Bro</string>
-    <string name="ending_win_33">Leather Recruit</string>
+    <!-- Achievements -->
+    <string name="ending_win_1">Leather Recruit</string>
+    <string name="ending_win_33">Gym Bro</string>
     <string name="ending_win_66">Dungeon Master Candidate</string>
     <string name="ending_win_100">Dungeon Master</string>
     <string name="ending_lose_4">Rookie Jabroni</string>
     <string name="ending_lose_8">Gym Slave</string>
-    <string name="ending_lose_12">Accidental Passerby in Latex</string>
+    <string name="ending_lose_12">Casual Latex Fan</string>
     <string name="ending_lose_16">Fisting Victim</string>
-    <string name="ending_lose_20">Secret Rear-Guard Agent</string>
+    <string name="ending_lose_20">Got the wrong door…</string>
     <string name="ending_lose_pussy">Gotcha, little boy</string>
     <string name="ending_all">Boss of this Gym</string>
-    <string name="ending_donate">Almost 300 bucks!</string>
+    <string name="ending_donate">300 bucks</string>
 
-    <!-- Game -->
+    <!-- Game Screen -->
     <string name="game_health_title">Gachi-Meter</string>
     <string name="game_questions">QUESTION</string>
     <string name="game_questions_counter" translatable="false">%1$d/%2$d</string>
 
-    <!-- Result -->
+    <!-- Result Screen-->
     <string name="result_title_win">Test complete! Looks like you\'re no weakling…</string>
     <string name="result_title_lose">Test over! Verdict: REGULAR WEAKLING</string>
     <string name="result_title_lose_pussy">Test failed! You\'ve been caught red-handed, kiddo!</string>
-
-    <string name="result_text_result_win_1_32">With a result like this, let\'s just say you\'re the most suspicious rookie we\'ve ever encountered. Your answers caused fierce arguments and a massive brawl in the staff room.
-        Be glad that those who considered you a true gym bro won this time, otherwise I already had a slip ready with your name and a big fat \"Weakling\" stamp on it. Scram!</string>
-    <string name="result_text_result_win_33_65">We saw your knees shaking during the evaluation. You answered with a struggle, but a result is a result — you can actually bench an empty bar!
-        I bet on the exact opposite, and now my monthly salary is going into some chump\'s pocket. Screw this job, I quit!</string>
-    <string name="result_text_result_win_66_99">You held your ground well. We doubted you for a moment, but you proved that your eggplant is rising in the right direction! One of the scientists bet his azz that you weren\'t one of us…
-        Well, you can probably guess what happened next! As for you, you\'re free to go.</string>
-    <string name="result_text_result_win_100">Some thought it was impossible, but you proved them wrong. You are the truest Boss of the Gym. One of the scientists bet his car that you\'d fail on the very first set…
-        The poor guy is getting kicked out by his wife, but now we know for sure that you are the true son of Billy Herrington!</string>
-    <string name="result_text_result_lose_4_7">When we analyzed the results, we were in absolute shock. You need to gain some mass first so you can at least move around without life support! So here\'s your slip: you\'re just a regular weakling.
-        The feeblest specimen we\'ve ever encountered, congratulations!</string>
-    <string name="result_text_result_lose_8_11">You tried to hide it, of course, but your weakness gave you away. We don\'t have schoolboys working here, we are qualified scientists, so busting a weakling like you is a piece of cake.
-        Here, take your slip, show it to your boyfriend, and we\'re going back to work. And don\'t you dare hit on our lab assistants on your way out!</string>
-    <string name="result_text_result_lose_12_15">Long story short, the system has placed you in the camp of latex lovers who have never lifted anything heavier than a protein shaker.
-        Sure, you didn\'t show it right away, but we aren\'t sitting here with multiple degrees working for pennies in the name of science for nothing. A single hint is enough for us… Boys, carry him out. Where? You\'re going to work off your 300 bucks!</string>
-    <string name="result_text_result_lose_16_19">The scientists argued for a long time, someone even threw a microscope at a colleague, but the decision was made. You are a victim of hardcore fisting! You already know it, maybe you haven\'t accepted it yet, but don\'t worry, you\'re not alone.
-        Though there are no more like you in this lab, so get the hell out of here, go lift some weights, work through your trauma, and come back!</string>
-    <string name="result_text_result_lose_20">To go so far just to trip up on the very last question… And I was already prepared to sign the papers stating you\'re a real Dungeon Master. Good thing the rest of the scientists and I weren\'t born yesterday, we know how to spot your kind.
-        So beat it, secret rear-guard agent, don\'t let your shadow cross this lab again! Go tell your stories about benching 225 lbs at the circus, we play for keeps here!</string>
-    <string name="result_text_result_lose_pussy">Gotcha, you sneaky bastard! Thought you could cheat the system and simplify the questions so we wouldn\'t find out who you really are? Well, too bad, you were caught red-handed, you rascal.
-        We\'ll see you at the retake, though let\'s be honest, it won\'t help you since everything is already clear here. Carry him out, boys!</string>
-
-    <string name="result_text_result_gaylord">You have mastered this life, girls fear you, men respect you. We have sent your results to the right authorities, you\'ll get a call soon inviting you to participate in a Gachimuchi sparring match for the title of Boss of the Gym, our congratulations!</string>
 
     <string name="result_button_restart">Try again</string>
     <string name="result_button_restart_description">Questions may vary</string>
@@ -79,18 +57,35 @@
     <string name="result_endings_new">New verdict documented</string>
     <string name="result_endings_all_unlocked">You have collected all verdicts, you are now the true Boss of the Gym!</string>
 
-    <string name="result_test_share_win">My Gachi-Meter held strong at %1$d%%! I stepped into this locker room and proved who the Boss of the Gym is. Van Darkholme would be proud of me! At which question will you fold?\n\nLink: %2$s</string>
-    <string name="result_test_share_lose">They cracked me on question %1$d! My Gachi-Meter dropped to zero, and I got kicked out of the gym… At which question will you break?\n\nLink: %2$s</string>
-    <string name="result_test_share_permanent_lose">EXPERIMENT INTERRUPTED: I chose the \"Small balls\" difficulty and was thrown out of the gym in shame. The Gachi-Meter didn\'t even turn on… Maybe you are braver than me?\n\nLink: %s</string>
+    <string name="result_test_share_win">My Gachi-Meter held up at %1$d%%! I stepped into this dungeon and proved who\'s the Dungeon Master here. Van Darkholme would be proud of me! Which question will break you?\n\nLink: %2$s</string>
+    <string name="result_test_share_lose">I got cracked on question #%1$d! My Gachi-Meter dropped to zero, and I was kicked out of the dungeon gagged… Which question will make you fail?\n\nLink: %2$s</string>
+    <string name="result_test_share_permanent_lose">EXPERIMENT ABORTED: I picked the \"Tiny Nuts\" difficulty and was kicked out of the dungeon in shame. The Gachi-Meter didn\'t even turn on… Maybe you\'re braver than me?\n\nLink: %s</string>
+
+    <!-- Result Win -->
+    <string name="result_text_result_win_1_32">You passed the test, but with such a weak score, we\'ll sign you up as a regular leather recruit for now. You\'ll be fetching gear for those who actually know what to do with it… Here, take your new uniform. Too tight? Don\'t worry, it\'s supposed to fit snugly in certain places… Sooner or later, they\'ll teach you everything. But for now, scram!</string>
+    <string name="result_text_result_win_33_65">During the test, we saw your knees shaking. Your answers were pretty shaky, but a result is a result — you can at least bench an empty bar! Here\'s your pass to the dungeon, your new gym bros are already waiting for you in there, they\'ll spot you real good…</string>
+    <string name="result_text_result_win_66_99">You held up honorably. We doubted you for a second, but you proved that you know your stuff about the true culture! One of the scientists bet his ass that you weren\'t one of us… Well, you can guess what happened next! As for you, you\'re free to go.</string>
+    <string name="result_text_result_win_100">Some thought it was impossible, but you proved them wrong. You are a true Dungeon Master, a real son of Billy Herrington! A couple of new slaves are already waiting for you outside the door. We hope you can teach them the basics, and we won\'t limit your methods… Welcome!</string>
+
+    <!-- Result Lose -->
+    <string name="result_text_result_lose_4_7">When we analyzed the results, we were in absolute shock. You need to gain some mass first just to move around without a life support system! So here is your certificate: you are a regular rookie jabroni. The weakest specimen we have ever encountered! You wouldn\'t last a single day in the dungeon, so run along back to mommy.</string>
+    <string name="result_text_result_lose_8_11">You tried to hide it, of course, but your weakness exposed itself. You are only good for fetching body oil for the guys when they decide to go wrestling again. So now you are a Gym Slave — take this certificate, show it to your boyfriend, and we\'re getting back to work.</string>
+    <string name="result_text_result_lose_12_15">Long story short, the system assigned you to the latex lovers\' camp — people who have never lifted anything heavier than a protein shaker. Sure, you didn\'t show it right away, but we don\'t sit here with multiple degrees working for mere pennies in the name of science for nothing. A single hint is enough for us… Boys, carry him out! Where to? You\'ll show them what you\'re willing to do for 300 bucks!</string>
+    <string name="result_text_result_lose_16_19">The scientists argued for a long time, someone even threw a microscope at a colleague, but the decision was made. You are a victim of hardcore fisting! You already know it, maybe you haven\'t accepted it yet, but don\'t worry, you\'re not alone. Though there are no more like you in this lab, so get the hell out of here, go lift some weights, work through your trauma, and come back!</string>
+    <string name="result_text_result_lose_20">Going so strong only to stumble on the very last question… And I was already about to sign the papers to issue your first leather belt. Good thing the rest of the scientists and I weren\'t born yesterday and know how to spot guys like you. So let\'s just admit you got the wrong door, just like your two new friends waiting right behind you. Have a great time together, boys!</string>
+
+    <!-- Result Secret -->
+    <string name="result_text_result_lose_pussy">Gotcha, you sneaky bastard! Thought you could cheat the system and simplify the questions to skip the line into the dungeon with the boys? Alas, you were caught, you naughty boy. We\'ll be waiting for your retake, though let\'s be honest, it won\'t help you. Carry him out, men!</string>
+    <string name="result_text_result_gaylord">You have mastered this life — women fear you, men respect you. We have forwarded your results to the proper authorities. Expect a call soon inviting you to participate in a Gachimuchi sparring match on a brand new Gachi Show. Our congratulations!</string>
 
     <!-- Connection -->
     <string name="connection_no_internet_title">SYSTEM BLACKOUT!</string>
-    <string name="connection_no_internet_description">Connection to the server lost. The scientists cannot conduct Gachi-experiments offline — they need to analyze your data in real time. Turn on the internet, and we will continue testing you.</string>
+    <string name="connection_no_internet_description">Connection to the dungeon lost. The scientists cannot conduct Gachi-experiments offline — they need to analyze your data in real time. Turn on the internet, and we will continue testing you.</string>
 
     <!-- Access Dialog -->
     <string name="access_dialog_title">Research Access Protocol</string>
     <string name="access_dialog_warning">WARNING: This application is created solely for entertainment purposes. We do not intend to offend anyone\'s feelings or dignity. All tests and results are a figment of our leading lab assistants\' imagination and hold no scientific or diagnostic value.</string>
-    <string name="access_dialog_ad_description">To keep the equipment running and pay the scientists\' salaries, the app contains some ads. We need your consent for data processing to show you relevant ads.</string>
+    <string name="access_dialog_ad_description">To keep the equipment running and pay the scientists\' salaries, the app contains some ads. We need your consent for data processing to show you ads.</string>
     <string name="access_dialog_privacy_policy">Read the Privacy Policy</string>
     <string name="access_dialog_button_continue">Let\'s go!</string>
     <string name="access_dialog_button_finish">Leave the Laboratory</string>

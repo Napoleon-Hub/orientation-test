@@ -128,7 +128,7 @@ private fun GameScreenContent(
 
     val currentBackgroundRes = if (uiState.questionNumber <= 7) {
         R.drawable.background_game_1
-    } else if (uiState.questionNumber <= 14) {
+    } else if (uiState.questionNumber <= 13) {
         R.drawable.background_game_2
     } else {
         R.drawable.background_game_3

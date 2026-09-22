@@ -4,18 +4,18 @@
     <string name="app_name">Gachi: Dungeon Master Test</string>
     <string name="app_version">Version %s</string>
 
-    <!-- Start -->
+    <!-- Start Screen -->
     <string name="start_button">Starten</string>
-    <string name="start_description">Der komplexeste und tiefgründigste Gachimuchi-Test aller Zeiten. Wissenschaftler aus der ganzen Welt haben Tag und Nacht geschwitzt, nur um die eine Frage zu beantworten: Bist du ein wahrer Dungeon Master oder ein erbärmlicher Schwächling?</string>
+    <string name="start_description">Willkommen im Dungeon-Labor! Hier erwartet dich der schwerste und tiefste Gachimuchi-Test. Wissenschaftler aus aller Welt haben dafür geschwitzt, um eine entscheidende Frage zu beantworten: Wer bist du – ein wahrer Dungeon Master oder hast du einfach die falsche Tür erwischt…</string>
     <string name="start_button_continue">Fortsetzen</string>
-    <string name="start_description_continue">Der schafft nicht mal die leere Stange, da erübrigt sich jeder Test.\nHey, stehst du immer noch an der Umkleidekabine? Zurück in die Testzone mit dir!</string>
+    <string name="start_description_continue">Was für ein Gigachad? Dieser Proband drückt nicht mal die leere Hantelstange, da brauchen wir nicht mal einen Test.\nHey, bist du da? Komm zurück in den Dungeon, du Lümmel!</string>
     <string name="start_button_difficulty">Schwierigkeit</string>
-    <string name="start_button_difficulty_easy">Weichei-Modus</string>
+    <string name="start_button_difficulty_easy">Kleine Glöckchen</string>
     <string name="start_button_difficulty_easy_gotcha">Wolltest du etwa schon wieder schummeln?</string>
     <string name="start_button_difficulty_hard">GigaChad</string>
     <string name="start_select_language_button">Sprache wählen</string>
 
-    <!-- Endings -->
+    <!-- Endings Screen -->
     <string name="endings_title">Ergebnisse</string>
     <string name="endings_stats_title">Statistik</string>
     <string name="endings_diagnosis_title">Verdikte des Subjekts</string>
@@ -25,50 +25,28 @@
     <string name="endings_locked_title">Verschlüsselt</string>
     <string name="diagnosis_dialog_button_close">Verstanden</string>
 
-    <string name="ending_win_1">Verirrter Gym-Bro</string>
-    <string name="ending_win_33">Leder-Rekrut</string>
+    <!-- Achievements -->
+    <string name="ending_win_1">Leder-Rekrut</string>
+    <string name="ending_win_33">Gym-Bro</string>
     <string name="ending_win_66">Dungeon-Master-Kandidat</string>
     <string name="ending_win_100">Dungeon Master</string>
     <string name="ending_lose_4">Einfacher Schwächling</string>
     <string name="ending_lose_8">Gym-Sklave</string>
-    <string name="ending_lose_12">Zufälliger Passant in Latex</string>
+    <string name="ending_lose_12">Gewöhnlicher Latex-Liebhaber</string>
     <string name="ending_lose_16">Opfer von hartem Fisting</string>
-    <string name="ending_lose_20">Verdeckter Rückseiten-Agent</string>
+    <string name="ending_lose_20">Die falsche Tür erwischt…</string>
     <string name="ending_lose_pussy">Erwischt, Kleiner</string>
     <string name="ending_all">Boss of this Gym</string>
-    <string name="ending_donate">Fast 300 Dollar!</string>
+    <string name="ending_donate">300 bucks</string>
 
-    <!-- Game -->
+    <!-- Game Screen -->
     <string name="game_health_title">Gachi-Meter</string>
     <string name="game_questions">FRAGE</string>
 
-    <!-- Result -->
-    <string name="result_title_win">Test bestanden! Sieht so aus, als wärst du kein Schwächling…</string>
-    <string name="result_title_lose">Test vorbei! Urteil: EINFACHER SCHWÄCHLING</string>
+    <!-- Result Screen-->
+    <string name="result_title_win">Test bestanden! Willkommen in der Familie, Kumpel…</string>
+    <string name="result_title_lose">Test vorbei! Du hast die falsche Tür erwischt…</string>
     <string name="result_title_lose_pussy">Test nicht bestanden! Du wurdest auf frischer Tat ertappt, Kleiner!</string>
-
-    <string name="result_text_result_win_1_32">Mit so einem Ergebnis sagen wir einfach mal, dass du der suspekteste Anfänger bist, den wir je erlebt haben. Deine Antworten haben zu heftigen Diskussionen und einer Massenschlägerei im Personalraum geführt.
-        Sei froh, dass diesmal diejenigen gewonnen haben, die dich für einen echten Gym-Bro hielten, sonst hätte ich schon einen Zettel mit deinem Namen und dem Vermerk „Schwächling“ bereitgehabt. Abflug!</string>
-    <string name="result_text_result_win_33_65">Wir haben gesehen, wie deine Knie während des Tests gezittert haben. Du hast dich zwar durchgequält, aber Ergebnis ist Ergebnis – die leere Hantelstange schaffst du!
-        Ich jedenfalls habe auf das Gegenteil gewettet, und jetzt landet mein Monatsgehalt in der Tasche eines anderen Idioten. Scheiß auf diesen Job, ich kündige!</string>
-    <string name="result_text_result_win_66_99">Du hast dich wacker geschlagen. Einen Moment lang haben wir an dir gezweifelt, aber du hast bewiesen, dass deine Aubergine in die richtige Richtung wächst!
-        Einer der Wissenschaftler hat seinen Allerwertesten darauf verwettet, dass du keiner von uns bist… Tja, was danach geschah, kannst du dir wohl selbst denken! Du hingegen bist hiermit entlassen.</string>
-    <string name="result_text_result_win_100">Manche hielten es für unmöglich, aber du hast das Gegenteil bewiesen. Du bist der wahrste Boss of the Gym. Einer der Wissenschaftler hat sein Auto darauf verwettet, dass du schon beim ersten Satz schlappmachst…
-        Der Ärmste wird wohl von seiner Frau vor die Tür gesetzt, aber jetzt wissen wir sicher, dass du der wahre Sohn von Billy Herrington bist!</string>
-    <string name="result_text_result_lose_4_7">Als wir die Ergebnisse analysierten, waren wir fassungslos. Du solltest erst mal etwas Masse aufbauen, damit du dich überhaupt ohne lebenserhaltende Maßnahmen bewegen kannst!
-        Hier ist also dein Zettel: Du bist ein ganz einfacher Schwächling. Das mickrigste Exemplar, das uns je untergekommen ist, Glückwunsch!</string>
-    <string name="result_text_result_lose_8_11">Du hast natürlich versucht, es zu verbergen, aber deine Hilflosigkeit hat dich verraten. Hier arbeiten keine Schulkinder, sondern qualifizierte Wissenschaftler, einen Schwächling wie dich zu durchschauen ist also ein Kinderspiel.
-        Hier, nimm deinen Zettel, zeig ihn deinem Freund, und wir gehen wieder an die Arbeit. Und wage es nicht, unsere Laboranten auf dem Weg nach draußen anzubaggern!</string>
-    <string name="result_text_result_lose_12_15">Kurz gesagt, das System hat dich dem Lager der Latex-Liebhaber zugeordnet, die noch nie etwas Schwereres als einen Protein-Shaker gehoben haben.
-        Natürlich hast du das nicht sofort gezeigt, aber wir sitzen hier nicht umsonst mit mehreren Abschlüssen und arbeiten für einen Hungerlohn im Namen der Wissenschaft. Ein einziger Hinweis reicht uns… Jungs, tragt ihn raus. Wohin? Du wirst deine 300 Dollar schön abarbeiten!</string>
-    <string name="result_text_result_lose_16_19">Die Wissenschaftler haben lange gestritten, jemand hat sogar mit einem Mikroskop nach einem Kollegen geworfen, aber die Entscheidung steht. Du bist ein Opfer von hartem Fisting!
-        Du weißt es selbst, vielleicht hast du es nur noch nicht akzeptiert, aber keine Sorge, du bist nicht allein. In diesem Labor gibt es zwar keine deinesgleichen mehr, also mach, dass du hier rauskommst. Geh ein bisschen pumpen, verarbeite deine Traumata und komm dann wieder!</string>
-    <string name="result_text_result_lose_20">So gut durchzuhalten, nur um bei der allerletzten Frage zu stolpern… Dabei war ich schon bereit, die Papiere zu unterschreiben, dass du ein echter Dungeon Master bist. Gut, dass die restlichen Wissenschaftler und ich nicht von gestern sind, wir wissen, wie man Typen wie dich entlarvt.
-        Also zisch ab, verdeckter Rückseiten-Agent, lass dich im Labor nicht mehr blicken! Erzähl deine Geschichten über 100 kg Bankdrücken im Zirkus, bei uns hier ist das alles todernst!</string>
-    <string name="result_text_result_lose_pussy">Erwischt, du Schlaumeier! Dachtest wohl, du könntest das System austricksen und die Fragen vereinfachen, damit wir nicht herausfinden, wer du wirklich bist? Aber Pustekuchen, du wurdest auf frischer Tat ertappt, du Bengel.
-        Wir sehen uns beim Nachholtermin, obwohl мы ehrlich sein müssen – der wird dir auch nicht helfen, denn hier ist eh alles klar. Tragt ihn raus, Männer!</string>
-
-    <string name="result_text_result_gaylord">Du hast dieses Leben durchschaut, Frauen haben Angst vor dir, Männer respektieren dich. Wir haben deine Ergebnisse an die zuständigen Stellen weitergeleitet, bald wirst du einen Anruf erhalten, um an einem Gachimuchi-Sparring um den Titel der Boss of the Gym teilzunehmen, unseren Glückwunsch!</string>
 
     <string name="result_button_restart">Test wiederholen</string>
     <string name="result_button_restart_description">Fragen können variieren</string>
@@ -79,18 +57,35 @@
     <string name="result_endings_new">Neues Verdikt dokumentiert</string>
     <string name="result_endings_all_unlocked">Du hast alle Verdikte gesammelt, jetzt bist du der wahre Boss of the Gym!</string>
 
-    <string name="result_test_share_win">Mein Gachi-Meter hat bei %1$d%% standgehalten! Ich habe diese Umkleidekabine betreten und bewiesen, wer hier der Boss of the Gym ist. Van Darkholme wäre stolz auf mich! Bei welcher Frage machst du schlapp?\n\nLink: %2$s</string>
-    <string name="result_test_share_lose">Ich wurde bei Frage %1$d geknackt! Das Gachi-Meter ist auf Null gefallen und ich wurde aus dem Gym geworfen… Bei welcher Frage brichst du ein?\n\nLink: %2$s</string>
-    <string name="result_test_share_permanent_lose">EXPERIMENT UNTERBROCHEN: Ich habe die Schwierigkeit „Kleine Eier“ gewählt und wurde voller Schande aus dem Gym geworfen. Das Gachi-Meter ist nicht mal angesprungen… Vielleicht bist du mutiger als ich?\n\nLink: %s</string>
+    <string name="result_test_share_win">Mein Gachi-Meter hat zu %1$d%% durchgehalten! Ich bin in diesen Dungeon marschiert und habe bewiesen, wer hier der Dungeon Master ist. Van Darkholme wäre stolz auf mich! Bei welcher Frage machst du schlapp?\n\nLink: %2$s</string>
+    <string name="result_test_share_lose">Sie haben mich bei Frage %1$d geknackt! Der Gachi-Meter ist auf Null gefallen und ich wurde mit Knebel im Mund aus dem Dungeon geworfen… An welcher Frage wirst du zerbrechen?\n\nLink: %2$s</string>
+    <string name="result_test_share_permanent_lose">EXPERIMENT ABGEBROCHEN: Ich habe den Schwierigkeitsgrad „Kleine Glöckchen“ gewählt und wurde voller Schande aus dem Dungeon geworfen. Der Gachi-Meter ist nicht mal angesprungen… Bist du vielleicht mutiger als ich?\n\nLink: %s</string>
+
+    <!-- Result Win -->
+    <string name="result_text_result_win_1_32">Du hast den Test bestanden, aber mit so einem schwachen Ergebnis tragen wir dich erst mal als normalen Leder-Rekruten ein. Du wirst die Ausrüstung für die herbeischaffen, die wissen, was man damit macht… Hier, nimm deine neue Uniform. Zwackt sie? Macht nichts, die muss an bestimmten Stellen eng sitzen… Früher oder später wird man dir alles beibringen. Und jetzt: Abmarsch!</string>
+    <string name="result_text_result_win_33_65">Während des Tests haben wir gesehen, wie deine Knie geschlottert haben. Deine Antworten waren zwar etwas holprig, aber Ergebnis ist Ergebnis – die leere Hantelstange drückst du allemal! Hier ist dein Pass für den Dungeon, deine neuen Gym-Bros warten drinnen schon auf dich, sie werden dich ordentlich sichern…</string>
+    <string name="result_text_result_win_66_99">Du hast dich wacker geschlagen. Zwischendurch hatten wir etwas Zweifel, aber du hast bewiesen, dass du die wahre Kultur verstehst! Einer der Wissenschaftler hat seinen Arsch darauf verwettet, dass du keiner von uns bist… Tja, was danach passiert ist, kannst du dir ja denken! Und du kannst jetzt gehen.</string>
+    <string name="result_text_result_win_100">Manche hielten es für unmöglich, aber du hast das Gegenteil bewiesen. Du bist ein wahrhaftiger Dungeon Master, ein echter Sohn von Billy Herrington! Vor der Tür wartet schon ein Paar neuer Sklaven auf dich. Wir hoffen, du kannst ihnen die Grundlagen beibringen, und bei den Methoden setzen wir dir keine Grenzen… Willkommen!</string>
+
+    <!-- Result Lose -->
+    <string name="result_text_result_lose_4_7">Als wir die Ergebnisse analysiert haben, waren wir schockiert. Du solltest erst mal etwas Masse zulegen, damit du dich überhaupt ohne Lebenserhaltungssystem fortbewegen kannst! Hier ist deine Bescheinigung: Du bist ein stinknormaler mickriger Lappen. Das schwächste Exemplar, das uns je untergekommen ist! Du würdest nicht mal einen Tag im Dungeon überleben, also lauf schnell heim zu Mami.</string>
+    <string name="result_text_result_lose_8_11">Du hast natürlich versucht, es zu verbergen, aber deine Unfähigkeit hat dich verraten. Du taugst höchstens dazu, den Jungs das Körperöl zu bringen, wenn sie wieder eine Runde Ringen wollen. Ab jetzt bist du ein Gym-Sklave – hier ist deine Bescheinigung, zeig sie deinem Freund. Wir arbeiten dann mal weiter.</string>
+    <string name="result_text_result_lose_12_15">Kurz gesagt: Das System hat dich ins Lager der Latex-Liebhaber gesteckt, die noch nie etwas Schwereres als einen Proteinshaker in der Hand hatten. Klar, du hast das nicht sofort gezeigt, но wir sitzen hier nicht umsonst mit mehreren akademischen Titeln und schuften für ein paar mickrige Groschen im Namen der Wissenschaft. Uns reicht ein einziger Hinweis… Jungs, schafft ihn weg! Wohin? Du wirst ihnen schon zeigen, wozu du für 300 Bucks bereit bist!</string>
+    <string name="result_text_result_lose_16_19">Die Wissenschaftler haben lange gestritten, jemand hat sogar mit einem Mikroskop nach einem Kollegen geworfen, aber die Entscheidung steht. Du bist ein Opfer von hartem Fisting! Du weißt es selbst, vielleicht hast du es nur noch nicht akzeptiert, aber keine Sorge, du bist nicht allein. In diesem Labor gibt es zwar keine deinesgleichen mehr, also mach, dass du hier rauskommst. Geh ein bisschen pumpen, verarbeite deine Traumata und komm dann wieder!</string>
+    <string name="result_text_result_lose_20">So gut dabei gewesen und ausgerechnet bei der letzten Frage gestolpert… Dabei war ich schon kurz davor, die Papiere für deinen ersten Ledergürtel zu unterschreiben. Gut, dass wir Wissenschaftler hier nicht auf den Kopf gefallen sind und genau wissen, wie man Typen wie dich entlarvt. Geben wir es also zu: Du hast einfach die falsche Tür erwischt, genau wie deine zwei neuen Freunde, die schon hinter dir stehen. Viel Spaß euch zusammen!</string>
+
+    <!-- Result Secret -->
+    <string name="result_text_result_lose_pussy">Erwischt, du Schlaumeier! Dachtest du etwa, du kannst das System austricksen und die Fragen vereinfachen, um ohne Anstehen zu den Jungs im Dungeon zu kommen? Tja, auf frischer Tat ertappt, du Lümmel. Wir warten auf deine Nachprüfung, obwohl sie dir – seien wir ehrlich – auch nicht helfen wird. Schafft ihn raus, Männer!</string>
+    <string name="result_text_result_gaylord">Du hast dieses Leben durchgespielt – Frauen fürchten dich, Männer respektieren dich. Wir haben deine Ergebnisse an die zuständigen Stellen weitergeleitet. Bald bekommst du einen Anruf mit einer Einladung zu einem Gachimuchi-Sparring in einer neuen Gachi-Show. Herzlichen Glückwunsch!</string>
 
     <!-- Connection -->
     <string name="connection_no_internet_title">SYSTEM STROMLOS!</string>
-    <string name="connection_no_internet_description">Verbindung zum Server verloren. Die Wissenschaftler können keine Gachi-Experimente offline durchführen – sie müssen deine Daten in Echtzeit analysieren. Schalte das Internet ein, und wir testen dich weiter.</string>
+    <string name="connection_no_internet_description">Verbindung zum Dungeon verloren. Die Wissenschaftler können keine Gachi-Experimente offline durchführen – sie müssen deine Daten in Echtzeit analysieren. Schalte das Internet ein, und wir testen dich weiter.</string>
 
     <!-- Access Dialog -->
     <string name="access_dialog_title">Forschungszugangsprotokoll</string>
     <string name="access_dialog_warning">ACHTUNG: Diese Anwendung wurde ausschließlich zu Unterhaltungszwecken erstellt. Wir beabsichtigen nicht, die Gefühle oder die Würde von jemandem zu verletzen. Alle Tests und Ergebnisse sind frei erfunden von unseren leitenden Laboranten und haben keinen wissenschaftlichen oder diagnostischen Wert.</string>
-    <string name="access_dialog_ad_description">Um den Betrieb der Geräte zu sichern und die Gehälter der Wissenschaftler zu bezahlen, enthält die App ein wenig Werbung. Wir benötigen deine Zustimmung zur Datenverarbeitung, um dir relevante Werbung anzuzeigen.</string>
+    <string name="access_dialog_ad_description">Um den Betrieb der Geräte zu sichern und die Gehälter der Wissenschaftler zu bezahlen, enthält die App ein wenig Werbung. Wir benötigen deine Zustimmung zur Datenverarbeitung, um dir Werbung anzuzeigen.</string>
     <string name="access_dialog_privacy_policy">Datenschutzerklärung lesen</string>
     <string name="access_dialog_button_continue">Auf geht\'s!</string>
     <string name="access_dialog_button_finish">Labor verlassen</string>
