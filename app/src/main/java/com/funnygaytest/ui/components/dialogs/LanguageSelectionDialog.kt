@@ -13,8 +13,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,11 +31,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.funnygaytest.R
 import com.funnygaytest.ui.theme.LabTheme
+import com.funnygaytest.utils.enums.AppLanguage
 
 @Composable
 fun LanguageSelectionDialog(
-    currentLanguage: String,
-    onLanguageSelected: (String) -> Unit,
+    currentLanguage: AppLanguage,
+    onLanguageSelected: (AppLanguage) -> Unit,
     onDismiss: () -> Unit
 ) {
     Dialog(onDismissRequest = onDismiss) {
@@ -48,6 +51,7 @@ fun LanguageSelectionDialog(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .verticalScroll(rememberScrollState())
                     .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -58,26 +62,14 @@ fun LanguageSelectionDialog(
                     color = LabTheme.colors.textPrimary
                 )
 
-                LanguageOption(
-                    text = "Русский",
-                    iconRes = R.drawable.ic_flag_ru,
-                    isSelected = currentLanguage.startsWith("ru"),
-                    onClick = { onLanguageSelected("ru") }
-                )
-
-                LanguageOption(
-                    text = "English",
-                    iconRes = R.drawable.ic_flag_en,
-                    isSelected = currentLanguage.startsWith("en"),
-                    onClick = { onLanguageSelected("en") }
-                )
-
-                LanguageOption(
-                    text = "Deutsch",
-                    iconRes = R.drawable.ic_flag_de,
-                    isSelected = currentLanguage.startsWith("de"),
-                    onClick = { onLanguageSelected("de") }
-                )
+                AppLanguage.entries.forEach { language ->
+                    LanguageOption(
+                        text = language.displayName,
+                        iconRes = language.flagRes,
+                        isSelected = language == currentLanguage,
+                        onClick = { onLanguageSelected(language) }
+                    )
+                }
             }
         }
     }

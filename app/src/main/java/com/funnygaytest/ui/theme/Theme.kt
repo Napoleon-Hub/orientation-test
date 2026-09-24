@@ -5,6 +5,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.staticCompositionLocalOf
 
 private val DefaultColors = LabColors()
@@ -30,11 +31,16 @@ val LocalLabTypography = staticCompositionLocalOf<LabTypography> {
     error("LabTypography не предоставлена: оберните UI в LabTheme")
 }
 
+val LocalLabDimens = compositionLocalOf<LabDimens> {
+    error("LabDimens не предоставлены: оберните UI в LabTheme")
+}
+
 @Composable
 fun LabTheme(content: @Composable () -> Unit) {
     CompositionLocalProvider(
         LocalLabColors provides DefaultColors,
-        LocalLabTypography provides DefaultTypography
+        LocalLabTypography provides DefaultTypography,
+        LocalLabDimens provides currentLabDimens()
     ) {
         MaterialTheme(
             colorScheme = LabColorScheme,
@@ -54,4 +60,9 @@ object LabTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalLabTypography.current
+
+    val dimens: LabDimens
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalLabDimens.current
 }

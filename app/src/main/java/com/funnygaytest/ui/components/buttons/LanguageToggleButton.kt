@@ -16,28 +16,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.R
 import com.funnygaytest.ui.theme.LabTheme
+import com.funnygaytest.utils.enums.AppLanguage
 
 @Composable
 fun LanguageToggleButton(
-    currentLanguage: String,
+    modifier: Modifier = Modifier,
+    currentLanguage: AppLanguage,
     onClick: () -> Unit
 ) {
-    val flagRes = if (currentLanguage.startsWith("ru")) {
-        R.drawable.ic_flag_ru
-    } else if(currentLanguage.startsWith("en")) {
-        R.drawable.ic_flag_en
-    } else R.drawable.ic_flag_de
-
     IconButton(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .padding(12.dp)
             .size(48.dp)
             .background(LabTheme.colors.surface.copy(alpha = 0.4f), CircleShape)
             .border(1.dp, LabTheme.colors.accent.copy(alpha = 0.5f), CircleShape)
     ) {
         Image(
-            painter = painterResource(id = flagRes),
+            painter = painterResource(id = currentLanguage.flagRes),
             contentDescription = stringResource(R.string.start_select_language_button),
             contentScale = ContentScale.Crop,
             modifier = Modifier

@@ -5,15 +5,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -27,9 +22,6 @@ fun DescriptionBox(
     textAlign: TextAlign = TextAlign.Center,
     descriptionString: AnnotatedString
 ) {
-    var scaledTextStyle by remember { mutableStateOf(textStyle) }
-    var readyToDraw by remember { mutableStateOf(false) }
-
     Box(
         modifier = modifier
             .background(
@@ -44,25 +36,10 @@ fun DescriptionBox(
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
-        Text(
+        BasicText(
             text = descriptionString,
-            modifier = Modifier.drawWithContent {
-                if (readyToDraw) {
-                    drawContent()
-                }
-            },
-            style = scaledTextStyle,
-            color = LabTheme.colors.textPrimary,
-            textAlign = textAlign,
-            onTextLayout = { textLayoutResult ->
-                if (textLayoutResult.hasVisualOverflow) {
-                    scaledTextStyle = scaledTextStyle.copy(
-                        fontSize = scaledTextStyle.fontSize * 0.95
-                    )
-                } else {
-                    readyToDraw = true
-                }
-            }
+            style = textStyle.copy(color = LabTheme.colors.textPrimary, textAlign = textAlign),
+            autoSize = shrinkToFit(textStyle)
         )
     }
 }
