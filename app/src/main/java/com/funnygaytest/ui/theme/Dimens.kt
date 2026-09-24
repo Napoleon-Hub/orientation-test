@@ -1,6 +1,6 @@
 package com.funnygaytest.ui.theme
 
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.text.TextStyle
@@ -52,7 +52,7 @@ internal val ExpandedDimens = LabDimens(
 
 @Composable
 internal fun currentLabDimens(): LabDimens {
-    val sizeClass = currentWindowAdaptiveInfo().windowSizeClass
+    val sizeClass = currentWindowAdaptiveInfoV2().windowSizeClass
     val isWideEnough = sizeClass.isWidthAtLeastBreakpoint(WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)
     return when {
         !isWideEnough -> CompactDimens

@@ -12,7 +12,7 @@ plugins {
 
 val appVersionMajor = 3
 val appVersionMinor = 1
-val appVersionPatch = 5
+val appVersionPatch = 8
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
@@ -140,7 +140,6 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
-    ksp(libs.kotlin.metadata.jvm)
 
     // Navigation Components
     implementation(libs.navigation.compose)

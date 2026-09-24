@@ -12,8 +12,10 @@ import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
+import com.android.billingclient.api.QueryPurchasesParams
 import com.android.billingclient.api.consumePurchase
 import com.android.billingclient.api.queryProductDetails
+import com.android.billingclient.api.queryPurchasesAsync
 import com.funnygaytest.di.BillingModule
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
@@ -48,27 +50,29 @@ class BillingInteractor @Inject constructor(
                 .enableOneTimeProducts()
                 .build()
         )
+        .enableAutoServiceReconnection()
         .build()
 
     fun init() {
-        if (!billingClient.isReady) {
-            billingClient.startConnection(object : BillingClientStateListener {
-                override fun onBillingSetupFinished(billingResult: BillingResult) {
-                    if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                        Timber.d("Billing connection retry succeeded.")
-                        queryProductDetails()
-                    } else {
-                        Timber.e("Billing connection retry failed: ${billingResult.debugMessage}")
-                        retryBillingServiceConnection()
-                    }
-                }
-
-                override fun onBillingServiceDisconnected() {
-                    Timber.e("GBPL Service disconnected")
-                    retryBillingServiceConnection()
-                }
-            })
+        if (billingClient.isReady) {
+            if (_productDetails.value == null) queryProductDetails()
+            processUnconsumedPurchases()
+            return
         }
+        billingClient.startConnection(object : BillingClientStateListener {
+            override fun onBillingSetupFinished(billingResult: BillingResult) {
+                if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                    queryProductDetails()
+                    processUnconsumedPurchases()
+                } else {
+                    Timber.e("Billing setup failed: ${billingResult.debugMessage}")
+                }
+            }
+
+            override fun onBillingServiceDisconnected() {
+                Timber.w("GBPL Service disconnected")
+            }
+        })
     }
 
     private fun queryProductDetails() {
@@ -85,24 +89,47 @@ class BillingInteractor @Inject constructor(
 
         scope.launch {
             val result = billingClient.queryProductDetails(params)
+            val details = result.productDetailsList?.firstOrNull()
+            if (result.billingResult.responseCode == BillingClient.BillingResponseCode.OK && details != null) {
+                _productDetails.value = details
+            } else {
+                Timber.e("Query product details failed: ${result.billingResult.responseCode} ${result.billingResult.debugMessage}")
+            }
+        }
+    }
+
+    private fun processUnconsumedPurchases() {
+        val params = QueryPurchasesParams.newBuilder()
+            .setProductType(BillingClient.ProductType.INAPP)
+            .build()
+
+        scope.launch {
+            val result = billingClient.queryPurchasesAsync(params)
             if (result.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                _productDetails.value = result.productDetailsList?.firstOrNull()
+                result.purchasesList.forEach { handlePurchase(it) }
+            } else {
+                Timber.e("Query purchases failed: ${result.billingResult.debugMessage}")
             }
         }
     }
 
     fun launchBillingFlow(activity: Activity, params: BillingFlowParams) {
-        billingClient.launchBillingFlow(activity, params)
+        val result = billingClient.launchBillingFlow(activity, params)
+        when (result.responseCode) {
+            BillingClient.BillingResponseCode.OK -> Unit
+            BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> processUnconsumedPurchases()
+            else -> Timber.e("Launch billing flow failed: ${result.responseCode} ${result.debugMessage}")
+        }
     }
 
     override fun onPurchasesUpdated(
         billingResult: BillingResult,
         purchases: MutableList<Purchase>?
     ) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK && purchases != null) {
-            for (purchase in purchases) {
-                handlePurchase(purchase)
-            }
+        when (billingResult.responseCode) {
+            BillingClient.BillingResponseCode.OK -> purchases?.forEach { handlePurchase(it) }
+            BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> processUnconsumedPurchases()
+            else -> Timber.w("Purchase not completed: ${billingResult.responseCode} ${billingResult.debugMessage}")
         }
     }
 
@@ -122,34 +149,6 @@ class BillingInteractor @Inject constructor(
                 }
             }
         }
-    }
-
-    private fun retryBillingServiceConnection() {
-        val maxTries = 3
-        var tries = 1
-        var isConnectionEstablished = false
-        do {
-            try {
-                billingClient.startConnection(object : BillingClientStateListener {
-                    override fun onBillingSetupFinished(billingResult: BillingResult) {
-                        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                            isConnectionEstablished = true
-                            Timber.d("Billing connection retry succeeded.")
-                        } else {
-                            Timber.e("Billing connection retry failed: ${billingResult.debugMessage}")
-                        }
-                    }
-
-                    override fun onBillingServiceDisconnected() {
-                        Timber.e("GBPL Service disconnected")
-                    }
-                })
-            } catch (e: Exception) {
-                e.message?.let { Timber.e(it) }
-            } finally {
-                tries++
-            }
-        } while (tries <= maxTries && !isConnectionEstablished)
     }
 
 }

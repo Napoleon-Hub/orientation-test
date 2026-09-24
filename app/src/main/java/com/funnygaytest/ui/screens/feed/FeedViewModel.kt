@@ -56,18 +56,22 @@ class FeedViewModel @Inject constructor(
     }
 
     fun launchBillingFlow(activity: Activity) {
-        productDetails.value?.let { details ->
-            val productDetailsParamsList = listOf(
-                BillingFlowParams.ProductDetailsParams.newBuilder()
-                    .setProductDetails(details)
-                    .build()
-            )
-            val billingFlowParams = BillingFlowParams.newBuilder()
-                .setProductDetailsParamsList(productDetailsParamsList)
-                .build()
-
-            billingInteractor.launchBillingFlow(activity, billingFlowParams)
+        val details = productDetails.value
+        if (details == null) {
+            Timber.w("Product details not loaded yet, retrying")
+            billingInteractor.init()
+            return
         }
+        val productDetailsParamsList = listOf(
+            BillingFlowParams.ProductDetailsParams.newBuilder()
+                .setProductDetails(details)
+                .build()
+        )
+        val billingFlowParams = BillingFlowParams.newBuilder()
+            .setProductDetailsParamsList(productDetailsParamsList)
+            .build()
+
+        billingInteractor.launchBillingFlow(activity, billingFlowParams)
     }
 
     private fun handleSuccessfulDonation(quantity: Int) {
