@@ -12,7 +12,7 @@ plugins {
 
 val appVersionMajor = 3
 val appVersionMinor = 1
-val appVersionPatch = 4
+val appVersionPatch = 5
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
@@ -171,5 +171,9 @@ dependencies {
     implementation(libs.timber)
 }
 
-fun generateVersionCode(major: Int, minor: Int, patch: Int): Int = major * 100 + minor * 10 + patch
+// По два разряда на minor и patch: 3.10.0 не должна совпасть с 4.0.0. Для 3.1.4 это 30104 (> старых 314)
+fun generateVersionCode(major: Int, minor: Int, patch: Int): Int {
+    require(minor in 0..99 && patch in 0..99) { "minor и patch должны быть в диапазоне 0..99" }
+    return major * 10_000 + minor * 100 + patch
+}
 fun generateVersionName(major: Int, minor: Int, patch: Int): String = "$major.$minor.$patch"

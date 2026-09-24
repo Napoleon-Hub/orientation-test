@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -64,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
     private var interstitialAd: InterstitialAd? = null
     private var interstitialAdLoader: InterstitialAdLoader? = null
+    private var isAdsInitialized = false
 
     private var appUpdateManager: AppUpdateManager? = null
     private var activityResultLauncher: ActivityResultLauncher<IntentSenderRequest>? = null
@@ -97,21 +99,21 @@ class MainActivity : AppCompatActivity() {
 
                     if (!isConnected) {
                         NoInternetScreen()
-                    } else {
-                        if (!uiState.consentShown) {
-                            LaboratoryAccessDialog(
-                                onConsentAccepted = {
-                                    viewModel.updateConsentState()
-                                    initializeMobileAds()
-                                },
-                                onDecline = {
-                                    activity?.finish()
-                                }
-                            )
-                        } else {
-                            initializeMobileAds()
-                        }
+                    } else if (!uiState.consentShown) {
+                        LaboratoryAccessDialog(
+                            onConsentAccepted = {
+                                viewModel.updateConsentState()
+                            },
+                            onDecline = {
+                                activity?.finish()
+                            }
+                        )
                     }
+                }
+
+                val canInitAds = isConnected && uiState.consentShown
+                LaunchedEffect(canInitAds) {
+                    if (canInitAds) initializeMobileAds()
                 }
             }
         }
@@ -146,6 +148,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeMobileAds() {
+        if (isAdsInitialized) return
+        isAdsInitialized = true
         YandexAds.apply {
             setUserConsent(true)
             setAppAdAnalyticsReporting(true)
