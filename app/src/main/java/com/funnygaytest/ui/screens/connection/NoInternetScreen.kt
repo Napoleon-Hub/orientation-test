@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -26,8 +26,7 @@ import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
-import com.funnygaytest.ui.themes.MainTestTheme
-import com.funnygaytest.ui.themes.MainTheme
+import com.funnygaytest.ui.theme.LabTheme
 
 @Composable
 fun NoInternetScreen(
@@ -73,8 +72,8 @@ private fun NoInternetScreenContent(
 
             Text(
                 text = stringResource(R.string.connection_no_internet_title),
-                style = MainTestTheme.typography.heading.copy(fontSize = 22.sp),
-                color = MainTestTheme.colors.primaryText.copy(alpha = 0.7f)
+                style = LabTheme.typography.heading.copy(fontSize = 22.sp),
+                color = LabTheme.colors.textPrimary.copy(alpha = 0.7f)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -83,7 +82,7 @@ private fun NoInternetScreenContent(
                 Spacer(modifier = Modifier.weight(0.3f))
                 DescriptionBox(
                     modifier = Modifier.weight(1f),
-                    textStyle = MainTestTheme.typography.heading,
+                    textStyle = LabTheme.typography.heading,
                     descriptionString = AnnotatedString(stringResource(R.string.connection_no_internet_description))
                 )
                 Spacer(modifier = Modifier.weight(0.3f))
@@ -96,7 +95,7 @@ private fun NoInternetScreenContent(
 @Preview(widthDp = 720, heightDp = 500)
 @Composable
 fun PreviewNoInternetScreen() {
-    MainTheme {
+    LabTheme {
         NoInternetScreenContent(uiState = NoInternetUiState())
     }
 }

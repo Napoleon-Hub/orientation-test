@@ -25,13 +25,12 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
@@ -47,9 +46,7 @@ import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.EndingCard
 import com.funnygaytest.ui.components.buttons.LabBackButton
 import com.funnygaytest.ui.components.buttons.MainButton
-import com.funnygaytest.ui.themes.LabError
-import com.funnygaytest.ui.themes.MainTestTheme
-import com.funnygaytest.ui.themes.MainTheme
+import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.utils.enums.EndingType
 
 @Composable
@@ -135,8 +132,8 @@ private fun BeforeDonationContent(onPayClicked: () -> Unit) {
         ) {
             Text(
                 text = stringResource(R.string.feed_title_no_donate),
-                style = MainTestTheme.typography.heading.copy(fontSize = 20.sp),
-                color = MainTestTheme.colors.primaryText
+                style = LabTheme.typography.heading.copy(fontSize = 20.sp),
+                color = LabTheme.colors.textPrimary
             )
             Spacer(Modifier.height(16.dp))
 
@@ -154,7 +151,7 @@ private fun BeforeDonationContent(onPayClicked: () -> Unit) {
             Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.TopCenter) {
                 DescriptionBox(
                     modifier = Modifier.wrapContentSize(),
-                    textStyle = MainTestTheme.typography.heading.copy(fontSize = 14.sp),
+                    textStyle = LabTheme.typography.heading.copy(fontSize = 14.sp),
                     textAlign = TextAlign.Start,
                     descriptionString = combinedLabReport
                 )
@@ -184,15 +181,15 @@ private fun AfterDonationContent(uiState: FeedUiState) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.feed_title_donate),
-                style = MainTestTheme.typography.heading.copy(fontSize = 20.sp),
-                color = MainTestTheme.colors.primaryText
+                style = LabTheme.typography.heading.copy(fontSize = 20.sp),
+                color = LabTheme.colors.textPrimary
             )
 
             Spacer(Modifier.height(16.dp))
 
             DescriptionBox(
                 modifier = Modifier.wrapContentSize(),
-                textStyle = MainTestTheme.typography.description,
+                textStyle = LabTheme.typography.description,
                 descriptionString = AnnotatedString(stringResource(R.string.feed_description_donate))
             )
         }
@@ -247,15 +244,15 @@ fun CucumberLevelIndicator(
     ) {
         Text(
             text = stringResource(if (isFilled) R.string.feed_status_donate else R.string.feed_status_no_donate),
-            style = MainTestTheme.typography.noteText,
-            color = if (isFilled) Color.Green else LabError
+            style = LabTheme.typography.caption,
+            color = if (isFilled) LabTheme.colors.success else LabTheme.colors.error
         )
         Spacer(Modifier.height(8.dp))
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(12.dp)
-                .border(1.dp, MainTestTheme.colors.primaryText.copy(0.3f), RoundedCornerShape(4.dp))
+                .border(1.dp, LabTheme.colors.textPrimary.copy(0.3f), RoundedCornerShape(4.dp))
                 .padding(2.dp)
         ) {
             Box(
@@ -263,7 +260,7 @@ fun CucumberLevelIndicator(
                     .fillMaxHeight()
                     .fillMaxWidth(level)
                     .background(
-                        if (isFilled) Color.Green.copy(0.7f) else Color.Red.copy(0.7f),
+                        if (isFilled) LabTheme.colors.success.copy(0.7f) else LabTheme.colors.error.copy(0.7f),
                         RoundedCornerShape(2.dp)
                     )
             )
@@ -274,7 +271,7 @@ fun CucumberLevelIndicator(
 @Preview(widthDp = 720, heightDp = 500)
 @Composable
 fun PreviewEndingsScreen() {
-    MainTheme {
+    LabTheme {
         FeedScreenContent(
             uiState = FeedUiState()
         )

@@ -15,7 +15,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -43,8 +43,7 @@ import com.funnygaytest.ui.components.EndingCard
 import com.funnygaytest.ui.components.buttons.IconButton
 import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
-import com.funnygaytest.ui.themes.MainTestTheme
-import com.funnygaytest.ui.themes.MainTheme
+import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.utils.enums.EndingType
 
 private const val APP_URI =
@@ -167,8 +166,8 @@ private fun ResultScreenContent(
 
                     Text(
                         text = titleTest,
-                        style = MainTestTheme.typography.heading.copy(fontSize = 20.sp),
-                        color = MainTestTheme.colors.primaryText.copy(alpha = 0.7f)
+                        style = LabTheme.typography.heading.copy(fontSize = 20.sp),
+                        color = LabTheme.colors.textPrimary.copy(alpha = 0.7f)
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -177,7 +176,7 @@ private fun ResultScreenContent(
                         modifier = Modifier
                             .weight(0.7f)
                             .fillMaxWidth(),
-                        textStyle = MainTestTheme.typography.heading.copy(fontSize = 16.sp),
+                        textStyle = LabTheme.typography.heading.copy(fontSize = 16.sp),
                         descriptionString = AnnotatedString(resultText)
                     )
 
@@ -245,7 +244,7 @@ private fun ResultScreenContent(
                     AutoScaledText(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(R.string.result_button_restart_description),
-                        style = MainTestTheme.typography.noteText,
+                        style = LabTheme.typography.caption,
                         textAlign = TextAlign.Center,
                         maxLines = 1
                     )
@@ -283,7 +282,7 @@ private fun ResultScreenContent(
                     AutoScaledText(
                         modifier = Modifier.fillMaxWidth(),
                         text = stringResource(R.string.result_rate_description),
-                        style = MainTestTheme.typography.noteText,
+                        style = LabTheme.typography.caption,
                         textAlign = TextAlign.Center,
                         maxLines = 1
                     )
@@ -297,7 +296,7 @@ private fun ResultScreenContent(
 @Preview(widthDp = 720, heightDp = 500)
 @Composable
 fun PreviewResultScreen() {
-    MainTheme {
+    LabTheme {
         ResultScreenContent(
             uiState = ResultUiState(
                 currentEnding = EndingType.LOSE_12,

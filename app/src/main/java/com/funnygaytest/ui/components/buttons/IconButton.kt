@@ -1,13 +1,13 @@
 package com.funnygaytest.ui.components.buttons
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.ripple
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalRippleConfiguration
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.RippleConfiguration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableLongStateOf
@@ -16,25 +16,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.funnygaytest.ui.themes.MainTestTheme
+import com.funnygaytest.ui.theme.LabTheme
 
 @Composable
 fun IconButton(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MainTestTheme.colors.primaryElement,
-    rippleColor: Color = MainTestTheme.colors.primaryElement,
+    backgroundColor: Color = LabTheme.colors.surface,
+    rippleColor: Color = LabTheme.colors.accent,
     iconId: Int,
     onClick: () -> Unit,
     enabled: Boolean = true
 ) {
     val lastClickTime = remember { mutableLongStateOf(0L) }
 
-    val customRipple = ripple(
-        color = rippleColor,
-        bounded = true
-    )
-
-    CompositionLocalProvider(LocalIndication provides customRipple) {
+    CompositionLocalProvider(LocalRippleConfiguration provides RippleConfiguration(color = rippleColor)) {
         OutlinedButton(
             modifier = modifier,
             onClick = {
@@ -45,7 +40,7 @@ fun IconButton(
                 }
             },
             enabled = enabled,
-            elevation = ButtonDefaults.elevation(
+            elevation = ButtonDefaults.buttonElevation(
                 defaultElevation = 3.dp,
                 pressedElevation = 8.dp,
                 disabledElevation = 0.dp
@@ -53,12 +48,14 @@ fun IconButton(
             contentPadding = PaddingValues(0.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.outlinedButtonColors(
-                backgroundColor = if (enabled) backgroundColor else Color.DarkGray,
-                contentColor = Color.Unspecified
+                containerColor = backgroundColor,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = LabTheme.colors.disabled,
+                disabledContentColor = Color.Unspecified
             ),
-            border = BorderStroke(1.5.dp, MainTestTheme.colors.primaryBackground.copy(alpha = 0.4f))
+            border = BorderStroke(1.5.dp, LabTheme.colors.accent.copy(alpha = 0.4f))
         ) {
-            Icon(painter = painterResource(id = iconId), contentDescription = null, tint = Color.White)
+            Icon(painter = painterResource(id = iconId), contentDescription = null, tint = LabTheme.colors.textEmphasis)
         }
     }
 }

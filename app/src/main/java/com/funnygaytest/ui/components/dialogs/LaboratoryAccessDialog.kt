@@ -11,12 +11,11 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
@@ -26,7 +25,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.buttons.MainButton
-import com.funnygaytest.ui.themes.MainTestTheme
+import com.funnygaytest.ui.theme.LabTheme
 
 @Composable
 fun LaboratoryAccessDialog(
@@ -46,8 +45,8 @@ fun LaboratoryAccessDialog(
                 .wrapContentHeight()
                 .padding(vertical = 24.dp),
             shape = RoundedCornerShape(20.dp),
-            color = MainTestTheme.colors.primaryElement,
-            elevation = 8.dp
+            color = LabTheme.colors.surface,
+            shadowElevation = 8.dp
         ) {
             Column(
                 modifier = Modifier
@@ -59,7 +58,7 @@ fun LaboratoryAccessDialog(
                         .fillMaxWidth()
                         .padding(bottom = 16.dp),
                     text = stringResource(R.string.access_dialog_title),
-                    style = MainTestTheme.typography.heading
+                    style = LabTheme.typography.heading
                 )
 
                 Column(
@@ -69,16 +68,16 @@ fun LaboratoryAccessDialog(
                 ) {
                     Text(
                         text = stringResource(R.string.access_dialog_warning),
-                        style = MainTestTheme.typography.subText,
-                        color = Color.Yellow.copy(alpha = 0.8f)
+                        style = LabTheme.typography.body,
+                        color = LabTheme.colors.warning.copy(alpha = 0.8f)
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
                         text = stringResource(R.string.access_dialog_ad_description),
-                        style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
-                        color = MainTestTheme.colors.secondaryText
+                        style = LabTheme.typography.body.copy(fontSize = 12.sp),
+                        color = LabTheme.colors.textSecondary
                     )
 
                     Spacer(modifier = Modifier.height(12.dp))
@@ -88,11 +87,11 @@ fun LaboratoryAccessDialog(
                             .fillMaxWidth()
                             .clickable { uriHandler.openUri(privacyPolicyUrl) },
                         text = stringResource(R.string.access_dialog_privacy_policy),
-                        style = MainTestTheme.typography.subText.copy(
+                        style = LabTheme.typography.body.copy(
                             fontSize = 12.sp,
                             textDecoration = TextDecoration.Underline
                         ),
-                        color = MainTestTheme.colors.secondaryText
+                        color = LabTheme.colors.textSecondary
                     )
                 }
 
@@ -115,8 +114,8 @@ fun LaboratoryAccessDialog(
                     ) {
                         Text(
                             text = stringResource(R.string.access_dialog_button_finish),
-                            color = MainTestTheme.colors.secondaryText,
-                            style = MainTestTheme.typography.subText
+                            color = LabTheme.colors.textSecondary,
+                            style = LabTheme.typography.body
                         )
                     }
                 }

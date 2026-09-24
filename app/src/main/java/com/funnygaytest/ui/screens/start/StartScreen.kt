@@ -18,7 +18,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -29,7 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
@@ -48,8 +47,7 @@ import com.funnygaytest.ui.components.buttons.LanguageToggleButton
 import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.components.dialogs.LanguageSelectionDialog
-import com.funnygaytest.ui.themes.MainTestTheme
-import com.funnygaytest.ui.themes.MainTheme
+import com.funnygaytest.ui.theme.LabTheme
 import java.util.Locale
 
 @Composable
@@ -260,8 +258,8 @@ private fun StartScreenContent(
                                         R.string.app_version,
                                         BuildConfig.VERSION_NAME
                                     ),
-                                    style = MainTestTheme.typography.subText,
-                                    color = MainTestTheme.colors.secondaryText.copy(alpha = 0.5f),
+                                    style = LabTheme.typography.body,
+                                    color = LabTheme.colors.textSecondary.copy(alpha = 0.5f),
                                     textAlign = TextAlign.Center
                                 )
                             } else {
@@ -278,8 +276,8 @@ private fun StartScreenContent(
                                     Spacer(modifier = Modifier.height(4.dp))
                                     Text(
                                         text = stringResource(R.string.start_button_difficulty_easy_gotcha),
-                                        style = MainTestTheme.typography.noteText,
-                                        color = Color.Red.copy(alpha = 0.7f),
+                                        style = LabTheme.typography.caption,
+                                        color = LabTheme.colors.error.copy(alpha = 0.7f),
                                         textAlign = TextAlign.Center
                                     )
                                 }
@@ -311,7 +309,7 @@ private fun StartScreenContent(
                     modifier = Modifier
                         .fillMaxHeight()
                         .weight(0.85f),
-                    textStyle = MainTestTheme.typography.description,
+                    textStyle = LabTheme.typography.description,
                     descriptionString = AnnotatedString(stringResource(bottomInfoRes))
                 )
                 Spacer(modifier = Modifier.weight(0.15f))
@@ -325,7 +323,7 @@ private fun StartScreenContent(
 @Preview(widthDp = 720, heightDp = 500)
 @Composable
 fun PreviewStartScreen() {
-    MainTheme {
+    LabTheme {
         StartScreenContent(
             uiState = StartUiState()
         )

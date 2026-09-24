@@ -14,10 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import com.funnygaytest.ui.theme.LabTheme
 import timber.log.Timber
 
 @SuppressLint("LocalContextResourcesRead")
@@ -53,7 +53,7 @@ fun BackgroundWrapper(
                     alignment = Alignment.Center
                 )
             } else {
-                Box(modifier = Modifier.fillMaxSize().background(Color(0xFF121212)))
+                Box(modifier = Modifier.fillMaxSize().background(LabTheme.colors.background))
             }
         }
         Box(modifier = modifier.fillMaxSize()) {

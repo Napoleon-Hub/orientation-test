@@ -21,7 +21,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -50,8 +49,7 @@ import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.buttons.LabBackButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.components.dialogs.DiagnosisDetailsDialog
-import com.funnygaytest.ui.themes.MainTestTheme
-import com.funnygaytest.ui.themes.MainTheme
+import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.utils.enums.EndingType
 
 @Composable
@@ -143,8 +141,8 @@ private fun EndingsScreenContent(
 
                 Text(
                     text = stringResource(R.string.endings_title),
-                    style = MainTestTheme.typography.heading,
-                    color = MainTestTheme.colors.primaryText
+                    style = LabTheme.typography.heading,
+                    color = LabTheme.colors.textPrimary
                 )
             }
 
@@ -156,20 +154,20 @@ private fun EndingsScreenContent(
                     modifier = Modifier
                         .weight(0.55f)
                         .background(
-                            Color.Black.copy(alpha = 0.3f),
+                            LabTheme.colors.panel,
                             shape = RoundedCornerShape(12.dp)
                         )
                         .border(
                             width = 1.dp,
-                            color = MainTestTheme.colors.primaryBackground.copy(alpha = 0.3f),
+                            color = LabTheme.colors.accent.copy(alpha = 0.3f),
                             shape = RoundedCornerShape(12.dp)
                         )
                         .padding(16.dp)
                 ) {
                     Text(
                         text = stringResource(R.string.endings_diagnosis_title),
-                        style = MainTestTheme.typography.heading,
-                        color = MainTestTheme.colors.primaryText,
+                        style = LabTheme.typography.heading,
+                        color = LabTheme.colors.textPrimary,
                         textAlign = TextAlign.Start
                     )
 
@@ -177,8 +175,8 @@ private fun EndingsScreenContent(
 
                     Text(
                         text = stringResource(R.string.endings_diagnosis_description),
-                        style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
-                        color = MainTestTheme.colors.secondaryText,
+                        style = LabTheme.typography.body.copy(fontSize = 12.sp),
+                        color = LabTheme.colors.textSecondary,
                         textAlign = TextAlign.Start
                     )
 
@@ -226,20 +224,20 @@ private fun StatsSection(
         modifier = modifier
             .wrapContentWidth()
             .background(
-                Color.Black.copy(alpha = 0.3f),
+                LabTheme.colors.panel,
                 shape = RoundedCornerShape(12.dp)
             )
             .border(
                 width = 1.dp,
-                color = MainTestTheme.colors.primaryBackground.copy(alpha = 0.3f),
+                color = LabTheme.colors.accent.copy(alpha = 0.3f),
                 shape = RoundedCornerShape(12.dp)
             )
             .padding(16.dp)
     ) {
         Text(
             text = stringResource(R.string.endings_stats_title),
-            style = MainTestTheme.typography.heading,
-            color = MainTestTheme.colors.primaryText
+            style = LabTheme.typography.heading,
+            color = LabTheme.colors.textPrimary
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -250,14 +248,14 @@ private fun StatsSection(
         ) {
             Text(
                 text = stringResource(R.string.endings_counter_wins, wins),
-                style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
-                color = MainTestTheme.colors.primaryText,
+                style = LabTheme.typography.body.copy(fontSize = 12.sp),
+                color = LabTheme.colors.textPrimary,
                 textAlign = TextAlign.Start
             )
             Text(
                 text = stringResource(R.string.endings_counter_loses, loses),
-                style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
-                color = MainTestTheme.colors.primaryText,
+                style = LabTheme.typography.body.copy(fontSize = 12.sp),
+                color = LabTheme.colors.textPrimary,
                 textAlign = TextAlign.Start
             )
         }
@@ -277,11 +275,11 @@ private fun DiagnosisGridItem(
             modifier = Modifier
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(16.dp))
-                .background(MainTestTheme.colors.primaryBackground.copy(alpha = 0.8f))
+                .background(LabTheme.colors.accent.copy(alpha = 0.8f))
                 .border(
                     width = 1.dp,
-                    color = if (item.isUnlocked) MainTestTheme.colors.primaryText.copy(alpha = 0.5f)
-                    else MainTestTheme.colors.secondaryText.copy(alpha = 0.2f),
+                    color = if (item.isUnlocked) LabTheme.colors.textPrimary.copy(alpha = 0.5f)
+                    else LabTheme.colors.textSecondary.copy(alpha = 0.2f),
                     shape = RoundedCornerShape(16.dp)
                 )
                 .clickable(onClick = onItemClicked),
@@ -297,8 +295,8 @@ private fun DiagnosisGridItem(
             } else {
                 Text(
                     text = "???",
-                    style = MainTestTheme.typography.heading,
-                    color = MainTestTheme.colors.secondaryText.copy(alpha = 0.5f)
+                    style = LabTheme.typography.heading,
+                    color = LabTheme.colors.textSecondary.copy(alpha = 0.5f)
                 )
             }
         }
@@ -308,9 +306,9 @@ private fun DiagnosisGridItem(
         Text(
             text = if (item.isUnlocked) stringResource(item.type.titleRes)
             else stringResource(R.string.endings_locked_title),
-            style = MainTestTheme.typography.subText.copy(fontSize = 11.sp),
-            color = if (item.isUnlocked) MainTestTheme.colors.primaryText
-            else MainTestTheme.colors.secondaryText.copy(alpha = 0.7f),
+            style = LabTheme.typography.body.copy(fontSize = 11.sp),
+            color = if (item.isUnlocked) LabTheme.colors.textPrimary
+            else LabTheme.colors.textSecondary.copy(alpha = 0.7f),
             textAlign = TextAlign.Center,
             maxLines = 3,
             minLines = 2
@@ -321,7 +319,7 @@ private fun DiagnosisGridItem(
 @Preview(widthDp = 720, heightDp = 500)
 @Composable
 fun PreviewEndingsScreen() {
-    MainTheme {
+    LabTheme {
         EndingsScreenContent(
             uiState = EndingsUiState(
                 wins = 3,

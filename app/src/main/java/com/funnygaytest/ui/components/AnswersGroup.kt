@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -34,14 +34,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.models.Answer
-import com.funnygaytest.ui.themes.MainTestTheme
+import com.funnygaytest.ui.theme.LabTheme
 
 @Composable
 fun AnswersGroup(
     modifier: Modifier = Modifier,
     answers: List<Answer>,
     selectedAnswer: Answer?,
-    textStyle: TextStyle = MainTestTheme.typography.subText,
+    textStyle: TextStyle = LabTheme.typography.body,
     onAnswerSelected: (Answer) -> Unit
 ) {
     val scrollState = rememberScrollState()
@@ -63,7 +63,7 @@ fun AnswersGroup(
             var readyToDraw by remember(answer) { mutableStateOf(false) }
 
             val borderColor by animateColorAsState(
-                targetValue = if (isSelected) MainTestTheme.colors.primaryBackground else Color.Transparent,
+                targetValue = if (isSelected) LabTheme.colors.accent else Color.Transparent,
                 animationSpec = tween(durationMillis = 200),
                 label = "BorderColorAnimation"
             )
@@ -74,12 +74,12 @@ fun AnswersGroup(
                     .heightIn(min = 48.dp)
                     .clip(RoundedCornerShape(12.dp))
                     .background(
-                        if (isSelected) MainTestTheme.colors.primaryBackground.copy(alpha = 0.25f)
-                        else Color.Black.copy(alpha = 0.4f)
+                        if (isSelected) LabTheme.colors.accent.copy(alpha = 0.25f)
+                        else LabTheme.colors.panelStrong
                     )
                     .border(
                         width = if (isSelected) 2.dp else 1.dp,
-                        color = if (isSelected) borderColor else MainTestTheme.colors.primaryBackground.copy(alpha = 0.1f),
+                        color = if (isSelected) borderColor else LabTheme.colors.accent.copy(alpha = 0.1f),
                         shape = RoundedCornerShape(12.dp)
                     )
                     .clickable { onAnswerSelected(answer) }
@@ -94,7 +94,7 @@ fun AnswersGroup(
                         }
                     },
                     style = scaledTextStyle,
-                    color = if (isSelected) Color.White else MainTestTheme.colors.primaryText.copy(alpha = 0.8f),
+                    color = if (isSelected) LabTheme.colors.textEmphasis else LabTheme.colors.textPrimary.copy(alpha = 0.8f),
                     textAlign = TextAlign.Start,
                     softWrap = true,
                     onTextLayout = { textLayoutResult ->

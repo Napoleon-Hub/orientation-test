@@ -21,10 +21,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.Text
-import androidx.compose.material.ripple
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -34,7 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -53,8 +53,7 @@ import com.funnygaytest.ui.components.AnswersGroup
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
-import com.funnygaytest.ui.themes.MainTestTheme
-import com.funnygaytest.ui.themes.MainTheme
+import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.utils.helpers.generateNewGameRun
 
 @Composable
@@ -150,8 +149,8 @@ private fun GameScreenContent(
             ) {
                 Text(
                     text = stringResource(R.string.game_health_title),
-                    style = MainTestTheme.typography.noteText,
-                    color = MainTestTheme.colors.primaryText.copy(alpha = 0.5f),
+                    style = LabTheme.typography.caption,
+                    color = LabTheme.colors.textPrimary.copy(alpha = 0.5f),
                     modifier = Modifier.padding(start = 4.dp, bottom = 4.dp)
                 )
 
@@ -172,7 +171,7 @@ private fun GameScreenContent(
                         modifier = Modifier
                             .weight(0.85f)
                             .fillMaxHeight(),
-                        textStyle = MainTestTheme.typography.heading,
+                        textStyle = LabTheme.typography.heading,
                         descriptionString = AnnotatedString(stringResource(uiState.currentQuestion.questionResId))
                     )
 
@@ -229,14 +228,14 @@ private fun GameScreenContent(
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
                             Text(
                                 text = stringResource(R.string.game_questions),
-                                style = MainTestTheme.typography.subText.copy(fontSize = 12.sp),
-                                color = MainTestTheme.colors.primaryText.copy(alpha = 0.5f),
+                                style = LabTheme.typography.body.copy(fontSize = 12.sp),
+                                color = LabTheme.colors.textPrimary.copy(alpha = 0.5f),
                                 maxLines = 1
                             )
                             Text(
                                 text = "${uiState.questionNumber} / ${uiState.totalQuestions}",
-                                style = MainTestTheme.typography.subText,
-                                color = MainTestTheme.colors.primaryText.copy(alpha = 0.6f),
+                                style = LabTheme.typography.body,
+                                color = LabTheme.colors.textPrimary.copy(alpha = 0.6f),
                                 maxLines = 1
                             )
                         }
@@ -266,12 +265,13 @@ fun HealthBar(
         label = "HpProgress"
     )
 
+    val colors = LabTheme.colors
     val targetColor = when {
-        progress > 0.8f -> Color(0xFF4CAF50)
-        progress > 0.6f -> Color(0xFF8BC34A)
-        progress > 0.4f -> Color(0xFFFFEB3B)
-        progress > 0.2f -> Color(0xFFFF9800)
-        else -> Color(0xFFF44336)
+        progress > 0.8f -> colors.healthFull
+        progress > 0.6f -> colors.healthHigh
+        progress > 0.4f -> colors.healthMedium
+        progress > 0.2f -> colors.healthLow
+        else -> colors.healthCritical
     }
 
     val animatedColor by animateColorAsState(
@@ -280,10 +280,14 @@ fun HealthBar(
         label = "HpColor"
     )
 
+    // Без зазора и точки-индикатора M3, чтобы полоса выглядела как раньше
     LinearProgressIndicator(
-        progress = animatedProgress,
+        progress = { animatedProgress },
         color = animatedColor,
-        backgroundColor = Color.Black.copy(alpha = 0.3f),
+        trackColor = colors.panel,
+        strokeCap = StrokeCap.Butt,
+        gapSize = 0.dp,
+        drawStopIndicator = {},
         modifier = modifier
             .fillMaxWidth()
             .height(8.dp)
@@ -298,13 +302,13 @@ fun NextArrowButton(
     isEnabled: Boolean
 ) {
     val targetBackgroundColor by animateColorAsState(
-        targetValue = if (isEnabled) MainTestTheme.colors.primaryElement else Color.DarkGray,
+        targetValue = if (isEnabled) LabTheme.colors.surface else LabTheme.colors.disabled,
         animationSpec = tween(durationMillis = 300),
         label = "ArrowBgColor"
     )
 
     val targetArrowColor by animateColorAsState(
-        targetValue = if (isEnabled) MainTestTheme.colors.primaryText else MainTestTheme.colors.secondaryText,
+        targetValue = if (isEnabled) LabTheme.colors.textPrimary else LabTheme.colors.textSecondary,
         animationSpec = tween(durationMillis = 300),
         label = "ArrowColor"
     )
@@ -315,13 +319,13 @@ fun NextArrowButton(
             .background(targetBackgroundColor)
             .border(
                 width = 1.5.dp,
-                color = MainTestTheme.colors.primaryBackground.copy(alpha = 0.4f),
+                color = LabTheme.colors.accent.copy(alpha = 0.4f),
                 shape = CircleShape
             )
             .clickable(
                 enabled = isEnabled,
                 onClick = { onClick() },
-                indication = ripple(bounded = true, color = MainTestTheme.colors.primaryElement),
+                indication = ripple(bounded = true, color = LabTheme.colors.surface),
                 interactionSource = remember { MutableInteractionSource() }
             ),
         contentAlignment = Alignment.Center
@@ -338,7 +342,7 @@ fun NextArrowButton(
 @Preview(widthDp = 800, heightDp = 450, locale = "ru")
 @Composable
 fun PreviewGameScreen() {
-    MainTheme {
+    LabTheme {
         GameScreenContent(
             uiState = GameUiState(
                 currentQuestion = generateNewGameRun()[3],

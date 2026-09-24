@@ -17,8 +17,8 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,15 +39,15 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.buttons.MainButton
-import com.funnygaytest.ui.themes.MainTestTheme
+import com.funnygaytest.ui.theme.LabTheme
 
 @Composable
 fun DiagnosisDetailsDialog(
     @DrawableRes iconRes: Int,
     title: String,
-    titleStyle: TextStyle = MainTestTheme.typography.heading,
+    titleStyle: TextStyle = LabTheme.typography.heading,
     description: String,
-    descriptionStyle: TextStyle = MainTestTheme.typography.description,
+    descriptionStyle: TextStyle = LabTheme.typography.description,
     onDismiss: () -> Unit
 ) {
     val maxDialogHeight = LocalWindowInfo.current.containerSize.height.dp * 0.85f
@@ -62,8 +62,8 @@ fun DiagnosisDetailsDialog(
                 .heightIn(max = maxDialogHeight)
                 .padding(vertical = 16.dp),
             shape = RoundedCornerShape(24.dp),
-            color = MainTestTheme.colors.primaryElement,
-            elevation = 8.dp
+            color = LabTheme.colors.surface,
+            shadowElevation = 8.dp
         ) {
             Column(
                 modifier = Modifier
@@ -76,10 +76,10 @@ fun DiagnosisDetailsDialog(
                         .sizeIn(maxWidth = 75.dp, maxHeight = 75.dp)
                         .aspectRatio(1f)
                         .clip(RoundedCornerShape(16.dp))
-                        .background(MainTestTheme.colors.primaryBackground.copy(alpha = 0.8f))
+                        .background(LabTheme.colors.accent.copy(alpha = 0.8f))
                         .border(
                             width = 1.dp,
-                            color = MainTestTheme.colors.primaryText.copy(alpha = 0.5f),
+                            color = LabTheme.colors.textPrimary.copy(alpha = 0.5f),
                             shape = RoundedCornerShape(16.dp)
                         ),
                     contentAlignment = Alignment.Center
@@ -100,7 +100,7 @@ fun DiagnosisDetailsDialog(
                 Text(
                     text = title,
                     style = titleStyle,
-                    color = MainTestTheme.colors.primaryText,
+                    color = LabTheme.colors.textPrimary,
                     textAlign = TextAlign.Center,
                     maxLines = 1,
                     modifier = Modifier
@@ -123,7 +123,7 @@ fun DiagnosisDetailsDialog(
                 Text(
                     text = description,
                     style = descriptionStyle,
-                    color = MainTestTheme.colors.secondaryText,
+                    color = LabTheme.colors.textSecondary,
                     textAlign = TextAlign.Start,
                     maxLines = 4,
                     modifier = Modifier

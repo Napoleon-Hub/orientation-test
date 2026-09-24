@@ -60,6 +60,11 @@ android {
         compose = true
     }
 
+    androidResources {
+        @Suppress("UnstableApiUsage")
+        generateLocaleConfig = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -107,6 +112,8 @@ base {
 dependencies {
     // Android
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.splashscreen)
 
     // Jetpack Compose
     implementation(platform(libs.compose.bom))
@@ -114,7 +121,7 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
     implementation(libs.compose.foundation)
-    implementation(libs.compose.material)
+    implementation(libs.compose.material3)
     implementation(libs.compose.material.icons)
     implementation(libs.compose.runtime.livedata)
     implementation(libs.lottie.compose)
@@ -171,7 +178,6 @@ dependencies {
     implementation(libs.timber)
 }
 
-// По два разряда на minor и patch: 3.10.0 не должна совпасть с 4.0.0. Для 3.1.4 это 30104 (> старых 314)
 fun generateVersionCode(major: Int, minor: Int, patch: Int): Int {
     require(minor in 0..99 && patch in 0..99) { "minor и patch должны быть в диапазоне 0..99" }
     return major * 10_000 + minor * 100 + patch

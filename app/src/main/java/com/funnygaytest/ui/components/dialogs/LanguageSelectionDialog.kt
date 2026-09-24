@@ -15,8 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.funnygaytest.R
-import com.funnygaytest.ui.themes.MainTestTheme
+import com.funnygaytest.ui.theme.LabTheme
 
 @Composable
 fun LanguageSelectionDialog(
@@ -42,8 +42,8 @@ fun LanguageSelectionDialog(
                 .fillMaxWidth()
                 .wrapContentHeight(),
             shape = RoundedCornerShape(20.dp),
-            color = MainTestTheme.colors.primaryElement,
-            elevation = 8.dp
+            color = LabTheme.colors.surface,
+            shadowElevation = 8.dp
         ) {
             Column(
                 modifier = Modifier
@@ -54,8 +54,8 @@ fun LanguageSelectionDialog(
             ) {
                 Text(
                     text = stringResource(R.string.start_select_language_button),
-                    style = MainTestTheme.typography.heading,
-                    color = MainTestTheme.colors.primaryText
+                    style = LabTheme.typography.heading,
+                    color = LabTheme.colors.textPrimary
                 )
 
                 LanguageOption(
@@ -91,7 +91,7 @@ fun LanguageOption(
     onClick: () -> Unit
 ) {
     val backgroundColor = if (isSelected) {
-        MainTestTheme.colors.primaryBackground.copy(alpha = 0.5f)
+        LabTheme.colors.accent.copy(alpha = 0.5f)
     } else {
         Color.Transparent
     }
@@ -112,15 +112,15 @@ fun LanguageOption(
             modifier = Modifier
                 .size(32.dp)
                 .clip(CircleShape)
-                .border(1.dp, MainTestTheme.colors.primaryText.copy(alpha = 0.3f), CircleShape)
+                .border(1.dp, LabTheme.colors.textPrimary.copy(alpha = 0.3f), CircleShape)
         )
 
         Spacer(modifier = Modifier.width(16.dp))
 
         Text(
             text = text,
-            style = MainTestTheme.typography.subText,
-            color = MainTestTheme.colors.primaryText
+            style = LabTheme.typography.body,
+            color = LabTheme.colors.textPrimary
         )
     }
 }

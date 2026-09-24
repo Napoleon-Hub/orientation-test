@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Text
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.funnygaytest.R
-import com.funnygaytest.ui.themes.MainTestTheme
+import com.funnygaytest.ui.theme.LabTheme
 
 @Composable
 fun EndingCard(
@@ -35,8 +35,8 @@ fun EndingCard(
     iconRes: Int,
     finalTextShown: Boolean = false
 ) {
-    val borderColor = MainTestTheme.colors.primaryBackground
-    val bgColor = MainTestTheme.colors.primaryBackground.copy(alpha = 0.25f)
+    val borderColor = LabTheme.colors.accent
+    val bgColor = LabTheme.colors.accent.copy(alpha = 0.25f)
 
     Row(
         modifier = modifier
@@ -66,15 +66,15 @@ fun EndingCard(
         ) {
             Text(
                 text = stringResource(R.string.result_endings_new),
-                style = MainTestTheme.typography.noteText,
-                color = MainTestTheme.colors.primaryText
+                style = LabTheme.typography.caption,
+                color = LabTheme.colors.textPrimary
             )
 
             Text(
                 modifier = Modifier.padding(top = 4.dp),
                 text = title,
-                style = MainTestTheme.typography.heading.copy(fontSize = 16.sp, fontWeight = FontWeight.Bold),
-                color = MainTestTheme.colors.primaryText,
+                style = LabTheme.typography.heading.copy(fontSize = 16.sp, fontWeight = FontWeight.Bold),
+                color = LabTheme.colors.textPrimary,
                 softWrap = true
             )
 
@@ -82,8 +82,8 @@ fun EndingCard(
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
                     text = stringResource(R.string.result_endings_all_unlocked),
-                    style = MainTestTheme.typography.noteText.copy(fontSize = 10.sp),
-                    color = MainTestTheme.colors.primaryText,
+                    style = LabTheme.typography.caption.copy(fontSize = 10.sp),
+                    color = LabTheme.colors.textPrimary,
                     textAlign = TextAlign.Start,
                     softWrap = true
                 )

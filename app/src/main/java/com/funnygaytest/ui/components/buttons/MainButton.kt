@@ -1,13 +1,14 @@
 package com.funnygaytest.ui.components.buttons
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
-import androidx.compose.material.ripple
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.LocalRippleConfiguration
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.RippleConfiguration
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
@@ -20,16 +21,15 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.funnygaytest.ui.themes.MainTestTheme
+import com.funnygaytest.ui.theme.LabTheme
 
 @Composable
 fun MainButton(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MainTestTheme.colors.primaryElement,
-    rippleColor: Color = MainTestTheme.colors.primaryElement,
+    backgroundColor: Color = LabTheme.colors.surface,
+    rippleColor: Color = LabTheme.colors.accent,
     text: String? = null,
-    textStyle: TextStyle = MainTestTheme.typography.buttonText,
+    textStyle: TextStyle = LabTheme.typography.button,
     onClick: () -> Unit,
     enabled: Boolean = true
 ) {
@@ -38,12 +38,7 @@ fun MainButton(
     var scaledTextStyle by remember { mutableStateOf(textStyle) }
     var readyToDraw by remember { mutableStateOf(false) }
 
-    val customRipple = ripple(
-        color = rippleColor,
-        bounded = true
-    )
-
-    CompositionLocalProvider(LocalIndication provides customRipple) {
+    CompositionLocalProvider(LocalRippleConfiguration provides RippleConfiguration(color = rippleColor)) {
         OutlinedButton(
             modifier = modifier,
             onClick = {
@@ -54,17 +49,20 @@ fun MainButton(
                 }
             },
             enabled = enabled,
-            elevation = ButtonDefaults.elevation(
+            elevation = ButtonDefaults.buttonElevation(
                 defaultElevation = 3.dp,
                 pressedElevation = 8.dp,
                 disabledElevation = 0.dp
             ),
             shape = RoundedCornerShape(12.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             colors = ButtonDefaults.outlinedButtonColors(
-                backgroundColor = if (enabled) backgroundColor else Color.DarkGray,
-                contentColor = Color.Unspecified
+                containerColor = backgroundColor,
+                contentColor = Color.Unspecified,
+                disabledContainerColor = LabTheme.colors.disabled,
+                disabledContentColor = Color.Unspecified
             ),
-            border = BorderStroke(1.5.dp, MainTestTheme.colors.primaryBackground.copy(alpha = 0.4f))
+            border = BorderStroke(1.5.dp, LabTheme.colors.accent.copy(alpha = 0.4f))
         ) {
 
             text?.let {

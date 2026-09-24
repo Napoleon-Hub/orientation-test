@@ -15,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -24,7 +25,7 @@ import com.funnygaytest.managers.network.NetworkMonitor
 import com.funnygaytest.navigation.AppNavigation
 import com.funnygaytest.ui.components.dialogs.LaboratoryAccessDialog
 import com.funnygaytest.ui.screens.connection.NoInternetScreen
-import com.funnygaytest.ui.themes.MainTheme
+import com.funnygaytest.ui.theme.LabTheme
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity() {
     private var activityResultLauncher: ActivityResultLauncher<IntentSenderRequest>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -80,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         setupAppUpdate()
 
         setContent {
-            MainTheme {
+            LabTheme {
                 val isConnected by networkMonitor.isConnected.collectAsState(initial = true)
                 val uiState by viewModel.uiState.collectAsState()
 
