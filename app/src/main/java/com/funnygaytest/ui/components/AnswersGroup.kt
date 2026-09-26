@@ -8,10 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -21,20 +18,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.models.Answer
 import com.funnygaytest.ui.theme.LabTheme
+
+private val FadeHeight = 32.dp
+private val ScrollIndicatorGap = 12.dp
+private val AnswerShape = RoundedCornerShape(12.dp)
 
 @Composable
 fun AnswersGroup(
@@ -46,71 +42,59 @@ fun AnswersGroup(
 ) {
     val scrollState = rememberScrollState()
 
-    LaunchedEffect(key1 = answers) {
-        scrollState.animateScrollTo(0)
+    LaunchedEffect(answers) {
+        scrollState.scrollTo(0)
     }
 
     Column(
         modifier = modifier
-            .fillMaxHeight()
-            .verticalScroll(scrollState),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .verticalScrollIndicator(scrollState, color = LabTheme.colors.accent.copy(alpha = 0.6f))
+            .verticalFadingEdges(scrollState, FadeHeight)
+            .verticalScroll(scrollState)
+            .padding(end = ScrollIndicatorGap),
+        verticalArrangement = Arrangement.spacedBy(LabTheme.dimens.spacingMedium)
     ) {
         answers.forEach { answer ->
-            val isSelected = answer == selectedAnswer
-
-            var scaledTextStyle by remember(answer) { mutableStateOf(textStyle) }
-            var readyToDraw by remember(answer) { mutableStateOf(false) }
-
-            val borderColor by animateColorAsState(
-                targetValue = if (isSelected) LabTheme.colors.accent else Color.Transparent,
-                animationSpec = tween(durationMillis = 200),
-                label = "BorderColorAnimation"
+            AnswerItem(
+                answer = answer,
+                isSelected = answer == selectedAnswer,
+                textStyle = textStyle,
+                onClick = { onAnswerSelected(answer) }
             )
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .heightIn(min = 48.dp)
-                    .clip(RoundedCornerShape(12.dp))
-                    .background(
-                        if (isSelected) LabTheme.colors.accent.copy(alpha = 0.25f)
-                        else LabTheme.colors.panelStrong
-                    )
-                    .border(
-                        width = if (isSelected) 2.dp else 1.dp,
-                        color = if (isSelected) borderColor else LabTheme.colors.accent.copy(alpha = 0.1f),
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                    .clickable { onAnswerSelected(answer) }
-                    .padding(horizontal = 20.dp, vertical = 16.dp),
-                contentAlignment = Alignment.CenterStart
-            ) {
-                Text(
-                    text = stringResource(id = answer.answerResId),
-                    modifier = Modifier.drawWithContent {
-                        if (readyToDraw) {
-                            drawContent()
-                        }
-                    },
-                    style = scaledTextStyle,
-                    color = if (isSelected) LabTheme.colors.textEmphasis else LabTheme.colors.textPrimary.copy(alpha = 0.8f),
-                    textAlign = TextAlign.Start,
-                    softWrap = true,
-                    onTextLayout = { textLayoutResult ->
-                        if (textLayoutResult.hasVisualOverflow) {
-                            scaledTextStyle = scaledTextStyle.copy(
-                                fontSize = scaledTextStyle.fontSize * 0.95
-                            )
-                        } else {
-                            readyToDraw = true
-                        }
-                    },
-                    maxLines = 2
-                )
-            }
         }
+    }
+}
 
-        Spacer(modifier = Modifier.height(16.dp))
+@Composable
+private fun AnswerItem(
+    answer: Answer,
+    isSelected: Boolean,
+    textStyle: TextStyle,
+    onClick: () -> Unit
+) {
+    val colors = LabTheme.colors
+    val borderColor by animateColorAsState(
+        targetValue = if (isSelected) colors.accent else colors.accent.copy(alpha = 0.1f),
+        animationSpec = tween(durationMillis = 200),
+        label = "AnswerBorderColor"
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(min = 48.dp)
+            .clip(AnswerShape)
+            .background(if (isSelected) colors.accent.copy(alpha = 0.25f) else colors.panelStrong)
+            .border(width = if (isSelected) 2.dp else 1.dp, color = borderColor, shape = AnswerShape)
+            .clickable(onClick = onClick)
+            .padding(horizontal = 20.dp, vertical = 16.dp),
+        contentAlignment = Alignment.CenterStart
+    ) {
+        Text(
+            text = stringResource(answer.answerResId),
+            style = textStyle,
+            color = if (isSelected) colors.textEmphasis else colors.textPrimary.copy(alpha = 0.8f),
+            textAlign = TextAlign.Start
+        )
     }
 }
