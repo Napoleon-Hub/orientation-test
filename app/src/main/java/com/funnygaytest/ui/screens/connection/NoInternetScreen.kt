@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,16 +37,8 @@ fun NoInternetScreen(
     modifier: Modifier = Modifier,
     viewModel: NoInternetViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isMuted by viewModel.isMuted.collectAsStateWithLifecycle()
     val activity = LocalActivity.current
-
-    LaunchedEffect(Unit) {
-        viewModel.onShown()
-    }
-
-    LaunchedEffect(uiState.isMuted) {
-        viewModel.setMuteMusic(uiState.isMuted)
-    }
 
     BackHandler {
         activity?.moveTaskToBack(true)
@@ -61,15 +52,15 @@ fun NoInternetScreen(
                 }
             }
         },
-        uiState = uiState,
-        onToggleMusic = viewModel::toggleMusic
+        isMuted = isMuted,
+        onToggleMusic = viewModel::toggleMute
     )
 }
 
 @Composable
 private fun NoInternetScreenContent(
     modifier: Modifier = Modifier,
-    uiState: NoInternetUiState,
+    isMuted: Boolean,
     onToggleMusic: () -> Unit = {}
 ) {
     val dimens = LabTheme.dimens
@@ -110,7 +101,7 @@ private fun NoInternetScreenContent(
             modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(dimens.screenPadding / 2),
-            isMuted = uiState.isMuted,
+            isMuted = isMuted,
             onClick = onToggleMusic
         )
     }
@@ -120,6 +111,6 @@ private fun NoInternetScreenContent(
 @Composable
 private fun NoInternetScreenPreview() {
     LabTheme {
-        NoInternetScreenContent(uiState = NoInternetUiState())
+        NoInternetScreenContent(isMuted = false)
     }
 }

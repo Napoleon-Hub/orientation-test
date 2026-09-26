@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,11 +27,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
+import com.funnygaytest.ui.components.ScreenMusic
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.EndingCard
 import com.funnygaytest.ui.components.buttons.IconButton
@@ -61,32 +60,28 @@ fun ResultScreen(
     onFeedScreen: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isMuted by viewModel.isMuted.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
     val activity = LocalActivity.current
 
-    LifecycleResumeEffect(Unit) {
-        viewModel.playMusic(R.raw.endings_music_new)
-        onPauseOrDispose { viewModel.stopMusic() }
-    }
+    ScreenMusic(R.raw.endings_music_new, viewModel)
 
-    LaunchedEffect(uiState.isMuted) {
-        viewModel.setMuteMusic(uiState.isMuted)
-    }
-
+    val state = uiState ?: return
     ResultScreenContent(
         modifier = modifier,
-        uiState = uiState,
+        uiState = state,
+        isMuted = isMuted,
         onRestartClicked = dropUnlessResumed { onStartScreen() },
         onPayClicked = dropUnlessResumed { onFeedScreen() },
         onAnotherTestsClicked = dropUnlessResumed { showAnotherApps(context) },
         onShareClicked = dropUnlessResumed {
-            share(context, uiState.healthLeft, uiState.lastQuestionNumber)
+            share(context, state.healthLeft, state.lastQuestionNumber)
         },
         onRateClicked = dropUnlessResumed {
             activity?.let { viewModel.rateUs(it) }
         },
-        onToggleMusic = viewModel::toggleMusic
+        onToggleMusic = viewModel::toggleMute
     )
 }
 
@@ -94,6 +89,7 @@ fun ResultScreen(
 private fun ResultScreenContent(
     modifier: Modifier = Modifier,
     uiState: ResultUiState,
+    isMuted: Boolean = false,
     onRestartClicked: () -> Unit = {},
     onPayClicked: () -> Unit = {},
     onAnotherTestsClicked: () -> Unit = {},
@@ -125,6 +121,7 @@ private fun ResultScreenContent(
                     .weight(ActionsWeight)
                     .fillMaxHeight(),
                 uiState = uiState,
+                isMuted = isMuted,
                 onRestartClicked = onRestartClicked,
                 onPayClicked = onPayClicked,
                 onAnotherTestsClicked = onAnotherTestsClicked,
@@ -190,6 +187,7 @@ private fun ResultReport(
 private fun ResultActions(
     modifier: Modifier = Modifier,
     uiState: ResultUiState,
+    isMuted: Boolean,
     onRestartClicked: () -> Unit,
     onPayClicked: () -> Unit,
     onAnotherTestsClicked: () -> Unit,
@@ -202,7 +200,7 @@ private fun ResultActions(
     Column(modifier = modifier) {
         MusicToggleButton(
             modifier = Modifier.align(Alignment.End),
-            isMuted = uiState.isMuted,
+            isMuted = isMuted,
             onClick = onToggleMusic
         )
 
@@ -287,17 +285,15 @@ private class ResultUiStatePreviewProvider : PreviewParameterProvider<ResultUiSt
             isNewEnding = true
         ),
         ResultUiState(
+            healthLeft = 0,
             lastQuestionNumber = 12,
-            titleRes = R.string.result_title_lose,
-            resultTextRes = R.string.result_text_result_lose_12_15,
             currentEnding = EndingType.LOSE_12,
             isNewEnding = true,
             isAllEndingsUnlocked = true
         ),
         ResultUiState(
+            healthLeft = 0,
             lastQuestionNumber = 1,
-            titleRes = R.string.result_title_lose_pussy,
-            resultTextRes = R.string.result_text_result_lose_pussy,
             isRateEnabled = false
         )
     )

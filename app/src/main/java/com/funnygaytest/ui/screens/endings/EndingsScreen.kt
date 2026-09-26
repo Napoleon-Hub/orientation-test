@@ -23,7 +23,6 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -40,11 +39,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
+import com.funnygaytest.ui.components.ScreenMusic
 import com.funnygaytest.ui.components.buttons.LabBackButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.components.dialogs.DiagnosisDetailsDialog
@@ -70,21 +69,16 @@ fun EndingsScreen(
     onBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isMuted by viewModel.isMuted.collectAsStateWithLifecycle()
 
-    LifecycleResumeEffect(Unit) {
-        viewModel.playMusic(R.raw.endings_music_new)
-        onPauseOrDispose { viewModel.stopMusic() }
-    }
-
-    LaunchedEffect(uiState.isMuted) {
-        viewModel.setMuteMusic(uiState.isMuted)
-    }
+    ScreenMusic(R.raw.endings_music_new, viewModel)
 
     EndingsScreenContent(
         modifier = modifier,
         uiState = uiState,
+        isMuted = isMuted,
         onBackClicked = dropUnlessResumed { onBack() },
-        onToggleMusic = viewModel::toggleMusic
+        onToggleMusic = viewModel::toggleMute
     )
 }
 
@@ -92,6 +86,7 @@ fun EndingsScreen(
 private fun EndingsScreenContent(
     modifier: Modifier = Modifier,
     uiState: EndingsUiState,
+    isMuted: Boolean = false,
     onBackClicked: () -> Unit = {},
     onToggleMusic: () -> Unit = {}
 ) {
@@ -118,7 +113,7 @@ private fun EndingsScreenContent(
             verticalArrangement = Arrangement.spacedBy(dimens.spacingLarge)
         ) {
             EndingsHeader(
-                isMuted = uiState.isMuted,
+                isMuted = isMuted,
                 onBackClicked = onBackClicked,
                 onToggleMusic = onToggleMusic
             )

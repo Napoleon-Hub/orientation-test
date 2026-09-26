@@ -276,7 +276,6 @@
     <string name="question_20_answer_3">Да плевать на тест… Кажется, я наконец-то готов стать истинным Боссом качалки!</string>
 
     <!-- Errors -->
-    <string name="error">Ошибка</string>
     <string name="error_empty_questions">Возникла ошибка формирования вопросов, тест перезапущен</string>
 
 </resources>

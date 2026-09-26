@@ -276,7 +276,6 @@
     <string name="question_20_answer_3">Scheiß auf den Test… Ich glaube, ich bin endlich bereit, der wahre Boss dieses Gyms zu werden!</string>
 
     <!-- Errors -->
-    <string name="error">SYSTEMFEHLER</string>
     <string name="error_empty_questions">Fehler bei der Protokollerstellung. Das Experiment wird neu gestartet…</string>
 
 </resources>

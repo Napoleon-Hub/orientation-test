@@ -24,7 +24,6 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -41,12 +40,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.funnygaytest.R
 import com.funnygaytest.models.Answer
 import com.funnygaytest.ui.components.AnswersGroup
 import com.funnygaytest.ui.components.BackgroundWrapper
+import com.funnygaytest.ui.components.ScreenMusic
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.theme.LabTheme
@@ -67,16 +66,10 @@ fun GameScreen(
     goToResult: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isMuted by viewModel.isMuted.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
-    LifecycleResumeEffect(Unit) {
-        viewModel.playMusic(R.raw.game_music)
-        onPauseOrDispose { viewModel.stopMusic() }
-    }
-
-    LaunchedEffect(uiState.isMuted) {
-        viewModel.setMuteMusic(uiState.isMuted)
-    }
+    ScreenMusic(R.raw.game_music, viewModel)
 
     ObserveAsEvents(viewModel.uiEffect) { effect ->
         when (effect) {
@@ -85,12 +78,14 @@ fun GameScreen(
         }
     }
 
+    val state = uiState ?: return
     GameScreenContent(
         modifier = modifier,
-        uiState = uiState,
+        uiState = state,
+        isMuted = isMuted,
         onAnswerSelected = viewModel::onAnswerSelected,
         onNextClicked = viewModel::onNextClicked,
-        onToggleMusic = viewModel::toggleMusic
+        onToggleMusic = viewModel::toggleMute
     )
 }
 
@@ -98,6 +93,7 @@ fun GameScreen(
 private fun GameScreenContent(
     modifier: Modifier = Modifier,
     uiState: GameUiState,
+    isMuted: Boolean = false,
     onAnswerSelected: (Answer) -> Unit = {},
     onNextClicked: () -> Unit = {},
     onToggleMusic: () -> Unit = {}
@@ -141,7 +137,7 @@ private fun GameScreenContent(
                     contentAlignment = Alignment.TopCenter
                 ) {
                     MusicToggleButton(
-                        isMuted = uiState.isMuted,
+                        isMuted = isMuted,
                         onClick = onToggleMusic
                     )
                 }

@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
+        installSplashScreen().setKeepOnScreenCondition { viewModel.uiState.value.isLoading }
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         hideSystemBars()
@@ -76,9 +76,9 @@ class MainActivity : AppCompatActivity() {
 
                     if (!isConnected) {
                         NoInternetScreen()
-                    } else if (!uiState.consentShown) {
+                    } else if (!uiState.isLoading && !uiState.consentShown) {
                         LaboratoryAccessDialog(
-                            onConsentAccepted = viewModel::updateConsentState,
+                            onConsentAccepted = viewModel::onConsentAccepted,
                             onDecline = ::finish
                         )
                     }

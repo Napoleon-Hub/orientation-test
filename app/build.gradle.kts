@@ -176,8 +176,9 @@ dependencies {
     // Work Runtime
     constraints { implementation(libs.work.runtime) }
 
-    // Gson
-    implementation(libs.gson)
+    // DataStore
+    implementation(libs.datastore.preferences)
+    implementation(libs.kotlinx.serialization.json)
 
     // Timber
     implementation(libs.timber)

@@ -1,28 +1,32 @@
 package com.funnygaytest
 
 import androidx.lifecycle.ViewModel
-import com.funnygaytest.prefs.PrefsEntity
+import androidx.lifecycle.viewModelScope
+import com.funnygaytest.data.settings.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class MainUiState(val consentShown: Boolean)
+data class MainUiState(
+    val isLoading: Boolean = true,
+    val consentShown: Boolean = false
+)
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val preferences: PrefsEntity
+    private val settingsRepository: SettingsRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(
-        MainUiState(consentShown = preferences.consentShown)
-    )
-    val uiState = _uiState.asStateFlow()
+    val uiState: StateFlow<MainUiState> = settingsRepository.consentShown
+        .map { MainUiState(isLoading = false, consentShown = it) }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, MainUiState())
 
-    fun updateConsentState() {
-        preferences.consentShown = true
-        _uiState.update { it.copy(consentShown = true) }
+    fun onConsentAccepted() {
+        viewModelScope.launch { settingsRepository.setConsentShown() }
     }
 
 }

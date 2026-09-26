@@ -1,15 +1,15 @@
 package com.funnygaytest.ui.screens.start
 
 import androidx.lifecycle.viewModelScope
-import com.funnygaytest.base.BaseViewModel
+import androidx.lifecycle.ViewModel
+import com.funnygaytest.data.game.GameSession
+import com.funnygaytest.data.game.GameSessionRepository
 import com.funnygaytest.managers.firebase.firestore.FirestoreManager
 import com.funnygaytest.managers.locale.AppLocaleManager
-import com.funnygaytest.managers.music.AudioManager
+import com.funnygaytest.managers.music.MusicController
 import com.funnygaytest.models.firebase.LabStats
-import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.utils.enums.AppLanguage
 import com.funnygaytest.utils.enums.EndingType
-import com.funnygaytest.utils.helpers.generateNewGameRun
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +24,6 @@ import javax.inject.Inject
 data class StartUiState(
     val isGameStarted: Boolean = false,
     val showDifficulty: Boolean = false,
-    val isMuted: Boolean = false,
     val wasPussyModeClicked: Boolean = false,
     val currentLanguage: AppLanguage = AppLanguage.Default
 )
@@ -36,27 +35,23 @@ sealed interface StartUiEffect {
 
 @HiltViewModel
 class StartViewModel @Inject constructor(
-    preferences: PrefsEntity,
-    audioManager: AudioManager,
+    musicController: MusicController,
+    private val gameSessionRepository: GameSessionRepository,
     private val firestoreManager: FirestoreManager,
     private val localeManager: AppLocaleManager
-) : BaseViewModel(preferences, audioManager) {
+) : ViewModel(), MusicController by musicController {
 
-    private val _uiState = MutableStateFlow(
-        StartUiState(
-            isGameStarted = gameBegun,
-            isMuted = isMuted,
-            currentLanguage = localeManager.currentLanguage
-        )
-    )
+    private val _uiState = MutableStateFlow(StartUiState(currentLanguage = localeManager.currentLanguage))
     val uiState = _uiState.asStateFlow()
 
     private val _uiEffect = Channel<StartUiEffect>(Channel.BUFFERED)
     val uiEffect = _uiEffect.receiveAsFlow()
 
     init {
-        if (!gameBegun) {
-            health = 100
+        viewModelScope.launch {
+            gameSessionRepository.session.collect { session ->
+                _uiState.update { it.copy(isGameStarted = session.isStarted) }
+            }
         }
 
         viewModelScope.launch {
@@ -76,23 +71,14 @@ class StartViewModel @Inject constructor(
     }
 
     fun onResume() {
-        _uiState.update {
-            it.copy(
-                isGameStarted = gameBegun,
-                isMuted = isMuted,
-                currentLanguage = localeManager.currentLanguage
-            )
-        }
+        _uiState.update { it.copy(currentLanguage = localeManager.currentLanguage) }
     }
 
     fun onStartGameClicked() {
-        if (!gameBegun) {
-            gameBegun = true
-            lastQuestionIndex = 0
-            health = 100
-            currentQuestionList = generateNewGameRun()
+        viewModelScope.launch {
+            gameSessionRepository.update { if (it.isStarted) it else GameSession.newRun() }
+            _uiEffect.send(StartUiEffect.NavigateToGame)
         }
-        sendEffect(StartUiEffect.NavigateToGame)
     }
 
     fun onDifficultyClicked() {
@@ -104,10 +90,10 @@ class StartViewModel @Inject constructor(
     }
 
     fun onEasyDifficultySelected() {
-        gameBegun = true
-        lastQuestionIndex = 0
-        health = 0
-        sendEffect(StartUiEffect.NavigateToLoseResult)
+        viewModelScope.launch {
+            gameSessionRepository.update { GameSession.instantLoss() }
+            _uiEffect.send(StartUiEffect.NavigateToLoseResult)
+        }
     }
 
     fun onHardDifficultySelected() {
@@ -117,15 +103,6 @@ class StartViewModel @Inject constructor(
     fun onLanguageSelected(language: AppLanguage) {
         _uiState.update { it.copy(currentLanguage = language) }
         localeManager.setLanguage(language)
-    }
-
-    override fun toggleMusic() {
-        _uiState.update { it.copy(isMuted = !it.isMuted) }
-        super.toggleMusic()
-    }
-
-    private fun sendEffect(effect: StartUiEffect) {
-        viewModelScope.launch { _uiEffect.send(effect) }
     }
 
 }

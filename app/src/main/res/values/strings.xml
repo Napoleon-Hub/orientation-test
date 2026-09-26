@@ -279,7 +279,6 @@
     <string name="question_20_answer_3">To hell with the test… I think I\'m finally ready to become the true Boss of this gym!</string>
 
     <!-- Errors -->
-    <string name="error">Error</string>
     <string name="error_empty_questions">Error loading questions. Restarting the test…</string>
 
     <!-- Untranslatable -->

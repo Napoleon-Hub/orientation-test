@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -37,6 +36,7 @@ import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.BuildConfig
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
+import com.funnygaytest.ui.components.ScreenMusic
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.buttons.LanguageToggleButton
 import com.funnygaytest.ui.components.buttons.MainButton
@@ -61,15 +61,13 @@ fun StartScreen(
     onLoseResultShow: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val isMuted by viewModel.isMuted.collectAsStateWithLifecycle()
+
+    ScreenMusic(R.raw.start_music, viewModel)
 
     LifecycleResumeEffect(Unit) {
         viewModel.onResume()
-        viewModel.playMusic(R.raw.start_music)
-        onPauseOrDispose { viewModel.stopMusic() }
-    }
-
-    LaunchedEffect(uiState.isMuted) {
-        viewModel.setMuteMusic(uiState.isMuted)
+        onPauseOrDispose { }
     }
 
     ObserveAsEvents(viewModel.uiEffect) { effect ->
@@ -86,12 +84,13 @@ fun StartScreen(
     StartScreenContent(
         modifier = modifier,
         uiState = uiState,
+        isMuted = isMuted,
         onStartGameClicked = dropUnlessResumed { viewModel.onStartGameClicked() },
         onEndingsClicked = dropUnlessResumed { onEndingsShow() },
         onDifficultyClicked = viewModel::onDifficultyClicked,
         onEasyClicked = dropUnlessResumed { viewModel.onEasyDifficultySelected() },
         onHardClicked = viewModel::onHardDifficultySelected,
-        onToggleMusic = viewModel::toggleMusic,
+        onToggleMusic = viewModel::toggleMute,
         onLanguageSelected = viewModel::onLanguageSelected
     )
 }
@@ -100,6 +99,7 @@ fun StartScreen(
 private fun StartScreenContent(
     modifier: Modifier = Modifier,
     uiState: StartUiState,
+    isMuted: Boolean = false,
     onStartGameClicked: () -> Unit = {},
     onEndingsClicked: () -> Unit = {},
     onDifficultyClicked: () -> Unit = {},
@@ -179,7 +179,7 @@ private fun StartScreenContent(
                 .padding(dimens.screenPadding / 2)
         ) {
             MusicToggleButton(
-                isMuted = uiState.isMuted,
+                isMuted = isMuted,
                 onClick = onToggleMusic
             )
 

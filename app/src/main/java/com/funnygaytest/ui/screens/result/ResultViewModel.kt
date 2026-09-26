@@ -3,13 +3,14 @@ package com.funnygaytest.ui.screens.result
 import android.app.Activity
 import android.content.Context
 import androidx.annotation.StringRes
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.funnygaytest.R
-import com.funnygaytest.base.BaseViewModel
+import com.funnygaytest.data.game.GameSessionRepository
 import com.funnygaytest.managers.firebase.firestore.FirestoreManager
-import com.funnygaytest.managers.music.AudioManager
+import com.funnygaytest.managers.music.MusicController
 import com.funnygaytest.models.firebase.LabStats
-import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.utils.enums.EndingType
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
@@ -18,18 +19,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class ResultUiState(
-    val isMuted: Boolean = false,
     val isRateEnabled: Boolean = true,
-    val healthLeft: Int = 0,
-    val lastQuestionNumber: Int = 0,
-    @param:StringRes val titleRes: Int = R.string.result_title_win,
-    @param:StringRes val resultTextRes: Int = R.string.result_text_result_win_100,
+    val healthLeft: Int,
+    val lastQuestionNumber: Int,
+    @param:StringRes val titleRes: Int = titleRes(healthLeft, lastQuestionNumber),
+    @param:StringRes val resultTextRes: Int = resultTextRes(healthLeft, lastQuestionNumber),
     val currentEnding: EndingType? = null,
     val isNewEnding: Boolean = false,
     val isAllEndingsUnlocked: Boolean = false
@@ -37,43 +38,25 @@ data class ResultUiState(
 
 @HiltViewModel
 class ResultViewModel @Inject constructor(
-    preferences: PrefsEntity,
-    audioManager: AudioManager,
+    musicController: MusicController,
+    private val savedStateHandle: SavedStateHandle,
+    private val gameSessionRepository: GameSessionRepository,
     private val firestoreManager: FirestoreManager,
     @param:ApplicationContext private val appContext: Context
-) : BaseViewModel(preferences, audioManager) {
+) : ViewModel(), MusicController by musicController {
 
-    private val _uiState = MutableStateFlow(
-        ResultUiState(
-            isMuted = isMuted,
-            healthLeft = health,
-            lastQuestionNumber = lastQuestionIndex + 1,
-            titleRes = titleRes(health, lastQuestionIndex + 1),
-            resultTextRes = resultTextRes(health, lastQuestionIndex + 1)
-        )
-    )
+    private val _uiState = MutableStateFlow<ResultUiState?>(null)
     val uiState = _uiState.asStateFlow()
 
     private var reviewManager: ReviewManager? = null
     private var reviewInfo: ReviewInfo? = null
 
     init {
-        processCurrentEnding()
-        refreshGameData()
-        requestReviewInfo()
-    }
-
-    private fun requestReviewInfo() {
-        reviewManager = ReviewManagerFactory.create(appContext)
-        val request = reviewManager?.requestReviewFlow()
-        request?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                _uiState.update { it.copy(isRateEnabled = true) }
-                reviewInfo = task.result
-            } else {
-                _uiState.update { it.copy(isRateEnabled = false) }
-                // @ReviewErrorCode val reviewErrorCode = (task.exception as ReviewException).errorCode
-            }
+        viewModelScope.launch {
+            val (health, questionNumber) = restoreRunOutcome() ?: takeFinishedRun()
+            _uiState.value = ResultUiState(healthLeft = health, lastQuestionNumber = questionNumber)
+            requestReviewInfo()
+            if (!restoreEnding()) recordEnding(health, questionNumber)
         }
     }
 
@@ -81,77 +64,107 @@ class ResultViewModel @Inject constructor(
         reviewInfo?.let { reviewInfo ->
             val flow = reviewManager?.launchReviewFlow(activity, reviewInfo)
             flow?.addOnCompleteListener {
-                _uiState.update { it.copy(isRateEnabled = false) }
+                _uiState.update { it?.copy(isRateEnabled = false) }
             }
         }
     }
 
-    private fun processCurrentEnding() {
-        val qNum = lastQuestionIndex + 1
-        val hp = health
+    private fun restoreRunOutcome(): Pair<Int, Int>? {
+        val health = savedStateHandle.get<Int>(KEY_HEALTH) ?: return null
+        val questionNumber = savedStateHandle.get<Int>(KEY_QUESTION_NUMBER) ?: return null
+        return health to questionNumber
+    }
 
-        val endingType = when {
-            hp > 0 -> {
-                when (hp) {
-                    100 -> EndingType.WIN_100
-                    in 66..99 -> EndingType.WIN_66
-                    in 33..65 -> EndingType.WIN_33
-                    else -> EndingType.WIN_1
-                }
-            }
-            else -> {
-                when (qNum) {
-                    in 2..7 -> EndingType.LOSE_4
-                    in 8..11 -> EndingType.LOSE_8
-                    in 12..15 -> EndingType.LOSE_12
-                    in 16..19 -> EndingType.LOSE_16
-                    20 -> EndingType.LOSE_20
-                    else -> EndingType.LOSE_PUSSY
-                }
+    private suspend fun takeFinishedRun(): Pair<Int, Int> {
+        val session = gameSessionRepository.session.first()
+        savedStateHandle[KEY_HEALTH] = session.health
+        savedStateHandle[KEY_QUESTION_NUMBER] = session.questionNumber
+        gameSessionRepository.clear()
+        return session.health to session.questionNumber
+    }
+
+    private fun restoreEnding(): Boolean {
+        val endingId = savedStateHandle.get<String>(KEY_ENDING) ?: return false
+        val ending = EndingType.entries.find { it.id == endingId } ?: return false
+        showEnding(
+            ending = ending,
+            isNew = savedStateHandle[KEY_IS_NEW_ENDING] ?: false,
+            isAllUnlocked = savedStateHandle[KEY_ALL_ENDINGS_UNLOCKED] ?: false
+        )
+        return true
+    }
+
+    private suspend fun recordEnding(health: Int, questionNumber: Int) {
+        val ending = endingFor(health, questionNumber)
+        val achievements = (firestoreManager.getStats().firstOrNull() ?: LabStats()).achievements
+
+        val isNew = ending.id !in achievements
+        val uniqueCoreEndings = (achievements + ending.id)
+            .filter { it != EndingType.ALL.id && it != EndingType.DONATE.id }
+            .distinct()
+            .size
+        val wasAllUnlocked = EndingType.ALL.id in achievements
+        val unlocksAll = uniqueCoreEndings >= CORE_ENDINGS_COUNT && !wasAllUnlocked
+
+        savedStateHandle[KEY_ENDING] = ending.id
+        savedStateHandle[KEY_IS_NEW_ENDING] = isNew
+        savedStateHandle[KEY_ALL_ENDINGS_UNLOCKED] = wasAllUnlocked || unlocksAll
+
+        firestoreManager.recordTestResult(isWin = health > 0, achievementId = ending.id)
+        if (unlocksAll) firestoreManager.recordTestResult(achievementId = EndingType.ALL.id)
+
+        showEnding(ending, isNew, isAllUnlocked = wasAllUnlocked || unlocksAll)
+    }
+
+    private fun showEnding(ending: EndingType, isNew: Boolean, isAllUnlocked: Boolean) {
+        _uiState.update {
+            it?.copy(
+                currentEnding = ending,
+                isNewEnding = isNew,
+                isAllEndingsUnlocked = isAllUnlocked
+            )
+        }
+    }
+
+    private fun requestReviewInfo() {
+        reviewManager = ReviewManagerFactory.create(appContext)
+        val request = reviewManager?.requestReviewFlow()
+        request?.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                _uiState.update { it?.copy(isRateEnabled = true) }
+                reviewInfo = task.result
+            } else {
+                _uiState.update { it?.copy(isRateEnabled = false) }
             }
         }
-
-        viewModelScope.launch {
-            val currentStats = firestoreManager.getStats().firstOrNull() ?: LabStats()
-
-            val isNew = !currentStats.achievements.contains(endingType.id)
-
-            firestoreManager.recordTestResult(isWin = hp > 0, achievementId = endingType.id)
-
-            val allUnlockedAchievements = currentStats.achievements + endingType.id
-            val uniqueCoreEndings = allUnlockedAchievements.filter {
-                it != EndingType.ALL.id && it != EndingType.DONATE.id
-            }.distinct().size
-
-            var isAllUnlockedNow = currentStats.achievements.contains(EndingType.ALL.id)
-
-            if (uniqueCoreEndings >= 10 && !isAllUnlockedNow) {
-                firestoreManager.recordTestResult(achievementId = EndingType.ALL.id)
-                isAllUnlockedNow = true
-            }
-
-            _uiState.update {
-                it.copy(
-                    currentEnding = endingType,
-                    isNewEnding = isNew,
-                    isAllEndingsUnlocked = isAllUnlockedNow
-                )
-            }
-        }
     }
 
-    override fun toggleMusic() {
-        _uiState.update { it.copy(isMuted = !it.isMuted) }
-        super.toggleMusic()
+    private companion object {
+        const val CORE_ENDINGS_COUNT = 10
+        const val KEY_HEALTH = "health"
+        const val KEY_QUESTION_NUMBER = "questionNumber"
+        const val KEY_ENDING = "ending"
+        const val KEY_IS_NEW_ENDING = "isNewEnding"
+        const val KEY_ALL_ENDINGS_UNLOCKED = "allEndingsUnlocked"
     }
 
-    private fun refreshGameData() {
-        gameBegun = false
-        lastQuestionIndex = 0
-        health = 100
-        currentQuestionList = listOf()
-    }
+}
 
+private fun endingFor(health: Int, questionNumber: Int): EndingType = when {
+    health > 0 -> when (health) {
+        100 -> EndingType.WIN_100
+        in 66..99 -> EndingType.WIN_66
+        in 33..65 -> EndingType.WIN_33
+        else -> EndingType.WIN_1
+    }
+    else -> when (questionNumber) {
+        in 2..7 -> EndingType.LOSE_4
+        in 8..11 -> EndingType.LOSE_8
+        in 12..15 -> EndingType.LOSE_12
+        in 16..19 -> EndingType.LOSE_16
+        20 -> EndingType.LOSE_20
+        else -> EndingType.LOSE_PUSSY
+    }
 }
 
 @StringRes

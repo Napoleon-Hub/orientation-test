@@ -1,11 +1,10 @@
 package com.funnygaytest.ui.screens.endings
 
 import androidx.lifecycle.viewModelScope
-import com.funnygaytest.base.BaseViewModel
+import androidx.lifecycle.ViewModel
 import com.funnygaytest.managers.firebase.firestore.FirestoreManager
-import com.funnygaytest.managers.music.AudioManager
+import com.funnygaytest.managers.music.MusicController
 import com.funnygaytest.models.firebase.LabStats
-import com.funnygaytest.prefs.PrefsEntity
 import com.funnygaytest.utils.enums.EndingType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,8 +18,7 @@ import javax.inject.Inject
 data class EndingsUiState(
     val wins: Int = 0,
     val loses: Int = 0,
-    val endings: List<DiagnosisItemState> = emptyList(),
-    val isMuted: Boolean = false
+    val endings: List<DiagnosisItemState> = emptyList()
 )
 
 data class DiagnosisItemState(
@@ -30,12 +28,11 @@ data class DiagnosisItemState(
 
 @HiltViewModel
 class EndingsViewModel @Inject constructor(
-    preferences: PrefsEntity,
-    audioManager: AudioManager,
+    musicController: MusicController,
     private val firestoreManager: FirestoreManager
-) : BaseViewModel(preferences, audioManager) {
+) : ViewModel(), MusicController by musicController {
 
-    private val _uiState = MutableStateFlow(EndingsUiState(isMuted = isMuted))
+    private val _uiState = MutableStateFlow(EndingsUiState())
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -57,11 +54,6 @@ class EndingsViewModel @Inject constructor(
                     }
                 }
         }
-    }
-
-    override fun toggleMusic() {
-        _uiState.update { it.copy(isMuted = !it.isMuted) }
-        super.toggleMusic()
     }
 
 }
