@@ -25,6 +25,7 @@ data class LabColors(
     val surface: Color = LabGraphite,
     val panel: Color = LabBlack.copy(alpha = 0.3f),
     val panelStrong: Color = LabBlack.copy(alpha = 0.4f),
+    val panelOpaque: Color = LabBlack.copy(alpha = 0.65f),
     val disabled: Color = LabDarkGray,
 
     val textPrimary: Color = LabLightGray,

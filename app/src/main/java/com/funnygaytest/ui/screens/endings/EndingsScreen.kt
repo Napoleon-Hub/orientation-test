@@ -201,8 +201,8 @@ private fun VerdictsPanel(
         ) {
             Text(
                 text = stringResource(R.string.endings_diagnosis_description),
-                style = LabTheme.typography.body.copy(fontSize = 12.sp).scaled(dimens.textScale),
-                color = LabTheme.colors.textSecondary,
+                style = LabTheme.typography.body.copy(fontSize = 13.sp).scaled(dimens.textScale),
+                color = LabTheme.colors.textPrimary.copy(alpha = 0.85f),
                 textAlign = TextAlign.Start
             )
 
@@ -337,7 +337,7 @@ private fun StatsPanel(
 
 @Composable
 private fun Modifier.labPanel(): Modifier = this
-    .background(LabTheme.colors.panel, PanelShape)
+    .background(LabTheme.colors.panelOpaque, PanelShape)
     .border(1.dp, LabTheme.colors.accent.copy(alpha = 0.3f), PanelShape)
 
 private class EndingsUiStatePreviewProvider : PreviewParameterProvider<EndingsUiState> {
