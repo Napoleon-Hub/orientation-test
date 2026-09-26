@@ -18,7 +18,6 @@ import javax.inject.Inject
 
 data class FeedUiState(
     val isDonated: Boolean = false,
-    val countOfProduct: Int = 0,
     val isDonateAchieveUnlocked: Boolean = false
 )
 
@@ -49,8 +48,8 @@ class FeedViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            billingInteractor.purchaseEvent.collect { quantity ->
-                handleSuccessfulDonation(quantity)
+            billingInteractor.purchaseEvent.collect {
+                handleSuccessfulDonation()
             }
         }
     }
@@ -74,13 +73,12 @@ class FeedViewModel @Inject constructor(
         billingInteractor.launchBillingFlow(activity, billingFlowParams)
     }
 
-    private fun handleSuccessfulDonation(quantity: Int) {
+    private fun handleSuccessfulDonation() {
         val isAlreadyUnlocked = currentAchievements.contains(EndingType.DONATE.id)
 
         _uiState.update {
             it.copy(
                 isDonated = true,
-                countOfProduct = it.countOfProduct + quantity,
                 isDonateAchieveUnlocked = !isAlreadyUnlocked
             )
         }
