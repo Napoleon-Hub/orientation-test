@@ -1,6 +1,7 @@
 package com.funnygaytest.ui.components
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -18,19 +19,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.model.Answer
 import com.funnygaytest.ui.theme.LabTheme
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
 
 private val FadeHeight = 32.dp
 private val ScrollIndicatorGap = 12.dp
 private val AnswerShape = RoundedCornerShape(12.dp)
+private val ScrollHintDistance = 64.dp
+private const val ScrollHintDelayMs = 1200L
+private const val ScrollHintDurationMs = 450
 
 @Composable
 fun AnswersGroup(
@@ -38,12 +47,31 @@ fun AnswersGroup(
     answers: List<Answer>,
     selectedAnswer: Answer?,
     textStyle: TextStyle = LabTheme.typography.body,
-    onAnswerSelected: (Answer) -> Unit
+    showScrollHint: Boolean = false,
+    onAnswerSelected: (Answer) -> Unit,
+    onScrollHintShown: () -> Unit = {}
 ) {
     val scrollState = rememberScrollState()
+    val hintDistancePx = with(LocalDensity.current) { ScrollHintDistance.roundToPx() }
+    val currentOnScrollHintShown by rememberUpdatedState(onScrollHintShown)
 
     LaunchedEffect(answers) {
         scrollState.scrollTo(0)
+    }
+
+    LaunchedEffect(answers, showScrollHint) {
+        if (!showScrollHint) return@LaunchedEffect
+        snapshotFlow { scrollState.maxValue }.first { it in 1 until Int.MAX_VALUE }
+        delay(ScrollHintDelayMs)
+        try {
+            if (scrollState.value == 0) {
+                val spec = tween<Float>(ScrollHintDurationMs, easing = FastOutSlowInEasing)
+                scrollState.animateScrollTo(minOf(hintDistancePx, scrollState.maxValue), spec)
+                scrollState.animateScrollTo(0, spec)
+            }
+        } finally {
+            currentOnScrollHintShown()
+        }
     }
 
     Column(
@@ -52,7 +80,7 @@ fun AnswersGroup(
             .verticalFadingEdges(scrollState, FadeHeight)
             .verticalScroll(scrollState)
             .padding(end = ScrollIndicatorGap),
-        verticalArrangement = Arrangement.spacedBy(LabTheme.dimens.spacingMedium)
+        verticalArrangement = Arrangement.spacedBy(LabTheme.dimens.answerSpacing)
     ) {
         answers.forEach { answer ->
             AnswerItem(
@@ -73,6 +101,7 @@ private fun AnswerItem(
     onClick: () -> Unit
 ) {
     val colors = LabTheme.colors
+    val dimens = LabTheme.dimens
     val borderColor by animateColorAsState(
         targetValue = if (isSelected) colors.accent else colors.accent.copy(alpha = 0.1f),
         animationSpec = tween(durationMillis = 200),
@@ -87,7 +116,7 @@ private fun AnswerItem(
             .background(if (isSelected) colors.accent.copy(alpha = 0.25f) else colors.panelStrong)
             .border(width = if (isSelected) 2.dp else 1.dp, color = borderColor, shape = AnswerShape)
             .clickable(onClick = onClick)
-            .padding(horizontal = 20.dp, vertical = 16.dp),
+            .padding(horizontal = dimens.answerHorizontalPadding, vertical = dimens.answerVerticalPadding),
         contentAlignment = Alignment.CenterStart
     ) {
         Text(

@@ -67,6 +67,7 @@ fun GameScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val isMuted by viewModel.isMuted.collectAsStateWithLifecycle()
+    val showScrollHint by viewModel.showScrollHint.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
     ScreenMusic(R.raw.game_music, viewModel)
@@ -83,7 +84,9 @@ fun GameScreen(
         modifier = modifier,
         uiState = state,
         isMuted = isMuted,
+        showScrollHint = showScrollHint,
         onAnswerSelected = viewModel::onAnswerSelected,
+        onScrollHintShown = viewModel::onScrollHintShown,
         onNextClicked = viewModel::onNextClicked,
         onToggleMusic = viewModel::toggleMute
     )
@@ -94,7 +97,9 @@ private fun GameScreenContent(
     modifier: Modifier = Modifier,
     uiState: GameUiState,
     isMuted: Boolean = false,
+    showScrollHint: Boolean = false,
     onAnswerSelected: (Answer) -> Unit = {},
+    onScrollHintShown: () -> Unit = {},
     onNextClicked: () -> Unit = {},
     onToggleMusic: () -> Unit = {}
 ) {
@@ -155,7 +160,9 @@ private fun GameScreenContent(
                     answers = uiState.currentQuestion.listOfAnswers,
                     selectedAnswer = uiState.selectedAnswer,
                     textStyle = LabTheme.typography.body.scaled(dimens.textScale),
-                    onAnswerSelected = onAnswerSelected
+                    showScrollHint = showScrollHint,
+                    onAnswerSelected = onAnswerSelected,
+                    onScrollHintShown = onScrollHintShown
                 )
 
                 Column(

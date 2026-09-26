@@ -23,6 +23,10 @@ class SettingsRepository @Inject constructor(
         .map { it[CONSENT_SHOWN] ?: false }
         .distinctUntilChanged()
 
+    val scrollHintShown: Flow<Boolean> = dataStore.data
+        .map { it[SCROLL_HINT_SHOWN] ?: false }
+        .distinctUntilChanged()
+
     suspend fun toggleMuted() {
         dataStore.edit { it[IS_MUTED] = !(it[IS_MUTED] ?: false) }
     }
@@ -31,8 +35,13 @@ class SettingsRepository @Inject constructor(
         dataStore.edit { it[CONSENT_SHOWN] = true }
     }
 
+    suspend fun setScrollHintShown() {
+        dataStore.edit { it[SCROLL_HINT_SHOWN] = true }
+    }
+
     private companion object {
         val IS_MUTED = booleanPreferencesKey("isMuted")
         val CONSENT_SHOWN = booleanPreferencesKey("consentShown")
+        val SCROLL_HINT_SHOWN = booleanPreferencesKey("scrollHintShown")
     }
 }

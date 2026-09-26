@@ -6,15 +6,20 @@ import androidx.lifecycle.viewModelScope
 import com.funnygaytest.R
 import com.funnygaytest.data.game.GameSession
 import com.funnygaytest.data.game.GameSessionRepository
+import com.funnygaytest.data.settings.SettingsRepository
 import com.funnygaytest.model.Answer
 import com.funnygaytest.model.Question
 import com.funnygaytest.platform.audio.MusicController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -38,7 +43,8 @@ sealed interface GameUiEffect {
 @HiltViewModel
 class GameViewModel @Inject constructor(
     musicController: MusicController,
-    private val gameSessionRepository: GameSessionRepository
+    private val gameSessionRepository: GameSessionRepository,
+    private val settingsRepository: SettingsRepository
 ) : ViewModel(), MusicController by musicController {
 
     private val _uiState = MutableStateFlow<GameUiState?>(null)
@@ -46,6 +52,10 @@ class GameViewModel @Inject constructor(
 
     private val _uiEffect = Channel<GameUiEffect>(Channel.BUFFERED)
     val uiEffect = _uiEffect.receiveAsFlow()
+
+    val showScrollHint: StateFlow<Boolean> = settingsRepository.scrollHintShown
+        .map { !it }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     private var session = GameSession()
     private var isRunOver = false
@@ -62,6 +72,10 @@ class GameViewModel @Inject constructor(
             session = loaded
             _uiState.value = loaded.toUiState()
         }
+    }
+
+    fun onScrollHintShown() {
+        viewModelScope.launch { settingsRepository.setScrollHintShown() }
     }
 
     fun onAnswerSelected(answer: Answer) {
