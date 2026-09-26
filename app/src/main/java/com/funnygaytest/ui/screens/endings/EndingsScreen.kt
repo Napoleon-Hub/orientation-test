@@ -6,29 +6,27 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,50 +35,45 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.LifecycleResumeEffect
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.buttons.LabBackButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.components.dialogs.DiagnosisDetailsDialog
+import com.funnygaytest.ui.components.verticalFadingEdges
+import com.funnygaytest.ui.components.verticalScrollIndicator
 import com.funnygaytest.ui.theme.LabTheme
+import com.funnygaytest.ui.theme.scaled
+import com.funnygaytest.ui.utils.LandscapePreviews
 import com.funnygaytest.utils.enums.EndingType
+
+private const val VerdictsWeight = 0.62f
+private const val StatsWeight = 0.38f
+private val TileMinSize = 96.dp
+private val FadeHeight = 32.dp
+private val ScrollIndicatorGap = 12.dp
+private val PanelShape = RoundedCornerShape(12.dp)
+private val TileShape = RoundedCornerShape(16.dp)
 
 @Composable
 fun EndingsScreen(
+    modifier: Modifier = Modifier,
     viewModel: EndingsViewModel = hiltViewModel(),
     onBack: () -> Unit
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    val lifecycleOwner = LocalLifecycleOwner.current
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_PAUSE -> {
-                    viewModel.stopMusic()
-                }
-
-                Lifecycle.Event.ON_RESUME -> {
-                    viewModel.playMusic(R.raw.endings_music_new)
-                }
-
-                else -> {}
-            }
-        }
-
-        lifecycleOwner.lifecycle.addObserver(observer)
-
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
-        }
+    LifecycleResumeEffect(Unit) {
+        viewModel.playMusic(R.raw.endings_music_new)
+        onPauseOrDispose { viewModel.stopMusic() }
     }
 
     LaunchedEffect(uiState.isMuted) {
@@ -88,127 +81,168 @@ fun EndingsScreen(
     }
 
     EndingsScreenContent(
+        modifier = modifier,
         uiState = uiState,
         onBackClicked = dropUnlessResumed { onBack() },
-        onToggleMusic = { viewModel.toggleMusic() }
+        onToggleMusic = viewModel::toggleMusic
     )
-
 }
 
 @Composable
 private fun EndingsScreenContent(
+    modifier: Modifier = Modifier,
     uiState: EndingsUiState,
     onBackClicked: () -> Unit = {},
     onToggleMusic: () -> Unit = {}
 ) {
-    var selectedDiagnosisForDialog by remember { mutableStateOf<DiagnosisItemState?>(null) }
+    val dimens = LabTheme.dimens
+    var selectedEnding by rememberSaveable { mutableStateOf<EndingType?>(null) }
 
-    selectedDiagnosisForDialog?.let { item ->
+    selectedEnding?.let { ending ->
         DiagnosisDetailsDialog(
-            iconRes = item.type.iconRes,
-            title = stringResource(item.type.titleRes),
-            description = stringResource(item.type.descriptionRes),
-            onDismiss = { selectedDiagnosisForDialog = null }
+            iconRes = ending.iconRes,
+            title = stringResource(ending.titleRes),
+            description = stringResource(ending.descriptionRes),
+            onDismiss = { selectedEnding = null }
         )
     }
 
-    BackgroundWrapper(backgroundId = R.drawable.background_endings) {
-
-        Box(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(end = 12.dp, top = 12.dp)
-        ) {
-            MusicToggleButton(
-                isMuted = uiState.isMuted,
-                onClick = onToggleMusic
-            )
-        }
-
+    BackgroundWrapper(
+        modifier = modifier,
+        backgroundId = R.drawable.background_endings
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 32.dp)
+                .padding(horizontal = dimens.screenPadding, vertical = dimens.spacingLarge),
+            verticalArrangement = Arrangement.spacedBy(dimens.spacingLarge)
         ) {
+            EndingsHeader(
+                isMuted = uiState.isMuted,
+                onBackClicked = onBackClicked,
+                onToggleMusic = onToggleMusic
+            )
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 20.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .weight(1f),
+                horizontalArrangement = Arrangement.spacedBy(dimens.spacingLarge)
             ) {
-                LabBackButton(onClick = onBackClicked)
+                VerdictsPanel(
+                    modifier = Modifier
+                        .weight(VerdictsWeight)
+                        .fillMaxHeight(),
+                    endings = uiState.endings,
+                    onEndingClicked = { item -> if (item.isUnlocked) selectedEnding = item.type }
+                )
 
-                Spacer(modifier = Modifier.width(16.dp))
-
-                Text(
-                    text = stringResource(R.string.endings_title),
-                    style = LabTheme.typography.heading,
-                    color = LabTheme.colors.textPrimary
+                StatsPanel(
+                    modifier = Modifier.weight(StatsWeight),
+                    wins = uiState.wins,
+                    loses = uiState.loses
                 )
             }
+        }
+    }
+}
 
-            Row(
-                modifier = Modifier.fillMaxSize(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Column(
-                    modifier = Modifier
-                        .weight(0.55f)
-                        .background(
-                            LabTheme.colors.panel,
-                            shape = RoundedCornerShape(12.dp)
+@Composable
+private fun EndingsHeader(
+    isMuted: Boolean,
+    onBackClicked: () -> Unit,
+    onToggleMusic: () -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(LabTheme.dimens.spacingLarge)
+    ) {
+        LabBackButton(onClick = onBackClicked)
+
+        Text(
+            modifier = Modifier.weight(1f),
+            text = stringResource(R.string.endings_title),
+            style = LabTheme.typography.heading.scaled(LabTheme.dimens.textScale),
+            color = LabTheme.colors.textPrimary,
+            textAlign = TextAlign.Start,
+            maxLines = 1
+        )
+
+        MusicToggleButton(
+            isMuted = isMuted,
+            onClick = onToggleMusic
+        )
+    }
+}
+
+@Composable
+private fun VerdictsPanel(
+    modifier: Modifier = Modifier,
+    endings: List<DiagnosisItemState>,
+    onEndingClicked: (DiagnosisItemState) -> Unit
+) {
+    val dimens = LabTheme.dimens
+    val scrollState = rememberScrollState()
+
+    Column(
+        modifier = modifier
+            .labPanel()
+            .padding(start = dimens.spacingLarge, top = dimens.spacingLarge, end = dimens.spacingSmall, bottom = dimens.spacingLarge)
+    ) {
+        Text(
+            text = stringResource(R.string.endings_diagnosis_title),
+            style = LabTheme.typography.heading.scaled(dimens.textScale),
+            color = LabTheme.colors.textPrimary,
+            textAlign = TextAlign.Start
+        )
+
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .verticalScrollIndicator(scrollState, color = LabTheme.colors.accent.copy(alpha = 0.6f))
+                .verticalFadingEdges(scrollState, FadeHeight)
+                .verticalScroll(scrollState)
+                .padding(top = dimens.spacingSmall, end = ScrollIndicatorGap),
+            verticalArrangement = Arrangement.spacedBy(dimens.spacingMedium)
+        ) {
+            Text(
+                text = stringResource(R.string.endings_diagnosis_description),
+                style = LabTheme.typography.body.copy(fontSize = 12.sp).scaled(dimens.textScale),
+                color = LabTheme.colors.textSecondary,
+                textAlign = TextAlign.Start
+            )
+
+            EndingsGrid(endings = endings, onEndingClicked = onEndingClicked)
+        }
+    }
+}
+
+@Composable
+private fun EndingsGrid(
+    endings: List<DiagnosisItemState>,
+    onEndingClicked: (DiagnosisItemState) -> Unit
+) {
+    val dimens = LabTheme.dimens
+    val spacing = dimens.spacingMedium
+
+    BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
+        val minTileSize = TileMinSize * dimens.textScale
+        val columns = ((maxWidth + spacing) / (minTileSize + spacing)).toInt().coerceAtLeast(2)
+
+        Column(verticalArrangement = Arrangement.spacedBy(spacing)) {
+            endings.chunked(columns).forEach { rowItems ->
+                Row(horizontalArrangement = Arrangement.spacedBy(spacing)) {
+                    rowItems.forEach { item ->
+                        EndingTile(
+                            modifier = Modifier.weight(1f),
+                            item = item,
+                            onClick = { onEndingClicked(item) }
                         )
-                        .border(
-                            width = 1.dp,
-                            color = LabTheme.colors.accent.copy(alpha = 0.3f),
-                            shape = RoundedCornerShape(12.dp)
-                        )
-                        .padding(16.dp)
-                ) {
-                    Text(
-                        text = stringResource(R.string.endings_diagnosis_title),
-                        style = LabTheme.typography.heading,
-                        color = LabTheme.colors.textPrimary,
-                        textAlign = TextAlign.Start
-                    )
-
-                    Spacer(modifier = Modifier.height(4.dp))
-
-                    Text(
-                        text = stringResource(R.string.endings_diagnosis_description),
-                        style = LabTheme.typography.body.copy(fontSize = 12.sp),
-                        color = LabTheme.colors.textSecondary,
-                        textAlign = TextAlign.Start
-                    )
-
-                    Spacer(modifier = Modifier.height(12.dp))
-
-                    LazyVerticalGrid(
-                        modifier = Modifier.fillMaxSize(),
-                        columns = GridCells.Fixed(3),
-                        contentPadding = PaddingValues(4.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        items(uiState.endings) { item ->
-                            DiagnosisGridItem(
-                                item = item,
-                                onItemClicked = {
-                                    if(item.isUnlocked) selectedDiagnosisForDialog = item
-                                }
-                            )
-                        }
                     }
-                }
-
-                Box(
-                    modifier = Modifier.weight(0.45f),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    StatsSection(
-                        wins = uiState.wins,
-                        loses = uiState.loses
-                    )
+                    repeat(columns - rowItems.size) {
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
                 }
             }
         }
@@ -216,130 +250,124 @@ private fun EndingsScreenContent(
 }
 
 @Composable
-private fun StatsSection(
+private fun EndingTile(
     modifier: Modifier = Modifier,
-    wins: Int,
-    loses: Int
-) {
-    Column(
-        modifier = modifier
-            .wrapContentWidth()
-            .background(
-                LabTheme.colors.panel,
-                shape = RoundedCornerShape(12.dp)
-            )
-            .border(
-                width = 1.dp,
-                color = LabTheme.colors.accent.copy(alpha = 0.3f),
-                shape = RoundedCornerShape(12.dp)
-            )
-            .padding(16.dp)
-    ) {
-        Text(
-            text = stringResource(R.string.endings_stats_title),
-            style = LabTheme.typography.heading,
-            color = LabTheme.colors.textPrimary
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Column(
-            modifier = Modifier.wrapContentWidth(),
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text(
-                text = stringResource(R.string.endings_counter_wins, wins),
-                style = LabTheme.typography.body.copy(fontSize = 12.sp),
-                color = LabTheme.colors.textPrimary,
-                textAlign = TextAlign.Start
-            )
-            Text(
-                text = stringResource(R.string.endings_counter_loses, loses),
-                style = LabTheme.typography.body.copy(fontSize = 12.sp),
-                color = LabTheme.colors.textPrimary,
-                textAlign = TextAlign.Start
-            )
-        }
-    }
-}
-
-@Composable
-private fun DiagnosisGridItem(
     item: DiagnosisItemState,
-    onItemClicked: () -> Unit
+    onClick: () -> Unit
 ) {
+    val colors = LabTheme.colors
+    val textScale = LabTheme.dimens.textScale
+
     Column(
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        verticalArrangement = Arrangement.spacedBy(LabTheme.dimens.spacingSmall)
     ) {
         Box(
             modifier = Modifier
+                .fillMaxWidth()
                 .aspectRatio(1f)
-                .clip(RoundedCornerShape(16.dp))
-                .background(LabTheme.colors.accent.copy(alpha = 0.8f))
+                .clip(TileShape)
+                .background(if (item.isUnlocked) colors.accent.copy(alpha = 0.8f) else colors.panelStrong)
                 .border(
                     width = 1.dp,
-                    color = if (item.isUnlocked) LabTheme.colors.textPrimary.copy(alpha = 0.5f)
-                    else LabTheme.colors.textSecondary.copy(alpha = 0.2f),
-                    shape = RoundedCornerShape(16.dp)
+                    color = if (item.isUnlocked) colors.textPrimary.copy(alpha = 0.5f)
+                    else colors.accent.copy(alpha = 0.25f),
+                    shape = TileShape
                 )
-                .clickable(onClick = onItemClicked),
+                .clickable(enabled = item.isUnlocked, onClick = onClick),
             contentAlignment = Alignment.Center
         ) {
             if (item.isUnlocked) {
                 Image(
-                    painter = painterResource(id = item.type.iconRes),
+                    painter = painterResource(item.type.iconRes),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
             } else {
-                Text(
-                    text = "???",
-                    style = LabTheme.typography.heading,
-                    color = LabTheme.colors.textSecondary.copy(alpha = 0.5f)
+                Icon(
+                    imageVector = Icons.Filled.Lock,
+                    contentDescription = null,
+                    tint = colors.textSecondary.copy(alpha = 0.5f),
+                    modifier = Modifier.fillMaxSize(0.3f)
                 )
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
-
         Text(
-            text = if (item.isUnlocked) stringResource(item.type.titleRes)
-            else stringResource(R.string.endings_locked_title),
-            style = LabTheme.typography.body.copy(fontSize = 11.sp),
-            color = if (item.isUnlocked) LabTheme.colors.textPrimary
-            else LabTheme.colors.textSecondary.copy(alpha = 0.7f),
+            text = stringResource(if (item.isUnlocked) item.type.titleRes else R.string.endings_locked_title),
+            style = LabTheme.typography.body.copy(fontSize = 11.sp).scaled(textScale),
+            color = if (item.isUnlocked) colors.textPrimary else colors.textSecondary.copy(alpha = 0.7f),
             textAlign = TextAlign.Center,
-            maxLines = 3,
-            minLines = 2
+            minLines = 2,
+            maxLines = 3
         )
     }
 }
 
-@Preview(widthDp = 720, heightDp = 500)
 @Composable
-fun PreviewEndingsScreen() {
-    LabTheme {
-        EndingsScreenContent(
-            uiState = EndingsUiState(
-                wins = 3,
-                loses = 100,
-                endings = listOf(
-                    DiagnosisItemState(EndingType.WIN_100, true),
-                    DiagnosisItemState(EndingType.WIN_66, true),
-                    DiagnosisItemState(EndingType.WIN_33, true),
-                    DiagnosisItemState(EndingType.WIN_1, true),
-                    DiagnosisItemState(EndingType.LOSE_4, true),
-                    DiagnosisItemState(EndingType.LOSE_8, true),
-                    DiagnosisItemState(EndingType.LOSE_12, true),
-                    DiagnosisItemState(EndingType.LOSE_16, true),
-                    DiagnosisItemState(EndingType.LOSE_20, true),
-                    DiagnosisItemState(EndingType.LOSE_PUSSY, true),
-                    DiagnosisItemState(EndingType.ALL, true),
-                    DiagnosisItemState(EndingType.DONATE, true),
-                )
-            )
+private fun StatsPanel(
+    modifier: Modifier = Modifier,
+    wins: Int,
+    loses: Int
+) {
+    val dimens = LabTheme.dimens
+    val statStyle = LabTheme.typography.body.copy(fontSize = 12.sp).scaled(dimens.textScale)
+
+    Column(
+        modifier = modifier
+            .labPanel()
+            .padding(dimens.spacingLarge),
+        verticalArrangement = Arrangement.spacedBy(dimens.spacingSmall)
+    ) {
+        Text(
+            text = stringResource(R.string.endings_stats_title),
+            style = LabTheme.typography.heading.scaled(dimens.textScale),
+            color = LabTheme.colors.textPrimary,
+            textAlign = TextAlign.Start
         )
+        Text(
+            text = stringResource(R.string.endings_counter_wins, wins),
+            style = statStyle,
+            color = LabTheme.colors.textPrimary,
+            textAlign = TextAlign.Start
+        )
+        Text(
+            text = stringResource(R.string.endings_counter_loses, loses),
+            style = statStyle,
+            color = LabTheme.colors.textPrimary,
+            textAlign = TextAlign.Start
+        )
+    }
+}
+
+@Composable
+private fun Modifier.labPanel(): Modifier = this
+    .background(LabTheme.colors.panel, PanelShape)
+    .border(1.dp, LabTheme.colors.accent.copy(alpha = 0.3f), PanelShape)
+
+private class EndingsUiStatePreviewProvider : PreviewParameterProvider<EndingsUiState> {
+    override val values = sequenceOf(
+        EndingsUiState(
+            wins = 3,
+            loses = 100,
+            endings = EndingType.entries.mapIndexed { index, type ->
+                DiagnosisItemState(type, isUnlocked = index % 3 != 2)
+            }
+        ),
+        EndingsUiState(
+            endings = EndingType.entries.map { DiagnosisItemState(it, isUnlocked = false) }
+        )
+    )
+}
+
+@LandscapePreviews
+@Composable
+private fun EndingsScreenPreview(
+    @PreviewParameter(EndingsUiStatePreviewProvider::class) uiState: EndingsUiState
+) {
+    LabTheme {
+        EndingsScreenContent(uiState = uiState)
     }
 }

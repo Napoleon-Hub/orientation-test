@@ -45,30 +45,17 @@ class EndingsViewModel @Inject constructor(
                     Timber.e(e, "Ошибка доступа к личному делу исследователя")
                 }
                 .collect { stats ->
-                val currentStats = stats ?: LabStats()
-                val achievements = currentStats.achievements
-
-                _uiState.update { state ->
-                    state.copy(
-                        wins = currentStats.wins,
-                        loses = currentStats.losses,
-                        endings = listOf(
-                            DiagnosisItemState(EndingType.WIN_100, achievements.contains(EndingType.WIN_100.id)),
-                            DiagnosisItemState(EndingType.WIN_66, achievements.contains(EndingType.WIN_66.id)),
-                            DiagnosisItemState(EndingType.WIN_33, achievements.contains(EndingType.WIN_33.id)),
-                            DiagnosisItemState(EndingType.WIN_1, achievements.contains(EndingType.WIN_1.id)),
-                            DiagnosisItemState(EndingType.LOSE_4, achievements.contains(EndingType.LOSE_4.id)),
-                            DiagnosisItemState(EndingType.LOSE_8, achievements.contains(EndingType.LOSE_8.id)),
-                            DiagnosisItemState(EndingType.LOSE_12, achievements.contains(EndingType.LOSE_12.id)),
-                            DiagnosisItemState(EndingType.LOSE_16, achievements.contains(EndingType.LOSE_16.id)),
-                            DiagnosisItemState(EndingType.LOSE_20, achievements.contains(EndingType.LOSE_20.id)),
-                            DiagnosisItemState(EndingType.LOSE_PUSSY, achievements.contains(EndingType.LOSE_PUSSY.id)),
-                            DiagnosisItemState(EndingType.ALL, achievements.contains(EndingType.ALL.id)),
-                            DiagnosisItemState(EndingType.DONATE, achievements.contains(EndingType.DONATE.id))
+                    val currentStats = stats ?: LabStats()
+                    _uiState.update { state ->
+                        state.copy(
+                            wins = currentStats.wins,
+                            loses = currentStats.losses,
+                            endings = EndingType.entries.map { type ->
+                                DiagnosisItemState(type, isUnlocked = type.id in currentStats.achievements)
+                            }
                         )
-                    )
+                    }
                 }
-            }
         }
     }
 

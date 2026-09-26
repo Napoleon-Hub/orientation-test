@@ -21,9 +21,10 @@ fun LabBackButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
+    val size = LabTheme.dimens.buttonHeight
     Box(
         modifier = modifier
-            .size(48.dp)
+            .size(size)
             .clip(RoundedCornerShape(12.dp))
             .background(LabTheme.colors.accent.copy(alpha = 0.15f))
             .border(
@@ -38,7 +39,7 @@ fun LabBackButton(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
             tint = LabTheme.colors.textPrimary.copy(alpha = 0.8f),
-            modifier = Modifier.size(20.dp)
+            modifier = Modifier.size(size * 0.42f)
         )
     }
 }
