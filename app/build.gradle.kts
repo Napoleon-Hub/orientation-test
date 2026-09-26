@@ -12,8 +12,8 @@ plugins {
 }
 
 val appVersionMajor = 3
-val appVersionMinor = 1
-val appVersionPatch = 9
+val appVersionMinor = 2
+val appVersionPatch = 0
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()

@@ -22,7 +22,7 @@
     <string name="endings_counter_loses">Pathetic attempts to rig the system: %d</string>
     <string name="endings_counter_wins">Cheated off a GigaChad: %d</string>
     <string name="endings_locked_title">Locked</string>
-    <string name="diagnosis_dialog_button_close">Understood</string>
+    <string name="diagnosis_dialog_button_close">Oh shit</string>
 
     <!-- Achievements -->
     <string name="ending_win_1">Leather Recruit</string>

@@ -33,7 +33,7 @@ class StatsRepository @Inject constructor(
                 val registration = usersCollection.document(uid)
                     .addSnapshotListener { snapshot, error ->
                         if (error != null) {
-                            Timber.e(error, "Failed to observe lab stats")
+                            close(error)
                             return@addSnapshotListener
                         }
                         trySend(snapshot?.toObject(LabStats::class.java))

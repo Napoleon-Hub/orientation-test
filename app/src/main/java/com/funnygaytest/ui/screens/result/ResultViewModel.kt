@@ -15,6 +15,7 @@ import com.funnygaytest.platform.audio.MusicController
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.firebase.firestore.FirebaseFirestoreException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,6 +24,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 data class ResultUiState(
@@ -96,15 +98,20 @@ class ResultViewModel @Inject constructor(
 
     private suspend fun recordEnding(health: Int, questionNumber: Int) {
         val ending = EndingType.from(health, questionNumber)
-        val achievements = (statsRepository.getStats().firstOrNull() ?: LabStats()).achievements
+        val achievements = try {
+            (statsRepository.getStats().firstOrNull() ?: LabStats()).achievements
+        } catch (e: FirebaseFirestoreException) {
+            Timber.w(e, "Lab stats are unavailable, the ending is recorded without the new verdict card")
+            null
+        }
 
-        val isNew = ending.id !in achievements
-        val uniqueCoreEndings = (achievements + ending.id)
+        val isNew = achievements != null && ending.id !in achievements
+        val uniqueCoreEndings = (achievements.orEmpty() + ending.id)
             .filter { it != EndingType.ALL.id && it != EndingType.DONATE.id }
             .distinct()
             .size
-        val wasAllUnlocked = EndingType.ALL.id in achievements
-        val unlocksAll = uniqueCoreEndings >= CORE_ENDINGS_COUNT && !wasAllUnlocked
+        val wasAllUnlocked = achievements != null && EndingType.ALL.id in achievements
+        val unlocksAll = achievements != null && uniqueCoreEndings >= CORE_ENDINGS_COUNT && !wasAllUnlocked
 
         savedStateHandle[KEY_ENDING] = ending.id
         savedStateHandle[KEY_IS_NEW_ENDING] = isNew
