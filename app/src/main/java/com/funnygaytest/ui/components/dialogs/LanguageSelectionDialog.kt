@@ -3,7 +3,6 @@ package com.funnygaytest.ui.components.dialogs
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -27,11 +28,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.funnygaytest.R
 import com.funnygaytest.platform.locale.AppLanguage
 import com.funnygaytest.ui.theme.LabTheme
+import com.funnygaytest.ui.theme.scaled
 
 @Composable
 fun LanguageSelectionDialog(
@@ -39,6 +42,8 @@ fun LanguageSelectionDialog(
     onLanguageSelected: (AppLanguage) -> Unit,
     onDismiss: () -> Unit
 ) {
+    val textScale = LabTheme.dimens.textScale
+
     Dialog(onDismissRequest = onDismiss) {
         Surface(
             modifier = Modifier
@@ -52,13 +57,14 @@ fun LanguageSelectionDialog(
                 modifier = Modifier
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
+                    .selectableGroup()
                     .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
                     text = stringResource(R.string.start_select_language_button),
-                    style = LabTheme.typography.heading,
+                    style = LabTheme.typography.heading.scaled(textScale),
                     color = LabTheme.colors.textPrimary
                 )
 
@@ -76,12 +82,13 @@ fun LanguageSelectionDialog(
 }
 
 @Composable
-fun LanguageOption(
+private fun LanguageOption(
     text: String,
     iconRes: Int,
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
+    val textScale = LabTheme.dimens.textScale
     val backgroundColor = if (isSelected) {
         LabTheme.colors.accent.copy(alpha = 0.5f)
     } else {
@@ -93,7 +100,7 @@ fun LanguageOption(
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
             .background(backgroundColor)
-            .clickable(onClick = onClick)
+            .selectable(selected = isSelected, role = Role.RadioButton, onClick = onClick)
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -102,7 +109,7 @@ fun LanguageOption(
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(32.dp)
+                .size(32.dp * textScale)
                 .clip(CircleShape)
                 .border(1.dp, LabTheme.colors.textPrimary.copy(alpha = 0.3f), CircleShape)
         )
@@ -111,7 +118,7 @@ fun LanguageOption(
 
         Text(
             text = text,
-            style = LabTheme.typography.body,
+            style = LabTheme.typography.body.scaled(textScale),
             color = LabTheme.colors.textPrimary
         )
     }

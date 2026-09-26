@@ -33,6 +33,7 @@ import com.funnygaytest.model.Answer
 import com.funnygaytest.ui.theme.LabTheme
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
+import kotlin.time.Duration.Companion.milliseconds
 
 private val FadeHeight = 32.dp
 private val ScrollIndicatorGap = 12.dp
@@ -62,7 +63,7 @@ fun AnswersGroup(
     LaunchedEffect(answers, showScrollHint) {
         if (!showScrollHint) return@LaunchedEffect
         snapshotFlow { scrollState.maxValue }.first { it in 1 until Int.MAX_VALUE }
-        delay(ScrollHintDelayMs)
+        delay(ScrollHintDelayMs.milliseconds)
         try {
             if (scrollState.value == 0) {
                 val spec = tween<Float>(ScrollHintDurationMs, easing = FastOutSlowInEasing)

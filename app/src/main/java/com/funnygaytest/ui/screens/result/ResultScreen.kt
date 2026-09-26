@@ -34,7 +34,7 @@ import com.funnygaytest.model.EndingType
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.EndingCard
-import com.funnygaytest.ui.components.buttons.IconButton
+import com.funnygaytest.ui.components.buttons.LabIconButton
 import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.components.buttons.adaptiveButtonModifier
@@ -248,19 +248,21 @@ private fun ResultActions(
                 modifier = buttonModifier,
                 horizontalArrangement = Arrangement.spacedBy(dimens.spacingMedium)
             ) {
-                IconButton(
+                LabIconButton(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
                     iconId = R.drawable.ic_share,
+                    contentDescription = stringResource(R.string.result_share_button_description),
                     onClick = onShareClicked
                 )
 
-                IconButton(
+                LabIconButton(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
                     iconId = R.drawable.ic_rate_us,
+                    contentDescription = stringResource(R.string.result_rate_button_description),
                     onClick = onRateClicked,
                     enabled = uiState.isRateEnabled
                 )

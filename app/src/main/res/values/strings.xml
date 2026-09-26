@@ -50,6 +50,8 @@
     <string name="result_button_restart">Try again</string>
     <string name="result_button_restart_description">Questions may vary</string>
     <string name="result_rate_description">Rate the Gachi and share results!</string>
+    <string name="result_rate_button_description">Rate the app</string>
+    <string name="result_share_button_description">Share the result</string>
     <string name="result_button_another_apps">Other tests</string>
     <string name="result_button_pay">Feed scientists</string>
 
@@ -83,9 +85,9 @@
 
     <!-- Access Dialog -->
     <string name="access_dialog_title">Research Access Protocol</string>
-    <string name="access_dialog_warning">WARNING: This application is created solely for entertainment purposes. We do not intend to offend anyone\'s feelings or dignity. All tests and results are a figment of our leading lab assistants\' imagination and hold no scientific or diagnostic value.</string>
-    <string name="access_dialog_ad_description">To keep the equipment running and pay the scientists\' salaries, the app contains some ads. We need your consent for data processing to show you ads.</string>
-    <string name="access_dialog_privacy_policy">Read the Privacy Policy</string>
+    <string name="access_dialog_warning">WARNING: This app is for entertainment only. We don\'t mean to offend anyone\'s feelings or dignity. All tests and results are made up by our lab assistants and have no scientific or diagnostic value.</string>
+    <string name="access_dialog_ad_description">The app shows some ads to keep the equipment running and pay the scientists. We need your consent to process data for showing ads.</string>
+    <string name="access_dialog_privacy_policy">Privacy Policy</string>
     <string name="access_dialog_button_continue">Let\'s go!</string>
     <string name="access_dialog_button_finish">Leave the Laboratory</string>
 

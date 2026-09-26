@@ -51,6 +51,8 @@
     <string name="result_button_restart">Перепройти тест</string>
     <string name="result_button_restart_description">Вопросы могут меняться</string>
     <string name="result_rate_description">Оцени Гачу и поделись результатами!</string>
+    <string name="result_rate_button_description">Оценить приложение</string>
+    <string name="result_share_button_description">Поделиться результатом</string>
     <string name="result_button_another_apps">Другие тесты</string>
     <string name="result_button_pay">Покормить ученых</string>
 
@@ -84,9 +86,9 @@
 
     <!-- Access Dialog -->
     <string name="access_dialog_title">Протокол доступа к исследованиям</string>
-    <string name="access_dialog_warning">ВНИМАНИЕ: Данное приложение создано исключительно в развлекательных целях. Мы не преследуем цель оскорбить чьи-либо чувства или достоинство. Все тесты и результаты являются плодом воображения наших ведущих лаборантов и не имеют научной или диагностической ценности.</string>
-    <string name="access_dialog_ad_description">Для обеспечения работы оборудования и выплаты зарплаты ученым в приложении есть немного рекламы. Нам нужно ваше согласие на обработку данных для показа рекламы.</string>
-    <string name="access_dialog_privacy_policy">Ознакомиться с Политикой конфиденциальности</string>
+    <string name="access_dialog_warning">ВНИМАНИЕ: Приложение создано исключительно для развлечения. Мы не хотим задеть чьи-либо чувства или достоинство. Все тесты и результаты придуманы нашими лаборантами и не имеют научной или диагностической ценности.</string>
+    <string name="access_dialog_ad_description">Чтобы оборудование работало, а ученые получали зарплату, в приложении есть немного рекламы. Для ее показа нам нужно ваше согласие на обработку данных.</string>
+    <string name="access_dialog_privacy_policy">Политика конфиденциальности</string>
     <string name="access_dialog_button_continue">Поехали!</string>
     <string name="access_dialog_button_finish">Покинуть лабораторию</string>
 

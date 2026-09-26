@@ -1,7 +1,10 @@
 package com.funnygaytest.ui.components.buttons
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -16,12 +19,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.ui.theme.LabTheme
 
+private const val IconHeightFraction = 0.55f
+
 @Composable
-fun IconButton(
+fun LabIconButton(
     modifier: Modifier = Modifier,
     backgroundColor: Color = LabTheme.colors.surface,
     rippleColor: Color = LabTheme.colors.accent,
-    iconId: Int,
+    @DrawableRes iconId: Int,
+    contentDescription: String?,
     onClick: () -> Unit,
     enabled: Boolean = true
 ) {
@@ -45,7 +51,14 @@ fun IconButton(
             ),
             border = BorderStroke(1.5.dp, LabTheme.colors.accent.copy(alpha = 0.4f))
         ) {
-            Icon(painter = painterResource(id = iconId), contentDescription = null, tint = LabTheme.colors.textEmphasis)
+            Icon(
+                modifier = Modifier
+                    .fillMaxHeight(IconHeightFraction)
+                    .aspectRatio(1f),
+                painter = painterResource(id = iconId),
+                contentDescription = contentDescription,
+                tint = LabTheme.colors.textEmphasis
+            )
         }
     }
 }

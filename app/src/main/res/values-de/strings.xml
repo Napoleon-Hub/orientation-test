@@ -51,6 +51,8 @@
     <string name="result_button_restart">Test wiederholen</string>
     <string name="result_button_restart_description">Fragen können variieren</string>
     <string name="result_rate_description">Bewerte das Gachi und teile deine Ergebnisse!</string>
+    <string name="result_rate_button_description">App bewerten</string>
+    <string name="result_share_button_description">Ergebnis teilen</string>
     <string name="result_button_another_apps">Weitere Tests</string>
     <string name="result_button_pay">Wissenschaftler füttern</string>
 
@@ -84,9 +86,9 @@
 
     <!-- Access Dialog -->
     <string name="access_dialog_title">Forschungszugangsprotokoll</string>
-    <string name="access_dialog_warning">ACHTUNG: Diese Anwendung wurde ausschließlich zu Unterhaltungszwecken erstellt. Wir beabsichtigen nicht, die Gefühle oder die Würde von jemandem zu verletzen. Alle Tests und Ergebnisse sind frei erfunden von unseren leitenden Laboranten und haben keinen wissenschaftlichen oder diagnostischen Wert.</string>
-    <string name="access_dialog_ad_description">Um den Betrieb der Geräte zu sichern und die Gehälter der Wissenschaftler zu bezahlen, enthält die App ein wenig Werbung. Wir benötigen deine Zustimmung zur Datenverarbeitung, um dir Werbung anzuzeigen.</string>
-    <string name="access_dialog_privacy_policy">Datenschutzerklärung lesen</string>
+    <string name="access_dialog_warning">ACHTUNG: Diese App dient ausschließlich der Unterhaltung. Wir wollen niemandes Gefühle oder Würde verletzen. Alle Tests und Ergebnisse sind von unseren Laboranten erfunden und haben keinen wissenschaftlichen oder diagnostischen Wert.</string>
+    <string name="access_dialog_ad_description">Damit die Geräte laufen und die Wissenschaftler bezahlt werden, enthält die App etwas Werbung. Dafür brauchen wir deine Zustimmung zur Datenverarbeitung.</string>
+    <string name="access_dialog_privacy_policy">Datenschutzerklärung</string>
     <string name="access_dialog_button_continue">Auf geht\'s!</string>
     <string name="access_dialog_button_finish">Labor verlassen</string>
 
