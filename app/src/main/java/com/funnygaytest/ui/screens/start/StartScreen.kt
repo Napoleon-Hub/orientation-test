@@ -43,6 +43,7 @@ import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.components.buttons.adaptiveButtonModifier
 import com.funnygaytest.ui.components.dialogs.LanguageSelectionDialog
+import com.funnygaytest.ui.components.shrinkToFitAll
 import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.ui.theme.scaled
 import com.funnygaytest.ui.utils.LandscapePreviews
@@ -246,28 +247,34 @@ private fun ColumnScope.MainMenu(
 ) {
     val buttonModifier = adaptiveButtonModifier(LabTheme.dimens.buttonHeight)
     val buttonTextStyle = LabTheme.typography.button.scaled(LabTheme.dimens.textScale)
+    val startText = stringResource(R.string.start_button)
+    val continueText = stringResource(R.string.start_button_continue)
+    val difficultyText = stringResource(R.string.start_button_difficulty)
+    val endingsText = stringResource(R.string.endings_title)
+    val buttonAutoSize = shrinkToFitAll(buttonTextStyle, listOf(startText, continueText, difficultyText, endingsText))
 
     MainButton(
         modifier = buttonModifier,
         onClick = onStartGameClicked,
         textStyle = buttonTextStyle,
-        text = stringResource(
-            if (isGameStarted) R.string.start_button_continue else R.string.start_button
-        )
+        autoSize = buttonAutoSize,
+        text = if (isGameStarted) continueText else startText
     )
 
     MainButton(
         modifier = buttonModifier,
         onClick = onDifficultyClicked,
         textStyle = buttonTextStyle,
-        text = stringResource(R.string.start_button_difficulty)
+        autoSize = buttonAutoSize,
+        text = difficultyText
     )
 
     MainButton(
         modifier = buttonModifier,
         onClick = onEndingsClicked,
         textStyle = buttonTextStyle,
-        text = stringResource(R.string.endings_title)
+        autoSize = buttonAutoSize,
+        text = endingsText
     )
 
     Text(
@@ -288,13 +295,17 @@ private fun ColumnScope.DifficultyMenu(
 ) {
     val buttonModifier = adaptiveButtonModifier(LabTheme.dimens.buttonHeight)
     val buttonTextStyle = LabTheme.typography.button.scaled(LabTheme.dimens.textScale)
+    val easyText = stringResource(R.string.start_button_difficulty_easy)
+    val hardText = stringResource(R.string.start_button_difficulty_hard)
+    val buttonAutoSize = shrinkToFitAll(buttonTextStyle, listOf(easyText, hardText))
 
     MainButton(
         modifier = buttonModifier,
         onClick = onEasyClicked,
         enabled = !isEasyLocked,
         textStyle = buttonTextStyle,
-        text = stringResource(R.string.start_button_difficulty_easy)
+        autoSize = buttonAutoSize,
+        text = easyText
     )
 
     if (isEasyLocked) {
@@ -312,7 +323,8 @@ private fun ColumnScope.DifficultyMenu(
         modifier = buttonModifier,
         onClick = onHardClicked,
         textStyle = buttonTextStyle,
-        text = stringResource(R.string.start_button_difficulty_hard)
+        autoSize = buttonAutoSize,
+        text = hardText
     )
 }
 

@@ -124,7 +124,6 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
     implementation(libs.compose.material3.adaptive)
-    implementation(libs.compose.material.icons)
     implementation(libs.compose.runtime.livedata)
     implementation(libs.lottie.compose)
 

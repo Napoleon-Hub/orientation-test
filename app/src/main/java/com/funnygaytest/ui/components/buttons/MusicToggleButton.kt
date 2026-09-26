@@ -5,14 +5,13 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.VolumeOff
-import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.funnygaytest.R
 import com.funnygaytest.ui.theme.LabTheme
 
 @Composable
@@ -30,7 +29,7 @@ fun MusicToggleButton(
             .border(1.dp, LabTheme.colors.accent.copy(alpha = 0.5f), CircleShape)
     ) {
         Icon(
-            imageVector = if (isMuted) Icons.AutoMirrored.Filled.VolumeOff else Icons.AutoMirrored.Filled.VolumeUp,
+            painter = painterResource(if (isMuted) R.drawable.ic_volume_off else R.drawable.ic_volume_up),
             contentDescription = "Music Toggle",
             tint = LabTheme.colors.textPrimary
         )

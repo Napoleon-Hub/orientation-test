@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LocalRippleConfiguration
 import androidx.compose.material3.OutlinedButton
@@ -24,6 +25,7 @@ fun MainButton(
     rippleColor: Color = LabTheme.colors.accent,
     text: String? = null,
     textStyle: TextStyle = LabTheme.typography.button,
+    autoSize: TextAutoSize = shrinkToFit(textStyle),
     onClick: () -> Unit,
     enabled: Boolean = true
 ) {
@@ -38,7 +40,7 @@ fun MainButton(
                 disabledElevation = 0.dp
             ),
             shape = RoundedCornerShape(12.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
             colors = ButtonDefaults.outlinedButtonColors(
                 containerColor = backgroundColor,
                 contentColor = Color.Unspecified,
@@ -54,7 +56,7 @@ fun MainButton(
                     style = textStyle,
                     softWrap = false,
                     maxLines = 1,
-                    autoSize = shrinkToFit(textStyle)
+                    autoSize = autoSize
                 )
             }
         }

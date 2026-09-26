@@ -39,6 +39,7 @@ import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.components.buttons.adaptiveButtonModifier
 import com.funnygaytest.ui.components.shrinkToFit
+import com.funnygaytest.ui.components.shrinkToFitAll
 import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.ui.theme.scaled
 import com.funnygaytest.ui.utils.LandscapePreviews
@@ -212,12 +213,17 @@ private fun ResultActions(
         ) {
             val buttonModifier = adaptiveButtonModifier(dimens.buttonHeight)
             val buttonTextStyle = LabTheme.typography.button.scaled(dimens.textScale)
+            val restartText = stringResource(R.string.result_button_restart)
+            val payText = stringResource(R.string.result_button_pay)
+            val anotherAppsText = stringResource(R.string.result_button_another_apps)
+            val buttonAutoSize = shrinkToFitAll(buttonTextStyle, listOf(restartText, payText, anotherAppsText))
 
             MainButton(
                 modifier = buttonModifier,
                 onClick = onRestartClicked,
                 textStyle = buttonTextStyle,
-                text = stringResource(R.string.result_button_restart)
+                autoSize = buttonAutoSize,
+                text = restartText
             )
 
             ActionCaption(text = stringResource(R.string.result_button_restart_description))
@@ -226,14 +232,16 @@ private fun ResultActions(
                 modifier = buttonModifier,
                 onClick = onPayClicked,
                 textStyle = buttonTextStyle,
-                text = stringResource(R.string.result_button_pay)
+                autoSize = buttonAutoSize,
+                text = payText
             )
 
             MainButton(
                 modifier = buttonModifier,
                 onClick = onAnotherTestsClicked,
                 textStyle = buttonTextStyle,
-                text = stringResource(R.string.result_button_another_apps)
+                autoSize = buttonAutoSize,
+                text = anotherAppsText
             )
 
             Row(

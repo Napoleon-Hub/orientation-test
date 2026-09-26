@@ -18,8 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -282,7 +280,7 @@ private fun EndingTile(
                 )
             } else {
                 Icon(
-                    imageVector = Icons.Filled.Lock,
+                    painter = painterResource(R.drawable.ic_lock),
                     contentDescription = null,
                     tint = colors.textSecondary.copy(alpha = 0.5f),
                     modifier = Modifier.fillMaxSize(0.3f)
