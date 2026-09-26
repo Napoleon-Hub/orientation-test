@@ -1,24 +1,21 @@
 package com.funnygaytest
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.IntentSenderRequest
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.funnygaytest.managers.ads.AdsManager
 import com.funnygaytest.managers.firebase.firestore.FirestoreManager
 import com.funnygaytest.managers.network.NetworkMonitor
@@ -27,12 +24,13 @@ import com.funnygaytest.ui.components.dialogs.LaboratoryAccessDialog
 import com.funnygaytest.ui.screens.connection.NoInternetScreen
 import com.funnygaytest.ui.theme.LabTheme
 import com.google.android.play.core.appupdate.AppUpdateInfo
-import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
+import com.google.android.play.core.install.model.ActivityResult
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,26 +47,27 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    private var appUpdateManager: AppUpdateManager? = null
-    private var activityResultLauncher: ActivityResultLauncher<IntentSenderRequest>? = null
+    private val appUpdateManager by lazy { AppUpdateManagerFactory.create(this) }
+
+    private val appUpdateLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        if (result.resultCode == ActivityResult.RESULT_IN_APP_UPDATE_FAILED) Timber.w("In-app update failed")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
-
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        hideSystemUI()
+        hideSystemBars()
 
         firestoreManager.authorizeFirebase(this)
-        setupAppUpdate()
+        if (savedInstanceState == null) checkForAppUpdate()
 
         setContent {
             LabTheme {
-                val isConnected by networkMonitor.isConnected.collectAsState(initial = true)
-                val uiState by viewModel.uiState.collectAsState()
-
-                val context = LocalContext.current
-                val activity = context as? Activity
+                val isConnected by networkMonitor.isConnected.collectAsStateWithLifecycle(initialValue = true)
+                val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
                 Box(modifier = Modifier.fillMaxSize()) {
                     AppNavigation(
@@ -79,12 +78,8 @@ class MainActivity : AppCompatActivity() {
                         NoInternetScreen()
                     } else if (!uiState.consentShown) {
                         LaboratoryAccessDialog(
-                            onConsentAccepted = {
-                                viewModel.updateConsentState()
-                            },
-                            onDecline = {
-                                activity?.finish()
-                            }
+                            onConsentAccepted = viewModel::updateConsentState,
+                            onDecline = ::finish
                         )
                     }
                 }
@@ -97,43 +92,50 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupAppUpdate() {
-        activityResultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartIntentSenderForResult()
-        ) { _ -> }
-        checkAppUpdatesAvailable()
-    }
-
-    private fun checkAppUpdatesAvailable() {
-        appUpdateManager = AppUpdateManagerFactory.create(this)
-        val appUpdateInfoTask = appUpdateManager?.appUpdateInfo
-
-        appUpdateInfoTask?.addOnSuccessListener { appUpdateInfo: AppUpdateInfo ->
-            try {
-                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
-                ) {
-                    appUpdateManager?.startUpdateFlowForResult(
-                        appUpdateInfo,
-                        activityResultLauncher!!,
-                        AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build()
-                    )
-                }
-            } catch (_: Exception) {
-            }
-        }
-
-    }
-
     override fun onResume() {
         super.onResume()
-        hideSystemUI()
+        resumeStalledAppUpdate()
     }
 
-    private fun hideSystemUI() {
-        val controller = WindowInsetsControllerCompat(window, window.decorView)
-        controller.hide(WindowInsetsCompat.Type.systemBars())
-        controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) hideSystemBars()
     }
 
+    private fun hideSystemBars() {
+        WindowCompat.getInsetsController(window, window.decorView).apply {
+            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+            hide(WindowInsetsCompat.Type.systemBars())
+        }
+    }
+
+    private fun checkForAppUpdate() {
+        appUpdateManager.appUpdateInfo
+            .addOnSuccessListener { info ->
+                if (info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                    info.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+                ) {
+                    startImmediateUpdate(info)
+                }
+            }
+            .addOnFailureListener { Timber.w(it, "Failed to check for app update") }
+    }
+
+    private fun resumeStalledAppUpdate() {
+        appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
+            if (info.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                startImmediateUpdate(info)
+            }
+        }
+    }
+
+    private fun startImmediateUpdate(info: AppUpdateInfo) {
+        runCatching {
+            appUpdateManager.startUpdateFlowForResult(
+                info,
+                appUpdateLauncher,
+                AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build()
+            )
+        }.onFailure { Timber.w(it, "Failed to start app update flow") }
+    }
 }
