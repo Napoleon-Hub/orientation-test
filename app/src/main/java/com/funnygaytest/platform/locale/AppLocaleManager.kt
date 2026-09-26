@@ -1,8 +1,7 @@
-package com.funnygaytest.managers.locale
+package com.funnygaytest.platform.locale
 
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
-import com.funnygaytest.utils.enums.AppLanguage
 import java.util.Locale
 import javax.inject.Inject
 import javax.inject.Singleton

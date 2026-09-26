@@ -4,9 +4,9 @@ import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.billingclient.api.BillingFlowParams
-import com.funnygaytest.managers.billing.BillingInteractor
-import com.funnygaytest.managers.firebase.firestore.FirestoreManager
-import com.funnygaytest.utils.enums.EndingType
+import com.funnygaytest.data.billing.BillingRepository
+import com.funnygaytest.data.stats.StatsRepository
+import com.funnygaytest.model.EndingType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -23,22 +23,22 @@ data class FeedUiState(
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(
-    private val billingInteractor: BillingInteractor,
-    private val firestoreManager: FirestoreManager
+    private val billingRepository: BillingRepository,
+    private val statsRepository: StatsRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(FeedUiState())
     val uiState = _uiState.asStateFlow()
 
-    private val productDetails = billingInteractor.productDetails
+    private val productDetails = billingRepository.productDetails
 
     private var currentAchievements: List<String> = emptyList()
 
     init {
-        billingInteractor.init()
+        billingRepository.init()
 
         viewModelScope.launch {
-            firestoreManager.getStats()
+            statsRepository.getStats()
                 .catch { e ->
                     Timber.e(e, "Ошибка доступа к личному делу исследователя")
                 }
@@ -48,7 +48,7 @@ class FeedViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            billingInteractor.purchaseEvent.collect {
+            billingRepository.purchaseEvent.collect {
                 handleSuccessfulDonation()
             }
         }
@@ -58,7 +58,7 @@ class FeedViewModel @Inject constructor(
         val details = productDetails.value
         if (details == null) {
             Timber.w("Product details not loaded yet, retrying")
-            billingInteractor.init()
+            billingRepository.init()
             return
         }
         val productDetailsParamsList = listOf(
@@ -70,7 +70,7 @@ class FeedViewModel @Inject constructor(
             .setProductDetailsParamsList(productDetailsParamsList)
             .build()
 
-        billingInteractor.launchBillingFlow(activity, billingFlowParams)
+        billingRepository.launchBillingFlow(activity, billingFlowParams)
     }
 
     private fun handleSuccessfulDonation() {
@@ -83,7 +83,7 @@ class FeedViewModel @Inject constructor(
             )
         }
         if (!isAlreadyUnlocked) {
-            firestoreManager.recordTestResult(achievementId = EndingType.DONATE.id)
+            statsRepository.recordTestResult(achievementId = EndingType.DONATE.id)
         }
     }
 

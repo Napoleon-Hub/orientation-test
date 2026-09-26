@@ -6,9 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.funnygaytest.R
 import com.funnygaytest.data.game.GameSession
 import com.funnygaytest.data.game.GameSessionRepository
-import com.funnygaytest.managers.music.MusicController
-import com.funnygaytest.models.Answer
-import com.funnygaytest.models.Question
+import com.funnygaytest.model.Answer
+import com.funnygaytest.model.Question
+import com.funnygaytest.platform.audio.MusicController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

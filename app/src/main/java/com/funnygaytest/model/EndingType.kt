@@ -1,4 +1,4 @@
-package com.funnygaytest.utils.enums
+package com.funnygaytest.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -21,5 +21,24 @@ enum class EndingType(
     LOSE_20("lose_20", R.drawable.ic_result_lose_20, R.string.ending_lose_20, R.string.result_text_result_lose_20),
     LOSE_PUSSY("lose_pussy", R.drawable.ic_result_lose_pussy, R.string.ending_lose_pussy, R.string.result_text_result_lose_pussy),
     ALL("all_endings", R.drawable.ic_result_all, R.string.ending_all, R.string.result_text_result_gaylord),
-    DONATE("donate", R.drawable.ic_donate, R.string.ending_donate, R.string.feed_description_donate)
+    DONATE("donate", R.drawable.ic_donate, R.string.ending_donate, R.string.feed_description_donate);
+
+    companion object {
+        fun from(health: Int, questionNumber: Int): EndingType = when {
+            health > 0 -> when (health) {
+                100 -> WIN_100
+                in 66..99 -> WIN_66
+                in 33..65 -> WIN_33
+                else -> WIN_1
+            }
+            else -> when (questionNumber) {
+                in 2..7 -> LOSE_4
+                in 8..11 -> LOSE_8
+                in 12..15 -> LOSE_12
+                in 16..19 -> LOSE_16
+                20 -> LOSE_20
+                else -> LOSE_PUSSY
+            }
+        }
+    }
 }

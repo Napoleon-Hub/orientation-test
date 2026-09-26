@@ -8,10 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.funnygaytest.R
 import com.funnygaytest.data.game.GameSessionRepository
-import com.funnygaytest.managers.firebase.firestore.FirestoreManager
-import com.funnygaytest.managers.music.MusicController
-import com.funnygaytest.models.firebase.LabStats
-import com.funnygaytest.utils.enums.EndingType
+import com.funnygaytest.data.stats.LabStats
+import com.funnygaytest.data.stats.StatsRepository
+import com.funnygaytest.model.EndingType
+import com.funnygaytest.platform.audio.MusicController
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManager
 import com.google.android.play.core.review.ReviewManagerFactory
@@ -41,7 +41,7 @@ class ResultViewModel @Inject constructor(
     musicController: MusicController,
     private val savedStateHandle: SavedStateHandle,
     private val gameSessionRepository: GameSessionRepository,
-    private val firestoreManager: FirestoreManager,
+    private val statsRepository: StatsRepository,
     @param:ApplicationContext private val appContext: Context
 ) : ViewModel(), MusicController by musicController {
 
@@ -95,8 +95,8 @@ class ResultViewModel @Inject constructor(
     }
 
     private suspend fun recordEnding(health: Int, questionNumber: Int) {
-        val ending = endingFor(health, questionNumber)
-        val achievements = (firestoreManager.getStats().firstOrNull() ?: LabStats()).achievements
+        val ending = EndingType.from(health, questionNumber)
+        val achievements = (statsRepository.getStats().firstOrNull() ?: LabStats()).achievements
 
         val isNew = ending.id !in achievements
         val uniqueCoreEndings = (achievements + ending.id)
@@ -110,8 +110,8 @@ class ResultViewModel @Inject constructor(
         savedStateHandle[KEY_IS_NEW_ENDING] = isNew
         savedStateHandle[KEY_ALL_ENDINGS_UNLOCKED] = wasAllUnlocked || unlocksAll
 
-        firestoreManager.recordTestResult(isWin = health > 0, achievementId = ending.id)
-        if (unlocksAll) firestoreManager.recordTestResult(achievementId = EndingType.ALL.id)
+        statsRepository.recordTestResult(isWin = health > 0, achievementId = ending.id)
+        if (unlocksAll) statsRepository.recordTestResult(achievementId = EndingType.ALL.id)
 
         showEnding(ending, isNew, isAllUnlocked = wasAllUnlocked || unlocksAll)
     }
@@ -148,23 +148,6 @@ class ResultViewModel @Inject constructor(
         const val KEY_ALL_ENDINGS_UNLOCKED = "allEndingsUnlocked"
     }
 
-}
-
-private fun endingFor(health: Int, questionNumber: Int): EndingType = when {
-    health > 0 -> when (health) {
-        100 -> EndingType.WIN_100
-        in 66..99 -> EndingType.WIN_66
-        in 33..65 -> EndingType.WIN_33
-        else -> EndingType.WIN_1
-    }
-    else -> when (questionNumber) {
-        in 2..7 -> EndingType.LOSE_4
-        in 8..11 -> EndingType.LOSE_8
-        in 12..15 -> EndingType.LOSE_12
-        in 16..19 -> EndingType.LOSE_16
-        20 -> EndingType.LOSE_20
-        else -> EndingType.LOSE_PUSSY
-    }
 }
 
 @StringRes

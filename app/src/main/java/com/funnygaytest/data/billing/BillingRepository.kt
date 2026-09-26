@@ -1,4 +1,4 @@
-package com.funnygaytest.managers.billing
+package com.funnygaytest.data.billing
 
 import android.app.Activity
 import android.content.Context
@@ -30,7 +30,7 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-class BillingInteractor @Inject constructor(
+class BillingRepository @Inject constructor(
     @param:ApplicationContext private val context: Context,
     @param:Named(BillingModule.BILLING_SCOPE) private val scope: CoroutineScope
 ) : PurchasesUpdatedListener {

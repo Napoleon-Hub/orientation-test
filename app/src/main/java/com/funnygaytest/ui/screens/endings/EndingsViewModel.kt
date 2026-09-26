@@ -1,11 +1,11 @@
 package com.funnygaytest.ui.screens.endings
 
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.ViewModel
-import com.funnygaytest.managers.firebase.firestore.FirestoreManager
-import com.funnygaytest.managers.music.MusicController
-import com.funnygaytest.models.firebase.LabStats
-import com.funnygaytest.utils.enums.EndingType
+import androidx.lifecycle.viewModelScope
+import com.funnygaytest.data.stats.LabStats
+import com.funnygaytest.data.stats.StatsRepository
+import com.funnygaytest.model.EndingType
+import com.funnygaytest.platform.audio.MusicController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,7 +29,7 @@ data class DiagnosisItemState(
 @HiltViewModel
 class EndingsViewModel @Inject constructor(
     musicController: MusicController,
-    private val firestoreManager: FirestoreManager
+    private val statsRepository: StatsRepository
 ) : ViewModel(), MusicController by musicController {
 
     private val _uiState = MutableStateFlow(EndingsUiState())
@@ -37,7 +37,7 @@ class EndingsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            firestoreManager.getStats()
+            statsRepository.getStats()
                 .catch { e ->
                     Timber.e(e, "Ошибка доступа к личному делу исследователя")
                 }

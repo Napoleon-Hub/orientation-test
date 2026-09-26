@@ -1,4 +1,4 @@
-package com.funnygaytest.managers.ads
+package com.funnygaytest.platform.ads
 
 import android.os.SystemClock
 import javax.inject.Inject

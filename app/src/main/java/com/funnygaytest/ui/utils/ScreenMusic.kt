@@ -1,9 +1,9 @@
-package com.funnygaytest.ui.components
+package com.funnygaytest.ui.utils
 
 import androidx.annotation.RawRes
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.LifecycleResumeEffect
-import com.funnygaytest.managers.music.MusicController
+import com.funnygaytest.platform.audio.MusicController
 
 @Composable
 fun ScreenMusic(@RawRes resId: Int, musicController: MusicController) {

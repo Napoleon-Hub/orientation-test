@@ -35,8 +35,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.BuildConfig
 import com.funnygaytest.R
+import com.funnygaytest.platform.locale.AppLanguage
 import com.funnygaytest.ui.components.BackgroundWrapper
-import com.funnygaytest.ui.components.ScreenMusic
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.buttons.LanguageToggleButton
 import com.funnygaytest.ui.components.buttons.MainButton
@@ -47,7 +47,7 @@ import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.ui.theme.scaled
 import com.funnygaytest.ui.utils.LandscapePreviews
 import com.funnygaytest.ui.utils.ObserveAsEvents
-import com.funnygaytest.utils.enums.AppLanguage
+import com.funnygaytest.ui.utils.ScreenMusic
 
 private const val MenuWeight = 1f
 private const val MenuFreeSpaceWeight = 2f

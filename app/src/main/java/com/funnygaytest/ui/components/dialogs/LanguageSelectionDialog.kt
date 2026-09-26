@@ -30,8 +30,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.funnygaytest.R
+import com.funnygaytest.platform.locale.AppLanguage
 import com.funnygaytest.ui.theme.LabTheme
-import com.funnygaytest.utils.enums.AppLanguage
 
 @Composable
 fun LanguageSelectionDialog(

@@ -25,7 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.funnygaytest.models.Answer
+import com.funnygaytest.model.Answer
 import com.funnygaytest.ui.theme.LabTheme
 
 private val FadeHeight = 32.dp

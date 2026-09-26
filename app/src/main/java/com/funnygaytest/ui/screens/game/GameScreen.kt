@@ -42,17 +42,17 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.funnygaytest.R
-import com.funnygaytest.models.Answer
+import com.funnygaytest.data.game.findQuestionById
+import com.funnygaytest.model.Answer
 import com.funnygaytest.ui.components.AnswersGroup
 import com.funnygaytest.ui.components.BackgroundWrapper
-import com.funnygaytest.ui.components.ScreenMusic
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
 import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.ui.theme.scaled
 import com.funnygaytest.ui.utils.LandscapePreviews
 import com.funnygaytest.ui.utils.ObserveAsEvents
-import com.funnygaytest.utils.helpers.findQuestionById
+import com.funnygaytest.ui.utils.ScreenMusic
 
 private const val QuestionWeight = 0.35f
 private const val AnswersWeight = 0.65f

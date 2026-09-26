@@ -45,6 +45,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.R
+import com.funnygaytest.model.EndingType
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.EndingCard
@@ -55,7 +56,6 @@ import com.funnygaytest.ui.components.verticalScrollIndicator
 import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.ui.theme.scaled
 import com.funnygaytest.ui.utils.LandscapePreviews
-import com.funnygaytest.utils.enums.EndingType
 
 private const val TransitionDurationMs = 1000
 private const val LevelFillDurationMs = 1500

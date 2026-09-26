@@ -1,7 +1,7 @@
 package com.funnygaytest.di
 
-import com.funnygaytest.managers.music.AudioManager
-import com.funnygaytest.managers.music.MusicController
+import com.funnygaytest.platform.audio.MusicController
+import com.funnygaytest.platform.audio.MusicPlayer
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 abstract class MusicModule {
 
     @Binds
-    abstract fun bindMusicController(audioManager: AudioManager): MusicController
+    abstract fun bindMusicController(musicPlayer: MusicPlayer): MusicController
 
 }

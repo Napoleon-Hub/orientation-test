@@ -15,8 +15,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.R
+import com.funnygaytest.platform.locale.AppLanguage
 import com.funnygaytest.ui.theme.LabTheme
-import com.funnygaytest.utils.enums.AppLanguage
 
 @Composable
 fun LanguageToggleButton(

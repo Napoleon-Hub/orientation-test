@@ -1,8 +1,8 @@
-package com.funnygaytest.utils.helpers
+package com.funnygaytest.data.game
 
 import com.funnygaytest.R
-import com.funnygaytest.models.Answer
-import com.funnygaytest.models.Question
+import com.funnygaytest.model.Answer
+import com.funnygaytest.model.Question
 
 private val questionSlots: List<List<Question>> = listOf(
     listOf(

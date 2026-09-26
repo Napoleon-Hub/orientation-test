@@ -30,8 +30,8 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.R
+import com.funnygaytest.model.EndingType
 import com.funnygaytest.ui.components.BackgroundWrapper
-import com.funnygaytest.ui.components.ScreenMusic
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.EndingCard
 import com.funnygaytest.ui.components.buttons.IconButton
@@ -42,7 +42,7 @@ import com.funnygaytest.ui.components.shrinkToFit
 import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.ui.theme.scaled
 import com.funnygaytest.ui.utils.LandscapePreviews
-import com.funnygaytest.utils.enums.EndingType
+import com.funnygaytest.ui.utils.ScreenMusic
 
 private const val APP_URI =
     "https://play.google.com/store/apps/details?id=com.funnygaytest"

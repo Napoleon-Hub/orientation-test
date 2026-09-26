@@ -1,4 +1,4 @@
-package com.funnygaytest.managers.music
+package com.funnygaytest.platform.audio
 
 import androidx.annotation.RawRes
 import kotlinx.coroutines.flow.StateFlow

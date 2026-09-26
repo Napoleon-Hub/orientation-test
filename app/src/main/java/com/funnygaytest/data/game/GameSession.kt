@@ -1,7 +1,6 @@
 package com.funnygaytest.data.game
 
-import com.funnygaytest.models.Question
-import com.funnygaytest.utils.helpers.generateNewGameRun
+import com.funnygaytest.model.Question
 
 data class GameSession(
     val isStarted: Boolean = false,

@@ -1,4 +1,4 @@
-package com.funnygaytest.managers.music
+package com.funnygaytest.platform.audio
 
 import android.content.Context
 import android.media.MediaPlayer
@@ -17,7 +17,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AudioManager @Inject constructor(
+class MusicPlayer @Inject constructor(
     @param:ApplicationContext private val context: Context,
     private val settingsRepository: SettingsRepository,
     @param:ApplicationScope private val scope: CoroutineScope

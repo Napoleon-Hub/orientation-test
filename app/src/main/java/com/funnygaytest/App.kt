@@ -1,7 +1,7 @@
 package com.funnygaytest
 
 import android.app.Application
-import com.funnygaytest.utils.helpers.ReleaseTree
+import com.funnygaytest.platform.logging.ReleaseTree
 import com.google.android.gms.games.PlayGamesSdk
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber

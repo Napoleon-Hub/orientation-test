@@ -1,4 +1,4 @@
-package com.funnygaytest.models.firebase
+package com.funnygaytest.data.stats
 
 import androidx.annotation.Keep
 

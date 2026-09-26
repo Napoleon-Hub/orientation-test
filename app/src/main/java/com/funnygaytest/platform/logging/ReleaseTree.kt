@@ -1,4 +1,4 @@
-package com.funnygaytest.utils.helpers
+package com.funnygaytest.platform.logging
 
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics

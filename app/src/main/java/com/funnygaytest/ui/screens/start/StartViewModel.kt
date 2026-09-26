@@ -1,15 +1,15 @@
 package com.funnygaytest.ui.screens.start
 
-import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.funnygaytest.data.game.GameSession
 import com.funnygaytest.data.game.GameSessionRepository
-import com.funnygaytest.managers.firebase.firestore.FirestoreManager
-import com.funnygaytest.managers.locale.AppLocaleManager
-import com.funnygaytest.managers.music.MusicController
-import com.funnygaytest.models.firebase.LabStats
-import com.funnygaytest.utils.enums.AppLanguage
-import com.funnygaytest.utils.enums.EndingType
+import com.funnygaytest.data.stats.LabStats
+import com.funnygaytest.data.stats.StatsRepository
+import com.funnygaytest.model.EndingType
+import com.funnygaytest.platform.audio.MusicController
+import com.funnygaytest.platform.locale.AppLanguage
+import com.funnygaytest.platform.locale.AppLocaleManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,7 +37,7 @@ sealed interface StartUiEffect {
 class StartViewModel @Inject constructor(
     musicController: MusicController,
     private val gameSessionRepository: GameSessionRepository,
-    private val firestoreManager: FirestoreManager,
+    private val statsRepository: StatsRepository,
     private val localeManager: AppLocaleManager
 ) : ViewModel(), MusicController by musicController {
 
@@ -55,7 +55,7 @@ class StartViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            firestoreManager.getStats()
+            statsRepository.getStats()
                 .catch { e ->
                     Timber.e(e, "Ошибка доступа к личному делу исследователя")
                 }

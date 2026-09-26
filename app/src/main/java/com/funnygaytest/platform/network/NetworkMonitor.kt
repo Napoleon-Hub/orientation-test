@@ -1,4 +1,4 @@
-package com.funnygaytest.managers.network
+package com.funnygaytest.platform.network
 
 import android.content.Context
 import android.net.ConnectivityManager

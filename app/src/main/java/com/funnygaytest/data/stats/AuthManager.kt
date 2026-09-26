@@ -1,4 +1,4 @@
-package com.funnygaytest.managers.firebase.auth
+package com.funnygaytest.data.stats
 
 import android.app.Activity
 import com.funnygaytest.R

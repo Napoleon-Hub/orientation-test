@@ -1,4 +1,4 @@
-package com.funnygaytest.utils.enums
+package com.funnygaytest.platform.locale
 
 import androidx.annotation.DrawableRes
 import com.funnygaytest.R

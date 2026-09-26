@@ -16,10 +16,10 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.funnygaytest.managers.ads.AdsManager
-import com.funnygaytest.managers.firebase.firestore.FirestoreManager
-import com.funnygaytest.managers.network.NetworkMonitor
+import com.funnygaytest.data.stats.StatsRepository
 import com.funnygaytest.navigation.AppNavigation
+import com.funnygaytest.platform.ads.AdsManager
+import com.funnygaytest.platform.network.NetworkMonitor
 import com.funnygaytest.ui.components.dialogs.LaboratoryAccessDialog
 import com.funnygaytest.ui.screens.connection.NoInternetScreen
 import com.funnygaytest.ui.theme.LabTheme
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var networkMonitor: NetworkMonitor
 
     @Inject
-    lateinit var firestoreManager: FirestoreManager
+    lateinit var statsRepository: StatsRepository
 
     @Inject
     lateinit var adsManager: AdsManager
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         hideSystemBars()
 
-        firestoreManager.authorizeFirebase(this)
+        statsRepository.authorizeFirebase(this)
         if (savedInstanceState == null) checkForAppUpdate()
 
         setContent {
