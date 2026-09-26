@@ -10,8 +10,6 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RippleConfiguration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.mutableLongStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -29,18 +27,10 @@ fun MainButton(
     onClick: () -> Unit,
     enabled: Boolean = true
 ) {
-    val lastClickTime = remember { mutableLongStateOf(0L) }
-
     CompositionLocalProvider(LocalRippleConfiguration provides RippleConfiguration(color = rippleColor)) {
         OutlinedButton(
             modifier = modifier,
-            onClick = {
-                val time = System.currentTimeMillis()
-                if (time - lastClickTime.longValue >= 500L) {
-                    lastClickTime.longValue = time
-                    onClick()
-                }
-            },
+            onClick = onClick,
             enabled = enabled,
             elevation = ButtonDefaults.buttonElevation(
                 defaultElevation = 3.dp,

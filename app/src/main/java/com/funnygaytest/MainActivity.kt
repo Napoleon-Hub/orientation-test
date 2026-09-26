@@ -19,7 +19,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.funnygaytest.managers.ads.AdFrequencyManager
+import com.funnygaytest.managers.ads.AdsManager
 import com.funnygaytest.managers.firebase.firestore.FirestoreManager
 import com.funnygaytest.managers.network.NetworkMonitor
 import com.funnygaytest.navigation.AppNavigation
@@ -32,26 +32,11 @@ import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.yandex.mobile.ads.common.AdError
-import com.yandex.mobile.ads.common.AdRequest
-import com.yandex.mobile.ads.common.AdRequestError
-import com.yandex.mobile.ads.common.ImpressionData
-import com.yandex.mobile.ads.common.YandexAds
-import com.yandex.mobile.ads.interstitial.InterstitialAd
-import com.yandex.mobile.ads.interstitial.InterstitialAdEventListener
-import com.yandex.mobile.ads.interstitial.InterstitialAdLoadListener
-import com.yandex.mobile.ads.interstitial.InterstitialAdLoader
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    companion object {
-       private const val AD_UNIT_ID = "R-M-19046095-1"
-       // private const val AD_UNIT_ID = "demo-interstitial-applovin"
-    }
 
     @Inject
     lateinit var networkMonitor: NetworkMonitor
@@ -60,13 +45,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var firestoreManager: FirestoreManager
 
     @Inject
-    lateinit var adFrequencyManager: AdFrequencyManager
+    lateinit var adsManager: AdsManager
 
     private val viewModel: MainViewModel by viewModels()
-
-    private var interstitialAd: InterstitialAd? = null
-    private var interstitialAdLoader: InterstitialAdLoader? = null
-    private var isAdsInitialized = false
 
     private var appUpdateManager: AppUpdateManager? = null
     private var activityResultLauncher: ActivityResultLauncher<IntentSenderRequest>? = null
@@ -91,12 +72,7 @@ class MainActivity : AppCompatActivity() {
 
                 Box(modifier = Modifier.fillMaxSize()) {
                     AppNavigation(
-                        onRequestShowAd = {
-                            if (adFrequencyManager.canShowAd()) {
-                                showAd()
-                                adFrequencyManager.recordAdShown()
-                            }
-                        }
+                        onRequestShowAd = { adsManager.showInterstitialIfAllowed(this@MainActivity) }
                     )
 
                     if (!isConnected) {
@@ -115,7 +91,7 @@ class MainActivity : AppCompatActivity() {
 
                 val canInitAds = isConnected && uiState.consentShown
                 LaunchedEffect(canInitAds) {
-                    if (canInitAds) initializeMobileAds()
+                    if (canInitAds) adsManager.initialize()
                 }
             }
         }
@@ -147,81 +123,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    private fun initializeMobileAds() {
-        if (isAdsInitialized) return
-        isAdsInitialized = true
-        YandexAds.apply {
-            setUserConsent(true)
-            setAppAdAnalyticsReporting(true)
-            initialize(this@MainActivity) {
-                interstitialAdLoader = InterstitialAdLoader(this@MainActivity)
-                loadInterstitialAd()
-            }
-        }
-    }
-
-    private fun loadInterstitialAd() {
-        interstitialAdLoader?.loadAd(
-            adRequest = AdRequest.Builder(AD_UNIT_ID).build(),
-            listener = object : InterstitialAdLoadListener {
-                override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                    this@MainActivity.interstitialAd = interstitialAd
-                }
-
-                override fun onAdFailedToLoad(error: AdRequestError) {
-                    Timber.e(error.description)
-                }
-            }
-        )
-    }
-
-    private fun showAd() {
-        interstitialAd?.apply {
-            setAdEventListener(object : InterstitialAdEventListener {
-                override fun onAdShown() {
-                    // Called when ad is shown.
-                }
-                override fun onAdFailedToShow(adError: AdError) {
-                    // Called when an InterstitialAd failed to show.
-                    // Clean resources after Ad dismissed
-                    interstitialAd?.setAdEventListener(null)
-                    interstitialAd = null
-
-                    // Now you can preload the next interstitial ad.
-                    loadInterstitialAd()
-                }
-                override fun onAdDismissed() {
-                    // Called when ad is dismissed.
-                    // Clean resources after Ad dismissed
-                    interstitialAd?.setAdEventListener(null)
-                    interstitialAd = null
-
-                    // Now you can preload the next interstitial ad.
-                    loadInterstitialAd()
-                }
-                override fun onAdClicked() {
-                    // Called when a click is recorded for an ad.
-                }
-                override fun onAdImpression(impressionData: ImpressionData?) {
-                    // Called when an impression is recorded for an ad.
-                }
-            })
-            show(this@MainActivity)
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        interstitialAdLoader?.cancelLoading()
-        interstitialAdLoader = null
-        destroyInterstitialAd()
-    }
-
-    private fun destroyInterstitialAd() {
-        interstitialAd?.setAdEventListener(null)
-        interstitialAd = null
     }
 
     override fun onResume() {

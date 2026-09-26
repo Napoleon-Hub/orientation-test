@@ -44,6 +44,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.buttons.LabBackButton
@@ -88,7 +89,7 @@ fun EndingsScreen(
 
     EndingsScreenContent(
         uiState = uiState,
-        onBackClicked = onBack,
+        onBackClicked = dropUnlessResumed { onBack() },
         onToggleMusic = { viewModel.toggleMusic() }
     )
 

@@ -28,6 +28,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.yandex.mobile.ads.common.AdActivity"
+            android:screenOrientation="sensorLandscape"
+            tools:ignore="DiscouragedApi" />
+
+        <activity
+            android:name="com.unity3d.ads.adplayer.FullScreenWebViewDisplay"
+            android:screenOrientation="sensorLandscape"
+            tools:ignore="DiscouragedApi" />
+
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
             android:value="@string/game_services_project_id" />

@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.BuildConfig
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
@@ -86,10 +87,10 @@ fun StartScreen(
     StartScreenContent(
         modifier = modifier,
         uiState = uiState,
-        onStartGameClicked = viewModel::onStartGameClicked,
-        onEndingsClicked = onEndingsShow,
+        onStartGameClicked = dropUnlessResumed { viewModel.onStartGameClicked() },
+        onEndingsClicked = dropUnlessResumed { onEndingsShow() },
         onDifficultyClicked = viewModel::onDifficultyClicked,
-        onEasyClicked = viewModel::onEasyDifficultySelected,
+        onEasyClicked = dropUnlessResumed { viewModel.onEasyDifficultySelected() },
         onHardClicked = viewModel::onHardDifficultySelected,
         onToggleMusic = viewModel::toggleMusic,
         onLanguageSelected = viewModel::onLanguageSelected

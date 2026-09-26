@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
@@ -61,10 +62,10 @@ fun FeedScreen(
 
     FeedScreenContent(
         uiState = uiState,
-        onPayClicked = {
+        onPayClicked = dropUnlessResumed {
             activity?.let { viewModel.launchBillingFlow(it) }
         },
-        onBackClicked = onBack
+        onBackClicked = dropUnlessResumed { onBack() }
     )
 
 }
