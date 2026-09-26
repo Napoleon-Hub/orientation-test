@@ -1,0 +1,48 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /subjects/{uid} {
+      allow get: if isOwner(uid);
+      allow create: if isOwner(uid) && isValidStats(request.resource.data);
+      allow update: if isOwner(uid)
+        && isValidStats(request.resource.data)
+        && neverDecreases(resource.data, request.resource.data);
+      allow delete: if isOwner(uid);
+    }
+
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    function isValidStats(data) {
+      return data.keys().hasOnly(['wins', 'losses', 'achievements'])
+        && isCounter(data, 'wins')
+        && isCounter(data, 'losses')
+        && isAchievementList(data);
+    }
+
+    function isCounter(data, field) {
+      return !(field in data) || (data[field] is int && data[field] >= 0);
+    }
+
+    function isAchievementList(data) {
+      return !('achievements' in data) || (
+        data.achievements is list
+          && data.achievements.size() <= 12
+          && data.achievements.hasOnly([
+            'win_100', 'win_66', 'win_33', 'win_1',
+            'lose_4', 'lose_8', 'lose_12', 'lose_16', 'lose_20', 'lose_pussy',
+            'all_endings', 'donate'
+          ])
+      );
+    }
+
+    function neverDecreases(before, after) {
+      return after.get('wins', 0) >= before.get('wins', 0)
+        && after.get('losses', 0) >= before.get('losses', 0)
+        && after.get('achievements', []).hasAll(before.get('achievements', []));
+    }
+  }
+}
