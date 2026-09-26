@@ -13,7 +13,7 @@ plugins {
 
 val appVersionMajor = 3
 val appVersionMinor = 2
-val appVersionPatch = 0
+val appVersionPatch = 1
 
 val keystorePropertiesFile: File = rootProject.file("keystore.properties")
 val keystoreProperties = Properties()
@@ -161,6 +161,7 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.config)
     releaseImplementation(libs.firebase.appcheck.playintegrity)
     debugImplementation(libs.firebase.appcheck.debug)
 
