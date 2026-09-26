@@ -110,8 +110,10 @@ class ResultViewModel @Inject constructor(
         savedStateHandle[KEY_IS_NEW_ENDING] = isNew
         savedStateHandle[KEY_ALL_ENDINGS_UNLOCKED] = wasAllUnlocked || unlocksAll
 
-        statsRepository.recordTestResult(isWin = health > 0, achievementId = ending.id)
-        if (unlocksAll) statsRepository.recordTestResult(achievementId = EndingType.ALL.id)
+        statsRepository.recordTestResult(
+            isWin = health > 0,
+            achievementIds = if (unlocksAll) listOf(ending.id, EndingType.ALL.id) else listOf(ending.id)
+        )
 
         showEnding(ending, isNew, isAllUnlocked = wasAllUnlocked || unlocksAll)
     }

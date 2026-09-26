@@ -153,6 +153,7 @@ dependencies {
     // Coroutines
     implementation(libs.coroutines.core)
     implementation(libs.coroutines.android)
+    implementation(libs.coroutines.play.services)
 
     // Firebase
     implementation(platform(libs.firebase.bom))

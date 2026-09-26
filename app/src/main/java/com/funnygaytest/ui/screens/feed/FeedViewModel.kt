@@ -83,7 +83,9 @@ class FeedViewModel @Inject constructor(
             )
         }
         if (!isAlreadyUnlocked) {
-            statsRepository.recordTestResult(achievementId = EndingType.DONATE.id)
+            viewModelScope.launch {
+                statsRepository.recordTestResult(achievementIds = listOf(EndingType.DONATE.id))
+            }
         }
     }
 
