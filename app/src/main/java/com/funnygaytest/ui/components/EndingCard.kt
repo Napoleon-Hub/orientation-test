@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.funnygaytest.R
 import com.funnygaytest.ui.theme.LabTheme
+import com.funnygaytest.ui.theme.scaled
 
 @Composable
 fun EndingCard(
@@ -35,6 +36,7 @@ fun EndingCard(
     iconRes: Int,
     finalTextShown: Boolean = false
 ) {
+    val dimens = LabTheme.dimens
     val borderColor = LabTheme.colors.accent
     val bgColor = LabTheme.colors.accent.copy(alpha = 0.25f)
 
@@ -48,7 +50,7 @@ fun EndingCard(
     ) {
         Box(
             modifier = Modifier
-                .size(64.dp)
+                .size(dimens.endingIconSize)
                 .clip(RoundedCornerShape(12.dp))
         ) {
             Image(
@@ -66,14 +68,15 @@ fun EndingCard(
         ) {
             Text(
                 text = stringResource(R.string.result_endings_new),
-                style = LabTheme.typography.caption,
+                style = LabTheme.typography.caption.scaled(dimens.textScale),
                 color = LabTheme.colors.textPrimary
             )
 
             Text(
                 modifier = Modifier.padding(top = 4.dp),
                 text = title,
-                style = LabTheme.typography.heading.copy(fontSize = 16.sp, fontWeight = FontWeight.Bold),
+                style = LabTheme.typography.heading.copy(fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    .scaled(dimens.textScale),
                 color = LabTheme.colors.textPrimary,
                 softWrap = true
             )
@@ -82,7 +85,7 @@ fun EndingCard(
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
                     text = stringResource(R.string.result_endings_all_unlocked),
-                    style = LabTheme.typography.caption.copy(fontSize = 10.sp),
+                    style = LabTheme.typography.caption.copy(fontSize = 10.sp).scaled(dimens.textScale),
                     color = LabTheme.colors.textPrimary,
                     textAlign = TextAlign.Start,
                     softWrap = true

@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,7 +30,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.compose.ui.unit.Dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -43,6 +41,7 @@ import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.buttons.LanguageToggleButton
 import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
+import com.funnygaytest.ui.components.buttons.adaptiveButtonModifier
 import com.funnygaytest.ui.components.dialogs.LanguageSelectionDialog
 import com.funnygaytest.ui.theme.LabTheme
 import com.funnygaytest.ui.theme.scaled
@@ -245,7 +244,7 @@ private fun ColumnScope.MainMenu(
     onDifficultyClicked: () -> Unit,
     onEndingsClicked: () -> Unit
 ) {
-    val buttonModifier = menuButtonModifier(LabTheme.dimens.buttonHeight)
+    val buttonModifier = adaptiveButtonModifier(LabTheme.dimens.buttonHeight)
     val buttonTextStyle = LabTheme.typography.button.scaled(LabTheme.dimens.textScale)
 
     MainButton(
@@ -287,7 +286,7 @@ private fun ColumnScope.DifficultyMenu(
     onEasyClicked: () -> Unit,
     onHardClicked: () -> Unit
 ) {
-    val buttonModifier = menuButtonModifier(LabTheme.dimens.buttonHeight)
+    val buttonModifier = adaptiveButtonModifier(LabTheme.dimens.buttonHeight)
     val buttonTextStyle = LabTheme.typography.button.scaled(LabTheme.dimens.textScale)
 
     MainButton(
@@ -316,12 +315,6 @@ private fun ColumnScope.DifficultyMenu(
         text = stringResource(R.string.start_button_difficulty_hard)
     )
 }
-
-private fun ColumnScope.menuButtonModifier(maxHeight: Dp): Modifier = Modifier
-    .fillMaxWidth()
-    .weight(1f, fill = false)
-    .heightIn(max = maxHeight)
-    .fillMaxHeight()
 
 private class StartUiStatePreviewProvider : PreviewParameterProvider<StartUiState> {
     override val values = sequenceOf(

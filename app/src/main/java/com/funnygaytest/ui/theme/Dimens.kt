@@ -19,6 +19,7 @@ data class LabDimens(
     val spacingMedium: Dp,
     val spacingLarge: Dp,
     val buttonHeight: Dp,
+    val endingIconSize: Dp,
     // Множитель для размеров шрифтов LabTypography
     val textScale: Float
 )
@@ -29,6 +30,7 @@ internal val CompactDimens = LabDimens(
     spacingMedium = 12.dp,
     spacingLarge = 16.dp,
     buttonHeight = 48.dp,
+    endingIconSize = 64.dp,
     textScale = 1f
 )
 
@@ -38,6 +40,7 @@ internal val MediumDimens = LabDimens(
     spacingMedium = 16.dp,
     spacingLarge = 24.dp,
     buttonHeight = 64.dp,
+    endingIconSize = 80.dp,
     textScale = 1.25f
 )
 
@@ -47,6 +50,7 @@ internal val ExpandedDimens = LabDimens(
     spacingMedium = 20.dp,
     spacingLarge = 32.dp,
     buttonHeight = 80.dp,
+    endingIconSize = 96.dp,
     textScale = 1.5f
 )
 

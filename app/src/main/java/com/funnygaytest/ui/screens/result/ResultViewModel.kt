@@ -2,7 +2,9 @@ package com.funnygaytest.ui.screens.result
 
 import android.app.Activity
 import android.content.Context
+import androidx.annotation.StringRes
 import androidx.lifecycle.viewModelScope
+import com.funnygaytest.R
 import com.funnygaytest.base.BaseViewModel
 import com.funnygaytest.managers.firebase.firestore.FirestoreManager
 import com.funnygaytest.managers.music.AudioManager
@@ -26,6 +28,8 @@ data class ResultUiState(
     val isRateEnabled: Boolean = true,
     val healthLeft: Int = 0,
     val lastQuestionNumber: Int = 0,
+    @param:StringRes val titleRes: Int = R.string.result_title_win,
+    @param:StringRes val resultTextRes: Int = R.string.result_text_result_win_100,
     val currentEnding: EndingType? = null,
     val isNewEnding: Boolean = false,
     val isAllEndingsUnlocked: Boolean = false
@@ -43,7 +47,9 @@ class ResultViewModel @Inject constructor(
         ResultUiState(
             isMuted = isMuted,
             healthLeft = health,
-            lastQuestionNumber = lastQuestionIndex + 1
+            lastQuestionNumber = lastQuestionIndex + 1,
+            titleRes = titleRes(health, lastQuestionIndex + 1),
+            resultTextRes = resultTextRes(health, lastQuestionIndex + 1)
         )
     )
     val uiState = _uiState.asStateFlow()
@@ -54,9 +60,10 @@ class ResultViewModel @Inject constructor(
     init {
         processCurrentEnding()
         refreshGameData()
+        requestReviewInfo()
     }
 
-    fun getReviewInfo() {
+    private fun requestReviewInfo() {
         reviewManager = ReviewManagerFactory.create(appContext)
         val request = reviewManager?.requestReviewFlow()
         request?.addOnCompleteListener { task ->
@@ -146,3 +153,30 @@ class ResultViewModel @Inject constructor(
     }
 
 }
+
+@StringRes
+private fun titleRes(healthLeft: Int, lastQuestionNumber: Int): Int = when {
+    healthLeft > 0 -> R.string.result_title_win
+    lastQuestionNumber == 1 -> R.string.result_title_lose_pussy
+    else -> R.string.result_title_lose
+}
+
+@StringRes
+private fun resultTextRes(healthLeft: Int, lastQuestionNumber: Int): Int =
+    if (healthLeft > 0) {
+        when (healthLeft) {
+            100 -> R.string.result_text_result_win_100
+            in 66..99 -> R.string.result_text_result_win_66_99
+            in 33..65 -> R.string.result_text_result_win_33_65
+            else -> R.string.result_text_result_win_1_32
+        }
+    } else {
+        when (lastQuestionNumber) {
+            in 2..7 -> R.string.result_text_result_lose_4_7
+            in 8..11 -> R.string.result_text_result_lose_8_11
+            in 12..15 -> R.string.result_text_result_lose_12_15
+            in 16..19 -> R.string.result_text_result_lose_16_19
+            20 -> R.string.result_text_result_lose_20
+            else -> R.string.result_text_result_lose_pussy
+        }
+    }

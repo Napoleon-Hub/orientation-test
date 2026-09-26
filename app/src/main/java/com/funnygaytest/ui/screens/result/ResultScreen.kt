@@ -1,9 +1,9 @@
 package com.funnygaytest.ui.screens.result
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,44 +13,45 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.LifecycleResumeEffect
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.compose.dropUnlessResumed
 import com.funnygaytest.R
-import com.funnygaytest.ui.components.AutoScaledText
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.EndingCard
 import com.funnygaytest.ui.components.buttons.IconButton
 import com.funnygaytest.ui.components.buttons.MainButton
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
+import com.funnygaytest.ui.components.buttons.adaptiveButtonModifier
+import com.funnygaytest.ui.components.shrinkToFit
 import com.funnygaytest.ui.theme.LabTheme
+import com.funnygaytest.ui.theme.scaled
+import com.funnygaytest.ui.utils.LandscapePreviews
 import com.funnygaytest.utils.enums.EndingType
 
 private const val APP_URI =
     "https://play.google.com/store/apps/details?id=com.funnygaytest"
 private const val DEVELOPER_URI =
     "https://play.google.com/store/apps/dev?id=6364243335711753284"
+
+private const val ReportWeight = 0.7f
+private const val ActionsWeight = 0.3f
 
 @Composable
 fun ResultScreen(
@@ -59,78 +60,40 @@ fun ResultScreen(
     onStartScreen: () -> Unit,
     onFeedScreen: () -> Unit
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
-    val activity = context as? Activity
+    val activity = LocalActivity.current
 
-    val lifecycleOwner = LocalLifecycleOwner.current
-    DisposableEffect(lifecycleOwner) {
-        val observer = LifecycleEventObserver { _, event ->
-            when (event) {
-                Lifecycle.Event.ON_PAUSE -> {
-                    viewModel.stopMusic()
-                }
-
-                Lifecycle.Event.ON_RESUME -> {
-                    viewModel.playMusic(R.raw.endings_music_new)
-                }
-
-                else -> {}
-            }
-        }
-
-        lifecycleOwner.lifecycle.addObserver(observer)
-
-        onDispose {
-            lifecycleOwner.lifecycle.removeObserver(observer)
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        viewModel.getReviewInfo()
+    LifecycleResumeEffect(Unit) {
+        viewModel.playMusic(R.raw.endings_music_new)
+        onPauseOrDispose { viewModel.stopMusic() }
     }
 
     LaunchedEffect(uiState.isMuted) {
         viewModel.setMuteMusic(uiState.isMuted)
     }
 
-    val titleText = getTitleText(context, uiState.healthLeft, uiState.lastQuestionNumber)
-    val resultText = getResultText(context, uiState.healthLeft, uiState.lastQuestionNumber)
-
     ResultScreenContent(
         modifier = modifier,
         uiState = uiState,
-        titleTest = titleText,
-        resultText = resultText,
-        onRestartClicked = dropUnlessResumed {
-            onStartScreen()
-        },
-        onPayClicked = dropUnlessResumed {
-            onFeedScreen()
-        },
-        onAnotherTestsClicked = dropUnlessResumed {
-            showAnotherApps(context)
-        },
+        onRestartClicked = dropUnlessResumed { onStartScreen() },
+        onPayClicked = dropUnlessResumed { onFeedScreen() },
+        onAnotherTestsClicked = dropUnlessResumed { showAnotherApps(context) },
         onShareClicked = dropUnlessResumed {
             share(context, uiState.healthLeft, uiState.lastQuestionNumber)
         },
         onRateClicked = dropUnlessResumed {
             activity?.let { viewModel.rateUs(it) }
         },
-        onToggleMusic = {
-            viewModel.toggleMusic()
-        }
+        onToggleMusic = viewModel::toggleMusic
     )
-
 }
 
 @Composable
 private fun ResultScreenContent(
     modifier: Modifier = Modifier,
     uiState: ResultUiState,
-    titleTest: String,
-    resultText: String,
     onRestartClicked: () -> Unit = {},
     onPayClicked: () -> Unit = {},
     onAnotherTestsClicked: () -> Unit = {},
@@ -138,200 +101,215 @@ private fun ResultScreenContent(
     onRateClicked: () -> Unit = {},
     onToggleMusic: () -> Unit = {}
 ) {
-    BackgroundWrapper(backgroundId = R.drawable.background_result) {
+    val dimens = LabTheme.dimens
 
+    BackgroundWrapper(
+        modifier = modifier,
+        backgroundId = R.drawable.background_result
+    ) {
         Row(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
-                .padding(24.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(dimens.screenPadding),
+            horizontalArrangement = Arrangement.spacedBy(dimens.screenPadding)
         ) {
-
-            Column(
+            ResultReport(
                 modifier = Modifier
-                    .weight(0.7f)
-                    .fillMaxHeight()
-                    .padding(end = 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
+                    .weight(ReportWeight)
+                    .fillMaxHeight(),
+                uiState = uiState
+            )
 
-                Column(
-                    modifier = Modifier
-                        .weight(0.66f),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Bottom
-                ) {
-
-                    Spacer(modifier = Modifier.weight(0.3f))
-
-                    Text(
-                        text = titleTest,
-                        style = LabTheme.typography.heading.copy(fontSize = 20.sp),
-                        color = LabTheme.colors.textPrimary.copy(alpha = 0.7f)
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    DescriptionBox(
-                        modifier = Modifier
-                            .weight(0.7f)
-                            .fillMaxWidth(),
-                        textStyle = LabTheme.typography.heading.copy(fontSize = 16.sp),
-                        descriptionString = AnnotatedString(resultText)
-                    )
-
-                }
-
-                Column(
-                    modifier = Modifier
-                        .weight(0.33f),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Bottom
-                ) {
-                    if (uiState.isNewEnding) {
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        uiState.currentEnding?.let { ending ->
-                            Box(
-                                modifier = Modifier.fillMaxWidth(),
-                                contentAlignment = Alignment.BottomCenter
-                            ) {
-                                EndingCard(
-                                    title = stringResource(id = ending.titleRes),
-                                    iconRes = ending.iconRes,
-                                    finalTextShown = uiState.isAllEndingsUnlocked
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-
-            Column(
+            ResultActions(
                 modifier = Modifier
-                    .weight(0.3f)
-                    .fillMaxHeight()
-            ) {
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 8.dp)
-                ) {
-                    MusicToggleButton(
-                        modifier = Modifier.align(Alignment.TopEnd),
-                        isMuted = uiState.isMuted,
-                        onClick = onToggleMusic
-                    )
-                }
-
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically)
-                ) {
-
-                    val actionModifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                        .heightIn(max = 55.dp)
-
-                    MainButton(
-                        modifier = actionModifier,
-                        onClick = onRestartClicked,
-                        text = stringResource(R.string.result_button_restart)
-                    )
-
-                    AutoScaledText(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(R.string.result_button_restart_description),
-                        style = LabTheme.typography.caption,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1
-                    )
-
-                    MainButton(
-                        modifier = actionModifier,
-                        onClick = onPayClicked,
-                        text = stringResource(R.string.result_button_pay)
-                    )
-
-                    MainButton(
-                        modifier = actionModifier,
-                        onClick = onAnotherTestsClicked,
-                        text = stringResource(R.string.result_button_another_apps)
-                    )
-
-                    Row(
-                        modifier = actionModifier,
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        IconButton(
-                            modifier = Modifier.weight(1f).fillMaxHeight(),
-                            iconId = R.drawable.ic_share,
-                            onClick = onShareClicked
-                        )
-
-                        IconButton(
-                            modifier = Modifier.weight(1f).fillMaxHeight(),
-                            iconId = R.drawable.ic_rate_us,
-                            onClick = onRateClicked,
-                            enabled = uiState.isRateEnabled
-                        )
-                    }
-
-                    AutoScaledText(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = stringResource(R.string.result_rate_description),
-                        style = LabTheme.typography.caption,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1
-                    )
-                }
-
-            }
+                    .weight(ActionsWeight)
+                    .fillMaxHeight(),
+                uiState = uiState,
+                onRestartClicked = onRestartClicked,
+                onPayClicked = onPayClicked,
+                onAnotherTestsClicked = onAnotherTestsClicked,
+                onShareClicked = onShareClicked,
+                onRateClicked = onRateClicked,
+                onToggleMusic = onToggleMusic
+            )
         }
     }
 }
 
-@Preview(widthDp = 720, heightDp = 500)
 @Composable
-fun PreviewResultScreen() {
-    LabTheme {
-        ResultScreenContent(
-            uiState = ResultUiState(
-                currentEnding = EndingType.LOSE_12,
-                isNewEnding = true
-            ),
-            titleTest = stringResource(R.string.result_title_win),
-            resultText = stringResource(R.string.result_text_result_win_100)
+private fun ResultReport(
+    modifier: Modifier = Modifier,
+    uiState: ResultUiState
+) {
+    val dimens = LabTheme.dimens
+    val titleStyle = LabTheme.typography.heading.copy(fontSize = 20.sp).scaled(dimens.textScale)
+
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Spacer(modifier = Modifier.weight(0.2f))
+
+        BasicText(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(uiState.titleRes),
+            style = titleStyle.copy(color = LabTheme.colors.textPrimary.copy(alpha = 0.7f)),
+            maxLines = 2,
+            autoSize = shrinkToFit(titleStyle)
         )
+
+        Spacer(modifier = Modifier.height(dimens.spacingLarge))
+
+        DescriptionBox(
+            modifier = Modifier
+                .weight(0.47f)
+                .fillMaxWidth(),
+            textStyle = LabTheme.typography.heading.copy(fontSize = 16.sp).scaled(dimens.textScale),
+            descriptionString = AnnotatedString(stringResource(uiState.resultTextRes))
+        )
+
+        Box(
+            modifier = Modifier
+                .weight(0.33f)
+                .fillMaxWidth(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            val ending = uiState.currentEnding
+            if (uiState.isNewEnding && ending != null) {
+                EndingCard(
+                    title = stringResource(ending.titleRes),
+                    iconRes = ending.iconRes,
+                    finalTextShown = uiState.isAllEndingsUnlocked
+                )
+            }
+        }
     }
 }
 
-private fun getTitleText(context: Context, healthLeft: Int, lastQuestionNumber: Int): String {
-    return if (healthLeft > 0) context.getString(R.string.result_title_win)
-    else if (lastQuestionNumber == 1) context.getString(R.string.result_title_lose_pussy)
-    else context.getString(R.string.result_title_lose)
+@Composable
+private fun ResultActions(
+    modifier: Modifier = Modifier,
+    uiState: ResultUiState,
+    onRestartClicked: () -> Unit,
+    onPayClicked: () -> Unit,
+    onAnotherTestsClicked: () -> Unit,
+    onShareClicked: () -> Unit,
+    onRateClicked: () -> Unit,
+    onToggleMusic: () -> Unit
+) {
+    val dimens = LabTheme.dimens
+
+    Column(modifier = modifier) {
+        MusicToggleButton(
+            modifier = Modifier.align(Alignment.End),
+            isMuted = uiState.isMuted,
+            onClick = onToggleMusic
+        )
+
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(dimens.spacingMedium, Alignment.CenterVertically)
+        ) {
+            val buttonModifier = adaptiveButtonModifier(dimens.buttonHeight)
+            val buttonTextStyle = LabTheme.typography.button.scaled(dimens.textScale)
+
+            MainButton(
+                modifier = buttonModifier,
+                onClick = onRestartClicked,
+                textStyle = buttonTextStyle,
+                text = stringResource(R.string.result_button_restart)
+            )
+
+            ActionCaption(text = stringResource(R.string.result_button_restart_description))
+
+            MainButton(
+                modifier = buttonModifier,
+                onClick = onPayClicked,
+                textStyle = buttonTextStyle,
+                text = stringResource(R.string.result_button_pay)
+            )
+
+            MainButton(
+                modifier = buttonModifier,
+                onClick = onAnotherTestsClicked,
+                textStyle = buttonTextStyle,
+                text = stringResource(R.string.result_button_another_apps)
+            )
+
+            Row(
+                modifier = buttonModifier,
+                horizontalArrangement = Arrangement.spacedBy(dimens.spacingMedium)
+            ) {
+                IconButton(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight(),
+                    iconId = R.drawable.ic_share,
+                    onClick = onShareClicked
+                )
+
+                IconButton(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight(),
+                    iconId = R.drawable.ic_rate_us,
+                    onClick = onRateClicked,
+                    enabled = uiState.isRateEnabled
+                )
+            }
+
+            ActionCaption(text = stringResource(R.string.result_rate_description))
+        }
+    }
 }
 
-private fun getResultText(context: Context, healthLeft: Int, lastQuestionNumber: Int): String {
-    return if (healthLeft > 0) {
-        when (healthLeft) {
-            100 -> context.getString(R.string.result_text_result_win_100)
-            in 66..99 -> context.getString(R.string.result_text_result_win_66_99)
-            in 33..65 -> context.getString(R.string.result_text_result_win_33_65)
-            else -> context.getString(R.string.result_text_result_win_1_32)
-        }
-    } else {
-        when (lastQuestionNumber) {
-            in 2..7 -> context.getString(R.string.result_text_result_lose_4_7)
-            in 8..11 -> context.getString(R.string.result_text_result_lose_8_11)
-            in 12..15 -> context.getString(R.string.result_text_result_lose_12_15)
-            in 16..19 -> context.getString(R.string.result_text_result_lose_16_19)
-            20 -> context.getString(R.string.result_text_result_lose_20)
-            else -> context.getString(R.string.result_text_result_lose_pussy)
-        }
+@Composable
+private fun ActionCaption(text: String) {
+    val style = LabTheme.typography.caption.scaled(LabTheme.dimens.textScale)
+    BasicText(
+        modifier = Modifier.fillMaxWidth(),
+        text = text,
+        style = style,
+        maxLines = 1,
+        softWrap = false,
+        autoSize = shrinkToFit(style)
+    )
+}
+
+private class ResultUiStatePreviewProvider : PreviewParameterProvider<ResultUiState> {
+    override val values = sequenceOf(
+        ResultUiState(
+            healthLeft = 100,
+            lastQuestionNumber = 20,
+            currentEnding = EndingType.WIN_100,
+            isNewEnding = true
+        ),
+        ResultUiState(
+            lastQuestionNumber = 12,
+            titleRes = R.string.result_title_lose,
+            resultTextRes = R.string.result_text_result_lose_12_15,
+            currentEnding = EndingType.LOSE_12,
+            isNewEnding = true,
+            isAllEndingsUnlocked = true
+        ),
+        ResultUiState(
+            lastQuestionNumber = 1,
+            titleRes = R.string.result_title_lose_pussy,
+            resultTextRes = R.string.result_text_result_lose_pussy,
+            isRateEnabled = false
+        )
+    )
+}
+
+@LandscapePreviews
+@Composable
+private fun ResultScreenPreview(
+    @PreviewParameter(ResultUiStatePreviewProvider::class) uiState: ResultUiState
+) {
+    LabTheme {
+        ResultScreenContent(uiState = uiState)
     }
 }
 
