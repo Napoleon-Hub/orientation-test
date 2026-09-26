@@ -1,100 +1,124 @@
 package com.funnygaytest.ui.screens.connection
 
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.funnygaytest.R
 import com.funnygaytest.ui.components.BackgroundWrapper
 import com.funnygaytest.ui.components.DescriptionBox
 import com.funnygaytest.ui.components.buttons.MusicToggleButton
+import com.funnygaytest.ui.components.shrinkToFit
 import com.funnygaytest.ui.theme.LabTheme
+import com.funnygaytest.ui.theme.scaled
+import com.funnygaytest.ui.utils.LandscapePreviews
+
+private const val DescriptionWeight = 1f
+private const val SideSpaceWeight = 0.3f
 
 @Composable
 fun NoInternetScreen(
+    modifier: Modifier = Modifier,
     viewModel: NoInternetViewModel = hiltViewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val activity = LocalActivity.current
+
+    LaunchedEffect(Unit) {
+        viewModel.onShown()
+    }
 
     LaunchedEffect(uiState.isMuted) {
         viewModel.setMuteMusic(uiState.isMuted)
     }
 
+    BackHandler {
+        activity?.moveTaskToBack(true)
+    }
+
     NoInternetScreenContent(
+        modifier = modifier.pointerInput(Unit) {
+            awaitPointerEventScope {
+                while (true) {
+                    awaitPointerEvent().changes.forEach { it.consume() }
+                }
+            }
+        },
         uiState = uiState,
-        onToggleMusic = { viewModel.toggleMusic() }
+        onToggleMusic = viewModel::toggleMusic
     )
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun NoInternetScreenContent(
+    modifier: Modifier = Modifier,
     uiState: NoInternetUiState,
     onToggleMusic: () -> Unit = {}
 ) {
-    BackgroundWrapper(backgroundId = R.drawable.background_connection) {
+    val dimens = LabTheme.dimens
+    val titleStyle = LabTheme.typography.heading.copy(fontSize = 22.sp).scaled(dimens.textScale)
 
-        Box(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(end = 12.dp, top = 12.dp)
-        ) {
-            MusicToggleButton(
-                isMuted = uiState.isMuted,
-                onClick = onToggleMusic
-            )
-        }
-
+    BackgroundWrapper(
+        modifier = modifier,
+        backgroundId = R.drawable.background_connection
+    ) {
         Column(
             modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
+                .fillMaxSize()
+                .padding(dimens.screenPadding),
+            verticalArrangement = Arrangement.spacedBy(dimens.spacingLarge, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Text(
+            BasicText(
+                modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.connection_no_internet_title),
-                style = LabTheme.typography.heading.copy(fontSize = 22.sp),
-                color = LabTheme.colors.textPrimary.copy(alpha = 0.7f)
+                style = titleStyle.copy(color = LabTheme.colors.textPrimary.copy(alpha = 0.7f)),
+                maxLines = 1,
+                softWrap = false,
+                autoSize = shrinkToFit(titleStyle)
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row {
-                Spacer(modifier = Modifier.weight(0.3f))
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Spacer(modifier = Modifier.weight(SideSpaceWeight))
                 DescriptionBox(
-                    modifier = Modifier.weight(1f),
-                    textStyle = LabTheme.typography.heading,
+                    modifier = Modifier.weight(DescriptionWeight),
+                    textStyle = LabTheme.typography.heading.scaled(dimens.textScale),
                     descriptionString = AnnotatedString(stringResource(R.string.connection_no_internet_description))
                 )
-                Spacer(modifier = Modifier.weight(0.3f))
+                Spacer(modifier = Modifier.weight(SideSpaceWeight))
             }
         }
 
+        MusicToggleButton(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(dimens.screenPadding / 2),
+            isMuted = uiState.isMuted,
+            onClick = onToggleMusic
+        )
     }
 }
 
-@Preview(widthDp = 720, heightDp = 500)
+@LandscapePreviews
 @Composable
-fun PreviewNoInternetScreen() {
+private fun NoInternetScreenPreview() {
     LabTheme {
         NoInternetScreenContent(uiState = NoInternetUiState())
     }

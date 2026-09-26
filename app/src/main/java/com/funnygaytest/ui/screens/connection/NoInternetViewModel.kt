@@ -22,6 +22,10 @@ class NoInternetViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(NoInternetUiState(isMuted = isMuted))
     val uiState = _uiState.asStateFlow()
 
+    fun onShown() {
+        _uiState.update { it.copy(isMuted = isMuted) }
+    }
+
     override fun toggleMusic() {
         _uiState.update { it.copy(isMuted = !it.isMuted) }
         super.toggleMusic()
