@@ -1,16 +1,21 @@
 package com.funnygaytest.data.stats
 
 import android.app.Activity
+import com.funnygaytest.di.ApplicationScope
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import javax.inject.Inject
@@ -19,7 +24,8 @@ import javax.inject.Singleton
 @Singleton
 class StatsRepository @Inject constructor(
     firestore: FirebaseFirestore,
-    private val authManager: AuthManager
+    private val authManager: AuthManager,
+    @param:ApplicationScope private val scope: CoroutineScope
 ) {
 
     private val usersCollection = firestore.collection("subjects")
@@ -43,28 +49,47 @@ class StatsRepository @Inject constructor(
         }
     }
 
-    suspend fun recordTestResult(isWin: Boolean? = null, achievementIds: List<String> = emptyList()) {
+    fun observeStats(): Flow<LabStats> = getStats()
+        .map { it ?: LabStats() }
+        .catch { e ->
+            Timber.e(e, "Failed to observe lab stats")
+            emit(LabStats())
+        }
+
+    suspend fun recordTestResult(isWin: Boolean? = null, achievementIds: List<String> = emptyList()): Boolean {
         val updates = buildMap<String, Any> {
             if (isWin == true) put(FIELD_WINS, FieldValue.increment(1))
             if (isWin == false) put(FIELD_LOSSES, FieldValue.increment(1))
             if (achievementIds.isNotEmpty()) put(FIELD_ACHIEVEMENTS, FieldValue.arrayUnion(*achievementIds.toTypedArray()))
         }
-        if (updates.isEmpty()) return
-        val uid = authManager.ensureSignedIn() ?: return
+        if (updates.isEmpty()) return true
+        val uid = authManager.ensureSignedIn() ?: return false
         writeToUser(uid, updates)
+        return true
     }
 
-    suspend fun signInWithPlayGames(activity: Activity) {
+    fun signInWithPlayGames(activity: Activity) {
+        scope.launch { upgradeToPlayGames(activity) }
+    }
+
+    private suspend fun upgradeToPlayGames(activity: Activity) {
         var carriedStats: LabStats? = null
-        val uid = authManager.signInWithPlayGames(activity) { anonymous ->
-            val document = usersCollection.document(anonymous.uid)
-            try {
-                carriedStats = document.get().await().toObject(LabStats::class.java)
-                document.delete().await()
-            } catch (e: FirebaseException) {
-                Timber.w(e, "Failed to move stats of the anonymous account")
+        val uid = authManager.signInWithPlayGames(
+            activity,
+            beforeAnonymousAccountRemoved = { anonymous ->
+                val document = usersCollection.document(anonymous.uid)
+                try {
+                    carriedStats = document.get().await().toObject(LabStats::class.java)
+                    document.delete().await()
+                } catch (e: FirebaseException) {
+                    Timber.w(e, "Failed to move stats of the anonymous account")
+                }
+            },
+            onAnonymousAccountKept = { anonymous ->
+                carriedStats?.let { mergeIntoUser(anonymous.uid, it) }
+                carriedStats = null
             }
-        }
+        )
         val stats = carriedStats ?: return
         if (uid == null) {
             Timber.w("Play Games sign-in failed after the anonymous account was removed, its stats are lost")

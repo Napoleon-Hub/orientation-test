@@ -1,5 +1,6 @@
 package com.funnygaytest.ui.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -33,7 +34,7 @@ import com.funnygaytest.ui.theme.scaled
 fun EndingCard(
     modifier: Modifier = Modifier,
     title: String,
-    iconRes: Int,
+    @DrawableRes iconRes: Int,
     finalTextShown: Boolean = false
 ) {
     val dimens = LabTheme.dimens

@@ -53,6 +53,9 @@
     <string name="result_rate_description">Оцени Гачу и поделись результатами!</string>
     <string name="result_rate_button_description">Оценить приложение</string>
     <string name="result_share_button_description">Поделиться результатом</string>
+    <string name="music_toggle_button_description">Включить или выключить музыку</string>
+    <string name="back_button_description">Назад</string>
+    <string name="game_next_button_description">Следующий вопрос</string>
     <string name="result_button_another_apps">Другие тесты</string>
     <string name="result_button_pay">Покормить ученых</string>
 

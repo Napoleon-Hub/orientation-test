@@ -36,13 +36,14 @@ class AuthManager @Inject constructor(
 
     suspend fun signInWithPlayGames(
         activity: Activity,
-        beforeAnonymousAccountRemoved: suspend (FirebaseUser) -> Unit
+        beforeAnonymousAccountRemoved: suspend (FirebaseUser) -> Unit,
+        onAnonymousAccountKept: suspend (FirebaseUser) -> Unit
     ): String? = mutex.withLock {
         val credential = playGamesCredential(activity) ?: return@withLock null
         val current = auth.currentUser
         try {
             if (current != null && current.isAnonymous) {
-                upgradeAnonymousAccount(current, credential, { playGamesCredential(activity) }, beforeAnonymousAccountRemoved)
+                upgradeAnonymousAccount(current, credential, activity, beforeAnonymousAccountRemoved, onAnonymousAccountKept)
             } else {
                 auth.signInWithCredential(credential).await()
             }
@@ -66,18 +67,25 @@ class AuthManager @Inject constructor(
     private suspend fun upgradeAnonymousAccount(
         anonymous: FirebaseUser,
         credential: AuthCredential,
-        refreshCredential: suspend () -> AuthCredential?,
-        beforeAnonymousAccountRemoved: suspend (FirebaseUser) -> Unit
+        activity: Activity,
+        beforeAnonymousAccountRemoved: suspend (FirebaseUser) -> Unit,
+        onAnonymousAccountKept: suspend (FirebaseUser) -> Unit
     ) {
         try {
             anonymous.linkWithCredential(credential).await()
             Timber.d("Anonymous account linked to Play Games")
+            return
         } catch (_: FirebaseAuthUserCollisionException) {
             Timber.d("Play Games account already exists, replacing the anonymous account")
-            val freshCredential = refreshCredential() ?: return
-            beforeAnonymousAccountRemoved(anonymous)
+        }
+        val freshCredential = playGamesCredential(activity) ?: return
+        beforeAnonymousAccountRemoved(anonymous)
+        try {
             anonymous.delete().await()
             auth.signInWithCredential(freshCredential).await()
+        } catch (e: FirebaseException) {
+            if (auth.currentUser?.uid == anonymous.uid) onAnonymousAccountKept(anonymous)
+            throw e
         }
     }
 
@@ -89,7 +97,7 @@ class AuthManager @Inject constructor(
                 return null
             }
             val serverAuthCode = signInClient
-                .requestServerSideAccess(activity.getString(R.string.web_client_id), false)
+                .requestServerSideAccess(activity.getString(R.string.default_web_client_id), false)
                 .await()
             PlayGamesAuthProvider.getCredential(serverAuthCode)
         } catch (e: ApiException) {

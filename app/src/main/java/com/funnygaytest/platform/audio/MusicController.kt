@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.StateFlow
 interface MusicController {
     val isMuted: StateFlow<Boolean>
     fun playMusic(@RawRes resId: Int)
-    fun stopMusic()
+    fun stopMusic(@RawRes resId: Int)
     fun toggleMute()
 }

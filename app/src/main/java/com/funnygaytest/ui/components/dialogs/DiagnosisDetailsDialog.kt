@@ -68,65 +68,65 @@ fun DiagnosisDetailsDialog(
                 .clickable(interactionSource = null, indication = null, onClick = onDismiss),
             contentAlignment = Alignment.Center
         ) {
-        Surface(
-            modifier = Modifier
-                .clickable(interactionSource = null, indication = null, onClick = {})
-                .fillMaxWidth(0.9f)
-                .widthIn(max = MaxDialogWidth * dimens.textScale)
-                .heightIn(max = maxHeight * MaxHeightFraction),
-            shape = DialogShape,
-            color = LabTheme.colors.surface,
-            shadowElevation = 8.dp
-        ) {
-            Row(
-                modifier = Modifier.padding(dimens.screenPadding),
-                horizontalArrangement = Arrangement.spacedBy(dimens.screenPadding)
+            Surface(
+                modifier = Modifier
+                    .clickable(interactionSource = null, indication = null, onClick = {})
+                    .fillMaxWidth(0.9f)
+                    .widthIn(max = MaxDialogWidth * dimens.textScale)
+                    .heightIn(max = maxHeight * MaxHeightFraction),
+                shape = DialogShape,
+                color = LabTheme.colors.surface,
+                shadowElevation = 8.dp
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(dimens.endingIconSize * 1.5f)
-                        .clip(IconShape)
-                        .background(LabTheme.colors.accent.copy(alpha = 0.8f))
-                        .border(1.dp, LabTheme.colors.textPrimary.copy(alpha = 0.5f), IconShape)
+                Row(
+                    modifier = Modifier.padding(dimens.screenPadding),
+                    horizontalArrangement = Arrangement.spacedBy(dimens.screenPadding)
                 ) {
-                    Image(
-                        painter = painterResource(iconRes),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize(),
-                        contentScale = ContentScale.Crop
-                    )
-                }
-
-                Column(
-                    modifier = Modifier.weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(dimens.spacingMedium)
-                ) {
-                    BasicText(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = title,
-                        style = titleStyle.copy(textAlign = TextAlign.Start),
-                        maxLines = 1,
-                        softWrap = false,
-                        autoSize = shrinkToFit(titleStyle)
-                    )
-
-                    DialogDescription(
-                        modifier = Modifier.weight(1f, fill = false),
-                        text = description,
-                        style = LabTheme.typography.description.scaled(dimens.textScale)
-                    )
-
-                    MainButton(
+                    Box(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(dimens.buttonHeight),
-                        text = stringResource(R.string.diagnosis_dialog_button_close),
-                        textStyle = LabTheme.typography.button.scaled(dimens.textScale),
-                        onClick = onDismiss
-                    )
+                            .size(dimens.endingIconSize * 1.5f)
+                            .clip(IconShape)
+                            .background(LabTheme.colors.accent.copy(alpha = 0.8f))
+                            .border(1.dp, LabTheme.colors.textPrimary.copy(alpha = 0.5f), IconShape)
+                    ) {
+                        Image(
+                            painter = painterResource(iconRes),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
+
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        verticalArrangement = Arrangement.spacedBy(dimens.spacingMedium)
+                    ) {
+                        BasicText(
+                            modifier = Modifier.fillMaxWidth(),
+                            text = title,
+                            style = titleStyle.copy(textAlign = TextAlign.Start),
+                            maxLines = 1,
+                            softWrap = false,
+                            autoSize = shrinkToFit(titleStyle)
+                        )
+
+                        DialogDescription(
+                            modifier = Modifier.weight(1f, fill = false),
+                            text = description,
+                            style = LabTheme.typography.description.scaled(dimens.textScale)
+                        )
+
+                        MainButton(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(dimens.buttonHeight),
+                            text = stringResource(R.string.diagnosis_dialog_button_close),
+                            textStyle = LabTheme.typography.button.scaled(dimens.textScale),
+                            onClick = onDismiss
+                        )
+                    }
                 }
             }
-        }
         }
     }
 }

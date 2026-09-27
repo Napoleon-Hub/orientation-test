@@ -16,7 +16,7 @@ import com.android.billingclient.api.QueryPurchasesParams
 import com.android.billingclient.api.consumePurchase
 import com.android.billingclient.api.queryProductDetails
 import com.android.billingclient.api.queryPurchasesAsync
-import com.funnygaytest.di.BillingModule
+import com.funnygaytest.di.ApplicationScope
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -26,13 +26,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
 class BillingRepository @Inject constructor(
     @param:ApplicationContext private val context: Context,
-    @param:Named(BillingModule.BILLING_SCOPE) private val scope: CoroutineScope
+    @param:ApplicationScope private val scope: CoroutineScope
 ) : PurchasesUpdatedListener {
 
     private val _purchaseEvent = MutableSharedFlow<Int>()

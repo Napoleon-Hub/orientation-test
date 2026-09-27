@@ -53,6 +53,9 @@
     <string name="result_rate_description">Bewerte das Gachi und teile deine Ergebnisse!</string>
     <string name="result_rate_button_description">App bewerten</string>
     <string name="result_share_button_description">Ergebnis teilen</string>
+    <string name="music_toggle_button_description">Musik ein- oder ausschalten</string>
+    <string name="back_button_description">Zurück</string>
+    <string name="game_next_button_description">Nächste Frage</string>
     <string name="result_button_another_apps">Weitere Tests</string>
     <string name="result_button_pay">Wissenschaftler füttern</string>
 

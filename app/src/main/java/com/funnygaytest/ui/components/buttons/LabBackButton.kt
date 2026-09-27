@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.funnygaytest.R
 import com.funnygaytest.ui.theme.LabTheme
@@ -37,7 +38,7 @@ fun LabBackButton(
     ) {
         Icon(
             painter = painterResource(R.drawable.ic_arrow_back),
-            contentDescription = "Back",
+            contentDescription = stringResource(R.string.back_button_description),
             tint = LabTheme.colors.textPrimary.copy(alpha = 0.8f),
             modifier = Modifier.size(size * 0.42f)
         )

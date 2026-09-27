@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.funnygaytest.data.game.GameSession
 import com.funnygaytest.data.game.GameSessionRepository
-import com.funnygaytest.data.stats.LabStats
 import com.funnygaytest.data.stats.StatsRepository
 import com.funnygaytest.model.EndingType
 import com.funnygaytest.platform.audio.MusicController
@@ -14,11 +13,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 data class StartUiState(
@@ -55,18 +52,9 @@ class StartViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            statsRepository.getStats()
-                .catch { e ->
-                    Timber.e(e, "Ошибка доступа к личному делу исследователя")
-                }
-                .collect { stats ->
-                    val achievements = (stats ?: LabStats()).achievements
-                    _uiState.update { state ->
-                        state.copy(
-                            wasPussyModeClicked = achievements.contains(EndingType.LOSE_PUSSY.id)
-                        )
-                    }
-                }
+            statsRepository.observeStats().collect { stats ->
+                _uiState.update { it.copy(wasPussyModeClicked = EndingType.LOSE_PUSSY.id in stats.achievements) }
+            }
         }
     }
 

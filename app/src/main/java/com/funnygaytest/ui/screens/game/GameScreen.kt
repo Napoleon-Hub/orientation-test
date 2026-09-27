@@ -303,7 +303,7 @@ private fun NextArrowButton(
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_arrow_next),
-            contentDescription = "Next",
+            contentDescription = stringResource(R.string.game_next_button_description),
             tint = targetArrowColor,
             modifier = Modifier.fillMaxSize(0.5f)
         )

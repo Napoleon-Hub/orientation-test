@@ -1,8 +1,6 @@
 package com.funnygaytest.di
 
 import com.google.firebase.Firebase
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.analytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,10 +16,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object FirebaseModule {
-
-    @Provides
-    @Singleton
-    fun provideFirebaseAnalytics(): FirebaseAnalytics = Firebase.analytics
 
     @Provides
     @Singleton

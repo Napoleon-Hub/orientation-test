@@ -50,7 +50,7 @@ class ResultViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<ResultUiState?>(null)
     val uiState = _uiState.asStateFlow()
 
-    private var reviewManager: ReviewManager? = null
+    private val reviewManager: ReviewManager = ReviewManagerFactory.create(appContext)
     private var reviewInfo: ReviewInfo? = null
 
     init {
@@ -63,11 +63,9 @@ class ResultViewModel @Inject constructor(
     }
 
     fun rateUs(activity: Activity) {
-        reviewInfo?.let { reviewInfo ->
-            val flow = reviewManager?.launchReviewFlow(activity, reviewInfo)
-            flow?.addOnCompleteListener {
-                _uiState.update { it?.copy(isRateEnabled = false) }
-            }
+        val info = reviewInfo ?: return
+        reviewManager.launchReviewFlow(activity, info).addOnCompleteListener {
+            _uiState.update { it?.copy(isRateEnabled = false) }
         }
     }
 
@@ -105,24 +103,25 @@ class ResultViewModel @Inject constructor(
             null
         }
 
-        val isNew = achievements != null && ending.id !in achievements
         val uniqueCoreEndings = (achievements.orEmpty() + ending.id)
             .filter { it != EndingType.ALL.id && it != EndingType.DONATE.id }
             .distinct()
             .size
-        val wasAllUnlocked = achievements != null && EndingType.ALL.id in achievements
-        val unlocksAll = achievements != null && uniqueCoreEndings >= CORE_ENDINGS_COUNT && !wasAllUnlocked
+        val unlocksAll = achievements != null &&
+            EndingType.ALL.id !in achievements &&
+            uniqueCoreEndings >= CORE_ENDINGS_COUNT
 
         savedStateHandle[KEY_ENDING] = ending.id
-        savedStateHandle[KEY_IS_NEW_ENDING] = isNew
-        savedStateHandle[KEY_ALL_ENDINGS_UNLOCKED] = wasAllUnlocked || unlocksAll
-
-        statsRepository.recordTestResult(
+        val recorded = statsRepository.recordTestResult(
             isWin = health > 0,
             achievementIds = if (unlocksAll) listOf(ending.id, EndingType.ALL.id) else listOf(ending.id)
         )
 
-        showEnding(ending, isNew, isAllUnlocked = wasAllUnlocked || unlocksAll)
+        val isNew = recorded && achievements != null && ending.id !in achievements
+        val isAllUnlocked = recorded && unlocksAll
+        savedStateHandle[KEY_IS_NEW_ENDING] = isNew
+        savedStateHandle[KEY_ALL_ENDINGS_UNLOCKED] = isAllUnlocked
+        showEnding(ending, isNew, isAllUnlocked)
     }
 
     private fun showEnding(ending: EndingType, isNew: Boolean, isAllUnlocked: Boolean) {
@@ -136,15 +135,9 @@ class ResultViewModel @Inject constructor(
     }
 
     private fun requestReviewInfo() {
-        reviewManager = ReviewManagerFactory.create(appContext)
-        val request = reviewManager?.requestReviewFlow()
-        request?.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                _uiState.update { it?.copy(isRateEnabled = true) }
-                reviewInfo = task.result
-            } else {
-                _uiState.update { it?.copy(isRateEnabled = false) }
-            }
+        reviewManager.requestReviewFlow().addOnCompleteListener { task ->
+            reviewInfo = task.takeIf { it.isSuccessful }?.result
+            _uiState.update { it?.copy(isRateEnabled = reviewInfo != null) }
         }
     }
 

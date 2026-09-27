@@ -16,7 +16,6 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.funnygaytest.data.stats.StatsRepository
 import com.funnygaytest.navigation.AppNavigation
 import com.funnygaytest.platform.ads.AdsManager
@@ -31,7 +30,6 @@ import com.google.android.play.core.install.model.ActivityResult
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -64,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         hideSystemBars()
 
         if (savedInstanceState == null) {
-            lifecycleScope.launch { statsRepository.signInWithPlayGames(this@MainActivity) }
+            statsRepository.signInWithPlayGames(this)
             checkForAppUpdate()
         }
 

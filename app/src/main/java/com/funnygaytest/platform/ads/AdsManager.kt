@@ -38,7 +38,8 @@ class AdsManager @Inject constructor(
 
     private val isInitializationRequested = MutableStateFlow(false)
     private var isActive = false
-    private var isSdkInitialized = false
+    private var isSdkInitializationStarted = false
+    private var isAdLoading = false
     private var interstitialAdLoader: InterstitialAdLoader? = null
     private var interstitialAd: InterstitialAd? = null
 
@@ -85,11 +86,11 @@ class AdsManager @Inject constructor(
     }
 
     private fun start() {
-        if (isSdkInitialized) {
+        if (isSdkInitializationStarted) {
             if (interstitialAd == null) loadInterstitialAd()
             return
         }
-        isSdkInitialized = true
+        isSdkInitializationStarted = true
         YandexAds.apply {
             setUserConsent(true)
             setAppAdAnalyticsReporting(true)
@@ -101,14 +102,19 @@ class AdsManager @Inject constructor(
     }
 
     private fun loadInterstitialAd() {
-        interstitialAdLoader?.loadAd(
+        val loader = interstitialAdLoader ?: return
+        if (isAdLoading) return
+        isAdLoading = true
+        loader.loadAd(
             adRequest = AdRequest.Builder(AD_UNIT_ID).build(),
             listener = object : InterstitialAdLoadListener {
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    isAdLoading = false
                     if (isActive) this@AdsManager.interstitialAd = interstitialAd
                 }
 
                 override fun onAdFailedToLoad(error: AdRequestError) {
+                    isAdLoading = false
                     Timber.e(error.description)
                 }
             }

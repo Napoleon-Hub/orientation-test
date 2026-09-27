@@ -10,7 +10,6 @@ import com.funnygaytest.model.EndingType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -38,13 +37,7 @@ class FeedViewModel @Inject constructor(
         billingRepository.init()
 
         viewModelScope.launch {
-            statsRepository.getStats()
-                .catch { e ->
-                    Timber.e(e, "Ошибка доступа к личному делу исследователя")
-                }
-                .collect { stats ->
-                currentAchievements = stats?.achievements ?: emptyList()
-            }
+            statsRepository.observeStats().collect { currentAchievements = it.achievements }
         }
 
         viewModelScope.launch {
@@ -74,18 +67,11 @@ class FeedViewModel @Inject constructor(
     }
 
     private fun handleSuccessfulDonation() {
-        val isAlreadyUnlocked = currentAchievements.contains(EndingType.DONATE.id)
-
-        _uiState.update {
-            it.copy(
-                isDonated = true,
-                isDonateAchieveUnlocked = !isAlreadyUnlocked
-            )
-        }
-        if (!isAlreadyUnlocked) {
-            viewModelScope.launch {
-                statsRepository.recordTestResult(achievementIds = listOf(EndingType.DONATE.id))
-            }
+        _uiState.update { it.copy(isDonated = true) }
+        if (EndingType.DONATE.id in currentAchievements) return
+        viewModelScope.launch {
+            val recorded = statsRepository.recordTestResult(achievementIds = listOf(EndingType.DONATE.id))
+            _uiState.update { it.copy(isDonateAchieveUnlocked = recorded) }
         }
     }
 

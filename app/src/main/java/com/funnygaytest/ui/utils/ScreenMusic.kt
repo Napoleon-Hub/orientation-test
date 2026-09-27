@@ -9,6 +9,6 @@ import com.funnygaytest.platform.audio.MusicController
 fun ScreenMusic(@RawRes resId: Int, musicController: MusicController) {
     LifecycleResumeEffect(resId, musicController) {
         musicController.playMusic(resId)
-        onPauseOrDispose { musicController.stopMusic() }
+        onPauseOrDispose { musicController.stopMusic(resId) }
     }
 }

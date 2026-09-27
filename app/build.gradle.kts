@@ -127,8 +127,6 @@ dependencies {
     implementation(libs.compose.foundation)
     implementation(libs.compose.material3)
     implementation(libs.compose.material3.adaptive)
-    implementation(libs.compose.runtime.livedata)
-    implementation(libs.lottie.compose)
 
     // Activity
     implementation(libs.androidx.activity.compose)
@@ -137,7 +135,6 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.lifecycle.runtime.compose)
-    implementation(libs.lifecycle.livedata.ktx)
 
     // Hilt
     implementation(libs.hilt.android)

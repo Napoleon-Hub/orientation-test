@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -47,28 +48,36 @@ class MusicPlayer @Inject constructor(
 
         stopMusic()
 
-        currentResId = resId
-
         val attributedContext = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             context.createAttributionContext("audio_tag")
         } else context
 
-        mediaPlayer = MediaPlayer.create(attributedContext, resId).apply {
+        val player = MediaPlayer.create(attributedContext, resId)
+        if (player == null) {
+            Timber.w("Music track $resId could not be opened")
+            return
+        }
+        currentResId = resId
+        mediaPlayer = player.apply {
             isLooping = true
             setVolume(volume, volume)
             start()
         }
     }
 
-    override fun stopMusic() {
-        mediaPlayer?.stop()
-        mediaPlayer?.release()
-        mediaPlayer = null
-        currentResId = null
+    override fun stopMusic(@RawRes resId: Int) {
+        if (currentResId == resId) stopMusic()
     }
 
     override fun toggleMute() {
         scope.launch { settingsRepository.toggleMuted() }
+    }
+
+    private fun stopMusic() {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+        currentResId = null
     }
 
     private companion object {

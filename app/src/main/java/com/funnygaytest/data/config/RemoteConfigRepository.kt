@@ -32,12 +32,13 @@ class RemoteConfigRepository @Inject constructor(
                 minimumFetchIntervalInSeconds = if (BuildConfig.DEBUG) 0 else DEFAULT_FETCH_INTERVAL_SECONDS
             }).await()
             remoteConfig.setDefaultsAsync(mapOf(KEY_ADS_ENABLED to DEFAULT_ADS_ENABLED)).await()
-            publishValues()
+            if (remoteConfig.info.lastFetchStatus == FirebaseRemoteConfig.LAST_FETCH_STATUS_SUCCESS) publishValues()
             try {
                 remoteConfig.fetchAndActivate().await()
                 publishValues()
             } catch (e: FirebaseRemoteConfigException) {
-                Timber.w(e, "Remote config fetch failed, cached values are used")
+                Timber.w(e, "Remote config fetch failed, default values are used")
+                publishValues()
             }
             listenForUpdates()
         }

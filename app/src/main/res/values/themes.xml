@@ -5,8 +5,8 @@
 
     <style name="AppTheme.Starting" parent="Theme.SplashScreen.IconBackground">
         <item name="windowSplashScreenBackground">@color/lab_background</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_gachi_foreground</item>
-        <item name="windowSplashScreenIconBackgroundColor">@color/ic_launcher_gachi_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher_main_foreground</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/ic_launcher_main_background</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
     </style>
 </resources>
