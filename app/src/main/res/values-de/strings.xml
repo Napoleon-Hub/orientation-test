@@ -109,15 +109,15 @@
 
     <!-- Questions -->
     <string name="question_1_a">Willkommen im Mittelalter. Du bist allerdings nicht der König. Was ist dein brutaler Beruf in der Burg?</string>
-    <string name="question_1_a_answer_1">Rattenfänger (Chef der Nagetiere)</string>
+    <string name="question_1_a_answer_1">Rattenfänger</string>
     <string name="question_1_a_answer_2">Sklave (Peitschenjunge mit Ledergürtel)</string>
     <string name="question_1_a_answer_3">Narr</string>
     <string name="question_1_a_answer_4">Schornsteinfeger im Latexanzug</string>
     <string name="question_1_a_answer_5">Nachtgoldsucher (Klärgrubenreiniger)</string>
 
     <string name="question_1_b">Welches Gemüse aus der Liste sagt dir… am meisten zu?</string>
-    <string name="question_1_b_answer_1">Gurke (Der Klassiker)</string>
-    <string name="question_1_b_answer_2">Aubergine (Billy Herringtons Wahl)</string>
+    <string name="question_1_b_answer_1">Gurke</string>
+    <string name="question_1_b_answer_2">Aubergine</string>
     <string name="question_1_b_answer_3">Karotte (Für Anfänger)</string>
     <string name="question_1_b_answer_4">Pack mir einfach alle ein!</string>
 
@@ -134,8 +134,8 @@
     <string name="question_3_a_answer_4">Ungefähr 6–7</string>
 
     <string name="question_3_b">Übrigens, wie stehst du zu normalen Fitness-Zivilisten, die die große Gachi-Kultur nicht respektieren oder sie gar nicht kennen?</string>
-    <string name="question_3_b_answer_1">Positiv! Sollen sie ruhig auf ihren Laufbändern rennen, jedem das Seine.</string>
-    <string name="question_3_b_answer_2">Äußerst skeptisch. Ich bin mir nicht sicher, ob ihr Lappen-Lebensstil im Gym überhaupt legal ist.</string>
+    <string name="question_3_b_answer_1">Positiv! Lass sie ruhig auf den Laufbändern rennen, ich war früher genauso.</string>
+    <string name="question_3_b_answer_2">Äußerst negativ. Ich bin mir nicht mal sicher, ob ihr mickriger Lebensstil im Gym überhaupt legal ist.</string>
     <string name="question_3_b_answer_3">Neutral. Nicht jeder ist bereit, die tiefe Philosophie des dunklen Dungeons zu verstehen.</string>
 
     <string name="question_4_a">Stell dir vor: Jemand bietet dir 1000 $ für ein Fotoshooting in Frauenkleidern an. Nimmst du an?</string>
@@ -151,29 +151,29 @@
     <string name="question_5_a">Wissenschaftler suchen nach neuen Trainingsmethoden. Was aus dieser Liste hältst du für effektiver?</string>
     <string name="question_5_a_answer_1">Griechisch-römisches Öl-Ringen</string>
     <string name="question_5_a_answer_2">Synchronisiertes Posen in der Umkleide</string>
-    <string name="question_5_a_answer_3">Pro-Wrestling (Einsatz: 300 Dollar)</string>
+    <string name="question_5_a_answer_3">Pro-Wrestling (Einsätze ab 300 Bucks)</string>
     <string name="question_5_a_answer_4">Schnellanprobe von Ledergürteln und Geschirren</string>
 
-    <string name="question_5_b">Lass uns kurz unsere Sensoren kalibrieren. Wähle ein Getränk:</string>
+    <string name="question_5_b">Eine Sekunde, wir müssen unsere Sensoren kalibrieren. Möchtest du lange etwas trinken?</string>
     <string name="question_5_b_answer_1">Roséwein</string>
     <string name="question_5_b_answer_2">Alkoholfreies Bier</string>
     <string name="question_5_b_answer_3">Nach hartem Fisting hilft nur ein erfrischender Aperol</string>
     <string name="question_5_b_answer_4">Lavendel-Raf mit Kokosmilch… mit einer doppelten Portion Protein!</string>
 
     <string name="question_6_a">Sag mal, was glaubst du, warum gibt es in diesem Test eigentlich überhaupt keine Standard-Antwortmöglichkeiten?</string>
-    <string name="question_6_a_answer_1">Weil die Wissenschaftler vom Geruch des Körperöls völlig den Verstand verloren haben.</string>
+    <string name="question_6_a_answer_1">Weil die Wissenschaftler komplett den Verstand verloren haben.</string>
     <string name="question_6_a_answer_2">Weil langweilige Tests nur für Lappen sind. Die Philosophie des Dungeons verlangt nach Chaos!</string>
-    <string name="question_6_a_answer_3">Weil, wenn ich das schon heruntergeladen habe, der Autor auch das Recht hat, seinen Spaß zu haben.</string>
+    <string name="question_6_a_answer_3">Weil, wenn ich das schon heruntergeladen habe, die Wissenschaftler ohnehin alles über mich wissen…</string>
     <string name="question_6_a_answer_4">Alles oben Genannte. Das hier ist ein reiner Zirkus.</string>
 
-    <string name="question_6_b">An welchem dieser legendären Orte würdest du am liebsten deine perfekte Umkleidekabine einrichten?</string>
-    <string name="question_6_b_answer_1">USA, Kalifornien (Genau das Gym, in dem Billy Herrington gefilmt hat)</string>
-    <string name="question_6_b_answer_2">Japan, Tokio (Wo Gachi zum absoluten Kult erhoben wurde)</string>
-    <string name="question_6_b_answer_3">Deutschland, Minden (Heimat der harten Ledermeister)</string>
+    <string name="question_6_b">Welcher dieser Orte entspricht am ehesten deinem Geist?</string>
+    <string name="question_6_b_answer_1">Eine schwitzige Umkleidekabine voller Männer</string>
+    <string name="question_6_b_answer_2">Eine Shisha-Bar</string>
+    <string name="question_6_b_answer_3">Ein Strand am Meer, umgeben von 3 Models</string>
     <string name="question_6_b_answer_4">Ein geheimer Dungeon ohne Fenster, aber mit guter Schalldämmung</string>
 
     <string name="question_7_a">Du triffst dich mit zwei Freunden – einem Typen und einem Mädchen. Der Bro will sofort einschlagen, während das Mädchen dich schon umarmen will. Wem widmest du dich zuerst und warum?</string>
-    <string name="question_7_a_answer_1">Bros before Hoes. Der Homie bekommt den Handschlag zuerst, keine Fragen gestellt.</string>
+    <string name="question_7_a_answer_1">Bros zuerst, ganz ohne Frage.</string>
     <string name="question_7_a_answer_2">Vergiss den Handschlag, ich gehe direkt auf die Umarmung. Mein Bro braucht auch ein bisschen Liebe!</string>
     <string name="question_7_a_answer_3">Natürlich dem Typen. Ihr wisst doch sowieso, was ich von ihm will.</string>
     <string name="question_7_a_answer_4">Hört mal zu, ihr Wissenschaftler, gebt mir echte Antwortmöglichkeiten! Ich drücke 100 kg auf der Bank und gucke keine flexenden Männer an, verdammt noch mal!</string>
@@ -184,7 +184,7 @@
     <string name="question_7_b_answer_3">Ich gehe nicht in Clubs. Ich bevorzuge softe Hauspartys mit meinen Besties.</string>
     <string name="question_7_b_answer_4">Hört mal zu, ihr Wissenschaftler, gebt mir echte Antwortmöglichkeiten! Ich drücke 100 kg auf der Bank und gucke keine flexenden Männer an, verdammt noch mal!</string>
 
-    <string name="question_8">Erinnerst du dich an die Frage mit den Schlägern und deiner Freundin? Ich gebe dir noch eine Chance, denn deine letzte Antwort war ein totaler Reinfall.</string>
+    <string name="question_8">So, jetzt knöpfe ich mir dich vor, mickriger Lappen. Erinnerst du dich an die Frage mit den Schlägern und deiner Freundin? Ich gebe dir noch eine Chance, denn deine letzte Antwort war ein totaler Reinfall.</string>
     <string name="question_8_answer_1">Mutters kleiner Sprengmeister. Voller Kamikaze-Modus: Aus voller Lunge schreien und so tun, als hätte man einen Zünder in der Tasche.</string>
     <string name="question_8_answer_2">Mutters kleiner braver Junge. Ihnen sagen, dass Mama verboten hat, mit Fremden zu sprechen. Wenn sie dein Mädchen in einen Lieferwagen zerren, sie lautstark daran erinnern, keine Süßigkeiten von ihnen anzunehmen!</string>
     <string name="question_8_answer_3">Mutters kleiner Psycho. Plötzlich anfangen, lautstark mit dem Mädchen zu streiten, weil sie dir deinen Vibe ruiniert. Wenn du dich komplett irre verhältst, denken sie vielleicht, du bist ein Verrückter, und lassen dich in Ruhe.</string>
@@ -225,7 +225,7 @@
     <string name="question_13_a">Hast du heterosexuelle Freunde?</string>
     <string name="question_13_a_answer_1">Nein!</string>
     <string name="question_13_a_answer_2">Ja, in meinem Freundeskreis gibt es nur solche.</string>
-    <string name="question_13_a_answer_3">Ja, aber ich nenne meine Kumpels ständig Schw… – höchstwahrscheinlich sind sie es auch.</string>
+    <string name="question_13_a_answer_3">Ja, aber ich nenne meine Kumpels ständig Schw… – wahrscheinlich sind sie es auch.</string>
     <string name="question_13_a_answer_4">Ja. Gleich und Gleich gesellt sich gern, nicht wahr?</string>
 
     <string name="question_13_b">Wenn du nicht als Mensch geboren wärst, in welchem Tierkörper würdest du dich am wohlsten fühlen?</string>
@@ -260,7 +260,7 @@
     <string name="question_17">Wie oft diskutierst du mit deinem Gym-Bro über die Gachi-Philosophie?</string>
     <string name="question_17_answer_1">Ich habe keinen Gym-Bro. Ich mache Witze mit dem Spiegel in der Umkleide, aber ich glaube, selbst er ignoriert mich langsam…</string>
     <string name="question_17_answer_2">Aus Spaß wurde Ernst. Zuerst haben wir nur über \„Deep Dark Fantasies\“ gesprochen, und jetzt teilen wir uns einen Dungeon zu zweit.</string>
-    <string name="question_17_answer_3">Ständig. Wir sind wie Prediger – wir tragen die große Lehre von Billy Herrington in die Massen.</string>
+    <string name="question_17_answer_3">Ständig. Wir sind wie Prediger – wir tragen die große Lehre von Billy Herrington (sprich: deine) in die Massen.</string>
     <string name="question_17_answer_4">Wir diskutieren nicht. Aber in letzter Zeit veranstalten wir Öl-Ringen, um herauszufinden, wer der Boss dieses Gyms ist.</string>
 
     <string name="question_18">Wie stehst du zu deiner Körperbehaarung?</string>
@@ -270,7 +270,7 @@
     <string name="question_18_answer_4">Ich finde Rasieren ist eine Sünde, also sehe ich im Grunde aus wie Chewbaccas Cousin.</string>
 
     <string name="question_19">Situation: Du gehst in die Umkleidekabine und dein Gym-Bro schaut sich klassische Videos von harten Pumpern in Ledergurten an und macht dabei komische Geräusche. Deine Reaktion?</string>
-    <string name="question_19_answer_1">Ich reiche ihm eine helfende Hand… und eine Flasche Körperöl, sozusagen.</string>
+    <string name="question_19_answer_1">Ihm eine helfende Hand reichen… und eine Flasche Körperöl.</string>
     <string name="question_19_answer_2">Was für eine Schande! Wieder einen echten Kumpel verloren.</string>
     <string name="question_19_answer_3">Ich habe meinen Dungeon Master doch gebeten, unsere Sparring-Sessions NICHT ins Netz zu stellen!</string>
     <string name="question_19_answer_4">Nicht schon wieder… Ständig fängt er an, sich exklusiven Content ohne mich anzuschauen!</string>

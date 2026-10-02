@@ -105,9 +105,9 @@ private fun GameScreenContent(
 ) {
     val dimens = LabTheme.dimens
     val backgroundRes = when {
-        uiState.questionNumber <= 7 -> R.drawable.background_game_1
-        uiState.questionNumber <= 13 -> R.drawable.background_game_2
-        else -> R.drawable.background_game_3
+        uiState.questionNumber <= 7 -> R.drawable.background_game_2
+        uiState.questionNumber <= 13 -> R.drawable.background_game_3
+        else -> R.drawable.background_game_4
     }
 
     BackgroundWrapper(

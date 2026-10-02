@@ -108,15 +108,15 @@
 
     <!-- Questions -->
     <string name="question_1_a">Welcome to the Middle Ages. You\'re not the king, though. What is your brutal profession in the castle?</string>
-    <string name="question_1_a_answer_1">Rat catcher (Chief of rodents)</string>
+    <string name="question_1_a_answer_1">Rat catcher</string>
     <string name="question_1_a_answer_2">Slave (Spanking boy with a leather belt)</string>
     <string name="question_1_a_answer_3">Jester</string>
     <string name="question_1_a_answer_4">Chimney sweep in a latex suit</string>
     <string name="question_1_a_answer_5">Night gold digger (Cesspool cleaner)</string>
 
     <string name="question_1_b">Which vegetable from the list is… to your liking?</string>
-    <string name="question_1_b_answer_1">Cucumber (The Classic)</string>
-    <string name="question_1_b_answer_2">Eggplant (Billy Herrington\'s choice)</string>
+    <string name="question_1_b_answer_1">Cucumber</string>
+    <string name="question_1_b_answer_2">Eggplant</string>
     <string name="question_1_b_answer_3">Carrot (For rookies)</string>
     <string name="question_1_b_answer_4">Pack them all up for me!</string>
 
@@ -124,7 +124,7 @@
     <string name="question_2_answer_1">Mama\'s Little Track Star. Remember PE class and hit a world record speedrun out of there.</string>
     <string name="question_2_answer_2">Mama\'s Little Crybaby. Start sobbing uncontrollably. If I pee myself, maybe they\'ll be too disgusted to touch me.</string>
     <string name="question_2_answer_3">Mama\'s Little Saint. Start praying out loud. They wouldn\'t dare interrupt a sacred ritual, so I\'m safe. As for the girl… well, she\'s an independent woman, she\'ll manage!</string>
-    <string name="question_2_answer_4">Mama\'s Little Strategist. Honestly, she\'s cooked anyway. I\'ll just casually blend into their crowd, pretend I\'m one of them, and slowly back away. Survival of the fittest!</string>
+    <string name="question_2_answer_4">Mama\'s Little Strategist. Honestly, she\'s cooked anyway, so I\'ll pretend to be her \"producer\". Time to make some money!</string>
 
     <string name="question_3_a">Let\'s look at the statistics. What is the total number of guys with whom you have been in close contact under the intimate conditions of… the gym, of course.</string>
     <string name="question_3_a_answer_1">I lost count during the intense research phases.</string>
@@ -133,8 +133,8 @@
     <string name="question_3_a_answer_4">Around 6–7 successful experiments.</string>
 
     <string name="question_3_b">By the way, how do you feel about regular fitness civils who don\'t respect the great Gachi culture or aren\'t familiar with it?</string>
-    <string name="question_3_b_answer_1">Positive! Let them run on their treadmills, to each their own.</string>
-    <string name="question_3_b_answer_2">Highly suspicious. I\'m not sure their weakling lifestyle is even legal in the gym.</string>
+    <string name="question_3_b_answer_1">Positive! Let them run on the treadmills, I used to be like that myself.</string>
+    <string name="question_3_b_answer_2">Extremely negative. I\'m not even sure their puny lifestyle is legal in the gym.</string>
     <string name="question_3_b_answer_3">Neutral. Not everyone is ready to understand the deep philosophy of the dark dungeon.</string>
 
     <string name="question_4_a">Picture this: someone offers you 1000$ for a photoshoot in women\'s apparel. You taking it?</string>
@@ -150,30 +150,30 @@
     <string name="question_5_a">Scientists are looking for new training methods. Which of these from the list do you consider more effective?</string>
     <string name="question_5_a_answer_1">Greco-Roman oil wrestling</string>
     <string name="question_5_a_answer_2">Synchronized locker room posing</string>
-    <string name="question_5_a_answer_3">Pro wrestling (300 bucks stake)</string>
+    <string name="question_5_a_answer_3">Professional wrestling (bets starting from 300 bucks)</string>
     <string name="question_5_a_answer_4">Speed-fitting of leather belts and harnesses</string>
 
-    <string name="question_5_b">Let\'s calibrate our sensors for a second. Choose a drink:</string>
+    <string name="question_5_b">One second, we need to calibrate our sensors. Want something to drink in the meantime?</string>
     <string name="question_5_b_answer_1">Rosé wine</string>
     <string name="question_5_b_answer_2">Non-alcoholic beer</string>
     <string name="question_5_b_answer_3">After a hardcore fisting, only a refreshing Aperol hits the spot</string>
     <string name="question_5_b_answer_4">Lavender raf with coconut milk… with a double scoop of protein!</string>
 
     <string name="question_6_a">Listen, why do you think there are no standard answer options in this test at all?</string>
-    <string name="question_6_a_answer_1">Because the scientists completely lost their minds from the smell of body oil.</string>
+    <string name="question_6_a_answer_1">Because the scientists have completely lost their minds.</string>
     <string name="question_6_a_answer_2">Because boring tests are for weaklings. The philosophy of the dungeon requires chaos!</string>
-    <string name="question_6_a_answer_3">Because if I downloaded this, the scientists have every right to have some fun.</string>
+    <string name="question_6_a_answer_3">Because if I downloaded this, the scientists already figured everything out about me…</string>
     <string name="question_6_a_answer_4">All of the above. It\'s a total circus.</string>
 
-    <string name="question_6_b">In which of these legendary locations would you prefer to set up your perfect locker room?</string>
-    <string name="question_6_b_answer_1">USA, California (The very gym where Billy Herrington filmed)</string>
-    <string name="question_6_b_answer_2">Japan, Tokyo (Where Gachi was raised to an absolute cult status)</string>
-    <string name="question_6_b_answer_3">Germany, Minden (Birthplace of hardcore leather masters)</string>
+    <string name="question_6_b">Which of these locations fits your vibe best?</string>
+    <string name="question_6_b_answer_1">A sweaty locker room packed with men</string>
+    <string name="question_6_b_answer_2">A hookah lounge</string>
+    <string name="question_6_b_answer_3">A seaside beach surrounded by 3 models</string>
     <string name="question_6_b_answer_4">A secret dungeon with no windows, but with good soundproofing</string>
 
     <string name="question_7_a">You pull up to meet two friends—a guy and a girl. The bro instantly goes in for a high-five, while the girl is already leaning in for a hug.
         Who are you locking in with first and what\'s the move?</string>
-    <string name="question_7_a_answer_1">The homie gets the handshake first, no questions asked.</string>
+    <string name="question_7_a_answer_1">Bros first, no questions asked.</string>
     <string name="question_7_a_answer_2">Forget the handshake, I\'m going in for the hug. My boy needs some love too!</string>
     <string name="question_7_a_answer_3">Of course, the guy. You already know what I want from him anyway.</string>
     <string name="question_7_a_answer_4">Listen here, scientists, give me some real options! I bench 225 and don\'t look at flexing men, dammit!</string>
@@ -184,7 +184,7 @@
     <string name="question_7_b_answer_3">I don\'t do clubs. I prefer vanilla house parties with my besties.</string>
     <string name="question_7_b_answer_4">Listen here, scientists, give me some real options! I bench 225 and don\'t look at flexing men, dammit!</string>
 
-    <string name="question_8">Remember the question about the local crew and your girlfriend? I\'m giving you one more shot, because your previous answer was a total fail.</string>
+    <string name="question_8">Alright, now I\'ll deal with you, puny jabroni. Remember the question about the local crew and your girlfriend? I\'m giving you one more shot, because your previous answer was a total fail.</string>
     <string name="question_8_answer_1">Mama\'s Little Demolition Man. Go full kamikaze mode: scream at the top of your lungs and pretend you have a detonator in your pocket.</string>
     <string name="question_8_answer_2">Mama\'s Little Good Boy. Tell them your mom doesn\'t let you talk to strangers. As they go for a walk with her, remind her not to take their candy!</string>
     <string name="question_8_answer_3">Mama\'s Little Menace. Start a loud, dramatic argument with the girl out of nowhere. If you act completely unhinged and yell at her about ruining your vibes,
@@ -262,7 +262,7 @@
     <string name="question_17">How often do you and your gym bro discuss Gachi philosophy?</string>
     <string name="question_17_answer_1">I don\'t have a gym bro. I joke with the mirror in the locker room, but I think even it started ignoring me…</string>
     <string name="question_17_answer_2">Jokes became reality. First we were just discussing \"Deep Dark Fantasies\", and now we share a dungeon together.</string>
-    <string name="question_17_answer_3">Constantly. We\'re like preachers — spreading the great teachings of Billy Herrington to the masses.</string>
+    <string name="question_17_answer_3">Constantly. We\'re like preachers — spreading the great teachings of Billy Herrington (meaning yours) to the masses.</string>
     <string name="question_17_answer_4">We don\'t discuss it. But lately we\'ve been doing oil wrestling to find out who\'s the Boss of this gym.</string>
 
     <string name="question_18">How do you feel about your body hair?</string>
@@ -272,7 +272,7 @@
     <string name="question_18_answer_4">I think shaving is a sin, so I basically look like Chewbacca\'s cousin.</string>
 
     <string name="question_19">Situation: you walk into the locker room, and your gym bro is watching classic videos of tough bodybuilders in leather harnesses while making weird noises. Your actions?</string>
-    <string name="question_19_answer_1">I\'ll lend him a helping hand… and a bottle of body oil, so to speak.</string>
+    <string name="question_19_answer_1">I\'ll lend him a helping hand… and a bottle of body oil.</string>
     <string name="question_19_answer_2">What a shame! He was a real homie, now he\'s gone for me.</string>
     <string name="question_19_answer_3">I asked my Dungeon Master NOT to upload our sparring sessions online!</string>
     <string name="question_19_answer_4">Here we go again… He always starts watching exclusive content without me!</string>
